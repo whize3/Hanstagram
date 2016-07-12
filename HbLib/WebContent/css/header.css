@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+	a{
+		text-decoration: none;
+		color:#000;
+	}
+	li{
+		list-style: none;
+	}
+	nav{
+		display:block;
+		width:100%;
+		border-bottom:1px solid #C1C0BD;
+		paddin:0;
+	}
+	header{
+		display:block;
+		width:100%;
+		
+	}
+	.wrap{
+		width:960px;
+		display:block;
+		height:100%;
+		margin:0 auto;
+	}
+	/* 최상단 */
+	.topArea{
+		width:100%;
+		height:20px;
+		display:block;
+		border-bottom: 1px solid #f4f4f4;
+		text-align: right;
+	}
+	#topMenu, #topMenu a{
+		font-size:13px;
+		color:#898989;
+	}
+	#topMenu a:hover{
+		text-decoration:underline;
+	}
+	
+	/* logo */
+	.logoArea{
+		display:inline-block;
+	}
+	.logoArea img{
+ 		width:165px;
+ 		position:absolute;
+ 		top:40px;
+	}
+	
+	/* 검색바 */
+	#keyword{
+		position:relative;
+		bottom:10px;
+		left:10px;
+		border:0;
+		outline: none;
+		width:350px;
+		height:20px;
+		font-size:15px;
+	}
+	#searchBtn{
+		position:relative;
+		right:-58px;
+		background:url(../img/searchBtn.png) no-repeat;
+		background-size:25px;
+		border:0;
+		width:30px;
+		height:30px;
+		display:inline;
+	}
+	#searchBar{
+		width:450px;
+		height:30px;
+		display:block;
+		margin:0 auto;
+		margin-top:20px;
+		border-bottom: 3px solid #052efc;
+	}
+	
+	
+	/* 네비 */
+	
+	ul#mainNav{
+		display:block;
+		width:960px;
+		/* border:1px solid #000; */
+		margin:0 auto;
+		height:25px;
+		padding-top:45px;
+		padding-left:0px;
+		margin-bottom:5px;
+		
+	}
+	ul#mainNav .firstMenu{
+		z-index:1000;
+		display:inline-block;
+		float:left;
+		width:240px;
+		text-align:center;
+		margin:0 auto;
+		/* border:1px solid red; */
+	}
+ 	ul#mainNav .firstMenu ul{
+		display:none;
+	}
+
+ 	.firstMenu a:hover{
+		color:#052efc;
+		font-weight:bolder;
+		display:inline-block;
+	}
+	ul#mainNav .firstMenu:hover div{
+		position:absolute;
+		padding:0px;
+	}
+	ul#mainNav .firstMenu:hover ul{
+		display:block;
+		position:relative;
+		/* top:157px;
+		left:20px; */
+		top:9px;
+		left:15px;
+		width:200px;
+		border:1px solid #959da6;
+	 	background:#fff;
+	 	z-index:1000;
+	 }
+	 .firstMenu ul{
+	 	padding:10px 0px;
+	 	box-shadow:1px 1px 1px 1px #dfdfdf;
+	 }
+	 .firstMenu ul li{
+	 	font-size:14px;
+	 	font-weight:lighter;
+	 }
+	 .firstMenu ul a:hover{
+	 	text-decoration: underline;
+	 	color:#052efc;
+	 }
+	 
+	 div.subMenuWrap ul{
+	 	
+	 }
+	 /* subMenu */
+	#subMenu0{
+		
+	}
