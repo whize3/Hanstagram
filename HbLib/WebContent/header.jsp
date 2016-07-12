@@ -41,13 +41,14 @@
 					</ul>
 				</div>
 			</li>
-			<li class="firstMenu"><a href="#">전자자료</a>
+			<li class="firstMenu"><a href="#">서비스 이용</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu1">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>스터디룸 안내</li></a>
+						<a href="#"><li>스터디룸 예약</li></a>
+						<a href="#"><li>도서구입 신청</li></a>
+						<a href="#"><li>도서구입 신청현황</li></a>
+						<a href="#"><li>열람실 현황</li></a>
 					</ul>
 				</div>
 			</li>
