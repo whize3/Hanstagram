@@ -5,8 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function search_go(f) {
+		f.action = "/HbLib/MyBookController"
+		f.submit();
+	}
+
+</script>
 </head>
 <body>
+<form method="post">	
+
 	<jsp:include page="header.jsp" />
 	<div class="searchview">
 		<jsp:include page="my_navi.jsp" />
@@ -25,10 +34,10 @@
 			<input type="text" name="keyword" /> 
 	<br />
 		</div>
-		 <label> 전체     <input type="checkbox" name="chk1" value="1" /></label> 
-		 <label> 비도서   <input type="checkbox" name="chk2" value="2" /></label>
-		 <label>인기자료<input	type="checkbox" name="chk3" value="3" /></label> 
-		 <label>신착자료<input	type="checkbox" name="chk4" value="4" /></label>
+		 <label> 전체     <input type="checkbox"   name="chk" value="1" /></label> 
+		 <label> 비도서   <input type="checkbox"   name="chk" value="2" /></label>
+		 <label>인기자료<input	type="checkbox"     name="chk" value="3" /></label> 
+		 <label>신착자료<input	type="checkbox"     name="chk" value="4" /></label>
 
 	</div>
 	<br />
@@ -49,6 +58,7 @@
 			<br/>
 			<input type="button" value="검색"onclick="search_go(this.form)" />
   </div>
+</form>
 
 </body>
 </html>
