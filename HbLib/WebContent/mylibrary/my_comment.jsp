@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/mylibrary.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="../css/mylibrary.css">
+<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
-		$("#navi_01").css("background-color", "gray")
+		$("#navi_04").css("background-color", "gray")
 	});
 </script>
 </head>
@@ -20,35 +20,33 @@
 		<div class="mainArea2">
 			<jsp:include page="my_navi.jsp" />
 			<div id="mainview">
-				<div class="mainviewnavi">◆My Library > 대출현황</div>
+				<div class="mainviewnavi">◆My Library > 나의서평</div>
 				<div>
-					<div class="mainview_c_btn">
-						<input type="button" value="대출현황">&nbsp;&nbsp;
-						<input type="button" value="대출안내">
+					<div class="mainview_cnt">
+						&nbsp;&nbsp;&nbsp;전체 : 1건
+						<hr color="black" width="670"/>
 					</div>
 					<div align="center">
 						<table width="680">
 							<thead>
 								<tr align="left">
-									<th width="250">제목</th>
-									<th width="150">저자</th>
-									<th width="130">고유번호</th>
-									<th width="150">반납예정일</th>
+									<th width="150">번호</th>
+									<th width="350">서명</th>
+									<th width="180">작성일자</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="4"><hr color="black" /></td>
+									<td colspan="3"><hr color="black" /></td>
 								</tr>
 								<!-- for시작ㄱ -->
 								<tr>
-									<td>정후영짱짱맨</td>
-									<td>정후영</td>
-									<td>599</td>
-									<td>2016-07-20</td>
+									<td>122</td>
+									<td>생각의 지도</td>
+									<td>2016-07-08</td>
 								</tr>
 								<tr>
-									<td colspan="4"><hr /></td>
+									<td colspan="3"><hr /></td>
 								</tr>
 								<!-- for끝 -->
 							</tbody>

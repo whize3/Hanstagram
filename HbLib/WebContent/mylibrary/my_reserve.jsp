@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/mylibrary.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="../css/mylibrary.css">
+<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
