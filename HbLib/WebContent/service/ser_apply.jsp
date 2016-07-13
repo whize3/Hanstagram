@@ -16,21 +16,26 @@
 			var url = "https://apis.daum.net/search/book?apikey=01c892cc876f5b1fd263a78eac5212d0&q="+$("#q").val()+"&output=json&callback=?";
 			$.getJSON(url, function(data) {
 				var result = "<h2>검색결과</h2><br/>";
-				result +="<table><tr><th>제목</th><th>저자</th><th>분류</th>"+
+				result +="<table><tr><th></th><th>제목</th><th>저자</th><th>분류</th>"+
 					"<th>출판사</th><th>고유번호</th></tr>";
 				
 				for (var i in data.channel.item)
-				{   result += "<tr>";             
+				{   result += "<tr>";
 					result += "<td>";
-					result += data.channel.item[i].title;
-					result += "</td>";				
+					result += "<img src='"+data.channel.item[i].cover_s_url+"'/></td>";
+					result += "<td>"+data.channel.item[i].title +"</td>";
 					result += "<td>" + data.channel.item[i].author_t + "</td>";			
 					result += "<td>" + data.channel.item[i].category + "</td>";				
 					result += "<td>" + data.channel.item[i].pub_nm + "</td>";				
 					result += "<td>" + data.channel.item[i].isbn + "</td>";
+					result += "<td id='tdadd'>"+
+					  "<input type='button' value='신청'"
+					   + " id='add'/></td>";
 					result += "</tr>";
 				}
 				result +="</table>";
+				result = result.replace(/&lt;/gi,'<');
+				result = result.replace(/&gt;/gi,'>');
 				$("#result").html(result);
 				
 				
