@@ -34,8 +34,8 @@
 			<li class="firstMenu"><a href="#">자료검색</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu0">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>전체자료검색</li></a>
+						<a href="#"><li>비도서</li></a>
 						<a href="#"><li>냥냥냥</li></a>
 						<a href="#"><li>냥냥냥</li></a>
 					</ul>
