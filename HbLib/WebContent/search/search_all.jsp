@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function search_go(f) {
-		f.action = "/HbLib/MyBookController"
+		f.action = "/HbLib/BookController"
 		f.submit();
 	}
 

@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/MyBookController")
-public class MyBookController extends HttpServlet {
+public class BookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-    public MyBookController() {
+    public BookController() {
         super();
 
     }
