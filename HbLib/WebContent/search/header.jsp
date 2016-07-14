@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>한빛도서관</title>
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
 <header>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="logoArea"><img src="img/logo.png"></div>
+		<div class="logoArea"><img src="../img/logo.png"></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">
@@ -34,8 +34,8 @@
 			<li class="firstMenu"><a href="#">자료검색</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu0">
-						<a href="#"><li>전체자료검색</li></a>
-						<a href="#"><li>비도서</li></a>
+						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>냥냥냥</li></a>
 						<a href="#"><li>냥냥냥</li></a>
 						<a href="#"><li>냥냥냥</li></a>
 					</ul>

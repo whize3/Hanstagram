@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.Command;
 import com.hb.command.LoginCommand;
+import com.hb.command.BookSearchCom;
+
 
 
 
@@ -40,9 +43,14 @@ public class Controller extends HttpServlet {
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
 			comm = new LoginCommand();
+		}else if(type.equals("all")){
+			
+		}else if(type.equals("search")){
+			comm = new BookSearchCom();
 		}
 		String result = comm.exec(request, response);
 		request.getRequestDispatcher(result).forward(request, response);
+		
 	}
 
 }

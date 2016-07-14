@@ -9,9 +9,7 @@
 <script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 $(function() {
-	document.on("click",".login",function() {
-		alert("로그인");
-	})
+	
 });
 	function login(){
 		
