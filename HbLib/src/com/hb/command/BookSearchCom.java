@@ -12,20 +12,20 @@ public class BookSearchCom implements Command{
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		String b_num  = request.getParameter("b_num");
-		String search_all = request.getParameter("search_all");
+	    String booksearch = request.getParameter("booksearch");
+	    String keyword = request.getParameter("keyword");
 		String path = null;
 		
-		if(b_num==null){
-			path = "search_all.jsp";
+		if(booksearch==null){
+			path = "searchall_result.jsp";
 		}else{
 			Dao dao  = new Dao();
-			List<BookVO> list = dao.search(b_num,search_all);
+			List<BookVO> list = dao.search(booksearch,keyword);
 			request.setAttribute("booklist", list);
 			path = "searchall_result.jsp";
 		}
 		
-		return null;
+		return path;
 	}
 
 }

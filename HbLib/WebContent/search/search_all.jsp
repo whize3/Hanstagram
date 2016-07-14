@@ -6,37 +6,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function search_go(f) {
-		f.action = "/HbLib/Controller"
-		f.submit();
+	function search_go() {
+		document.f.action = "/HbLib/Controller";
+		document.f.submit();
+		
 	}
 
 </script>
 </head>
 <body>
-<form method="post">	
+
 
 	<jsp:include page="header.jsp" />
 	<div class="searchview">
 		<jsp:include page="my_navi.jsp" />
 	</div>
+	<form method="post" name="f">	
 	<div align="center">
 		<div class="searchdetail">
 			<li class="serchWord">
 			<select name="booksearch">
-					<option value="ALL">전체</option>
-					<option value="WRI">저자</option>
-					<option value="PUB">출판사</option>
-					<option value="TTI">총서명</option>
-					<option value="CAT">분류</option>
+					<option value="0">전체</option>
+					<option value="1">저자</option>
+					<option value="2">출판사</option>
+					<option value="3">제목</option>
+					<option value="4">분류</option>
 			</select> 
 			<input type="text" name="keyword" /> 
 	<br />
 		</div>
-		 <label> 전체     <input type="checkbox"   name="chk" value="1" /></label> 
-		 <label> 비도서   <input type="checkbox"   name="chk" value="2" /></label>
-		 <label>인기자료<input	type="checkbox"     name="chk" value="3" /></label> 
-		 <label>신착자료<input	type="checkbox"     name="chk" value="4" /></label>
+		 <label> 비도서   <input type="checkbox"   name="chk" value="1" /></label>
+		 <label>인기자료<input	type="checkbox"     name="chk" value="2" /></label> 
+		 <label>신착자료<input	type="checkbox"     name="chk" value="3" /></label>
 
 	</div>
 	<br />
@@ -49,13 +50,15 @@
 					</select>
 					
 			 <span>순서</span> 
-					<select name="desearch">
+					<select name="sunser">
 							<option value="asc">오름차순</option>
 							<option value="desc">내림차순</option>
 					</select>
-			<input type="hidden"name="type" value="search" /> 
+			
+			<input type="hidden" name="type" value="search" /> 
 			<br/>
-			<input type="button" value="검색"onclick="search_go(this.form)" />
+		
+			<input type="button" value="검색" onclick="search_go()" />
   </div>
 </form>
 
