@@ -18,12 +18,12 @@ public class BookSearchCom implements Command{
 		String path = null;
 		
 		if(booksearch==null){
-			path = "searchall_result.jsp";
+			path = "search/searchall_result.jsp";
 		}else{
 			Dao dao  = new Dao();
 			List<BookVO> list = dao.search(booksearch, keyword,desearch);
 			request.setAttribute("booklist", list);
-			path = "searchall_result.jsp";
+			path = "search/searchall_result.jsp";
 		}
 		
 		return path;
