@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function search_go(f) {
-		f.action = "/HbLib/BookController"
+		f.action = "/HbLib/Controller"
 		f.submit();
 	}
 
@@ -28,8 +28,7 @@
 					<option value="WRI">저자</option>
 					<option value="PUB">출판사</option>
 					<option value="TTI">총서명</option>
-					<option value="TOC">목차</option>
-					<option value="ISSN">ISSN</option>
+					<option value="CAT">분류</option>
 			</select> 
 			<input type="text" name="keyword" /> 
 	<br />

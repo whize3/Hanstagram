@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hb.command.BookSearchCom;
+import com.hb.command.Command;
+
+
 
 
 @WebServlet("/Controller")
@@ -31,9 +35,17 @@ public class Controller extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
 		System.out.println(type);
+		
+		// 도서검색
+		Command comm = null;
+		if(type.equals("all")){
+			
+		}else if(type.equals("search")) {
+			comm = new BookSearchCom();
+		}
 	
-		/*String path = comm.exec(request, response);*/
-		/*request.getRequestDispatcher(path).forward(request, response);*/
+		String path = comm.exec(request, response);
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }
