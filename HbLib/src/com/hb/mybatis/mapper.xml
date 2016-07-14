@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="HBLib">
 	<!-- 도서검색  -->
 	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
@@ -15,5 +16,12 @@
 	</select>
 
 	
+=======
+	<mapper namespace="HbLib">
+		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
+		</insert>
+>>>>>>> branch 'master' of https://github.com/whize3/HbLibrary.git
 	
-</mapper>
+	
+	</mapper>

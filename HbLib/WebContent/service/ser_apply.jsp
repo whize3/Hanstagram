@@ -11,7 +11,6 @@
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_03").css("background-color", "gray")
-		
 		$("#go").click(function() {
 			var url = "https://apis.daum.net/search/book?apikey=01c892cc876f5b1fd263a78eac5212d0&q="+$("#q").val()+"&output=json&callback=?";
 			$.getJSON(url, function(data) {
@@ -20,31 +19,61 @@
 					"<th>출판사</th><th>고유번호</th></tr>";
 				
 				for (var i in data.channel.item)
-				{   result += "<tr>";
+				{
+					var url = data.channel.item[i].cover_s_url;
+					var title = data.channel.item[i].title;
+					var author = data.channel.item[i].author_t;
+					var category = data.channel.item[i].category;
+					var publisher = data.channel.item[i].pub_nm;
+					var isbn = data.channel.item[i].isbn;
+					result += "<tr>";
 					result += "<td>";
-					result += "<img src='"+data.channel.item[i].cover_s_url+"'/></td>";
-					result += "<td>"+data.channel.item[i].title +"</td>";
-					result += "<td>" + data.channel.item[i].author_t + "</td>";			
-					result += "<td>" + data.channel.item[i].category + "</td>";				
-					result += "<td>" + data.channel.item[i].pub_nm + "</td>";				
-					result += "<td>" + data.channel.item[i].isbn + "</td>";
-					result += "<td id='tdadd'>"+
-					  "<input type='button' value='신청'"
-					   + " id='add'/></td>";
+					result += "<img src='"+url+"'/></td>";
+					result += "<td>"+title+"</td>";
+					result += "<td>" +author+ "</td>";			
+					result += "<td>" + category + "</td>";				
+					result += "<td>" + publisher + "</td>";				
+					result += "<td>" + isbn + "</td>";
+					result += "<td id='tdadd'>";
+					result += "<input type='button' value='신청' url='";
+					result += url+"' title='"+title
+					  +"' author='"+author+"' category='"+category+"' publisher='"+publisher+"' isbn='"+isbn+"'"
+					   + " class='app'/></td>";
 					result += "</tr>";
 				}
 				result +="</table>";
 				result = result.replace(/&lt;/gi,'<');
 				result = result.replace(/&gt;/gi,'>');
 				$("#result").html(result);
-				
-				
 			}).error(function(XMLHttpRequest, textStatus, errorThrown) {
-					result = textStatus;			
+				result = textStatus;			
 			}).complete(function(){
-				                                    
+					                                   
 			});
 			
+		});		
+		$(document).on("click", ".app", function() {
+			$.ajax({
+				type : "get",
+				url : "/HbLib/Controller",
+				data : 
+					"url="+$(this).attr("url")+
+					"&title="+$(this).attr("title")+
+					"&author="+$(this).attr("author")+
+					"&url="+$(this).attr("url")+
+					"&category="+$(this).attr("category")+
+					"&publisher="+$(this).attr("publisher")+
+					"&isbn="+$(this).attr("isbn")+
+					"&type=applybook",
+				success: function (data) {
+					if(data!=null){
+						alert("신청되셨습니다.");
+					}
+				},
+				error:function(){
+					alert("실패ㅋ");	
+				}				
+			});
 		});
 	});
 	

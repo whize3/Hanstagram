@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hb.command.BookSearchCom;
+
+import com.hb.command.ApplyBookCommand;
 import com.hb.command.Command;
+import com.hb.command.LoginCommand;
+import com.hb.command.BookSearchCom;
 
 
 
@@ -21,7 +24,7 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public Controller() {
-        super(); 
+         
     }
 
 
@@ -36,17 +39,19 @@ public class Controller extends HttpServlet {
 		System.out.println("컨트롤러진입");
 		String type = request.getParameter("type");
 		System.out.println(type);
-		
-		// 도서검색
 		Command comm = null;
-		if(type.equals("all")){
+		if(type.equals("applybook")){
+			comm = new ApplyBookCommand();
+		}else if(type.equals("login")){
+			comm = new LoginCommand();
+		}else if(type.equals("all")){
 			
-		}else if(type.equals("search")) {
+		}else if(type.equals("search")){
 			comm = new BookSearchCom();
 		}
-	
-		String path = comm.exec(request, response);
-		request.getRequestDispatcher(path).forward(request, response);
+		String result = comm.exec(request, response);
+		request.getRequestDispatcher(result).forward(request, response);
+		
 	}
 
 }

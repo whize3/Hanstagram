@@ -44,16 +44,11 @@
 	<div align="center">
 					<span>정렬</span> 
 					<select name="desearch">
-							<option value="S_TITL">자료명</option>
-							<option value="S_WRI">저자</option>
-							<option value="S_PUB">출판사</option>
+							<option value="0">자료명</option>
+							<option value="1">저자</option>
+							<option value="3">출판사</option>
 					</select>
 					
-			 <span>순서</span> 
-					<select name="sunser">
-							<option value="asc">오름차순</option>
-							<option value="desc">내림차순</option>
-					</select>
 			
 			<input type="hidden" name="type" value="search" /> 
 			<br/>

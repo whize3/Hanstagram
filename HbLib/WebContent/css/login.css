@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+.loginSec {
+    width: 250px;
+    padding: 20px 0 18px 17px;
+    border: 1px solid #d0d2d4;
+    background: #f4f5f7;
+    color: #899197;
+}
+.loginSec dt {
+    float: left;
+    width: 149px;
+}
+.loginSec input {
+    width: 129px;
+    height: 28px;
+    padding-left: 8px;
+    padding-right: 8px;
+    line-height: 28px;
+    border: 1px solid #b0b5b8;
+    color: #899197;
+}
+.loginLink li {
+    float: left;
+}
+.loginLink li a {
+    padding: 2px 0;
+}
+.loginSec a {
+    font-size: 11px;
+    letter-spacing: -1px;
+    color: #899197;
+}
+.loginSec a strong {
+    margin-right: 5px;
+    color: #56595e;
+}
+a:link, a:visited, a:active {
+    color: #666;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: 150%;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+ul {
+    list-style: none;
+}
+strong{
+	font-size: 15px;
+}
