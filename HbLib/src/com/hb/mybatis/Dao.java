@@ -9,6 +9,11 @@ public class Dao {
 	public Dao() {
 		ss = DBService.getFactory().openSession(true);
 	}
-	//리스트생성
+	// 도서 자료구입요청 받은 데이터 BOOKAPPLY에 삽입
+	
+	public void bookApply(Book_ApplyVO bavo){
+		ss.insert("apply", bavo);
+	}
+	
 	
 }

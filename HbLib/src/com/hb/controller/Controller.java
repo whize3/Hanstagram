@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hb.command.ApplyBookCommand;
+import com.hb.command.Command;
+import com.hb.command.LoginCommand;
+
 
 
 @WebServlet("/Controller")
@@ -17,7 +21,7 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public Controller() {
-        super(); 
+         
     }
 
 
@@ -31,9 +35,14 @@ public class Controller extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
 		System.out.println(type);
-	
-		/*String path = comm.exec(request, response);*/
-		/*request.getRequestDispatcher(path).forward(request, response);*/
+		Command comm = null;
+		if(type.equals("applybook")){
+			comm = new ApplyBookCommand();
+		}else if(type.equals("login")){
+			comm = new LoginCommand();
+		}
+		String result = comm.exec(request, response);
+		request.getRequestDispatcher(result).forward(request, response);
 	}
 
 }
