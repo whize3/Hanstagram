@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>한빛도서관</title>
-<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="css/header.css">
 </head>
 <body>
 <header>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="logoArea"><img src="../img/logo.png"></div>
+		<div class="logoArea"><img src="img/logo.png"></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">
@@ -41,24 +41,24 @@
 					</ul>
 				</div>
 			</li>
-			<li class="firstMenu"><a href="#">서비스 이용</a>
+			<li class="firstMenu"><a href="#">전자자료</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu1">
-						<a href="#"><li>스터디룸 안내</li></a>
-						<a href="#"><li>스터디룸 예약</li></a>
-						<a href="#"><li>도서구입 신청</li></a>
-						<a href="#"><li>도서구입 신청현황</li></a>
-						<a href="#"><li>열람실 현황</li></a>
+						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>냥냥냥</li></a>
+						<a href="#"><li>냥냥냥</li></a>
 					</ul>
 				</div>
 			</li>
 			<li class="firstMenu"><a href="#">My Library</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu2">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<li><a href="/teampj/Controller?type=draw&id=aaa">대출현황</a></li>
+						<li><a href="/teampj/Controller?type=reserve&id=aaa">예약확인</a></li>
+						<li><a href="/teampj/Controller?type=myinfo&id=aaa">개인정보</a></li>
+						<li><a href="/teampj/Controller?type=comment&id=aaa">나의서평</a></li>
+						<li><a href="/teampj/Controller?type=history&id=aaa">대출반납이력</a></li>
 					</ul>
 				</div>
 			</li>

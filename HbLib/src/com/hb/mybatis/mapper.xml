@@ -25,5 +25,42 @@
 		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 			select * from users where id=#{id} and pwd=#{pwd}
 		</select>
-
+	<select id="getmydraw" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select a.bd_date,b.isbn,b.writer,b.b_subject from (select id,b_num,bd_date,b_state from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='1'
+	</select>
+	<select id="getmyreserve" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select * from book where b_num in (select b_num from book_draw where id=#{id} and b_state='2')
+	</select>
+	<select id="getmyreserve_cnt" resultType="String" parameterType="String">
+		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select * from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select a.bd_redate,b.isbn,b.writer,b.b_subject from (select id,b_num,bd_redate,b_state from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='0'
+	</select>
+	<select id="getmycomment" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select b.bc_idx,a.b_subject,b.bc_date from (select b_num, b_subject from book where b_num in(select b_num from b_comment where id=#{id})) a, b_comment b where a.b_num=b.b_num
+	</select>
+	<select id="getmycommentcnt" resultType="String" parameterType="String">
+		select count(*) from b_comment where id=#{id}
+	</select>
+	<select id="getmyinfo" resultType="com.hb.mybatis.UsersVO" parameterType="String">
+		select * from users where id = #{id}
+	</select>
+	<update id="getmyinfoupdate" parameterType="Map">
+		update users set 
+		<choose>
+			<when test="changetype.equals('change_pwd')"> pwd=#{pwd} where id=#{id}</when>
+			<when test="changetype.equals('change_email')"> email=#{email} where id=#{id}</when>
+			<when test="changetype.equals('change_tel')"> tel=#{tel} where id=#{id}</when>
+		</choose>
+	</update>
+		<select id="getjoincheckid" parameterType="String" resultType="com.hb.mybatis.UsersVO">
+		select * from users where id = #{id}
+	</select>
+	<insert id="usersjoin" parameterType="com.hb.mybatis.UsersVO">
+		insert into users values(#{id},#{name},#{pwd},#{jumin},#{email},#{tel},#{addr})
+	</insert>
 	</mapper>

@@ -1,19 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div id="mainnavi">
 				<ul class="navileft">
-					<li id="navi_01"><a href="my_draw.jsp">´ëÃâÇöÈ²</a></li>
-					<li id="navi_02"><a href="my_reserve.jsp">¿¹¾àÈ®ÀÎ</a></li>
-					<li id="navi_03"><a href="my_info.jsp">°³ÀÎÁ¤º¸</a></li>
-					<li id="navi_04"><a href="my_comment.jsp">³ªÀÇ¼­Æò</a></li>
-					<li id="navi_05"><a href="my_history.jsp">´ëÃâ¹Ý³³ÀÌ·Â</a></li>
+					<li id="navi_01"><a href="/teampj/Controller?type=draw&id=aaa">ëŒ€ì¶œí˜„í™©</a></li>
+					<li id="navi_02"><a href="/teampj/Controller?type=reserve&id=aaa">ì˜ˆì•½í™•ì¸</a></li>
+					<li id="navi_03"><a href="/teampj/Controller?type=myinfo&id=aaa">ê°œì¸ì •ë³´</a></li>
+					<li id="navi_04"><a href="/teampj/Controller?type=comment&id=aaa">ë‚˜ì˜ì„œí‰</a></li>
+					<li id="navi_05"><a href="/teampj/Controller?type=history&id=aaa">ëŒ€ì¶œë°˜ë‚©ì´ë ¥</a></li>
 				</ul>
 			</div>
 </body>
