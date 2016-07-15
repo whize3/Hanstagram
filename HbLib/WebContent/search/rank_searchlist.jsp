@@ -34,7 +34,6 @@
 				   </tr>
 				   <c:forEach var="k" items="${list}">
 				   	<tr>
-				   
 				   <td>${k.RANK} </td>
 				   <td>${k.ISBN}</td>
 				   <td>${b_subject}</td>
