@@ -1,3 +1,4 @@
+<%@page import="com.hb.mybatis.UsersVO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,8 +13,27 @@
 	<div class="topArea">
 		<div class="wrap">
 			<div id="topMenu">
+				<%
+		request.setCharacterEncoding("utf-8");
+		String id = null;
+		String name = null;
+		try {
+			System.out.println("try/catch 진입");
+			UsersVO uvo = (UsersVO) session.getAttribute("user");
+			id = uvo.getId();
+			System.out.println("header에서 id:" +id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (id == null) {
+	%>
 				<a href="#">로그인</a>
+				&nbsp;|&nbsp;<%}else{%> 
+				<a href="#">로그아웃</a>
 				&nbsp;|&nbsp;
+				
+				<%}%>
 				<a href="#">회원가입</a>
 			</div>
 		</div>

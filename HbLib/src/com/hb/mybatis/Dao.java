@@ -15,9 +15,17 @@ public class Dao {
 	}
 
 	// 도서 자료구입요청 받은 데이터 BOOKAPPLY에 삽입
-	
 	public void bookApply(Book_ApplyVO bavo){
 		ss.insert("apply", bavo);
+	}
+	
+	// 로그인
+	public UsersVO login(String id, String pwd){
+		UsersVO user = new UsersVO();
+		user.setId(id);
+		user.setPwd(pwd);
+		UsersVO result = ss.selectOne("login", user);
+		return result;
 	}
 
 	
