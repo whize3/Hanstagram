@@ -29,13 +29,15 @@ public class Dao {
 	}
 
 	
-	public List<BookVO> search(String b_num, String booklist){
+	public List<BookVO> search(String booksearch, String keyword , String desearch) {
 		Map<String, String> map = new HashMap<>();
-		map.put("b_num", b_num);
-		map.put("booklist",booklist);
-		List<BookVO> list = ss.selectList(booklist,map);
+		map.put("booksearch", booksearch);
+		map.put("keyword",keyword);
+		map.put("desearch", desearch);
+		List<BookVO> list = ss.selectList("booklist",map);
 		return list;
 	}
+	
 	
 
 

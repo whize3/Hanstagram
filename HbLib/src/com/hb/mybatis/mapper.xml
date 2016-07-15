@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="HbLib">
 	
 		<!-- 도서구입신청  -->
+
+	<!-- 도서검색  -->
+	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
+		select * from book
+	      <choose>
+	      	<when test="idx==0">where book b_num = #{keyword} </when>
+	      	<when test="idx==1">where writer like '%' || #{keyword} || '%' </when>
+	      	<when test="idx==2">where publisher like '%' || #{keyword} || '%' </when>
+	      	<when test="idx==3">where b_subject   like '%' || #{keyword} || '%' </when>
+	      	<when test="idx==4">where category like '%' || #{keyword} || '%'</when>
+	      </choose>	
+	</select>
+
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
 			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
 		</insert>
-		
+
 		<!-- 로그인  -->
 		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 			select * from users where id=#{id} and pwd=#{pwd}
 		</select>
-	
-	
+
 	</mapper>

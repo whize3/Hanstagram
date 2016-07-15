@@ -84,7 +84,7 @@
 					onclick="login_go()" />
 
 			</dd>
-			<hr align="left" width="85%" />
+			<hr align="left" width="85%" />\
 			<a href=""><strong>아이디, 패스워드 찾기</strong></a>/
 			<a href=""><strong>회원가입</strong></a>
 		</dl>
