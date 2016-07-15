@@ -63,4 +63,59 @@
 	<insert id="usersjoin" parameterType="com.hb.mybatis.UsersVO">
 		insert into users values(#{id},#{name},#{pwd},#{jumin},#{email},#{tel},#{addr})
 	</insert>
+	
+	
+	<!-- admin -->
+		<!-- 로그인 비교 -->
+	<select id="login" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
+		select * from admin where id = #{id} and pwd= #{pwd}
+	</select>
+	<!-- 회원 총 카운트 -->
+	<select id="memberTotalCount" resultType="int">
+		select count(*) from users
+	</select>
+	<!-- 회원정보 리스트 -->
+	<select id="memberlist" parameterType="Map" resultType="com.hb.mybatis.UsersVO">
+		select * from ( 
+            select rownum r_num, a.* from (
+            	select * from users
+            	) a 
+              ) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 회원정보 -->
+	<select id="memberonelist" parameterType="String" resultType="com.hb.mybatis.UsersVO">
+		select * from users where id = #{id}
+	</select>
+	<!-- 회원 대출현황 리스트 -->
+	<select id="bookMemberList" parameterType="String" resultType="com.hb.mybatis.Book_DrawVO">
+		select * from book_draw where id = #{id}
+	</select>
+	<!-- 도서목록
+	<select id="booklist" resultType="com.hb.mybatis.BookVO">
+		select * from book
+	</select> -->
+	<!-- 책 총 권수 -->
+	<select id="bookListCount" resultType="int">
+		select count(*) from book
+	</select>
+	<select id="booklist" parameterType="Map" resultType="com.hb.mybatis.BookVO">
+		select * from (select rownum r_num, a.* from(
+			select * from book) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 공지사항 총 게시물 수 -->
+	<select id="noticeListCount" resultType="int">
+		select count(*) from notice
+	</select>
+	<!-- 공지사항 리스트 -->
+	<select id="noticeList" parameterType="Map" resultType="com.hb.mybatis.NoticeVO">
+		select * from (select rownum r_num, a.* from(
+			select * from notice) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 공지사항 게시물 추가 -->
+	<insert id="noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
+		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
+	</insert>
+	
 	</mapper>
