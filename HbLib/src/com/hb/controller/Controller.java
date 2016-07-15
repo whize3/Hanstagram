@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.Command;
 import com.hb.command.LoginCommand;
+import com.hb.command.RankBookCommand;
 import com.hb.command.BookSearchCom;
 
 
@@ -48,6 +49,8 @@ public class Controller extends HttpServlet {
 			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
+		}else if(type.equals("rank")){
+			comm = new RankBookCommand();
 		}
 		String result = comm.exec(request, response);
 		request.getRequestDispatcher(result).forward(request, response);

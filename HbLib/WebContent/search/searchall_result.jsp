@@ -10,6 +10,9 @@
 <body>
 	<h1>검색결과(테스트)</h1>
 	<ul>
+		
+		
+		
 		<c:forEach items="${booklist}" var="k">
 			<li>${k.b_num},${k.b_subject},${k.b_location},${k.publisher},${k.writer},
 			${k.category},${k.ISBN}</li>

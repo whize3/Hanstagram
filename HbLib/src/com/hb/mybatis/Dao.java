@@ -29,7 +29,12 @@ public class Dao {
 		List<BookVO> list = ss.selectList("booklist",map);
 		return list;
 	}
-	
+	public List<Book_rankVO> ranking(){
+		List<Book_rankVO> list = ss.selectList("ranking");
+		System.out.println(list.size());
+		return list;
+		
+	}
 	
 
 
