@@ -18,7 +18,6 @@
 		String id = null;
 		String name = null;
 		try {
-			System.out.println("try/catch 진입");
 			UsersVO uvo = (UsersVO) session.getAttribute("user");
 			id = uvo.getId();
 			System.out.println("header에서 id:" +id);
@@ -29,7 +28,7 @@
 		if (id == null) {%>
 				<a href="#">로그인</a>
 				&nbsp;|&nbsp;<%}else{%> 
-				<a href="#">로그아웃</a>
+				<a href="HbLib/">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>
 				
 				<a href="#">회원가입</a>
