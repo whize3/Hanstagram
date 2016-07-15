@@ -67,7 +67,7 @@
 	
 	<!-- admin -->
 		<!-- 로그인 비교 -->
-	<select id="login" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
+	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
 		select * from admin where id = #{id} and pwd= #{pwd}
 	</select>
 	<!-- 회원 총 카운트 -->
