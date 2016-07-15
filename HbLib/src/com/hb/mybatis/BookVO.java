@@ -1,13 +1,15 @@
 package com.hb.mybatis;
 
 public class BookVO {
-	private String b_num, b_subject, b_location, publisher, writer, category, ISBN;
+	private String b_num, b_subject, b_location, publisher, writer, category, ISBN,img_url;
 	public BookVO() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public BookVO(String b_num, String b_subject, String b_location, String publisher, String writer, String category,
-			String iSBN) {
+			String iSBN, String img_url) {
 		super();
 		this.b_num = b_num;
 		this.b_subject = b_subject;
@@ -16,7 +18,22 @@ public class BookVO {
 		this.writer = writer;
 		this.category = category;
 		ISBN = iSBN;
+		this.img_url = img_url;
 	}
+
+
+
+	public String getImg_url() {
+		return img_url;
+	}
+
+
+
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
+	}
+
+
 
 	public String getB_num() {
 		return b_num;
