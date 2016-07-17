@@ -105,69 +105,68 @@ public class Dao {
 	
 	// 로그인
 	public AdminVO getAdminList(AdminVO avo){
-		
 		AdminVO adminVo = ss.selectOne("adminLogin",avo);
 		return adminVo;
 	}
 	
 	// member 전체 게시물의 수
 	public int memberTotalCount(){
-		int count = ss.selectOne("memberTotalCount");
+		int count = ss.selectOne("a_memberTotalCount");
 		return count;
 	}
 	
 	// member paging 목록
 	public List<UsersVO> getMemberList(Map<String, Integer> map){
-		List<UsersVO> list = ss.selectList("memberlist",map);
+		List<UsersVO> list = ss.selectList("a_memberlist",map);
 		/*ss.close();*/
 		return list;
 	}
 	
 	// member 정보
 	public UsersVO getMemberOnelist(String id){
-		UsersVO uvo2 = ss.selectOne("memberonelist",id);
+		UsersVO uvo2 = ss.selectOne("a_memberonelist",id);
 		return uvo2;
 	}
 	
 	// member 대출 현황 정보
 	public List<Book_DrawVO> getBookDraw(String id){
-		List<Book_DrawVO> list = ss.selectList("bookMemberList",id);
+		List<Book_DrawVO> list = ss.selectList("a_bookMemberList",id);
 		return list;
 	}
 	
 	// book count
 	public int bookTotalCount(){
-		int count = ss.selectOne("bookListCount");
+		int count = ss.selectOne("a_bookListCount");
 		return count;
 	}
 	
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
-		List<BookVO> list = ss.selectList("booklist",map);
+		List<BookVO> list = ss.selectList("a_booklist",map);
 		return list;
 	}
 	
 	// book 추가
 	public void getBookAdd(BookVO bvo){
-		ss.insert("bookAdd",bvo);
+		ss.insert("a_bookAdd",bvo);
 		ss.commit();
 	}
 	
 	// notice 전체 게시물의 수
 	public int noticeTotalCount(){
-		int count = ss.selectOne("noticeListCount");
+		int count = ss.selectOne("a_noticeListCount");
 		return count;
 	}
 	
 	// notice 리스트
 	public List<NoticeVO> getNoticeList(Map<String, Integer> map){
-		List<NoticeVO> list = ss.selectList("noticeList",map);
+		List<NoticeVO> list = ss.selectList("a_noticeList",map);
 		return list;
 	}
 	
 	// notice 글쓰기
 	public void getNoticeAdd(NoticeVO nvo){
-		ss.insert("noticeAdd", nvo);
+		ss.insert("a_noticeAdd", nvo);
 		ss.commit();
 	}
 

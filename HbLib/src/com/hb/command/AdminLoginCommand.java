@@ -15,7 +15,7 @@ public class AdminLoginCommand implements Command{
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-
+		
 		AdminVO avo = new AdminVO();
 		avo.setId(id);
 		avo.setPwd(pwd);
@@ -25,9 +25,9 @@ public class AdminLoginCommand implements Command{
 		if(admin!=null){
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", admin);
-			return "main.jsp";
+			return "admin/main.jsp";
 		}else{
-			return "login_fail.jsp";
+			return "admin/login_fail.jsp";
 		}		
 				
 	}

@@ -9,7 +9,7 @@
 <link href="../css/menuList.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 	function book_add(f) {
-		f.action="/HbLib/Controller?type=bookAdd&chk=chk";
+		f.action="/HbLib/Controller?type=a_bookAdd&chk=chk";
 		f.submit();
 	}
 </script>
@@ -21,7 +21,7 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
 					<li><span class="li-s">></span><a href="menu2_bookList.jsp">도서 조회/추가</a></li>

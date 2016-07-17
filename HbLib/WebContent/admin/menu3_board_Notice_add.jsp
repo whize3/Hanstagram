@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="../css/menuList.css" type="text/css" rel="stylesheet">
 
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 
 <script>
    window.onload=function(){
@@ -34,7 +34,7 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
 					<li><span class="li-s">></span><a href="menu3_board_Notice.jsp">공지사항</a></li>
