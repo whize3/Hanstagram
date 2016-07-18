@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../css/menuList.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('td').dblclick(function() {
 			var id = $(this).closest("tr").find(".td_id").text();
-			location.href="/HbLib/Controller?type=memberOnelist&id="+id;
+			location.href="/HbLib/Controller?type=a_memberOnelist&id="+id;
 		});		
 	});
 </script>
@@ -24,11 +24,11 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_member.png" class="img"/><h3>회원관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_member.png" class="img"/><h3>회원관리</h3><hr/></div>
 			
 			<div class="menu-wrap">
 				<ul class="submenu">
-					<li><span class="li-s">></span><a href="/HbLib/Controller?type=memberlist">회원목록</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_memberlist">회원목록</a></li>
 				</ul>
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 				<h3>회원목록 
 					<small>
 						현재 회원 수 
-						<a style="color: red">${memberlist.size()}</a>
+						<a style="color: red">${a_memberlist.size()}</a>
 						명
 					</small>
 				</h3>
@@ -63,7 +63,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${memberlist}" var="k">
+						<c:forEach items="${a_memberlist}" var="k">
 							<tr>
 								<td class="td_id">${k.id}</td>
 								<td>${k.name}</td>
@@ -82,7 +82,7 @@
 											<li class="disable">이전으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=memberlist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
 										</c:otherwise>
 									</c:choose>
 									
@@ -92,7 +92,7 @@
 												<li class="now">${k}</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=memberlist&cPage=${k}">${k}</a></li>
+												<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${k}">${k}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -101,7 +101,7 @@
 											<li class="disable">다음으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=memberlist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ul>

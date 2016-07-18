@@ -26,7 +26,7 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_member.png" class="img"/><h3>회원관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_member.png" class="img"/><h3>회원관리</h3><hr/></div>
 			
 			<div class="menu-wrap">
 				<ul class="submenu">

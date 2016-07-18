@@ -20,7 +20,7 @@ public class BookAddCommand implements Command{
 		String img_url = request.getParameter("img_url");
 		
 		if(chk==null){
-			return "menu2_bookList_add.jsp";
+			return "admin/menu2_bookList_add.jsp";
 		}else{
 			BookVO bvo = new BookVO();
 			bvo.setB_num(b_num);
@@ -34,7 +34,7 @@ public class BookAddCommand implements Command{
 			
 			Dao dao = new Dao();
 			dao.getBookAdd(bvo);
-			return "menu2_bookList.jsp";
+			return "admin/menu2_bookList.jsp";
 		}
 	
 	}

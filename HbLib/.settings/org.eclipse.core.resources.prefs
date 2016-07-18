@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/hb/command/BookListCommand.java=UTF-8
+encoding//src/com/hb/command/MemberListCommand.java=UTF-8
+encoding//src/com/hb/command/NoticeListCommand.java=UTF-8
 encoding//src/com/hb/mybatis/Dao.java=UTF-8

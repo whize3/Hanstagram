@@ -21,7 +21,7 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
 					<li><span class="li-s">></span><a href="menu2_bookList.jsp">도서 조회/추가</a></li>
@@ -54,7 +54,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${booklist}" var="k">
+						<c:forEach items="${a_booklist}" var="k">
 							<tr>
 								<td>${k.b_num}</td>
 								<td>${k.b_subject}</td>
@@ -74,7 +74,7 @@
 											<li class="disable">이전으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=booklist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_booklist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
 										</c:otherwise>
 									</c:choose>
 									
@@ -84,7 +84,7 @@
 												<li class="now">${k}</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=booklist&cPage=${k}">${k}</a></li>
+												<li><a href="/HbLib/Controller?type=a_booklist&cPage=${k}">${k}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -93,7 +93,7 @@
 											<li class="disable">다음으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=booklist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_booklist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ul>
