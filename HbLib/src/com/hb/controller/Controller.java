@@ -2,6 +2,7 @@ package com.hb.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -17,6 +18,9 @@ import com.hb.command.BookListCommand;
 import com.hb.command.Command;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
+
+import com.hb.command.RankBookCommand;
+
 import com.hb.command.MemberListCommand;
 import com.hb.command.MemberOnelistCommand;
 import com.hb.command.MyCommentCommand;
@@ -28,6 +32,7 @@ import com.hb.command.MyReserveCommand;
 import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.UsersJoinCommand;
+
 import com.hb.command.BookSearchCom;
 
 
@@ -62,6 +67,10 @@ public class Controller extends HttpServlet {
 			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
+
+		}else if(type.equals("rank")){
+			comm = new RankBookCommand();
+
 		}else if(type.equals("draw")){
 			comm = new MyDrawCommand();
 		}else if(type.equals("reserve")){
@@ -95,6 +104,7 @@ public class Controller extends HttpServlet {
 			comm = new NoticeListCommand();
 		}else if(type.equals("a_NoticeAdd")){
 			comm = new NoticeAddCommand();
+
 		}
 		String path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);

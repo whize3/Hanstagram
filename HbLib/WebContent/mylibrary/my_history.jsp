@@ -46,10 +46,17 @@
 								<!-- for시작ㄱ -->
 								<c:forEach var="k" items="${list }">
 								<tr>
+
+									<td>���Ŀ�¯¯��</td>
+									<td>���Ŀ�</td>
+									<td>599</td>
+									<td	>2016-07-11</td>
+
 									<td>${k.b_subject }</td>
 									<td>${k.writer }</td>
 									<td>${k.isbn }</td>
 									<td>${k.bd_redate.substring(0,10) }</td>
+
 								</tr>
 								<tr>
 									<td colspan="4"><hr /></td>
