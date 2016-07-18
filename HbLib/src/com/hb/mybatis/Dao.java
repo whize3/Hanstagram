@@ -27,8 +27,9 @@ public class Dao {
 		System.out.println("dao id:"+id);
 		UsersVO result = ss.selectOne("login", user);
 		UsersVO book = ss.selectOne("loginbook", user);
-		System.out.println(book.getDraw());
 		result.setDraw(book.getDraw());
+		result.setReserve(book.getReserve());
+		result.setOverdue(book.getOverdue());
 		return result;
 	}
 
