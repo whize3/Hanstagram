@@ -63,14 +63,10 @@ public class Controller extends HttpServlet {
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
 			comm = new LoginCommand();
-		}else if(type.equals("all")){
-			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
-
 		}else if(type.equals("rank")){
 			comm = new RankBookCommand();
-
 		}else if(type.equals("draw")){
 			comm = new MyDrawCommand();
 		}else if(type.equals("reserve")){
