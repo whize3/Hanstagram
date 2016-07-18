@@ -16,7 +16,7 @@ public class MyHistoryCommand implements Command{
 		String id = request.getParameter("id");
 		List<MyDrawVO> list = dao.getMyHistory(id);
 		request.setAttribute("list", list);
-		return "my_history.jsp";
+		return "mylibrary/my_history.jsp";
 	}
 
 }

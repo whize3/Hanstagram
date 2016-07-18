@@ -35,6 +35,8 @@
 			</div>
 		</div>
 	</div>
+	<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+<jsp:setProperty property="*" name="user" />
 	<div class="wrap">
 		<div class="logoArea"><img src="/HbLib/img/logo.png"></div>
 		<div id="searchBar">
@@ -72,10 +74,11 @@
 			<li class="firstMenu"><a href="#">My Library</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu2">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<li><a href="/HbLib/Controller?type=draw&id=${user.id }">대출현황</a></li>
+						<li><a href="/HbLib/Controller?type=reserve&id=aaa">예약확인</a></li>
+						<li><a href="/HbLib/Controller?type=myinfo&id=aaa">개인정보</a></li>
+						<li><a href="/HbLib/Controller?type=comment&id=aaa">나의서평</a></li>
+						<li><a href="/HbLib/Controller?type=history&id=aaa">대출반납이력</a></li>
 					</ul>
 				</div>
 			</li>

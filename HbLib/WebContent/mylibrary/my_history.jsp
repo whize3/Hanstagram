@@ -6,20 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/mylibrary.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_05").css("background-color", "gray")
 		$("#btn1").click(function(){
-			location.href="/teampj/Controller?type=draw&id=aaa";
+			location.href="/HbLib/Controller?type=draw&id=aaa";
 		});
 	});
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="my_navi.jsp" />
@@ -46,17 +46,10 @@
 								<!-- for시작ㄱ -->
 								<c:forEach var="k" items="${list }">
 								<tr>
-
-									<td>���Ŀ�¯¯��</td>
-									<td>���Ŀ�</td>
-									<td>599</td>
-									<td	>2016-07-11</td>
-
 									<td>${k.b_subject }</td>
 									<td>${k.writer }</td>
 									<td>${k.isbn }</td>
 									<td>${k.bd_redate.substring(0,10) }</td>
-
 								</tr>
 								<tr>
 									<td colspan="4"><hr /></td>

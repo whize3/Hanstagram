@@ -10,6 +10,9 @@
     float: left;
     width: 149px;
 }
+.loginSec ul{
+	margin-left: -40px;
+}
 .loginSec input {
     width: 129px;
     height: 28px;

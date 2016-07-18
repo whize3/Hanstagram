@@ -32,10 +32,10 @@
 						}
 					});
 				});
-		$("#logout_img").click(
-				function() {
-					location.href="/HbLib/Controller?type=logout"
-				});
+		$("#logout_img").click(function() {
+			alert("로그아웃 function 진입")
+			location.href = "/HbLib/Controller?type=logout"
+		});
 	});
 </script>
 </head>
@@ -44,16 +44,13 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 		String id = null;
-		String name = null;
-		
+
 		try {
 			UsersVO uvo = (UsersVO) session.getAttribute("user");
 			id = uvo.getId();
-			name = uvo.getName();
-			System.out.println("로그인 페이지에서 id:"+id);
-			
+
 		} catch (Exception e) {
-			
+
 		}
 
 		if (id == null) {
@@ -79,53 +76,60 @@
 		} else {
 	%>
 	<div class="loginSec">
-			<h3>개인정보</h3>
+		<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+		<jsp:setProperty property="*" name="user" />
+		<h3>개인정보</h3>
 		<dl>
 			<dt>
-				<label><%=name%></label><br/>
-				대출도서
+				<label>${user.name}</label><br />
+				<ul>
+					<li>대출도서 ${user.draw}권</li>
+					<li>예약 도서 ${user.reserve}권</li>
+					<li>연체 도서 ${user.overdue}권</li>
+				</ul>
 			</dt>
 			<dd>
-				<img src="img/logoutBtn.jpg" alt="로그아웃" id="logout_img"
-					/>
+				<img src="img/logoutBtn.jpg" alt="로그아웃" id="logout_img" />
 
 			</dd>
-			<hr align="left" width="85%" />			
+			<hr align="left" width="85%" />
 		</dl>
 	</div>
 	<div class="myaccount">
-				<div class="myaccount-header">
-					<h3 class="myaccount-title ng-binding">
-						<%=name%><span class="myaccount-id ng-binding">2009313924 (학부생)</span>
-					</h3>
-					
-				</div>
-				<div class="myaccount-text">
-					<ul>
-						<li><a href="#/mylibrary/charges">대출도서 <span
-								class="ng-binding">0</span>권
-						</a></li>
-						<li><a href="#/mylibrary/holds">예약도서 <span
-								class="ng-binding">0</span>권
-						</a></li>
-					</ul>
-					<ul>
-						<li><a href="#/mylibrary/charges">연체도서 <span
-								class="ng-binding">0</span>권
-						</a></li>
-						<li><a href="#/mylibrary/fines">연 체 료 <span
-								class="ng-binding">0</span>원
-						</a></li>
-					</ul>
-				</div>
-				<div class="myaccount-icon">
-					<ul>
-						<li><a href="#/mylibrary/dashboard" class="myaccount-icon01"><span>Dashboard</span></a></li>
-						<li><a href="#/mylibrary/mynotice" class="myaccount-icon02"><span>개인알림</span></a></li>
-						<li><a href="#/mylibrary/myinfo" class="myaccount-icon03"><span>개인정보수정</span></a></li>
-					</ul>
-				</div>
-			</div>
+
+		<div class="myaccount-header">
+			<h3 class="myaccount-title ng-binding">
+				${user.name}<span class="myaccount-id ng-binding">2009313924
+					(학부생)</span>
+			</h3>
+
+		</div>
+		<div class="myaccount-text">
+			<ul>
+				<li><a href="#/mylibrary/charges">대출도서 <span
+						class="ng-binding">0</span>권
+				</a></li>
+				<li><a href="#/mylibrary/holds">예약도서 <span
+						class="ng-binding">0</span>권
+				</a></li>
+			</ul>
+			<ul>
+				<li><a href="#/mylibrary/charges">연체도서 <span
+						class="ng-binding">0</span>권
+				</a></li>
+				<li><a href="#/mylibrary/fines">연 체 료 <span
+						class="ng-binding">0</span>원
+				</a></li>
+			</ul>
+		</div>
+		<div class="myaccount-icon">
+			<ul>
+				<li><a href="#/mylibrary/dashboard" class="myaccount-icon01"><span>Dashboard</span></a></li>
+				<li><a href="#/mylibrary/mynotice" class="myaccount-icon02"><span>개인알림</span></a></li>
+				<li><a href="#/mylibrary/myinfo" class="myaccount-icon03"><span>개인정보수정</span></a></li>
+			</ul>
+		</div>
+	</div>
 	<%
 		}
 	%>

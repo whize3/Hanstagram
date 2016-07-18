@@ -124,9 +124,9 @@
 	<insert id="a_noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
 		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
 	</insert>
-	
+	<!-- 로그인시 대출/예약/연체 도서 정보  -->
 	<select id="loginbook" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
-		select count(id) draw from book_draw where id=#{id} and b_state='1'
+		select count(case when id=#{id} and b_state='1' then 1 else null end)draw, count(case when id=#{id} and b_state='2' then 1 else null end)reserve, count(case when id=#{id} and b_state='1' and sysdate>bd_redate then 1 else null end)overdue from book_draw
 	</select>
 	
 	</mapper>

@@ -18,6 +18,6 @@ public class MyCommentCommand implements Command{
 		String bc_cnt = dao.getMyCommentCnt(id);
 		request.setAttribute("list", list);
 		request.setAttribute("bc_cnt", bc_cnt);
-		return "my_comment.jsp";
+		return "mylibrary/my_comment.jsp";
 	}
 }
