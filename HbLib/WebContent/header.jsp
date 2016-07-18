@@ -7,6 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>한빛도서관</title>
 <link rel="stylesheet" href="/HbLib/css/header.css">
+<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+<script type="text/javascript">
+	function logout_go() {
+		$.ajax({
+			type : "get",
+			url : "/HbLib/AjaxController",
+			data : "type=logout",						
+			dataType : "text",
+			success : function() {
+				alert("로그아웃 되셨습니다.");
+				parent.document.location.reload();
+			},
+			error : function(request, status, error) {
+				alert("request: " + request + " status: " + status
+						+ " error: " + error);
+			}
+		});
+	
+	}
+</script>
 </head>
 <body>
 <header>
@@ -20,7 +40,6 @@
 		try {
 			UsersVO uvo = (UsersVO) session.getAttribute("user");
 			id = uvo.getId();
-			System.out.println("header에서 id:" +id);
 		} catch (Exception e) {
 
 		}
@@ -28,7 +47,7 @@
 		if (id == null) {%>
 				<a href="#">로그인</a>
 				&nbsp;|&nbsp;<%}else{%> 
-				<a href="/HbLib/Controller?type=logout">로그아웃</a>
+				<a href="#" onclick="logout_go()">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>
 				
 				<a href="#">회원가입</a>
@@ -38,7 +57,7 @@
 	<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
 <jsp:setProperty property="*" name="user" />
 	<div class="wrap">
-		<div class="logoArea"><img src="/HbLib/img/logo.png"></div>
+		<div class="logoArea"><a href="/HbLib/main.jsp"><img src="/HbLib/img/logo.png"></a></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">
@@ -65,8 +84,8 @@
 					<ul id="subMenu1">
 						<a href="#"><li>스터디룸 안내</li></a>
 						<a href="#"><li>스터디룸 예약</li></a>
-						<a href="#"><li>도서구입 신청</li></a>
-						<a href="#"><li>도서구입 신청현황</li></a>
+						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
+						<a href="/HbLib/service/ser_apply_state.jsp"><li>도서구입 신청현황</li></a>
 						<a href="#"><li>열람실 현황</li></a>
 					</ul>
 				</div>

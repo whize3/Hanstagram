@@ -33,13 +33,26 @@
 					});
 				});
 		$("#logout_img").click(function() {
-			alert("로그아웃 function 진입")
-			location.href = "/HbLib/Controller?type=logout"
+			$.ajax({
+				type : "get",
+				url : "/HbLib/AjaxController",
+				data : "type=logout",						
+				dataType : "text",
+				success : function() {
+					alert("로그아웃 되셨습니다.");
+					parent.document.location.reload();
+				},
+				error : function(request, status, error) {
+					alert("request: " + request + " status: " + status
+							+ " error: " + error);
+				}
+			});
 		});
 	});
 </script>
 </head>
 <body>
+<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
 
 	<%
 		request.setCharacterEncoding("utf-8");
@@ -63,8 +76,7 @@
 					id="password" type="password" title="패스워드" placeholder="패스워드" />
 			</dt>
 			<dd>
-				<img src="img/loginBtn.gif" alt="로그인" id="login_img"
-					onclick="login_go()" />
+				<img src="img/loginBtn.gif" alt="로그인" id="login_img" />
 
 			</dd>
 			<hr align="left" width="85%" />
@@ -76,8 +88,7 @@
 		} else {
 	%>
 	<div class="loginSec">
-		<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
-		<jsp:setProperty property="*" name="user" />
+				
 		<h3>개인정보</h3>
 		<dl>
 			<dt>
