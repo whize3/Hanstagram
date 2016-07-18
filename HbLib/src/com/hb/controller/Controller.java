@@ -55,7 +55,6 @@ public class Controller extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("컨트롤러진입");
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
