@@ -28,7 +28,7 @@
 		if (id == null) {%>
 				<a href="#">로그인</a>
 				&nbsp;|&nbsp;<%}else{%> 
-				<a href="HbLib/">로그아웃</a>
+				<a href="/HbLib/Controller?type=logout">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>
 				
 				<a href="#">회원가입</a>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="logoArea"><img src="HbLib/img/logo.png"></div>
+		<div class="logoArea"><img src="/HbLib/img/logo.png"></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">

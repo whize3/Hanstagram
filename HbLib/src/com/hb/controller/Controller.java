@@ -18,7 +18,7 @@ import com.hb.command.BookListCommand;
 import com.hb.command.Command;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
-
+import com.hb.command.LogoutCommand;
 import com.hb.command.RankBookCommand;
 
 import com.hb.command.MemberListCommand;
@@ -104,7 +104,8 @@ public class Controller extends HttpServlet {
 			comm = new NoticeListCommand();
 		}else if(type.equals("a_NoticeAdd")){
 			comm = new NoticeAddCommand();
-
+		}else if(type.equals("logout")){
+			comm = new LogoutCommand();
 		}
 		String path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
