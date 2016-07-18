@@ -1,7 +1,7 @@
 package com.hb.mybatis;
 
 public class Book_rankVO {
-	private  String b_subject , ISBN ,RANK ;
+	private  String b_subject , ISBN ,dense_rank ;
 
 	public String getB_subject() {
 		return b_subject;
@@ -19,13 +19,15 @@ public class Book_rankVO {
 		ISBN = iSBN;
 	}
 
-	public String getRANK() {
-		return RANK;
+	public String getDense_rank() {
+		return dense_rank;
 	}
 
-	public void setRANK(String rANK) {
-		RANK = rANK;
+	public void setDense_rank(String dense_rank) {
+		this.dense_rank = dense_rank;
 	}
+
+	
 
 	
 }
