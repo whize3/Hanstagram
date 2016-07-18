@@ -16,6 +16,14 @@
 </script>
 </head>
 <body>
+<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+<jsp:setProperty property="*" name="user" />
+<c:if test="${user.id==null }">
+<script type="text/javascript">
+alert("로그인해주세요")
+history.go(-1)
+</script>
+</c:if>
 	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">

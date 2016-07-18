@@ -94,10 +94,10 @@
 				<div class="subMenuWrap">
 					<ul id="subMenu2">
 						<li><a href="/HbLib/Controller?type=draw&id=${user.id }">대출현황</a></li>
-						<li><a href="/HbLib/Controller?type=reserve&id=aaa">예약확인</a></li>
-						<li><a href="/HbLib/Controller?type=myinfo&id=aaa">개인정보</a></li>
-						<li><a href="/HbLib/Controller?type=comment&id=aaa">나의서평</a></li>
-						<li><a href="/HbLib/Controller?type=history&id=aaa">대출반납이력</a></li>
+						<li><a href="/HbLib/Controller?type=reserve&id=${user.id }">예약확인</a></li>
+						<li><a href="/HbLib/Controller?type=myinfo&id=${user.id }">개인정보</a></li>
+						<li><a href="/HbLib/Controller?type=comment&id=${user.id }">나의서평</a></li>
+						<li><a href="/HbLib/Controller?type=history&id=${user.id }">대출반납이력</a></li>
 					</ul>
 				</div>
 			</li>
