@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="HBLib">
+	<mapper namespace="HbLib">
+	
+		<!-- 도서구입신청  -->
+
 	<!-- 도서검색  -->
 	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
 		select * from book
@@ -14,7 +17,6 @@
 	      </choose>	
 	</select>
 
-	
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
 			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
 		</insert>
@@ -23,6 +25,104 @@
             from book_apply
 		</select>
 
+
+
+		<!-- 로그인  -->
+		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+			select * from users where id=#{id} and pwd=#{pwd}
+		</select>
+	<select id="getmydraw" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select a.bd_date,b.isbn,b.writer,b.b_subject from (select id,b_num,bd_date,b_state from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='1'
+	</select>
+	<select id="getmyreserve" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select * from book where b_num in (select b_num from book_draw where id=#{id} and b_state='2')
+	</select>
+	<select id="getmyreserve_cnt" resultType="String" parameterType="String">
+		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select * from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select a.bd_redate,b.isbn,b.writer,b.b_subject from (select id,b_num,bd_redate,b_state from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='0'
+	</select>
+	<select id="getmycomment" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
+		select b.bc_idx,a.b_subject,b.bc_date from (select b_num, b_subject from book where b_num in(select b_num from b_comment where id=#{id})) a, b_comment b where a.b_num=b.b_num
+	</select>
+	<select id="getmycommentcnt" resultType="String" parameterType="String">
+		select count(*) from b_comment where id=#{id}
+	</select>
+	<select id="getmyinfo" resultType="com.hb.mybatis.UsersVO" parameterType="String">
+		select * from users where id = #{id}
+	</select>
+	<update id="getmyinfoupdate" parameterType="Map">
+		update users set 
+		<choose>
+			<when test="changetype.equals('change_pwd')"> pwd=#{pwd} where id=#{id}</when>
+			<when test="changetype.equals('change_email')"> email=#{email} where id=#{id}</when>
+			<when test="changetype.equals('change_tel')"> tel=#{tel} where id=#{id}</when>
+		</choose>
+	</update>
+		<select id="getjoincheckid" parameterType="String" resultType="com.hb.mybatis.UsersVO">
+		select * from users where id = #{id}
+	</select>
+	<insert id="usersjoin" parameterType="com.hb.mybatis.UsersVO">
+		insert into users values(#{id},#{name},#{pwd},#{jumin},#{email},#{tel},#{addr})
+	</insert>
+
 	
+	
+	<!-- admin -->
+		<!-- 로그인 비교 -->
+	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
+		select * from admin where id = #{id} and pwd= #{pwd}
+	</select>
+	<!-- 회원 총 카운트 -->
+	<select id="memberTotalCount" resultType="int">
+		select count(*) from users
+	</select>
+	<!-- 회원정보 리스트 -->
+	<select id="memberlist" parameterType="Map" resultType="com.hb.mybatis.UsersVO">
+		select * from ( 
+            select rownum r_num, a.* from (
+            	select * from users
+            	) a 
+              ) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 회원정보 -->
+	<select id="memberonelist" parameterType="String" resultType="com.hb.mybatis.UsersVO">
+		select * from users where id = #{id}
+	</select>
+	<!-- 회원 대출현황 리스트 -->
+	<select id="bookMemberList" parameterType="String" resultType="com.hb.mybatis.Book_DrawVO">
+		select * from book_draw where id = #{id}
+	</select>
+	<!-- 도서목록
+	<select id="booklist" resultType="com.hb.mybatis.BookVO">
+		select * from book
+	</select> -->
+	<!-- 책 총 권수 -->
+	<select id="bookListCount" resultType="int">
+		select count(*) from book
+	</select>
+	<select id="booklist" parameterType="Map" resultType="com.hb.mybatis.BookVO">
+		select * from (select rownum r_num, a.* from(
+			select * from book) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 공지사항 총 게시물 수 -->
+	<select id="noticeListCount" resultType="int">
+		select count(*) from notice
+	</select>
+	<!-- 공지사항 리스트 -->
+	<select id="noticeList" parameterType="Map" resultType="com.hb.mybatis.NoticeVO">
+		select * from (select rownum r_num, a.* from(
+			select * from notice) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 공지사항 게시물 추가 -->
+	<insert id="noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
+		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
+	</insert>
 	
 	</mapper>

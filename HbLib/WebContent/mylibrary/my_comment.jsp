@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/mylibrary.css">
-<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="css/mylibrary.css">
+<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
@@ -23,7 +24,7 @@
 				<div class="mainviewnavi">◆My Library > 나의서평</div>
 				<div>
 					<div class="mainview_cnt">
-						&nbsp;&nbsp;&nbsp;전체 : 1건
+						&nbsp;&nbsp;&nbsp;전체 : ${bc_cnt }
 						<hr color="black" width="670"/>
 					</div>
 					<div align="center">
@@ -40,14 +41,16 @@
 									<td colspan="3"><hr color="black" /></td>
 								</tr>
 								<!-- for시작ㄱ -->
+								<c:forEach var="k" items="${list }">
 								<tr>
-									<td>122</td>
-									<td>생각의 지도</td>
-									<td>2016-07-08</td>
+									<td>${k.bc_idx }</td>
+									<td>${k.b_subject }</td>
+									<td>${k.bc_date.substring(0,10) }</td>
 								</tr>
 								<tr>
 									<td colspan="3"><hr /></td>
 								</tr>
+								</c:forEach>
 								<!-- for끝 -->
 							</tbody>
 						</table>

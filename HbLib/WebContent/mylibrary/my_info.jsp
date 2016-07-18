@@ -1,18 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/mylibrary.css">
-<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="css/mylibrary.css">
+<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_03").css("background-color", "gray")
 		$(".myinfoview tr:gt(0)").addClass("my_info_tr")
+		$("#change_pwd").click(function(){
+			if($("#pwd").val()==""){
+				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
+				$("#pwd").focus();
+			}else{
+				var chk = confirm("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•©ë‹ˆë‹¤.");
+				if(chk){
+					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&pwd="+$("#pwd").val()+"&change=change_pwd";
+				}else
+					$("#pwd").focus();
+				return;
+			}
+		});
+		$("#change_email").click(function(){
+			if($("#email").val()==""){
+				alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
+				$("#email").focus();
+			}else{
+				var chk = confirm("ì´ë©”ì¼ì„ ë³€ê²½í•©ë‹ˆë‹¤.");
+				if(chk){
+					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&email="+$("#email").val()+"&change=change_email";
+				}else
+					$("#email").focus();
+				return;
+			}
+		});
+		$("#change_tel").click(function(){
+			if($("#tel").val()==""){
+				alert("ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
+				$("#tel").focus();
+			}else{
+				var chk = confirm("ì „í™”ë²ˆí˜¸ë¥¼ ë³€ê²½í•©ë‹ˆë‹¤.");
+				if(chk){
+					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&tel="+$("#tel").val()+"&change=change_tel";
+				}else
+					$("#tel").focus();
+				return;
+			}
+		});
 	});
+	
 </script>
 </head>
 <body>
@@ -21,46 +62,45 @@
 		<div class="mainArea2">
 			<jsp:include page="my_navi.jsp" />
 			<div id="mainview">
-				<div class="mainviewnavi">¡ßMy Library > °³ÀÎÁ¤º¸</div>
+				<div class="mainviewnavi">â—†My Library > ê°œì¸ì •ë³´</div>
 				<div>
 					<div align="left">
 						<table class="myinfoview">
 							<tr>
-								<td width="100">¾ÆÀÌµğ</td>
-								<td width="300"><input type="text" name="id" value="Á¤ÈÄ¿µÂ¯Â¯¸Ç" size="30" readonly /></td>
+								<td width="100">ì•„ì´ë””</td>
+								<td width="300"><input type="text" name="id" id="id" size="30" value="${list.id }" readonly/></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">ÀÌ¸§</td>
-								<td><input type="text" name="name" value="Á¤ÈÄ¿µ" size="30" readonly /></td>
+								<td width="100">ì´ë¦„</td>
+								<td><input type="text" name="name" value="${list.name }" size="30" readonly /></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">ºñ¹Ğ¹øÈ£</td>
-								<td><input type="password" name="pwd" size="30" /></td>
-								<td width="120"><input type="button" value="ºñ¹Ğ¹øÈ£º¯°æ"></td>
+								<td width="100">ë¹„ë°€ë²ˆí˜¸</td>
+								<td><input type="password" name="pwd" size="30" id="pwd"/></td>
+								<td width="120"><input type="button" value="ë¹„ë°€ë²ˆí˜¸ë³€ê²½" id="change_pwd" /></td>
 							</tr>
 							<tr>
-								<td>»ı³â¿ùÀÏ</td>
-								<td><input type="text" name="jumin" size="30" readonly /></td>
+								<td>ìƒë…„ì›”ì¼</td>
+								<td><input type="text" name="jumin" size="30" value="${list.jumin }" readonly /></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">ÀÌ¸ŞÀÏ</td>
-								<td><input type="text" name="email" size="30" /></td>
-								<td><input type="button" value="ÀÌ¸ŞÀÏº¯°æ"></td>
+								<td width="100">ì´ë©”ì¼</td>
+								<td><input type="text" name="email" size="30" id="email" value="${list.email }"/></td>
+								<td><input type="button" value="ì´ë©”ì¼ë³€ê²½" id="change_email" /></td>
 							</tr>
 							<tr>
-								<td width="100">ÀüÈ­¹øÈ£</td>
-								<td><input type="text" name="tel" size="30" /></td>
-								<td><input type="button" value="ÀüÈ­¹øÈ£º¯°æ"></td>
+								<td width="100">ì „í™”ë²ˆí˜¸</td>
+								<td><input type="text" name="tel" size="30" id="tel" value="${list.tel }"/></td>
+								<td><input type="button" value="ì „í™”ë²ˆí˜¸ë³€ê²½" id="change_tel" /></td>
 							</tr>
 							<tr>
-								<td width="100">ÁÖ¼Ò</td>
-								<td><input type="text" name="addr" size="30" /></td>
-								<td><input type="button" value="ÁÖ¼Òº¯°æ"></td>
+								<td width="100">ì£¼ì†Œ</td>
+								<td><input type="text" name="addr" size="30" value="${list.addr }"/></td>
+								<td><input type="button" value="ì£¼ì†Œë³€ê²½" /></td>
 							</tr>
-
 						</table>
 					</div>
 				</div>

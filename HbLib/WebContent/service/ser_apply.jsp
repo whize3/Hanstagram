@@ -55,7 +55,7 @@
 		$(document).on("click", ".app", function() {
 			$.ajax({
 				type : "get",
-				url : "/HbLib/Controller",
+				url : "/HbLib/AjaxController",
 				data : 
 					"url="+$(this).attr("url")+
 					"&title="+$(this).attr("title")+
