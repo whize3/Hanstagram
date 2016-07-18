@@ -81,7 +81,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="ser_navi.jsp" />
