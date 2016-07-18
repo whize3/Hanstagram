@@ -277,7 +277,7 @@ $(function(){
 });
 function moveBanner(int a){
 	
-}
+} 
 </script>
 </head>
 <body>
@@ -298,7 +298,7 @@ function moveBanner(int a){
 			<%@include file="banner.html" %>
 		</div>
 		<div id="login">
-			<%@include file="login.jsp" %>
+			<jsp:include page="login.jsp"/> 
 		</div>
 		</div>
 	<div class="wrap">

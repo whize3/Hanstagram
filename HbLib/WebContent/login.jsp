@@ -27,10 +27,14 @@
 							}
 						},
 						error : function(request, status, error) {
-							alert("request: " + request + " status: " + stats
+							alert("request: " + request + " status: " + status
 									+ " error: " + error);
 						}
 					});
+				});
+		$("#logout_img").click(
+				function() {
+					location.href="/HbLib/Controller?type=logout"
 				});
 	});
 </script>
@@ -41,18 +45,19 @@
 		request.setCharacterEncoding("utf-8");
 		String id = null;
 		String name = null;
+		
 		try {
 			UsersVO uvo = (UsersVO) session.getAttribute("user");
 			id = uvo.getId();
 			name = uvo.getName();
+			System.out.println("로그인 페이지에서 id:"+id);
+			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 
 		if (id == null) {
 	%>
-	<jsp:useBean id="uvo" class="com.hb.mybatis.UsersVO"/>
-	<jsp:setProperty property="*" name="uvo"/>
 	<div class="loginSec">
 		<h3>로그인</h3>
 		<dl>
@@ -80,8 +85,8 @@
 				<label><%=name%></label>
 			</dt>
 			<dd>
-				<img src="img/loginBtn.gif" alt="로그아웃" id="login_img"
-					onclick="login_go()" />
+				<img src="img/logoutBtn.jpg" alt="로그아웃" id="logout_img"
+					/>
 
 			</dd>
 			<hr align="left" width="85%" />\
@@ -94,9 +99,7 @@
 					<h3 class="myaccount-title ng-binding">
 						<%=name%><span class="myaccount-id ng-binding">2009313924 (학부생)</span>
 					</h3>
-					<div ik-access-level="member" style="display: inline;">
-						<a href="#" class="myaccount-logout" ng-click="logout()">로그아웃</a>
-					</div>
+					
 				</div>
 				<div class="myaccount-text">
 					<ul>
