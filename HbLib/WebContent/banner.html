@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>슬라이드</title>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript" src="./js/jquery.ulslide.js"></script>
+
+		<script type="text/javascript">
+            $(function() {
+                $('#main_bn').ulslide({
+                    statusbar: true,
+                    width: 305,
+                    height: 223, 
+                    affect: 'slide', 
+                    axis: 'x', 	
+                    navigator: '#main_bn_btn a',
+                    duration: 400, 
+					autoslide: 3000 
+                });
+            });
+        </script>
+
+        <style type="text/css">
+
+			#wrap{position:relative; width:100%;}
+			
+			#main_bn {
+				margin:0 auto;
+				width:305px;
+				height:223px;
+			}
+			#main_bn img {
+				width:100%;
+				height:auto;
+			}
+            #main_bn_btn {
+                list-style-type:none;
+				position:absolute;
+				bottom:5px; left:5px;
+            }
+            #main_bn_btn li {
+                float: left; padding:0px 2px; margin-right:5px; 
+            }
+			a, a:hover, a:visited { text-decoration:none; }
+			ul li { list-style : none; }
+
+        </style>
+    </head>
+    
+    <body>
+	<div id="wrap">
+        <div id="main_bn">
+                <li>
+                    <img src="./img/banner4.jpg" alt="" />
+                </li>
+                <li>
+                    <img src="./img/8950965410_1.jpg" alt="" />
+                </li>
+                <li>
+                    <img src="./img/8954641490_1.jpg" alt="" />
+                </li>
+                <li>
+                    <img src="./img/8957077235_1.jpg" alt="" />
+                </li>
+            <div id="main_bn_btn">
+                <li><a href="#"><img src="./img/blt.png"></a></li>
+                <li><a href="#"><img src="./img/blt.png"></a></li>
+                <li><a href="#"><img src="./img/blt.png"></a></li>
+                <li><a href="#"><img src="./img/blt.png"></a></li>
+            </div>
+        </div>
+
+	</div>
+    </body>
+</html>
