@@ -194,7 +194,7 @@ $(function() {
 			
 			$.ajax({
 				type : "post",
-				url : "/teampj/Controller?type=chkid",
+				url : "/HbLib/Controller?type=chkid",
 				dataType : "text", // 넘어오는 데이터 형식
 				data : "id=" + $("#id").val(), // 서블릿으로 넘어가는 파라미터 값
 				success : function(data) {
@@ -285,7 +285,7 @@ $(function() {
 				  }else if($("#addr").val()==""){
 					  alert("주소를 입력하세요");
 				  }else{
-						$("#inForm").attr("action","/teampj/Controller?type=join").attr("method", "post").submit();
+						$("#inForm").attr("action","/HbLib/Controller?type=join").attr("method", "post").submit();
 				  }
 			});	
 	});

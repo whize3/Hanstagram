@@ -50,7 +50,7 @@
 				<a href="#" onclick="logout_go()">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>
 				
-				<a href="#">회원가입</a>
+				<a href="join.jsp">회원가입</a>
 			</div>
 		</div>
 	</div>
