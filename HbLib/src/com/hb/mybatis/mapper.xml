@@ -125,4 +125,8 @@
 		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
 	</insert>
 	
+	<select id="loginbook" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select count(id) draw from book_draw where id=#{id} and b_state='1';
+	</select>
+	
 	</mapper>
