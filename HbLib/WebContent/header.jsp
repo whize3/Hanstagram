@@ -22,7 +22,7 @@
 			id = uvo.getId();
 			System.out.println("header에서 id:" +id);
 		} catch (Exception e) {
-		
+
 		}
 
 		if (id == null) {%>

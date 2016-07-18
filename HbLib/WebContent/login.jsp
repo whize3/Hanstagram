@@ -82,16 +82,15 @@
 			<h3>개인정보</h3>
 		<dl>
 			<dt>
-				<label><%=name%></label>
+				<label><%=name%></label><br/>
+				대출도서
 			</dt>
 			<dd>
 				<img src="img/logoutBtn.jpg" alt="로그아웃" id="logout_img"
 					/>
 
 			</dd>
-			<hr align="left" width="85%" />\
-			<a href=""><strong>아이디, 패스워드 찾기</strong></a>/
-			<a href=""><strong>회원가입</strong></a>
+			<hr align="left" width="85%" />			
 		</dl>
 	</div>
 	<div class="myaccount">
