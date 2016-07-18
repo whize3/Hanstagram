@@ -35,12 +35,12 @@
 		$("#logout_img").click(function() {
 			$.ajax({
 				type : "get",
-				url : "/HbLib/AjaxController",
+				url : "/HbLib/Controller",
 				data : "type=logout",						
 				dataType : "text",
-				success : function() {
+				success : function(data) {
 					alert("로그아웃 되셨습니다.");
-					parent.document.location.reload();
+					parent.document.location.href=data;
 				},
 				error : function(request, status, error) {
 					alert("request: " + request + " status: " + status

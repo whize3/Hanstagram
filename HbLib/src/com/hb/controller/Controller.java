@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,7 @@ import com.hb.command.MyReserveCommand;
 import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.UsersJoinCommand;
-
+import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
 
 
@@ -54,6 +55,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		String path = null;
 		PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
@@ -101,8 +103,11 @@ public class Controller extends HttpServlet {
 			comm = new NoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
+			path = comm.exec(request, response);
+			out.print(path);
+			return;
 		}
-		String path = comm.exec(request, response);
+		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
 		
 	}
