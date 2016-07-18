@@ -37,8 +37,6 @@ public class AjaxController extends HttpServlet {
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
 			comm = new LoginCommand();
-		}else if(type.equals("all")){
-			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
 		}
