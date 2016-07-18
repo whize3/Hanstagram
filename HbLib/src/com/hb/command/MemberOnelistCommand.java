@@ -31,7 +31,7 @@ public class MemberOnelistCommand implements Command{
 		
 		//
 		
-		return "menu1_memberList2.jsp";
+		return "admin/menu1_memberList2.jsp";
 	}
 
 }

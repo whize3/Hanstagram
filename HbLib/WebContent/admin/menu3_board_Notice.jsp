@@ -15,7 +15,7 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
+			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
 					<li><span class="li-s">></span><a href="menu3_board_Notice.jsp">공지사항</a></li>
@@ -45,7 +45,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="k" items="${noticeList}">
+						<c:forEach var="k" items="${a_noticeList}">
 							<tr>
 								<td>${k.n_idx}</td>
 								<td>${k.n_subject}</td>								
@@ -63,7 +63,7 @@
 											<li class="disable">이전으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=noticeList&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
 										</c:otherwise>
 									</c:choose>
 									
@@ -73,7 +73,7 @@
 												<li class="now">${k}</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=noticeList&cPage=${k}">${k}</a></li>
+												<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${k}">${k}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -82,7 +82,7 @@
 											<li class="disable">다음으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=noticeList&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+											<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ul>

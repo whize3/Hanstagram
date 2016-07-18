@@ -23,11 +23,11 @@ public class NoticeListCommand implements Command{
 			pvo.setNowPage(Integer.parseInt(cPage));
 		}
 		
-		// 전체 게시물
+		// �쟾泥� 寃뚯떆臾�
 		pvo.setTotalRecord(dao.noticeTotalCount());
 		pvo.setTotalPage();
 		
-		// begin 과 end 구하기
+		// begin 怨� end 援ы븯湲�
 		pvo.setBegin((pvo.getNowPage()-1)*pvo.getNumPerPage()+1);
 		pvo.setEnd((pvo.getBegin()-1)+pvo.getNumPerPage());
 		
@@ -36,12 +36,12 @@ public class NoticeListCommand implements Command{
 		map.put("begin", pvo.getBegin());
 		map.put("end", pvo.getEnd());
 		
-		// 원글 리스트 구하기
+		// �썝湲� 由ъ뒪�듃 援ы븯湲�
 		List<NoticeVO> list = dao.getNoticeList(map);
 		System.out.println("dd");
-		request.setAttribute("noticeList", list);
+		request.setAttribute("a_noticeList", list);
 		
-		// 블록의 시작번호 끝번호 구하기
+		// 釉붾줉�쓽 �떆�옉踰덊샇 �걹踰덊샇 援ы븯湲�
 		pvo.setBeginPage(((int)(pvo.getNowPage()-1)/pvo.getPagePerBlock())*pvo.getPagePerBlock()+1);
 		pvo.setEndPage(pvo.getBeginPage() + pvo.getPagePerBlock()-1);
 		
@@ -52,7 +52,7 @@ public class NoticeListCommand implements Command{
 		request.setAttribute("pvo", pvo);
 		request.setAttribute("cPage", cPage);
 		
-		return "menu3_board_Notice.jsp";
+		return "admin/menu3_board_Notice.jsp";
 	}
 
 }

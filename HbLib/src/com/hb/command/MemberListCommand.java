@@ -28,17 +28,17 @@ public class MemberListCommand implements Command{
 		Paging pvo = new Paging();
 		Dao dao = new Dao();
 		
-		// list 무조건 cPage 부터 받기
-		// cPage는 현재 페이지롤 변경, null 이면 현재페이지가 기본값 1이된다.
+		// list 臾댁“嫄� cPage 遺��꽣 諛쏄린
+		// cPage�뒗 �쁽�옱 �럹�씠吏�濡� 蹂�寃�, null �씠硫� �쁽�옱�럹�씠吏�媛� 湲곕낯媛� 1�씠�맂�떎.
 		String cPage = request.getParameter("cPage");
 		if(cPage != null){
 			pvo.setNowPage(Integer.parseInt(cPage));
 		}
-		// 전체 게시물의 수
+		// �쟾泥� 寃뚯떆臾쇱쓽 �닔
 		pvo.setTotalRecord(dao.memberTotalCount());
 		pvo.setTotalPage();
 		
-		//  begin과 end 구하기
+		//  begin怨� end 援ы븯湲�
 		pvo.setBegin((pvo.getNowPage()-1)*pvo.getNumPerPage()+1);
 		pvo.setEnd((pvo.getBegin()-1)+pvo.getNumPerPage());
 		
@@ -46,11 +46,11 @@ public class MemberListCommand implements Command{
 		map.put("begin", pvo.getBegin());
 		map.put("end", pvo.getEnd());
 		
-		// 원글 리스트 구하기.
+		// �썝湲� 由ъ뒪�듃 援ы븯湲�.
 		List<UsersVO> list =  dao.getMemberList(map);
-		request.setAttribute("memberlist", list);
+		request.setAttribute("a_memberlist", list);
 		
-		//  블록의 시작번호 끝번호 구하기
+		//  釉붾줉�쓽 �떆�옉踰덊샇 �걹踰덊샇 援ы븯湲�
 		pvo.setBeginPage((int)((pvo.getNowPage()-1)/pvo.getPagePerBlock())*pvo.getPagePerBlock()+1);
 		pvo.setEndPage(pvo.getBeginPage() + pvo.getPagePerBlock()-1);
 		 
@@ -58,10 +58,10 @@ public class MemberListCommand implements Command{
 			pvo.setEndPage(pvo.getTotalPage());
 		}
 		
-		// list.jsp에서 페이징 처리할때 필요하므로
+		// list.jsp�뿉�꽌 �럹�씠吏� 泥섎━�븷�븣 �븘�슂�븯誘�濡�
 		request.setAttribute("pvo", pvo);
 	    request.setAttribute("cPage", cPage);
 		
-		return "menu1_memberList.jsp";
+		return "admin/menu1_memberList.jsp";
 	}
 }

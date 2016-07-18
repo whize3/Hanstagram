@@ -92,17 +92,17 @@ public class Controller extends HttpServlet {
 			comm = new UsersJoinCommand();
 		}else if(type.equals("adminLogin")){
 			comm = new AdminLoginCommand();
-		}else if(type.equals("memberlist")){
+		}else if(type.equals("a_memberlist")){
 			comm = new MemberListCommand();			
-		}else if(type.equals("memberOnelist")){
+		}else if(type.equals("a_memberOnelist")){
 			comm = new MemberOnelistCommand();		
-		}else if(type.equals("booklist")){
+		}else if(type.equals("a_booklist")){
 			comm = new BookListCommand();
-		}else if(type.equals("bookAdd")){
+		}else if(type.equals("a_bookAdd")){
 			comm = new BookAddCommand();
-		}else if(type.equals("noticeList")){
+		}else if(type.equals("a_noticeList")){
 			comm = new NoticeListCommand();
-		}else if(type.equals("NoticeAdd")){
+		}else if(type.equals("a_NoticeAdd")){
 			comm = new NoticeAddCommand();
 
 		}

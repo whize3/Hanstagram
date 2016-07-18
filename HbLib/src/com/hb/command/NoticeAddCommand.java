@@ -41,7 +41,7 @@ public class NoticeAddCommand implements Command{
 		
 		Dao dao = new Dao();
 		dao.getNoticeAdd(nvo);
-		return "Controller?type=noticeList";
+		return "Controller?type=a_noticeList";
 	}
 
 }
