@@ -37,7 +37,7 @@ import com.hb.command.BookSearchCom;
 
 
 
-
+//select count(b_num),b_num from book_draw where bd_date >= sysdate-15 group by b_num;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
