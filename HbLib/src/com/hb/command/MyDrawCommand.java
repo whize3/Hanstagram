@@ -18,5 +18,4 @@ public class MyDrawCommand implements Command {
 		request.setAttribute("list", list);
 		return "mylibrary/my_draw.jsp";
 	}
-
 }
