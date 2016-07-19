@@ -54,8 +54,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
-<jsp:setProperty property="*" name="user" />
 	<div class="wrap">
 		<div class="logoArea"><a href="/HbLib/main.jsp"><img src="/HbLib/img/logo.png"></a></div>
 		<div id="searchBar">
@@ -85,7 +83,7 @@
 						<a href="#"><li>스터디룸 안내</li></a>
 						<a href="#"><li>스터디룸 예약</li></a>
 						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
-						<a href="/HbLib/service/ser_apply_state.jsp"><li>도서구입 신청현황</li></a>
+						<a href="/HbLib/Controller?type=applylist&id=${user.id}"><li>도서구입 신청현황</li></a>
 						<a href="#"><li>열람실 현황</li></a>
 					</ul>
 				</div>

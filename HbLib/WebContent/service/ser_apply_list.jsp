@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/mylibrary.css">
-<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_04").css("background-color", "gray")
-		
-	});
-	
-	
+	});	
 </script>
+<style type="text/css">
+	th{
+		padding-right: 100px;
+	}
+</style>
 </head>
 <body>
+<jsp:useBean id="user" class="com.hb.mybatis.UsersVO" scope="session"/>
 	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
@@ -29,13 +33,21 @@
 						<input type="button" value="구입신청">						
 					</div>
 					<div align="center">
-					<jsp:useBean id="user" class="com.hb.mybatis.UsersVO" scope="session"/>					
-						<table >
+					
+					<input type="hidden" class="id" value="${user.id}" >
+						<table>
 							<tr>
-								<td width="100">검색어</td>
-								<td><input type="text" name="pwd" size="30" id="q" /></td>
-								<td width="120"><input type="button" value="검색" id="go" ></td>
+								<th>번호</th><th>제목</th><th>신청일자</th><th>처리상태</th>
 							</tr>
+							<c:forEach var="k" items="${list}">
+							<tr>
+								<td>${k.ba_idx}</td>
+								<td>${k.b_subject}</td>
+								<td>${k.ba_date.substring(0,10)}</td>
+								<td>${k.ba_state}</td>
+							</tr>
+								
+							</c:forEach>
 						</table>
 					</div>
 					<div id="result">

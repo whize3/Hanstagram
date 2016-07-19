@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hb.command.AdminLoginCommand;
 import com.hb.command.ApplyBookCommand;
+import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
@@ -106,6 +107,8 @@ public class Controller extends HttpServlet {
 			path = comm.exec(request, response);
 			out.print(path);
 			return;
+		}else if(type.equals("applylist")){
+			comm = new ApplyListCommand();
 		}
 		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);

@@ -281,6 +281,7 @@ function moveBanner(int a){
 </script>
 </head>
 <body>
+<jsp:useBean id="user" class="com.hb.mybatis.UsersVO" scope="session"/>
 <div id="container">
 	<div class="wrap">
 		<div id="notice">
