@@ -138,6 +138,7 @@ vertical-align: middle;
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script>
 	$(function() {
 		$(".room").click(function(){
@@ -147,7 +148,7 @@ vertical-align: middle;
 			$("input[name=roomNum]").val(rnum);
 			var date = $("input[name=rDate]").val();
 			$.ajax({
-				url:'/library/Controller?type=getRoom&date='+date,
+				url:'/HbLib/Controller?type=getRoom&date='+date,
 				type:'get',
 				dataType:'json',
 				success:function(data){
@@ -163,7 +164,7 @@ vertical-align: middle;
 </script>
 </head>
 <body>
-<form action="/library/Controller?type=roomReserve" method="post">
+<form action="/HbLib/Controller?type=roomReserve" method="post">
 	<div id="section">
 		<div class="header">
 			<h3>스터디룸 예약하기</h3>

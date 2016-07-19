@@ -123,7 +123,7 @@ public class Controller extends HttpServlet {
 			if(request.getParameter("date")==null){
 				comm = new SRCommand();
 			}else{
-				System.out.println(request.getParameter("date"));
+				System.out.println(request.getParameter("date")+"111");
 				comm = new SRCommand(request.getParameter("date"));
 			}
 		}else if(type.equals("roomReserve")){

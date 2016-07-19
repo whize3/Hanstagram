@@ -7,10 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	/* $.ajax({
-		url:'/library/Controller?type=getRoom',
+		url:'/HbLib/Controller?type=getRoom',
 		type:'post',
 		success:function(data){
 			$("#").load("studyroom.jsp");
