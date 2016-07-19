@@ -11,8 +11,7 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	
-	<jsp:include page="my_navi.jsp" />
-	<div id="mainview">
+		<div id="mainview">
 		<div align="center">
 			<tr align="left">
 				<table width="700">
