@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>한빛도서관</title>
-<link rel="stylesheet" href="../css/mylibrary.css">
-<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+
+<title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
+
+
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")

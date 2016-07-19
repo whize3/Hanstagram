@@ -77,8 +77,8 @@ public class Dao {
 		ss.close();
 		return list;
 	}
-	public List<MyDrawVO> getMyHistory(String id){
-		List<MyDrawVO> list = ss.selectList("getmyhistory",id);
+	public List<MyDrawVO> getMyHistory(Map<Object, Object> map){
+		List<MyDrawVO> list = ss.selectList("getmyhistory",map);
 		ss.close();
 		return list;
 	}
@@ -194,6 +194,16 @@ public class Dao {
 	public List<Book_ApplyVO> getBookApply(String id){
 		return ss.selectList("applylist", id);
 	}
+
+	public int historytotalCount(String id){
+		int count = ss.selectOne("historytotalCount" , id);
+		return count ;
+	}
+	public List<YulVO> getYul(){
+		List<YulVO> yulvo = ss.selectList("yul");
+		ss.close();
+		return yulvo;}
+
 	
 	// 아이디찾기
 	
@@ -202,11 +212,11 @@ public class Dao {
 	}
 	public UsersVO forgotPwd(UsersVO input){
 		return ss.selectOne("forgotpwd", input);
+
 	}
 
 }
 
-	//由ъ뒪�듃�깮�꽦
-
+	
 	
 

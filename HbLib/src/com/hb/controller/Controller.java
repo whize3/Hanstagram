@@ -36,12 +36,13 @@ import com.hb.command.MyReserveCommand;
 import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.UsersJoinCommand;
+import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
 
 
 
-//select count(b_num),b_num from book_draw where bd_date >= sysdate-15 group by b_num;
+
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -112,6 +113,9 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
 
+		}else if(type.equals("yul")){
+			comm = new YulCommand();
+
 		}else if(type.equals("selectone")){
 			comm = new DtCommand();
 
@@ -126,6 +130,7 @@ public class Controller extends HttpServlet {
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
 			comm = new SRCommand();
+
 
 		}
 		

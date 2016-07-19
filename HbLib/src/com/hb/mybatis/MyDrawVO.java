@@ -1,12 +1,12 @@
 package com.hb.mybatis;
 
 public class MyDrawVO {
-	private String bd_date,isbn,writer,b_subject,id,b_num,bd_redate,bc_idx,bc_date;
+	private String bd_date,isbn,writer,b_subject,id,b_num,bd_redate,bc_idx,bc_date,r_num;
 	
 	public MyDrawVO(){}
 
 	public MyDrawVO(String bd_date, String isbn, String writer, String b_subject, String id, String b_num,
-			String bd_redate, String bc_idx, String bc_date) {
+			String bd_redate, String bc_idx, String bc_date, String r_num) {
 		super();
 		this.bd_date = bd_date;
 		this.isbn = isbn;
@@ -17,6 +17,7 @@ public class MyDrawVO {
 		this.bd_redate = bd_redate;
 		this.bc_idx = bc_idx;
 		this.bc_date = bc_date;
+		this.r_num = r_num;
 	}
 
 	public String getBd_date() {
@@ -90,5 +91,14 @@ public class MyDrawVO {
 	public void setBc_date(String bc_date) {
 		this.bc_date = bc_date;
 	}
+
+	public String getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+
 	
 }
