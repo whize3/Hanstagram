@@ -181,9 +181,9 @@ vertical-align: middle;
 		<div id="time">
 			<h4 class="header">시간 선택</h4>
 			<div id="timeArea">
+			
 			<%
 			String[] times = {"9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"};
-			
 			List<Studyroom_ReserveVO> time = (List)request.getAttribute("time");
 			if(time!=null){
 				System.out.println("room size : "+time.size());
@@ -194,14 +194,12 @@ vertical-align: middle;
 						if(vo.getStart_time().equals(this_time)){
 							
 						}else{
+							System.out.print("예약된시간 : "+vo.getStart_time());
 							
-							out.print("예약된시간 : "+vo.getStart_time());
-													
 						}
 					}
 				}
 			}
-			
 			%>
 			
 			</div>
