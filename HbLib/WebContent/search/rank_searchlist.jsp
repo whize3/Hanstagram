@@ -10,47 +10,42 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
+	<jsp:include page="my_navi.jsp" />
+	
 	<form>
 		<%
 			List<Book_rankVO> list = (List<Book_rankVO>) request.getAttribute("list");
 		%>
-
-		<jsp:include page="header.jsp" />
-		<jsp:include page="my_navi.jsp" />
-		<div class="rank"></div>
-		<div>
-			<table width="700">
-				<thead>
-					<tr align="left">
-						<th width="250">순위</th>
-						<th width="250">ISBN</th>
-						<th width="250">제목</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr>
-						<td colspan="3"><hr color="black" />
-						<td>
-					</tr>
-					<c:forEach var="k" items="${list}">
-						<tr>
-							<td>${k.dense_rank}</td>
-							<td>${k.ISBN}</td>
-							<td>${k.b_subject}</td>
+		<div class="rank">
+			<div align="center">
+				<table width="700">
+					<thead>
+						<tr align="center">
+							<th></th>
+							<th width="250">책번호</th>
+							<th width="250">제목</th>
+							<th width="250">작가</th>
 						</tr>
-					</c:forEach>
-
-					<tr>
-				</tbody>
-				<td colspan="3"><hr /></td>
-				</tr>
-
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="4"><hr color="black" /></td>
+						</tr>
+						<c:forEach var="k" items="${list}">
+							<tr align="center">
+								<td>${k.img_url}</td>
+								<td>${k.b_num}</td>
+								<td>${k.b_subject}</td>
+								<td>${k.writer}</td>
+							</tr>
+							<td colspan="4"></td>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
-
-		</from>
+</from>
 </body>
 </html>

@@ -16,16 +16,17 @@
 	      	<when test="idx==4">where category like '%' || #{keyword} || '%'</when>
 	      </choose>	
 	</select>
-
+	<!-- 랭킹  -->
+	<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
+		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc
+	</select>
+	
+	
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
 			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
 		</insert>
-		<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
-			select b_subject, ISBN, dense_rank()  OVER(ORDER BY ISBN asc,b_subject) AS  dense_rank
-			from book_apply
-
-		</select>
-
+		
+			
 
 
 		<!-- 로그인  -->
@@ -134,8 +135,5 @@
 	<select id="applylist" parameterType="String" resultType="com.hb.mybatis.Book_ApplyVO">
 		select * from book_apply where id=#{id} order by ba_idx
 	</select>
-	<!-- 랭킹  -->
-	<select id="">
-		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
-	</select>
+	
 	</mapper>

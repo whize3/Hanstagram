@@ -15,7 +15,7 @@ public class RankBookCommand implements Command{
 		Dao dao = new Dao();
 		List<Book_rankVO> list = dao.ranking();
 		for (Book_rankVO k : list) {
-			System.out.println(k.getDense_rank());
+			System.out.println(k.getRank());
 		}
 		request.setAttribute("list", list);
 		
