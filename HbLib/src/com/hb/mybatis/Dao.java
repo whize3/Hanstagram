@@ -60,7 +60,7 @@ public class Dao {
 		for(MyDrawVO k : list){
 			result = ss.selectOne("getmyreserve_cnt",k.getB_num());
 			if(result.equals("0")){
-				k.setBd_date("諛섎궔�룄�꽌");
+				k.setBd_date("반납도서");
 			}else{
 				myDrawVO = ss.selectOne("getmyreserve_chk",k.getB_num());
 				k.setBd_date(myDrawVO.getBd_date().substring(0,10));
@@ -94,10 +94,10 @@ public class Dao {
 	}
 	
 	public String getJoinCheckId(String id){
-		  String result = "�궗�슜媛��뒫";
+		  String result = "사용가능";
 		  List<UsersVO> list = ss.selectList("getjoincheckid",id);
 		  if(list.size()>0){
-			  result = "以묐났�맂 �븘�씠�뵒";
+			  result = "중복된 아이디";
 		  }
 		  ss.close();
 		  return result;
