@@ -69,8 +69,8 @@ public class Dao {
 		ss.close();
 		return list;
 	}
-	public List<MyDrawVO> getMyHistory(String id){
-		List<MyDrawVO> list = ss.selectList("getmyhistory",id);
+	public List<MyDrawVO> getMyHistory(Map<Object, Object> map){
+		List<MyDrawVO> list = ss.selectList("getmyhistory",map);
 		ss.close();
 		return list;
 	}
@@ -186,10 +186,13 @@ public class Dao {
 	public List<Book_ApplyVO> getBookApply(String id){
 		return ss.selectList("applylist", id);
 	}
+	public int historytotalCount(String id){
+		int count = ss.selectOne("historytotalCount" , id);
+		return count ;
+	}
 
 }
 
-	//由ъ뒪�듃�깮�꽦
-
+	
 	
 

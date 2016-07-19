@@ -43,8 +43,10 @@
 	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
 		select * from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
-	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
-		select a.bd_redate,b.isbn,b.writer,b.b_subject from (select id,b_num,bd_redate,b_state from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='0'
+	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="Map">
+		select * from ( select rownum r_num, q.* from ( select a.bd_redate,b.isbn,b.writer,b.b_subject from 
+(select id,b_num,bd_redate,b_state from book_draw where id=#{id} order by bd_redate desc) a , 
+book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q order by bd_redate desc) where r_num between #{begin} and #{end} 
 	</select>
 	<select id="getmycomment" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
 		select b.bc_idx,a.b_subject,b.bc_date from (select b_num, b_subject from book where b_num in(select b_num from b_comment where id=#{id})) a, b_comment b where a.b_num=b.b_num
@@ -136,5 +138,8 @@
 	<!-- 랭킹  -->
 	<select id="">
 		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
+	</select>
+	<select id="historytotalCount" resultType="int" parameterType="String">
+		select count(*) from book_draw where id=#{id} and b_state='0'
 	</select>
 	</mapper>

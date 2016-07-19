@@ -52,9 +52,13 @@ history.go(-1)
 									<td colspan="4"><hr color="black" /></td>
 								</tr>
 								<!-- for시작ㄱ -->
-								<c:forEach var="k" items="${list }">
+								<c:if test="${empty list}">
+				  				<tr><td colspan="4"> 현재 등록된 자료가 없음 </td></tr>
+								</c:if>
+								<c:if test="${!empty list}">
+								<c:forEach var="k" items="${list }"  varStatus="index">
 								<tr>
-									<td>${k.b_subject }</td>
+									<td>${pvo.totalRecord - k.r_num +1} ${k.b_subject }</td>
 									<td>${k.writer }</td>
 									<td>${k.isbn }</td>
 									<td>${k.bd_redate.substring(0,10) }</td>
@@ -63,8 +67,48 @@ history.go(-1)
 									<td colspan="4"><hr /></td>
 								</tr>
 								</c:forEach>
+								</c:if>
 								<!-- for끝 -->
 							</tbody>
+										<tfoot>
+				<tr>
+					<td colspan="4">
+						<ol class="paging">
+						<!--  이전버튼 은 beginPage가 pagePerBlock보다 작으면 비활성화 -->
+						<c:choose>
+							<c:when test="${pvo.beginPage < pvo.pagePerBlock}">
+								  <li class="disable">이전으로</li>
+							</c:when>
+							<c:otherwise>
+							 <li><a href="/HbLib/Controller?type=history&cPage=${pvo.beginPage-pvo.pagePerBlock }&id=${user.id}">이전으로</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}" step="1">
+							<c:choose>
+								<c:when test="${k==pvo.nowPage}">
+									<li class="now">${k}</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="/HbLib/Controller?type=history&cPage=${k}&id=${user.id}">${k}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${pvo.endPage>=pvo.totalPage}">
+								  <li class="disable">다음으로</li>
+							</c:when>
+							<c:otherwise>
+								 <li><a href="/HbLib/Controller?type=history&cPage=${pvo.beginPage+pvo.pagePerBlock }&id=${user.id}">다음으로</a></li>
+							</c:otherwise>
+						</c:choose>
+						</ol>
+					</td>
+					<td>
+						<input type="button" value="글쓰기" onclick="javascript:location.href='/0625_jsp_MVC_BBS/MyController?type=write'"/>
+					</td>
+				</tr>
+			</tfoot>
 						</table>
 					</div>
 				</div>
