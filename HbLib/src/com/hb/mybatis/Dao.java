@@ -25,6 +25,10 @@ public class Dao {
 		user.setId(id);
 		user.setPwd(pwd);
 		UsersVO result = ss.selectOne("login", user);
+		UsersVO book = ss.selectOne("loginbook", user);
+		result.setDraw(book.getDraw());
+		result.setReserve(book.getReserve());
+		result.setOverdue(book.getOverdue());
 		return result;
 	}
 
@@ -37,6 +41,13 @@ public class Dao {
 		List<BookVO> list = ss.selectList("booklist",map);
 		return list;
 	}
+
+	public List<Book_rankVO> ranking(){
+		List<Book_rankVO> list = ss.selectList("ranking");
+		System.out.println(list.size());
+		return list;
+	}
+
 	public List<MyDrawVO> getMyDraw(String id){
 		List<MyDrawVO> list = ss.selectList("getmydraw",id);
 		ss.close();
@@ -49,7 +60,7 @@ public class Dao {
 		for(MyDrawVO k : list){
 			result = ss.selectOne("getmyreserve_cnt",k.getB_num());
 			if(result.equals("0")){
-				k.setBd_date("諛섎궔�룄�꽌");
+				k.setBd_date("반납도서");
 			}else{
 				myDrawVO = ss.selectOne("getmyreserve_chk",k.getB_num());
 				k.setBd_date(myDrawVO.getBd_date().substring(0,10));
@@ -83,10 +94,10 @@ public class Dao {
 	}
 	
 	public String getJoinCheckId(String id){
-		  String result = "�궗�슜媛��뒫";
+		  String result = "사용가능";
 		  List<UsersVO> list = ss.selectList("getjoincheckid",id);
 		  if(list.size()>0){
-			  result = "以묐났�맂 �븘�씠�뵒";
+			  result = "중복된 아이디";
 		  }
 		  ss.close();
 		  return result;
@@ -100,6 +111,7 @@ public class Dao {
 		}finally{
 			
 		}
+
 		
 	}
 	
@@ -168,6 +180,11 @@ public class Dao {
 	public void getNoticeAdd(NoticeVO nvo){
 		ss.insert("a_noticeAdd", nvo);
 		ss.commit();
+	}
+	
+	// 도서구입신청현황 리스트
+	public List<Book_ApplyVO> getBookApply(String id){
+		return ss.selectList("applylist", id);
 	}
 
 }

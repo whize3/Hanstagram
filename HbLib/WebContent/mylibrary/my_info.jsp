@@ -6,8 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/mylibrary.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
@@ -20,7 +20,7 @@
 			}else{
 				var chk = confirm("비밀번호를 변경합니다.");
 				if(chk){
-					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&pwd="+$("#pwd").val()+"&change=change_pwd";
+					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&pwd="+$("#pwd").val()+"&change=change_pwd";
 				}else
 					$("#pwd").focus();
 				return;
@@ -33,7 +33,7 @@
 			}else{
 				var chk = confirm("이메일을 변경합니다.");
 				if(chk){
-					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&email="+$("#email").val()+"&change=change_email";
+					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&email="+$("#email").val()+"&change=change_email";
 				}else
 					$("#email").focus();
 				return;
@@ -46,7 +46,7 @@
 			}else{
 				var chk = confirm("전화번호를 변경합니다.");
 				if(chk){
-					location.href="/teampj/Controller?type=myupdate&id="+$("#id").val()+"&tel="+$("#tel").val()+"&change=change_tel";
+					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&tel="+$("#tel").val()+"&change=change_tel";
 				}else
 					$("#tel").focus();
 				return;
@@ -57,7 +57,15 @@
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+<jsp:setProperty property="*" name="user" />
+<c:if test="${user.id==null }">
+<script type="text/javascript">
+alert("로그인해주세요")
+history.go(-1)
+</script>
+</c:if>
+	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="my_navi.jsp" />

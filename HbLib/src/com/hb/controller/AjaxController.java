@@ -13,6 +13,7 @@ import com.hb.command.ApplyBookCommand;
 import com.hb.command.BookSearchCom;
 import com.hb.command.Command;
 import com.hb.command.LoginCommand;
+import com.hb.command.LogoutCommand;
 
 @WebServlet("/AjaxController")
 public class AjaxController extends HttpServlet {
@@ -37,10 +38,10 @@ public class AjaxController extends HttpServlet {
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
 			comm = new LoginCommand();
-		}else if(type.equals("all")){
-			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
+		}else if(type.equals("logout")){
+			comm = new LogoutCommand();
 		}
 		String result = comm.exec(request, response);
 		out.print(result);

@@ -6,8 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/mylibrary.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
@@ -16,7 +16,15 @@
 </script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+<jsp:setProperty property="*" name="user" />
+<c:if test="${user.id==null }">
+<script type="text/javascript">
+alert("로그인해주세요")
+history.go(-1)
+</script>
+</c:if>
+	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="my_navi.jsp" />

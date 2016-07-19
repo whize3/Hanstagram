@@ -6,10 +6,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>한빛도서관</title>
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="/HbLib/css/header.css">
+<script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
+<script type="text/javascript">
+	function logout_go() {
+		$.ajax({
+			type : "get",
+			url : "/HbLib/Controller",
+			data : "type=logout",						
+			dataType : "text",
+			success : function(data) {
+				alert("로그아웃 되셨습니다.");
+				parent.document.location.href=data;
+			},
+			error : function(request, status, error) {
+				alert("request: " + request + " status: " + status
+						+ " error: " + error);
+			}
+		});
+	
+	}
+</script>
 </head>
 <body>
 <header>
+<jsp:useBean id="user" class="com.hb.mybatis.UsersVO" scope="session"/>
 	<div class="topArea">
 		<div class="wrap">
 			<div id="topMenu">
@@ -18,26 +39,24 @@
 		String id = null;
 		String name = null;
 		try {
-			System.out.println("try/catch 진입");
 			UsersVO uvo = (UsersVO) session.getAttribute("user");
 			id = uvo.getId();
-			System.out.println("header에서 id:" +id);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 
 		if (id == null) {%>
-				<a href="#">로그인</a>
+				<a href="/HbLib/headerlogin.jsp">로그인</a>
 				&nbsp;|&nbsp;<%}else{%> 
-				<a href="#">로그아웃</a>
+				<a href="#" onclick="logout_go()">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>
 				
-				<a href="#">회원가입</a>
+				<a href="join.jsp">회원가입</a>
 			</div>
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="logoArea"><img src="img/logo.png"></div>
+		<div class="logoArea"><a href="/HbLib/main.jsp"><img src="/HbLib/img/logo.png"></a></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">
@@ -64,8 +83,8 @@
 					<ul id="subMenu1">
 						<a href="#"><li>스터디룸 안내</li></a>
 						<a href="#"><li>스터디룸 예약</li></a>
-						<a href="#"><li>도서구입 신청</li></a>
-						<a href="#"><li>도서구입 신청현황</li></a>
+						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
+						<a href="/HbLib/Controller?type=applylist&id=${user.id}"><li>도서구입 신청현황</li></a>
 						<a href="#"><li>열람실 현황</li></a>
 					</ul>
 				</div>
@@ -73,10 +92,11 @@
 			<li class="firstMenu"><a href="#">My Library</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu2">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<li><a href="/HbLib/Controller?type=draw&id=${user.id }">대출현황</a></li>
+						<li><a href="/HbLib/Controller?type=reserve&id=${user.id }">예약확인</a></li>
+						<li><a href="/HbLib/Controller?type=myinfo&id=${user.id }">개인정보</a></li>
+						<li><a href="/HbLib/Controller?type=comment&id=${user.id }">나의서평</a></li>
+						<li><a href="/HbLib/Controller?type=history&id=${user.id }">대출반납이력</a></li>
 					</ul>
 				</div>
 			</li>
