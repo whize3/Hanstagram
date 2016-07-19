@@ -23,7 +23,7 @@
 	
 	
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
-			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
 		</insert>
 		
 			
