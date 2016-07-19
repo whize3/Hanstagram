@@ -18,6 +18,7 @@ public class Dao {
 	// �룄�꽌 �옄猷뚭뎄�엯�슂泥� 諛쏆� �뜲�씠�꽣 BOOKAPPLY�뿉 �궫�엯
 	public void bookApply(Book_ApplyVO bavo){
 		ss.insert("apply", bavo);
+		ss.close();
 	}
 	
 	// 濡쒓렇�씤

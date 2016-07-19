@@ -199,7 +199,7 @@ vertical-align: middle;
 					}
 				}
 			}
-			out.print("<p>??????</p>");
+			
 			%>
 			</div>
 
