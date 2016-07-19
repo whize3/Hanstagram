@@ -34,6 +34,7 @@ import com.hb.command.MyReserveCommand;
 import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.UsersJoinCommand;
+import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
 
@@ -109,6 +110,8 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
+		}else if(type.equals("yul")){
+			comm = new YulCommand();
 		}
 		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);

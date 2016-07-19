@@ -142,4 +142,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="historytotalCount" resultType="int" parameterType="String">
 		select count(*) from book_draw where id=#{id} and b_state='0'
 	</select>
+	<select id="yul" resultType="com.hb.mybatis.YulVO">
+		select * from yul
+	</select>
 	</mapper>

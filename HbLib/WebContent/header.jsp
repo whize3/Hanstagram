@@ -84,7 +84,7 @@
 						<a href="#"><li>스터디룸 예약</li></a>
 						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
 						<a href="/HbLib/Controller?type=applylist&id=${user.id}"><li>도서구입 신청현황</li></a>
-						<a href="#"><li>열람실 현황</li></a>
+						<a href="/HbLib/Controller?type=yul"><li>열람실 현황</li></a>
 					</ul>
 				</div>
 			</li>

@@ -13,7 +13,7 @@
 					<li id="navi_02"><a href="">스터디룸 예약신청</a></li>
 					<li id="navi_03"><a href="/HbLib/service/ser_apply.jsp">도서구입신청</a></li>
 					<li id="navi_04"><a href="/HbLib/Controller?type=applylist&id=${user.id}">도서구입신청 현황</a></li>
-					<li id="navi_05"><a href="">열람실 현황</a></li>
+					<li id="navi_05"><a href="/HbLib/Controller?type=yul">열람실 현황</a></li>
 				</ul>
 			</div>
 </body>
