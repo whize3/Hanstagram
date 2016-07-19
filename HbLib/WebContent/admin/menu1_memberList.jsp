@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="../js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {

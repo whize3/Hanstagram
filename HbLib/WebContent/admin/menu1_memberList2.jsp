@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>

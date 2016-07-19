@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 	function book_add(f) {
 		f.action="/HbLib/Controller?type=a_bookAdd&chk=chk";
