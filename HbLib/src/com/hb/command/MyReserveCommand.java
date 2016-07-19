@@ -16,6 +16,6 @@ public class MyReserveCommand implements Command{
 		String id = request.getParameter("id");
 		List<MyDrawVO> list = dao.getMyReserve(id);
 		request.setAttribute("list", list);
-		return "my_reserve.jsp";
+		return "mylibrary/my_reserve.jsp";
 	}
 }

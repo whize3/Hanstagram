@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hb.command.AdminLoginCommand;
 import com.hb.command.ApplyBookCommand;
+import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
@@ -32,12 +34,12 @@ import com.hb.command.MyReserveCommand;
 import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.UsersJoinCommand;
-
+import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
 
 
 
-
+//select count(b_num),b_num from book_draw where bd_date >= sysdate-15 group by b_num;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -54,8 +56,8 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		String path = null;
 		PrintWriter out = response.getWriter();
-		System.out.println("컨트롤러진입");
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
@@ -63,14 +65,10 @@ public class Controller extends HttpServlet {
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
 			comm = new LoginCommand();
-		}else if(type.equals("all")){
-			
 		}else if(type.equals("search")){
 			comm = new BookSearchCom();
-
 		}else if(type.equals("rank")){
 			comm = new RankBookCommand();
-
 		}else if(type.equals("draw")){
 			comm = new MyDrawCommand();
 		}else if(type.equals("reserve")){
@@ -106,8 +104,13 @@ public class Controller extends HttpServlet {
 			comm = new NoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
+			path = comm.exec(request, response);
+			out.print(path);
+			return;
+		}else if(type.equals("applylist")){
+			comm = new ApplyListCommand();
 		}
-		String path = comm.exec(request, response);
+		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
 		
 	}

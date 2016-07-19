@@ -18,7 +18,7 @@
 	</select>
 
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
-			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
 		</insert>
 		<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
 			select b_subject, ISBN, RANK()  OVER(ORDER BY ISBN asc,b_subject) AS RANK
@@ -124,5 +124,17 @@
 	<insert id="a_noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
 		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
 	</insert>
+	<!-- 로그인시 대출/예약/연체 도서 정보  -->
+	<select id="loginbook" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select count(case when id=#{id} and b_state='1' then 1 else null end)draw, count(case when id=#{id} and b_state='2' then 1 else null end)reserve, count(case when id=#{id} and b_state='1' and sysdate>bd_redate then 1 else null end)overdue from book_draw
+	</select>
 	
+	<!--도서구입신청현황 리스트 -->
+	<select id="applylist" parameterType="String" resultType="com.hb.mybatis.Book_ApplyVO">
+		select * from book_apply where id=#{id} order by ba_idx
+	</select>
+	<!-- 랭킹  -->
+	<select id="">
+		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
+	</select>
 	</mapper>

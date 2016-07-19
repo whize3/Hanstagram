@@ -43,7 +43,9 @@
 	width: 170px;
 	border-bottom: 1px solid #C1C0BD;
 }
-
+.select_li{
+	background-color: gray;
+}
 .mainviewnavi {
 	height: 60px;
 	padding-left: 10px;
