@@ -7,6 +7,46 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<style type="text/css">
+
+		table tfoot ol.paging {
+	    list-style:none;
+	}
+	
+	table tfoot ol.paging li {
+	    float:left;
+	    margin-right:8px;
+	}
+	
+	table tfoot ol.paging li a {
+	    display:block;
+	    padding:3px 7px;
+	    border:1px solid #00B3DC;
+	    color:#2f313e;
+	    font-weight:bold;
+	}
+	
+	table tfoot ol.paging li a:hover {
+	    background:#00B3DC;
+	    color:white;
+	    font-weight:bold;
+	}
+	
+	.disable {
+	    padding:3px 7px;
+	    border:1px solid silver;
+	    color:silver;
+	}
+	
+	.now {
+	   padding:3px 7px;
+	    border:1px solid #ff4aa5;
+	    background:#ff4aa5;
+	    color:white;
+	    font-weight:bold;
+	}
+}
+</style>
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -70,7 +110,7 @@ history.go(-1)
 								</c:if>
 								<!-- for끝 -->
 							</tbody>
-										<tfoot>
+							<tfoot>
 				<tr>
 					<td colspan="4">
 						<ol class="paging">
@@ -103,9 +143,6 @@ history.go(-1)
 							</c:otherwise>
 						</c:choose>
 						</ol>
-					</td>
-					<td>
-						<input type="button" value="글쓰기" onclick="javascript:location.href='/0625_jsp_MVC_BBS/MyController?type=write'"/>
 					</td>
 				</tr>
 			</tfoot>
