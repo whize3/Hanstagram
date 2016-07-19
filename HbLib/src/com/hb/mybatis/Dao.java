@@ -186,6 +186,15 @@ public class Dao {
 	public List<Book_ApplyVO> getBookApply(String id){
 		return ss.selectList("applylist", id);
 	}
+	
+	// 아이디찾기
+	
+	public UsersVO forgotId(UsersVO input){
+		return ss.selectOne("forgotid", input);
+	}
+	public UsersVO forgotPwd(UsersVO input){
+		return ss.selectOne("forgotpwd", input);
+	}
 
 }
 

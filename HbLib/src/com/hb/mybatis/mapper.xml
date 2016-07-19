@@ -137,4 +137,13 @@
 	<select id="">
 		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
 	</select>
+	
+	<!-- 아이디 찾기  -->
+	<select id="forgotid" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select * from users where name=#{name} and jumin=#{jumin}	
+	</select>
+	<!-- 비밀번호 찾기  -->
+	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
+	</select>
 	</mapper>

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.BookSearchCom;
 import com.hb.command.Command;
+import com.hb.command.ForgotIdCommand;
+import com.hb.command.ForgotPwdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
 
@@ -42,6 +44,10 @@ public class AjaxController extends HttpServlet {
 			comm = new BookSearchCom();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
+		}else if(type.equals("forgotid")){
+			comm = new ForgotIdCommand();
+		}else if(type.equals("forgotpwd")){
+			comm = new ForgotPwdCommand();
 		}
 		String result = comm.exec(request, response);
 		out.print(result);
