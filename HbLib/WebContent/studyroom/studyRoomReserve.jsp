@@ -194,14 +194,16 @@ vertical-align: middle;
 						if(vo.getStart_time().equals(this_time)){
 							
 						}else{
-							System.out.print("예약된시간 : "+vo.getStart_time());
-							out.print("<p>??????</p>");
+							
+							out.print("예약된시간 : "+vo.getStart_time());
+													
 						}
 					}
 				}
 			}
 			
 			%>
+			
 			</div>
 
 		</div>

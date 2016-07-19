@@ -8,7 +8,6 @@ $(function(){
 		});
 		
 		$(".able").click(function() {
-			alert("gd")
 			console.log(".able is clicked");
 			$(".click").removeClass("click");
 			$(this).addClass("click");
