@@ -194,11 +194,15 @@ $(function() {
 			
 			$.ajax({
 				type : "post",
-				url : "/teampj/Controller?type=chkid",
+				url : "/HbLib/Controller?type=chkid",
 				dataType : "text", // 넘어오는 데이터 형식
 				data : "id=" + $("#id").val(), // 서블릿으로 넘어가는 파라미터 값
 				success : function(data) {
-					$(".id_chk").html(data);
+					if(data.substring(0,4)=="사용가능"){
+						$(".id_chk").html(data.substring(0,4));
+					}else{
+						$(".id_chk").html(data);
+					}
 				},
 				error : function() {
 					alert("오류발생2");
@@ -254,7 +258,7 @@ $(function() {
 			   }
 			  });
 			  $("#pwd_chk").keyup(function(){
-				  if(pwd.value==pwd_chk.value){
+				  if($("#pwd").val() == $("#pwd_chk").val()){
 					  $(".pwd_chk").html("비밀번호가 동일합니다!");
 				  }else{
 					  $(".pwd_chk").html("비밀번호를 확인하세요");
@@ -262,8 +266,28 @@ $(function() {
 				  
 			  })
 			  $("#join_ok").click(function(){
-						$("#inForm").attr("action","/teampj/Controller?type=join").attr("method", "post").submit();
-					});	
+				  if($("#id").val()==""){
+					  alert("아이디를 입력하세요");
+				  }else if($(".id_chk").text() != "사용가능"){
+					  alert("아이디를 확인하세요");
+				  }else if($("#name").val()==""){
+					  alert("이름을 입력하세요");
+				  }else if($("#pwd").val()==""){
+					  alert("비밀번호를 입력하세요");
+				  }else if($("#pwd").val() != $("#pwd_chk").val()){
+					  alert("비밀번호를 확인하세요");
+				  }else if($("input[name=gender]:radio:checked").length == 0){
+					  alert("성별을 선택하세요");
+				  }else if($("#email_1").val()=="" || $("#email_2").val()==""){
+					  alert("이메일을 입력하세요");
+				  }else if($("#tel1").val()=="" || $("#tel2").val()=="" || $("#tel3").val()==""){
+					  alert("전화번호를 입력하세요");
+				  }else if($("#addr").val()==""){
+					  alert("주소를 입력하세요");
+				  }else{
+						$("#inForm").attr("action","/HbLib/Controller?type=join").attr("method", "post").submit();
+				  }
+			});	
 	});
 </script>
 
@@ -277,8 +301,7 @@ $(function() {
 					<table>
 						<tr>
 							<td width="150">아이디</td>
-							<td><input type="text" name="id" id="id" /><span
-								class="id_chk">중복검사여부</span></td>
+							<td><input type="text" name="id" id="id" /><span class="id_chk">중복검사여부</span>
 						</tr>
 						<tr>
 							<td>이름</td>
@@ -290,52 +313,56 @@ $(function() {
 						</tr>
 						<tr>
 							<td>비밀번호확인</td>
-							<td><input type="password" name="pwd_chk" id="pwd_chk" /><span
-								class="pwd_chk"></span></td>
+							<td>
+								<input type="password" name="pwd_chk" id="pwd_chk" />
+								<span class="pwd_chk"></span>
+							</td>
 						</tr>
 						<tr>
 							<td>생년월일</td>
 							<td>
-							<select name="birthdayYear" id="birthdayYear">
-							</select>
-							<select name="birthdayMonth" id="birthdayMonth">
-							</select>
-							<select name="birthdayDay" id="birthdayDay">
-							</select>
+								<select name="birthdayYear" id="birthdayYear"></select>
+								<select name="birthdayMonth" id="birthdayMonth"></select>
+								<select name="birthdayDay" id="birthdayDay"></select>
 							</td>
 						</tr>
 						<tr>
 							<td>성별</td>
-							<td><input type="radio" name="gender" id="man" value="1"/> 남
-							<input type="radio" name="gender" id="woman" value="2"/> 여
-							
+							<td>
+								<input type="radio" name="gender" id="man" value="1" /> 남 
+								<input type="radio" name="gender" id="woman" value="2" /> 여
 							</td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="text" name="email_1" id="email_1" size="10" />@
-								<input type="text" name="email_2" id="email_2" size="10"
-								readonly /> <select id="email_select">
+							<td>
+								<input type="text" name="email_1" id="email_1" size="10" />@
+								<input type="text" name="email_2" id="email_2" size="10" readonly />
+								<select id="email_select">
 									<option value="" selected>선택하세요</option>
 									<option value="naver.com">naver.com</option>
 									<option value="daum.net">daum.net</option>
 									<option value="nate.com">nate.com</option>
 									<option value="hb.kr">hb.kr</option>
 									<option value="1">::직접입력::</option>
-							</select></td>
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<td>tel</td>
-							<td><input type="text" name="tel1" id="tel1" size="3"
-								maxlength="3"> <input type="text" name="tel2" id="tel2"
-								size="4" maxlength="4"> <input type="text" name="tel3"
-								id="tel3" size="4" maxlength="4"></td>
+							<td>
+								<input type="text" name="tel1" id="tel1" size="3" maxlength="3" />
+								<input type="text" name="tel2" id="tel2" size="4" maxlength="4" />
+								<input type="text" name="tel3" id="tel3" size="4" maxlength="4" />
+							</td>
 						</tr>
 						<tr>
 							<td>주소</td>
 							<td><input type="text" name="addr" id="addr" /></td>
 						</tr>
-						<tr><td colspane="2"><input type="button" value="회원가입" id="join_ok"></td></tr>
+						<tr>
+							<td colspane="2"><input type="button" value="회원가입" id="join_ok" /></td>
+						</tr>
 					</table>
 				</form>
 			</div>

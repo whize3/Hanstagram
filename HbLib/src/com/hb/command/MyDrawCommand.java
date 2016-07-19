@@ -16,7 +16,7 @@ public class MyDrawCommand implements Command {
 		String id = request.getParameter("id");
 		List<MyDrawVO> list = dao.getMyDraw(id);
 		request.setAttribute("list", list);
-		return "my_draw.jsp";
+		return "mylibrary/my_draw.jsp";
 	}
 
 }

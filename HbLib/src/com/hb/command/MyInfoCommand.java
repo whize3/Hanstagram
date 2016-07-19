@@ -17,7 +17,7 @@ public class MyInfoCommand implements Command{
 		String id = request.getParameter("id");
 		UsersVO list = dao.getMyInfo(id);
 		request.setAttribute("list", list);
-		return "my_info.jsp";
+		return "mylibrary/my_info.jsp";
 	}
 
 }
