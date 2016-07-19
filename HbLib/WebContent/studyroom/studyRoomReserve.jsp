@@ -148,11 +148,24 @@ vertical-align: middle;
 			$("input[name=roomNum]").val(rnum);
 			var date = $("input[name=rDate]").val();
 			$.ajax({
-				url:'/HbLib/Controller?type=getRoom&date='+date,
+				url:'/HbLib/AjaxController?type=getRoom&date='+date,
 				type:'get',
 				dataType:'json',
 				success:function(data){
-					console.log("suc");
+					alert("성공");
+					 var table = "<tbody>" ;
+					 $.each(data,function(key,data){
+						table += "<tr>";
+						table +="<td>"+data.sr_idx+"</td>";
+						table +="<td>"+data.s_num +"</td>";
+						table +="<td>"+data.start_time +"</td>";
+						table +="<td>"+data.end_time +"</td>";
+						table +="<td>"+data.id +"</td>";
+						table += "</tr>";
+					 });
+					 table +="</tbody>";
+					 $("#timeArea").html(table);
+					
 				},error:function(request,status,error){
 			        console.log("error");
 				}
@@ -191,13 +204,7 @@ vertical-align: middle;
 				for(int i=0;i<times.length;i++){
 					String this_time = times[i];
 					for(Studyroom_ReserveVO vo:time){
-						if(vo.getStart_time().equals(this_time)){
-							
-						}else{
-							
-							out.print("예약된시간 : "+vo.getStart_time());
-													
-						}
+						vo.getStart_time();
 					}
 				}
 			}
