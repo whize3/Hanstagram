@@ -31,6 +31,6 @@ public class SRCommand implements Command{
 			list = sdao.getTime(date);
 			request.setAttribute("time", list);
 		}
-		return "studyRoomReserve.jsp";
+		return "/studyroom/studyRoomReserve.jsp";
 	}
 }

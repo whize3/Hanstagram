@@ -137,4 +137,14 @@
 	<select id="">
 		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
 	</select>
+		<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
+		select * from studyroom
+	</select>
+
+	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
+		insert into studyroom_reserve values(sr_seq.nextval, #{s_num},#{start_time},#{end_time},#{id},#{sr_state},#{sr_date})
+	</insert>
+	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
+		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	</select>
 	</mapper>
