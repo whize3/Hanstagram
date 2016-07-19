@@ -16,6 +16,7 @@ import com.hb.command.ForgotIdCommand;
 import com.hb.command.ForgotPwdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
+import com.hb.command.SRCommand2;
 
 @WebServlet("/AjaxController")
 public class AjaxController extends HttpServlet {
@@ -48,8 +49,11 @@ public class AjaxController extends HttpServlet {
 			comm = new ForgotIdCommand();
 		}else if(type.equals("forgotpwd")){
 			comm = new ForgotPwdCommand();
+		}else if(type.equals("getRoom")){
+			comm = new SRCommand2();
 		}
 		String result = comm.exec(request, response);
+		System.out.println(result);
 		out.print(result);
 	}
 

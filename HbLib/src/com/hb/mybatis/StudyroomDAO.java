@@ -10,37 +10,29 @@ import org.apache.ibatis.session.SqlSession;
 public class StudyroomDAO {
 	private static SqlSession ss;
 	
-	private synchronized static SqlSession getSql(){
-		if(ss==null){
-			ss = DBService.getFactory().openSession();
-		}
-		return ss;
-	}
+	
 	public StudyroomDAO() {
-		
+		ss = DBService.getFactory().openSession(true);
 	}
 	
 	public List<StudyroomVO> allStudyRoom(){
-		List<StudyroomVO> list = getSql().selectList("getRoom");
+		List<StudyroomVO> list = ss.selectList("getRoom");
 		return list;
 	}
 	
-	public List<StudyroomVO> getTime(String date){
-		System.out.println("getTime");
-		List<StudyroomVO> list = getSql().selectList("getTime",date);
-		System.out.println("list.size="+list.size());
+	public List<Studyroom_ReserveVO> getTime(String date){
+		List<Studyroom_ReserveVO> list = ss.selectList("getTime",date);
 		return list;
 	}
 	
 	public void roomReserve(Studyroom_ReserveVO rvo){
 		System.out.println("roomReserve"+rvo.getS_num());
 		try{
-			getSql().insert("reserve", rvo);
-			getSql().commit();
+			ss.insert("reserve", rvo);
+			ss.commit();
 		}catch(Exception e){
 			e.printStackTrace();
-			getSql().rollback();
-			
+			ss.rollback();
 		}
 	}
 }
