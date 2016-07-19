@@ -31,6 +31,7 @@ public class Dao {
 		result.setDraw(book.getDraw());
 		result.setReserve(book.getReserve());
 		result.setOverdue(book.getOverdue());
+		ss.close();
 		return result;
 	}
 
@@ -41,18 +42,21 @@ public class Dao {
 		map.put("keyword",keyword);
 		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
+		ss.close();
 		return list;
 	}
 	
 	public BookVO detisearch (String b_num){
 		BookVO bookvo = new BookVO();
 		bookvo =ss.selectOne("deti", b_num);
+		ss.close();
 		return bookvo;
 	}
 
 	public List<Book_rankVO> ranking(){
 		List<Book_rankVO> list = ss.selectList("ranking");
 		System.out.println(list.size());
+		ss.close();
 		return list;
 	}
 
@@ -126,12 +130,14 @@ public class Dao {
 	// 로그인
 	public AdminVO getAdminList(AdminVO avo){
 		AdminVO adminVo = ss.selectOne("adminLogin",avo);
+		ss.close();
 		return adminVo;
 	}
 	
 	// member 전체 게시물의 수
 	public int memberTotalCount(){
 		int count = ss.selectOne("a_memberTotalCount");
+		ss.close();
 		return count;
 	}
 	
@@ -151,18 +157,21 @@ public class Dao {
 	// member 대출 현황 정보
 	public List<Book_DrawVO> getBookDraw(String id){
 		List<Book_DrawVO> list = ss.selectList("a_bookMemberList",id);
+		ss.close();
 		return list;
 	}
 	
 	// book count
 	public int bookTotalCount(){
 		int count = ss.selectOne("a_bookListCount");
+		ss.close();
 		return count;
 	}
 	
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
 		List<BookVO> list = ss.selectList("a_booklist",map);
+		ss.close();
 		return list;
 	}
 	
@@ -175,12 +184,14 @@ public class Dao {
 	// notice 전체 게시물의 수
 	public int noticeTotalCount(){
 		int count = ss.selectOne("a_noticeListCount");
+		ss.close();
 		return count;
 	}
 	
 	// notice 리스트
 	public List<NoticeVO> getNoticeList(Map<String, Integer> map){
 		List<NoticeVO> list = ss.selectList("a_noticeList",map);
+		ss.close();
 		return list;
 	}
 	
@@ -197,6 +208,7 @@ public class Dao {
 
 	public int historytotalCount(String id){
 		int count = ss.selectOne("historytotalCount" , id);
+		
 		return count ;
 	}
 	public List<YulVO> getYul(){
