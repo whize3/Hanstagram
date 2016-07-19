@@ -205,13 +205,7 @@ vertical-align: middle;
 					String this_time = times[i];
 					for(Studyroom_ReserveVO vo:time){
 
-						if(vo.getStart_time().equals(this_time)){
-							
-						}else{
-							System.out.print("예약된시간 : "+vo.getStart_time());
-							
-						}
-
+						vo.getStart_time();
 					}
 				}
 			}
