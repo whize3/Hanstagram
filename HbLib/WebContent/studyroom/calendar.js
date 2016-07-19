@@ -42,7 +42,7 @@ $(function(){
 			console.log(month+"/"+year);
 		
 			$.ajax({
-				url:'/library/Controller?type=getRoom',
+				url:'/HbLib/Controller?type=getRoom',
 				type:'post',
 				data:{month:month,year:year},
 				success:function(data){
