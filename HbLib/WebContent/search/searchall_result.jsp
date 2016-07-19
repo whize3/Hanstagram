@@ -6,9 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	
 	<jsp:include page="my_navi.jsp" />
 	<div id="mainview">
@@ -17,6 +18,7 @@
 				<table width="700">
 					<thead>
 						<tr align="left">
+							<th width="200"></th>
 							<th width="200">책번호</th>
 							<th width="200">책제목</th>
 							<th width="200">책위치</th>
@@ -27,10 +29,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<td colspan="7"><hr color="black" /></td>
+						<td colspan="8"><hr color="black" /></td>
 						<c:forEach items="${booklist}" var="k">
 							<tr>
-								<td>${k.b_num}</td>
+								<td>${k.s_url}</td>
+								<td><a href="/HbLib/Controller?type=selectone&b_num=${k.b_num }">${k.b_num}</a></td>
 								<td>${k.b_subject}</td>
 								<td>${k.b_location}</td>
 								<td>${k.publisher}</td>
@@ -38,7 +41,7 @@
 								<td>${k.category}</td>
 								<td>${k.ISBN}</td>
 							</tr>
-							<td colspan="7"></td>
+							<td colspan="8"></td>
 							</tr>
 						</c:forEach>
 

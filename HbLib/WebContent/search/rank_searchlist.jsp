@@ -8,9 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".navileft>li").addClass("navileft_li")
+		$("#navi_02").css("background-color", "gray")
+	});	
+</script>
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<jsp:include page="my_navi.jsp" />
 	
 	<form>
@@ -34,7 +42,7 @@
 						</tr>
 						<c:forEach var="k" items="${list}">
 							<tr align="center">
-								<td>${k.img_url}</td>
+								<td>${k.s_url}</td>
 								<td>${k.b_num}</td>
 								<td>${k.b_subject}</td>
 								<td>${k.writer}</td>

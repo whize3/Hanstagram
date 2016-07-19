@@ -16,9 +16,15 @@
 	      	<when test="idx==4">where category like '%' || #{keyword} || '%'</when>
 	      </choose>	
 	</select>
+	<!-- 상세보기  -->
+		<select id="deti" parameterType="String" resultType="com.hb.mybatis.BookVO"> 
+			select * from book where b_num = #{b_num}		
+		</select>
 	<!-- 랭킹  -->
 	<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
-		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc
+		select a.*,b.b_subject,b.writer,b.s_url from 
+		(select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 
+		group by b_num) a, book b where b.b_num = a.b_num order by rank desc
 	</select>
 	
 	

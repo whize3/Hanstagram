@@ -5,19 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	function search_go() {
 		document.f.action = "/HbLib/Controller";
 		document.f.submit();
-		
 	}
 
+	$(function() {
+		$(".navileft>li").addClass("navileft_li")
+		$("#navi_01").css("background-color", "gray")
+	});
 </script>
 </head>
 <body>
 
 
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="searchview">
 		<jsp:include page="my_navi.jsp" />
 	</div>

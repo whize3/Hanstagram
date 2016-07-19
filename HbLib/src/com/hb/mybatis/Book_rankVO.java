@@ -1,7 +1,7 @@
 package com.hb.mybatis;
 
 public class Book_rankVO {
-	private String rank , b_num , b_subject , writer , img_url;
+	private String rank , b_num , b_subject , writer , s_url;
 
 	public String getRank() {
 		return rank;
@@ -35,12 +35,12 @@ public class Book_rankVO {
 		this.writer = writer;
 	}
 
-	public String getImg_url() {
-		return img_url;
+	public String getS_url() {
+		return s_url;
 	}
 
-	public void setImg_url(String img_url) {
-		this.img_url = img_url;
+	public void setS_url(String s_url) {
+		this.s_url = s_url;
 	}
 
 	

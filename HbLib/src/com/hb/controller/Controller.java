@@ -18,6 +18,7 @@ import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
+import com.hb.command.DtCommand;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
@@ -109,6 +110,8 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
+		}else if(type.equals("selectone")){
+			comm = new DtCommand();
 		}
 		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
