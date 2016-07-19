@@ -1,5 +1,6 @@
 package com.hb.mybatis;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,12 @@ public class Dao {
 		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
 		return list;
+	}
+	
+	public BookVO detisearch (String b_num){
+		BookVO bookvo = new BookVO();
+		bookvo =ss.selectOne("deti", b_num);
+		return bookvo;
 	}
 
 	public List<Book_rankVO> ranking(){

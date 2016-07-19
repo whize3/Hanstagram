@@ -18,11 +18,13 @@ import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
+import com.hb.command.DtCommand;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
 import com.hb.command.RankBookCommand;
-
+import com.hb.command.ReserveRoomCommand;
+import com.hb.command.SRCommand;
 import com.hb.command.MemberListCommand;
 import com.hb.command.MemberOnelistCommand;
 import com.hb.command.MyCommentCommand;
@@ -109,7 +111,24 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
+
+		}else if(type.equals("selectone")){
+			comm = new DtCommand();
+
+		}else if(type.equals("getRoom")){
+			if(request.getParameter("date")==null){
+				comm = new SRCommand();
+			}else{
+				System.out.println(request.getParameter("date"));
+				comm = new SRCommand(request.getParameter("date"));
+			}
+		}else if(type.equals("roomReserve")){
+			comm = new ReserveRoomCommand();			
+		}else if(type.equals("strSuc")){
+			comm = new SRCommand();
+
 		}
+		
 		path = comm.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);
 		
