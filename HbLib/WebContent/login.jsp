@@ -52,7 +52,7 @@
 </script>
 </head>
 <body>
-<jsp:useBean id="user" scope="session" class="com.hb.mybatis.UsersVO" />
+
 
 	<%
 		request.setCharacterEncoding("utf-8");

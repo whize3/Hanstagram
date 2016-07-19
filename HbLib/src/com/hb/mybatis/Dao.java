@@ -181,6 +181,11 @@ public class Dao {
 		ss.insert("a_noticeAdd", nvo);
 		ss.commit();
 	}
+	
+	// 도서구입신청현황 리스트
+	public List<Book_ApplyVO> getBookApply(String id){
+		return ss.selectList("applylist", id);
+	}
 
 }
 

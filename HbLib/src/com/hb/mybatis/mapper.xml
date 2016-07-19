@@ -129,4 +129,12 @@
 		select count(case when id=#{id} and b_state='1' then 1 else null end)draw, count(case when id=#{id} and b_state='2' then 1 else null end)reserve, count(case when id=#{id} and b_state='1' and sysdate>bd_redate then 1 else null end)overdue from book_draw
 	</select>
 	
+	<!--도서구입신청현황 리스트 -->
+	<select id="applylist" parameterType="String" resultType="com.hb.mybatis.Book_ApplyVO">
+		select * from book_apply where id=#{id} order by ba_idx
+	</select>
+	<!-- 랭킹  -->
+	<select id="">
+		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
+	</select>
 	</mapper>
