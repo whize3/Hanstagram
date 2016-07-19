@@ -30,6 +30,7 @@
 </head>
 <body>
 <header>
+<jsp:useBean id="user" class="com.hb.mybatis.UsersVO" scope="session"/>
 	<div class="topArea">
 		<div class="wrap">
 			<div id="topMenu">
@@ -45,7 +46,7 @@
 		}
 
 		if (id == null) {%>
-				<a href="#">로그인</a>
+				<a href="/HbLib/headerlogin.jsp">로그인</a>
 				&nbsp;|&nbsp;<%}else{%> 
 				<a href="#" onclick="logout_go()">로그아웃</a>
 				&nbsp;|&nbsp;<%}%>

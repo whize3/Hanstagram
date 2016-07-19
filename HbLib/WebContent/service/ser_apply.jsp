@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <title>Insert title here</title>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
+
+
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_03").css("background-color", "gray")
 		$("#go").click(function() {
+			var id = "<c:out value='${user.id}'/>";
 			var url = "https://apis.daum.net/search/book?apikey=01c892cc876f5b1fd263a78eac5212d0&q="+$("#q").val()+"&output=json&callback=?";
 			$.getJSON(url, function(data) {
 				var result = "<h2>검색결과</h2><br/>";
@@ -20,23 +25,25 @@
 				
 				for (var i in data.channel.item)
 				{
-					var url = data.channel.item[i].cover_s_url;
+					var s_url = data.channel.item[i].cover_s_url;
+					var l_url = data.channel.item[i].cover_l_url;
 					var title = data.channel.item[i].title;
 					var author = data.channel.item[i].author_t;
 					var category = data.channel.item[i].category;
 					var publisher = data.channel.item[i].pub_nm;
 					var isbn = data.channel.item[i].isbn;
+					
 					result += "<tr>";
 					result += "<td>";
-					result += "<img src='"+url+"'/></td>";
+					result += "<img src='"+s_url+"'/></td>";
 					result += "<td>"+title+"</td>";
 					result += "<td>" +author+ "</td>";			
 					result += "<td>" + category + "</td>";				
 					result += "<td>" + publisher + "</td>";				
 					result += "<td>" + isbn + "</td>";
 					result += "<td id='tdadd'>";
-					result += "<input type='button' value='신청' url='";
-					result += url+"' title='"+title
+					result += "<input type='button' value='신청' s_url='";
+					result += s_url+"' title='"+title+"' id='"+id+"' l_url='"+l_url
 					  +"' author='"+author+"' category='"+category+"' publisher='"+publisher+"' isbn='"+isbn+"'"
 					   + " class='app'/></td>";
 					result += "</tr>";
@@ -57,7 +64,9 @@
 				type : "get",
 				url : "/HbLib/AjaxController",
 				data : 
-					"url="+$(this).attr("url")+
+					"s_url="+$(this).attr("s_url")+
+					"&l_url="+$(this).attr("l_url")+
+					"&id="+$(this).attr("id")+
 					"&title="+$(this).attr("title")+
 					"&author="+$(this).attr("author")+
 					"&url="+$(this).attr("url")+
@@ -68,6 +77,8 @@
 				success: function (data) {
 					if(data!=null){
 						alert("신청되셨습니다.");
+					}else{
+						alert("데이터가안옴ㅋ");
 					}
 				},
 				error:function(){
@@ -82,6 +93,12 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
+	<c:if test="${user.id==null }">
+<script type="text/javascript">
+alert("로그인해주세요")
+history.go(-1)
+</script>
+</c:if>
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="ser_navi.jsp" />

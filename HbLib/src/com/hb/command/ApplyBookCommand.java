@@ -12,7 +12,8 @@ public class ApplyBookCommand implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		Dao dao = new Dao();
 		Book_ApplyVO bavo = new Book_ApplyVO();
-		bavo.setImg_url(request.getParameter("url"));
+		bavo.setS_url(request.getParameter("s_url"));
+		bavo.setL_url(request.getParameter("l_url"));
 		bavo.setB_subject(request.getParameter("title").replaceAll("<b>", "").replaceAll("</b>", ""));
 		bavo.setCategory(request.getParameter("category"));
 		bavo.setId("whoyoung");

@@ -17,7 +17,7 @@ public class BookAddCommand implements Command{
 		String writer = request.getParameter("writer");
 		String category = request.getParameter("category");
 		String isbn = request.getParameter("isbn");
-		String img_url = request.getParameter("img_url");
+		String s_url = request.getParameter("img_url");
 		
 		if(chk==null){
 			return "admin/menu2_bookList_add.jsp";
@@ -30,7 +30,7 @@ public class BookAddCommand implements Command{
 			bvo.setWriter(writer);
 			bvo.setCategory(category);
 			bvo.setISBN(isbn);
-			bvo.setImg_url(img_url);
+			bvo.setS_url(s_url);
 			
 			Dao dao = new Dao();
 			dao.getBookAdd(bvo);

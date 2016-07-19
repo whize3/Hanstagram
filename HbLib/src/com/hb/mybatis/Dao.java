@@ -1,5 +1,6 @@
 package com.hb.mybatis;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,12 @@ public class Dao {
 		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
 		return list;
+	}
+	
+	public BookVO detisearch (String b_num){
+		BookVO bookvo = new BookVO();
+		bookvo =ss.selectOne("deti", b_num);
+		return bookvo;
 	}
 
 	public List<Book_rankVO> ranking(){
@@ -186,6 +193,7 @@ public class Dao {
 	public List<Book_ApplyVO> getBookApply(String id){
 		return ss.selectList("applylist", id);
 	}
+
 	public int historytotalCount(String id){
 		int count = ss.selectOne("historytotalCount" , id);
 		return count ;
@@ -193,7 +201,17 @@ public class Dao {
 	public List<YulVO> getYul(){
 		List<YulVO> yulvo = ss.selectList("yul");
 		ss.close();
-		return yulvo;
+		return yulvo;}
+
+	
+	// 아이디찾기
+	
+	public UsersVO forgotId(UsersVO input){
+		return ss.selectOne("forgotid", input);
+	}
+	public UsersVO forgotPwd(UsersVO input){
+		return ss.selectOne("forgotpwd", input);
+
 	}
 
 }

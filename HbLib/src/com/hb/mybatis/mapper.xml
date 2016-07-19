@@ -16,15 +16,23 @@
 	      	<when test="idx==4">where category like '%' || #{keyword} || '%'</when>
 	      </choose>	
 	</select>
-
-		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
-			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{img_url})
-		</insert>
-		<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
-			select b_subject, ISBN, RANK()  OVER(ORDER BY ISBN asc,b_subject) AS RANK
-            from book_apply
+	<!-- 상세보기  -->
+		<select id="deti" parameterType="String" resultType="com.hb.mybatis.BookVO"> 
+			select * from book where b_num = #{b_num}		
 		</select>
-
+	<!-- 랭킹  -->
+	<select id="ranking" resultType="com.hb.mybatis.Book_rankVO">
+		select a.*,b.b_subject,b.writer,b.s_url from 
+		(select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 
+		group by b_num) a, book b where b.b_num = a.b_num order by rank desc
+	</select>
+	
+	
+		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
+		</insert>
+		
+			
 
 
 		<!-- 로그인  -->
@@ -135,14 +143,37 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="applylist" parameterType="String" resultType="com.hb.mybatis.Book_ApplyVO">
 		select * from book_apply where id=#{id} order by ba_idx
 	</select>
+
 	<!-- 랭킹  -->
 	<select id="">
 		select a.*,b.b_subject,b.writer,b.img_url from (select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 group by b_num) a, book b where b.b_num = a.b_num order by rank desc;
 	</select>
+
 	<select id="historytotalCount" resultType="int" parameterType="String">
 		select count(*) from book_draw where id=#{id} and b_state='0'
 	</select>
 	<select id="yul" resultType="com.hb.mybatis.YulVO">
 		select * from yul
+	</select>
+
+	
+	<!-- 아이디 찾기  -->
+	<select id="forgotid" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select * from users where name=#{name} and jumin=#{jumin}	
+	</select>
+	<!-- 비밀번호 찾기  -->
+	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
+		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
+	</select>
+
+		<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
+		select * from studyroom
+	</select>
+
+	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
+		insert into studyroom_reserve values(sr_seq.nextval, #{s_num},#{start_time},#{end_time},#{id},#{sr_state},#{sr_date})
+	</insert>
+	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
+		select start_time, end_time from studyroom_reserve where sr_date=#{date}
 	</select>
 	</mapper>
