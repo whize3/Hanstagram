@@ -288,7 +288,7 @@ function moveBanner(int a){
 <div id="container">
 	<div class="wrap">
 		<div id="notice">
-			<p>공지사항 <a href="Controller?type="><img src="./img/plus.png"></a></p>
+			<p>공지사항 <a href="Controller?type=noticelist"><img src="./img/plus.png"></a></p>
 			<ul>
 				<c:forEach items="${notice}" var="k" begin="0" end="4">
 					<li><span class="noticeType">공지</span><a href="Controller?type=onenotice&n_idx=${k.n_idx}">${k.n_subject}</a></li>

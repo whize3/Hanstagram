@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -55,7 +56,7 @@
 											<li class="disable">이전으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+											<li><a href="/HbLib/Controller?type=noticeList&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
 										</c:otherwise>
 									</c:choose>
 									
@@ -65,7 +66,7 @@
 												<li class="now">${k}</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${k}">${k}</a></li>
+												<li><a href="/HbLib/Controller?type=noticelist&cPage=${k}">${k}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -74,7 +75,7 @@
 											<li class="disable">다음으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=a_noticeList&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+											<li><a href="/HbLib/Controller?type=noticelist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ul>
