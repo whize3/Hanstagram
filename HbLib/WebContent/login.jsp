@@ -80,7 +80,8 @@
 
 			</dd>
 			<hr align="left" width="85%" />
-			<a href="#" onclick="window.open('forgotuser.jsp', '', 'width=400, height=300, left=500, top=200')"><strong>아이디, 패스워드 찾기</strong></a>/
+			<a href="#" onclick="window.open('forgotid.jsp', '', 'width=330, height=250, left=500, top=200')"><strong>아이디 찾기</strong></a>/
+			<a href="#" onclick="window.open('forgotpwd.jsp', '', 'width=330, height=250, left=500, top=200')"><strong>패스워드 찾기</strong></a>/
 			<a href="join.jsp"><strong>회원가입</strong></a>
 		</dl>
 	</div>
