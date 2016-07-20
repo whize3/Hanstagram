@@ -222,9 +222,15 @@ public class Dao {
 	public UsersVO forgotId(UsersVO input){
 		return ss.selectOne("forgotid", input);
 	}
+	// 비밀번호 찾기
 	public UsersVO forgotPwd(UsersVO input){
 		return ss.selectOne("forgotpwd", input);
 
+	}
+	// 공지사항 가져오기
+	
+	public List<NoticeVO> getNotice(){
+		return ss.selectList("notice");
 	}
 
 }

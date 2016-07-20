@@ -22,6 +22,7 @@ import com.hb.command.DtCommand;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
+import com.hb.command.MainCommand;
 import com.hb.command.RankBookCommand;
 import com.hb.command.ReserveRoomCommand;
 import com.hb.command.SRCommand;
@@ -64,6 +65,7 @@ public class Controller extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
+		
 		if(type.equals("applybook")){
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
@@ -130,8 +132,10 @@ public class Controller extends HttpServlet {
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
 			comm = new SRCommand();
-
-
+		}else if(type.equals("main")){
+			comm = new MainCommand();
+		}else if(type.equals("onenotice")){
+			
 		}
 		
 		path = comm.exec(request, response);

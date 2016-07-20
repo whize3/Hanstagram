@@ -165,8 +165,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
-
-		<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
+	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom
 	</select>
 
@@ -175,5 +174,9 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</insert>
 	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
 		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	</select>
+	<!-- 공지사항 가져오기  -->
+	<select id="notice" resultType="com.hb.mybatis.NoticeVO">
+		select * from notice
 	</select>
 	</mapper>
