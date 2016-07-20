@@ -50,3 +50,7 @@ ul {
 strong{
 	font-size: 15px;
 }
+
+.myaccount{
+	display: none;
+}

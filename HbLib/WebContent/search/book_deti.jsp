@@ -14,6 +14,36 @@
 		
 	});	
 </script>
+
+<style type="text/css">
+ 
+ 
+#div1 {
+    list-style-type: none;
+    padding: 0;
+}
+
+#div1 {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+#div2 {
+    list-style-type: none;
+    padding: 0;
+}
+
+#div2 {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -30,11 +60,79 @@
 	System.out.println(L_url);
  
  %>
+ 		
  		<jsp:include page="../header.jsp" />
+ 	
  	 	
- 	 	<div align="center" id="img" >
- 	 		<img src="<%=L_url%>">
- 	 	</div>
+				 
+				 <div id="div1">
+				 <li><img src="<%=L_url%>"></li>	
+				</div>
+				
+				
+				<div id="div2">
+					<li><%=b_num %></li>
+					<li><%=b_subject %></li>
+					<li><%=b_location %></li>
+					<li><%=publisher %></li>
+					<li><%=writer %></li>
+					<li><%=category %></li>
+					<li><%=ISBN %></li>
+				
+				</div>
+				
+				
+				
+
+
+<%-- 
+
+
+ 	 				<tr>
+ 	 				 <td>
+ 	 				  <table align="center" width="100px">
+ 	 				  	<tbody align="center">
+ 	 				  		<td>분류<%=category %></td>
+ 	 				  	</tr>
+ 	 				  	
+ 	 				  	 <br />
+ 	 				  	
+ 	 				  	<td>저자<%=writer%></td>
+ 	 				  	 </tr>
+ 	 				  	
+ 	 				  	 <tr>
+ 	 				  	 <br/>
+ 	 				  	
+ 	 				  	 <td>번호	<%=b_num %></td>
+ 	 				  	 </tr>
+ 	 				  	
+ 	 				  	 <td>제목<%=b_subject %></td>
+ 	 				  	 <br/>
+ 	 				  	 </tr>
+ 	 				  	 
+ 	 				  	 <td>출판사<%=publisher %></td>
+ 	 				  	 <br/>
+ 	 				  	 </tr>			  	
+ 	 				  	 
+ 	 				  	 <td>위치<%=b_location %></td>
+ 	 				  	 <br/>
+ 	 				  	 </tr>
+ 	 				  	 
+ 	 				  	 <td>ISBN<%=ISBN %></td>
+ 	 				  	 <br/>
+ 	 				  	 </tr>
+ 	 				  	 
+ 	 				  	</tbody>
+ 	 				  
+ 	 				  </table>
+ 	 			
+ --%> 	 	
+ 	 	
+ 	 		
+ 	 	
+ 	 	
+ 	 	
+ 	 	
  	 	
  	 	
  
@@ -42,4 +140,5 @@
   	  
 		
 </body>
+
 </html>

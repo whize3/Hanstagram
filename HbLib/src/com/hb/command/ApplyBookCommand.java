@@ -16,7 +16,7 @@ public class ApplyBookCommand implements Command {
 		bavo.setL_url(request.getParameter("l_url"));
 		bavo.setB_subject(request.getParameter("title").replaceAll("<b>", "").replaceAll("</b>", ""));
 		bavo.setCategory(request.getParameter("category"));
-		bavo.setId("whoyoung");
+		bavo.setId(request.getParameter("id"));
 		bavo.setISBN(request.getParameter("isbn"));
 		bavo.setPublisher(request.getParameter("publisher").replaceAll("<b>", "").replaceAll("</b>", ""));
 		bavo.setWriter(request.getParameter("author").replaceAll("<b>", "").replaceAll("</b>", ""));
