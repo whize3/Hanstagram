@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,13 +10,13 @@
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
-		$("#navi_01").css("background-color", "gray")
+		$("#navi_02").css("background-color", "gray")
 	});	
 </script>
 </head>
 <body>
-<jsp:useBean id="notice" class="com.hb.mybatis.NoticeVO" scope="request"/>
-<jsp:setProperty property="*" name="notice"/>
+<jsp:useBean id="qna" class="com.hb.mybatis.QnaVO" scope="request"/>
+<jsp:setProperty property="*" name="qna"/>
 	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
@@ -32,12 +31,12 @@
 								<tbody>
 									<tr>
 										<th bgcolor="#B2EBF4">번호</th>
-										<td>${notice.n_idx}</td>
+										<td id="q_idx">${qna.q_idx}</td>
 									</tr>
 
 									<tr>
 										<th bgcolor="#B2EBF4">제목</th>
-										<td>${notice.n_subject}</td>
+										<td id="qa_subject">${qna.qa_subject}</td>
 									</tr>
 									<tr>
 										<th bgcolor="#B2EBF4">첨부파일</th>
@@ -45,22 +44,23 @@
 
 									<tr>
 										<th bgcolor="#B2EBF4">날짜</th>
-										<td>${notice.n_date}</td>
+										<td id="qa_date">${qna.qa_date}</td>
 									</tr>
 									<tr>
 										<th bgcolor="#B2EBF4">내용</th>
 									</tr>
 									<tr>
-										<td colspan="2"><pre>${notice.n_content}</pre></td>
+										<td colspan="2"><pre id="qa_content">${qna.qa_content}</pre></td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td colspan="2"><input type="button" value="목록"
-											onclick="javascript:location.href='Controller?type=noticelist&cPage=${cPage}'" /> 
-
+											onclick="javascript:location.href='Controller?type=qnalist'" /> 
+											<input type="button" value="수정"
+											onclick="modify_go(this.form)" /> <input type="button"
+											value="삭제" onclick="delete_go(this.form)" /></td>
 									</tr>
-
 								</tfoot>
 							</table>
 						</form>

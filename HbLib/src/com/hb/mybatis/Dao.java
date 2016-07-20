@@ -226,23 +226,40 @@ public class Dao {
 		return ss.selectOne("forgotpwd", input);
 
 	}
-	// 공지사항 리스트 가져오기
+	// 메인에서 공지사항 리스트 가져오기
 	
 	public List<NoticeVO> getNoticeList(){
 		List<NoticeVO> list = ss.selectList("noticelist");
-		
 		return list;
-		
 	}
-	
 	// 공지사항 한 개 가져오기
-	
 	public NoticeVO getOneNotice(String n_idx){
 		NoticeVO nvo = ss.selectOne("onenotice", n_idx);
 		
 		return nvo;
 	}
+	// 공지사항 히트 수 업데이트
+	public void noticeHit(String n_idx){
+		ss.update("noticehit", n_idx);
+	}
 	
+	// Qna 전체 게시물의 수
+		public int qnaTotalCount(){
+			int count = ss.selectOne("qnalistcount");
+			
+			return count;
+		}
+		
+	// QNA 리스트
+		public List<QnaVO> getQnaList(Map<String, Integer> map){
+			List<QnaVO> list = ss.selectList("qnalist",map);
+			return list;
+		}
+		// QNA 한 개 가져오기
+		public QnaVO getOneQna(String q_idx){
+			QnaVO qvo = ss.selectOne("oneqna", q_idx);
+			return qvo;
+		}		
 
 }
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,18 +12,18 @@
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
-		$("#navi_01").css("background-color", "gray")
-	});	
+		$("#navi_02").css("background-color", "gray")
+	});
 </script>
 </head>
-<body>
-	<%System.out.println(request.getParameter("cPage")); %>
+<jsp:useBean id="qnalist" class="java.util.ArrayList" scope="request"/>
+<jsp:setProperty property="*" name="qnalist"/>
 	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="board_navi.jsp" />
 			<div id="mainview">
-				<div class="mainviewnavi">◆게시판> 공지사항</div>
+				<div class="mainviewnavi">◆게시판> QNA</div>
 				<div>
 					<div align="center">
 					<input type="hidden" class="id" value="${user.id}" >
@@ -38,12 +38,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="k" items="${a_noticeList}">
+						<c:forEach var="k" items="${qnalist}">
 							<tr>
 								<td>${pvo.totalRecord-k.r_num+1}</td>
-								<td><a href="Controller?type=onenotice&cPage=${pvo.nowPage}&n_idx=${k.n_idx}">${k.n_subject}</a></td>								
-								<td>${k.n_date.substring(0,10)}</td>
-								<td>${k.n_hit}</td>
+								<td><a href="Controller?type=oneqna&q_idx=${k.q_idx}">${k.qa_subject}</a></td>								
+								<td>${k.qa_date.substring(0,10)}</td>
+								<td>${k.qa_hit}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -56,7 +56,7 @@
 											<li class="disable">이전으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=noticelist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+											<li><a href="/HbLib/Controller?type=qnalist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
 										</c:otherwise>
 									</c:choose>
 									
@@ -66,7 +66,7 @@
 												<li class="now">${k}</li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=noticelist&cPage=${k}">${k}</a></li>
+												<li><a href="/HbLib/Controller?type=qnalist&cPage=${k}">${k}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -75,7 +75,7 @@
 											<li class="disable">다음으로</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=noticelist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+											<li><a href="/HbLib/Controller?type=qnalist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ul>
@@ -90,6 +90,8 @@
 			</div>
 		</div>
 	</div>
+	
+<body>
 
 </body>
 </html>

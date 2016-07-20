@@ -183,4 +183,23 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="onenotice" parameterType="String" resultType="com.hb.mybatis.NoticeVO">
 		select * from notice where n_idx=#{n_idx}
 	</select>
+	<!-- 공지사항 hit 수 업데이트  -->
+	<update id="noticehit" parameterType="String">
+		update notice set n_hit = #{n_hit} where n_idx = #{n_idx}
+	</update>
+	
+	<!-- qna 총 게시물 수 -->
+	<select id="qnalistcount" resultType="int">
+		select count(*) from qna
+	</select>
+	<!-- qna 리스트 -->
+	<select id="qnalist" parameterType="Map" resultType="com.hb.mybatis.QnaVO">
+		select * from (select rownum r_num, a.* from(
+			select * from qna) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- QNA 하나 가져오기  -->
+	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
+		select * from qna where q_idx=#{q_idx}
+	</select>
 	</mapper>

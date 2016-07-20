@@ -38,6 +38,8 @@ import com.hb.command.NoticeListCommand;
 import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
 import com.hb.command.OneNoticeCommand;
+import com.hb.command.OneQnaCommand;
+import com.hb.command.QnaListCommand;
 import com.hb.command.UsersJoinCommand;
 import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
@@ -140,6 +142,10 @@ public class Controller extends HttpServlet {
 			comm = new OneNoticeCommand();
 		}else if(type.equals("noticelist")){
 			comm = new NoticeListCommand();
+		}else if(type.equals("qnalist")){
+			comm = new QnaListCommand();
+		}else if(type.equals("oneqna")){
+			comm = new OneQnaCommand();
 		}
 		
 		path = comm.exec(request, response);
