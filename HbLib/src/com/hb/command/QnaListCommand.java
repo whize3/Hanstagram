@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.hb.mybatis.Dao;
 import com.hb.mybatis.NoticeVO;
 import com.hb.mybatis.Paging;
+import com.hb.mybatis.QnaVO;
 
-public class NoticeListCommand implements Command {
+public class QnaListCommand implements Command{
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
@@ -23,7 +24,7 @@ public class NoticeListCommand implements Command {
 			pvo.setNowPage(Integer.parseInt(cPage));
 		}
 		
-		pvo.setTotalRecord(dao.noticeTotalCount());
+		pvo.setTotalRecord(dao.qnaTotalCount());
 		pvo.setTotalPage();
 		
 		pvo.setBegin((pvo.getNowPage()-1)*pvo.getNumPerPage()+1);
@@ -34,8 +35,9 @@ public class NoticeListCommand implements Command {
 		map.put("begin", pvo.getBegin());
 		map.put("end", pvo.getEnd());
 				
-		List<NoticeVO> list = dao.getNoticeList(map);
-		request.setAttribute("a_noticeList", list);
+		List<QnaVO> list = dao.getQnaList(map);
+		request.setAttribute("qnalist", list);
+		
 				
 		pvo.setBeginPage(((int)(pvo.getNowPage()-1)/pvo.getPagePerBlock())*pvo.getPagePerBlock()+1);
 		pvo.setEndPage(pvo.getBeginPage() + pvo.getPagePerBlock()-1);
@@ -47,7 +49,7 @@ public class NoticeListCommand implements Command {
 		request.setAttribute("pvo", pvo);
 		request.setAttribute("cPage", cPage);
 		
-		return "board/noticelist.jsp";
+		return "board/qnalist.jsp";
 	}
-	
+
 }

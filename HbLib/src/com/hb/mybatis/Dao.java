@@ -1,6 +1,5 @@
 package com.hb.mybatis;
 
-import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,7 +138,7 @@ public class Dao {
 	// member 전체 게시물의 수
 	public int memberTotalCount(){
 		int count = ss.selectOne("a_memberTotalCount");
-		ss.close();
+		
 		return count;
 	}
 	
@@ -186,14 +185,14 @@ public class Dao {
 	// notice 전체 게시물의 수
 	public int noticeTotalCount(){
 		int count = ss.selectOne("a_noticeListCount");
-		ss.close();
+		
 		return count;
 	}
 	
 	// notice 리스트
 	public List<NoticeVO> getNoticeList(Map<String, Integer> map){
 		List<NoticeVO> list = ss.selectList("a_noticeList",map);
-		ss.close();
+		
 		return list;
 	}
 	
@@ -224,10 +223,45 @@ public class Dao {
 	public UsersVO forgotId(UsersVO input){
 		return ss.selectOne("forgotid", input);
 	}
+	// 비밀번호 찾기
 	public UsersVO forgotPwd(UsersVO input){
 		return ss.selectOne("forgotpwd", input);
 
 	}
+	// 메인에서 공지사항 리스트 가져오기
+	
+	public List<NoticeVO> getNoticeList(){
+		List<NoticeVO> list = ss.selectList("noticelist");
+		return list;
+	}
+	// 공지사항 한 개 가져오기
+	public NoticeVO getOneNotice(String n_idx){
+		NoticeVO nvo = ss.selectOne("onenotice", n_idx);
+		
+		return nvo;
+	}
+	// 공지사항 히트 수 업데이트
+	public void noticeHit(String n_idx){
+		ss.update("noticehit", n_idx);
+	}
+	
+	// Qna 전체 게시물의 수
+		public int qnaTotalCount(){
+			int count = ss.selectOne("qnalistcount");
+			
+			return count;
+		}
+		
+	// QNA 리스트
+		public List<QnaVO> getQnaList(Map<String, Integer> map){
+			List<QnaVO> list = ss.selectList("qnalist",map);
+			return list;
+		}
+		// QNA 한 개 가져오기
+		public QnaVO getOneQna(String q_idx){
+			QnaVO qvo = ss.selectOne("oneqna", q_idx);
+			return qvo;
+		}		
 
 }
 

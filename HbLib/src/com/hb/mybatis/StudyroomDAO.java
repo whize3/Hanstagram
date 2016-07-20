@@ -2,6 +2,7 @@ package com.hb.mybatis;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -20,8 +21,8 @@ public class StudyroomDAO {
 		return list;
 	}
 	
-	public List<Studyroom_ReserveVO> getTime(String date){
-		List<Studyroom_ReserveVO> list = ss.selectList("getTime",date);
+	public List<Studyroom_ReserveVO> getTime(Map<Object, Object> map){
+		List<Studyroom_ReserveVO> list = ss.selectList("getTime",map);
 		return list;
 	}
 	

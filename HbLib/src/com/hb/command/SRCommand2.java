@@ -1,6 +1,8 @@
 package com.hb.command;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +17,13 @@ public class SRCommand2 implements Command{
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		String date = request.getParameter("date");
+		String s_num = request.getParameter("r_num");
 		StudyroomDAO sdao = new StudyroomDAO();
 		List<Studyroom_ReserveVO> list = null;
-		list = sdao.getTime(date);
+		Map<Object, Object> map = new HashMap<>();
+		map.put("s_num", s_num);
+		map.put("date", date);
+		list = sdao.getTime(map);
 		String result="[";
 		for(Studyroom_ReserveVO k : list){
 			result +="{";
@@ -30,7 +36,9 @@ public class SRCommand2 implements Command{
 			result +="\"sr_date\""+":"+"\""+k.getSr_date()+"\"";
 			result +="},";
 		}
+		if(list.size()>0){
 		result = result.substring(0,result.length()-1);
+		}
 		result +="]";
 		return result;
 	}
