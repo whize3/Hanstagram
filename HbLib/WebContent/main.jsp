@@ -284,15 +284,14 @@ function moveBanner(int a){
 <body>
 <jsp:useBean id="notice" class="java.util.ArrayList" scope="request"/>
 <jsp:setProperty property="*" name="notice"/>
-<jsp:forward page="onenotice.jsp"/>
 
 <div id="container">
 	<div class="wrap">
 		<div id="notice">
-			<p>공지사항 <a href="#"><img src="./img/plus.png"></a></p>
+			<p>공지사항 <a href="Controller?type="><img src="./img/plus.png"></a></p>
 			<ul>
 				<c:forEach items="${notice}" var="k" begin="0" end="4">
-				<li><span class="noticeType">공지</span><a href="Controller?type=onenotice&n_idx=${k.n_idx}">${k.n_subject}</a></li>
+					<li><span class="noticeType">공지</span><a href="Controller?type=onenotice&n_idx=${k.n_idx}">${k.n_subject}</a></li>
 				</c:forEach>
 			</ul>
 		</div>

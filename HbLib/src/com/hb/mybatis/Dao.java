@@ -227,11 +227,18 @@ public class Dao {
 		return ss.selectOne("forgotpwd", input);
 
 	}
-	// 공지사항 가져오기
+	// 공지사항 리스트 가져오기
 	
-	public List<NoticeVO> getNotice(){
-		return ss.selectList("notice");
+	public List<NoticeVO> getNoticeList(){
+		return ss.selectList("noticelist");
 	}
+	
+	// 공지사항 한 개 가져오기
+	
+	public NoticeVO getOneNotice(String n_idx){
+		return ss.selectOne("onenotice", n_idx);
+	}
+	
 
 }
 

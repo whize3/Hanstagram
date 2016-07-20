@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hb.mybatis.Dao;
 import com.hb.mybatis.NoticeVO;
 
-public class NoticeAddCommand implements Command{
+public class AdminNoticeAddCommand implements Command{
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {

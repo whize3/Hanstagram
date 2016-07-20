@@ -34,8 +34,10 @@ import com.hb.command.MyHistoryCommand;
 import com.hb.command.MyInfoCommand;
 import com.hb.command.MyInfoUpdateCommand;
 import com.hb.command.MyReserveCommand;
-import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
+import com.hb.command.AdminNoticeAddCommand;
+import com.hb.command.AdminNoticeListCommand;
+import com.hb.command.OneNoticeCommand;
 import com.hb.command.UsersJoinCommand;
 import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
@@ -104,9 +106,9 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("a_bookAdd")){
 			comm = new BookAddCommand();
 		}else if(type.equals("a_noticeList")){
-			comm = new NoticeListCommand();
+			comm = new AdminNoticeListCommand();
 		}else if(type.equals("a_NoticeAdd")){
-			comm = new NoticeAddCommand();
+			comm = new AdminNoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
 			path = comm.exec(request, response);
@@ -135,7 +137,9 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("main")){
 			comm = new MainCommand();
 		}else if(type.equals("onenotice")){
-			
+			comm = new OneNoticeCommand();
+		}else if(type.equals("noticelist")){
+			comm = new NoticeListCommand();
 		}
 		
 		path = comm.exec(request, response);

@@ -13,7 +13,7 @@ public class MainCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		Dao dao = new Dao();
-		List<NoticeVO> notice = dao.getNotice();
+		List<NoticeVO> notice = dao.getNoticeList();
 		System.out.println(notice.size());
 		request.setAttribute("notice", notice);
 		return "main.jsp";

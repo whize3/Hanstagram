@@ -176,7 +176,11 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select start_time, end_time from studyroom_reserve where sr_date=#{date}
 	</select>
 	<!-- 공지사항 가져오기  -->
-	<select id="notice" resultType="com.hb.mybatis.NoticeVO">
+	<select id="noticelist" resultType="com.hb.mybatis.NoticeVO">
 		select * from notice
+	</select>
+	<!-- 공지사항 하나 가져오기  -->
+	<select id="onenotice" parameterType="String" resultType="com.hb.mybatis.NoticeVO">
+		select * from notice where n_idx=#{n_idx}
 	</select>
 	</mapper>
