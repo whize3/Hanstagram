@@ -165,15 +165,18 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
+	
+	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom
 	</select>
-
+	<!-- 스터디룸 예약 접수 -->
 	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
 		insert into studyroom_reserve values(sr_seq.nextval, #{s_num},#{start_time},#{end_time},#{id},#{sr_state},#{sr_date})
 	</insert>
-	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
-		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	<!-- 예약된 시간 가져오기 -->	
+	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="Map">
+		select start_time, end_time from studyroom_reserve where sr_date=#{date} and s_num=#{s_num}
 	</select>
 	<!-- 공지사항 가져오기  -->
 	<select id="noticelist" resultType="com.hb.mybatis.NoticeVO">
