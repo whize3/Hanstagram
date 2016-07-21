@@ -97,36 +97,7 @@ function delete_go(f) {
 								<p>ID: ${k.id}</p>
 								<p>날짜: ${k.qc_date.substring(0,10)}</p>
 								<p>내용: <pre>${k.qc_content}</pre></p>
-							</c:forEach>
-								<ul class="commentpaging">
-									<c:choose>
-										<c:when test="${pvo.beginPage<pvo.pagePerBlock}">
-											<li class="disable">이전으로</li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=oneqna&q_idx=${qna.q_idx}&qPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
-										</c:otherwise>
-									</c:choose>
-									
-									<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}" step="1">
-										<c:choose>
-											<c:when test="${k==pvo.nowPage}">
-												<li class="now">${k}</li>
-											</c:when>
-											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=oneqna&q_idx=${qna.q_idx}&qPage=${k}">${k}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-									<c:choose>
-										<c:when test="${pvo.endPage>=pvo.totalPage}">
-											<li class="disable">다음으로</li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=oneqna&q_idx=${qna.q_idx}&qPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
-										</c:otherwise>
-									</c:choose>
-								</ul>
+							</c:forEach>		
 						
 						</div>
 						<div class="q_comment_write">
