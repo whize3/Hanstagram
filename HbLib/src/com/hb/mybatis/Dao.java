@@ -264,6 +264,10 @@ public class Dao {
 			ss.close();
 			return list;
 		}
+	// 메인에서 QNA 리스트
+		public List<QnaVO> getQnaList(){
+			return ss.selectList("m_qnalist");
+		}
 	// QNA 한 개 가져오기
 		public QnaVO getOneQna(String q_idx){
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
