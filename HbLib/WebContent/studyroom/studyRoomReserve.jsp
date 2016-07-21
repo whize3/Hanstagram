@@ -358,7 +358,7 @@ $("#timeArea").html(result);
 				<span>ID : </span><input type="text" name="id" value="<%=id %>" readonly="readonly">
 			</p>
 			<p>
-				<span>이름 : </span><input type="text" name="name" value="<%=uvo.getName() %>" readonly="readonly">
+				<span>이름 : </span><input type="text" name="name" value="" readonly="readonly">
 			</p>
 			<p>
 				<span>날짜 : </span><input type="text" name="rDate" value="" readonly="readonly">

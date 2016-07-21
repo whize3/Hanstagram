@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+table th {text-align:center; font-weight:bold;}
+ table.tableType01 {width:100%; margin-top:10px; border-top:1px solid #6bacd4;}
+table.tableType01 th {padding:8px 0; background:#f1f7fa; color:#4887ae; border-bottom:1px solid #6bacd4; border-right:1px solid #e0e3e6;}
+table.tableType01 td {padding:7px 0; color:#607280; border-bottom:1px solid #e0e3e6; border-right:1px solid #e0e3e6; text-align:center;}
+.subContent h3.tit {margin-top:23px; padding-left:14px; font-family:NanumGothic, 나눔고딕, ngwoff, ngeot; font-size:14px; color:#333;}
+.bBorderType01 {padding-bottom:20px; border-bottom:1px dotted #ccc;}
+p.subParaType01 {line-height:18px; margin-top:10px;}
+span.strongType02 {color:#4887ae;}
+
