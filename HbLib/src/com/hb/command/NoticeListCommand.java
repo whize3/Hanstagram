@@ -19,6 +19,7 @@ public class NoticeListCommand implements Command {
 		Dao dao = new Dao();
 		
 		String cPage = request.getParameter("cPage");
+		if(cPage=="") cPage="1";
 		if(cPage != null){
 			pvo.setNowPage(Integer.parseInt(cPage));
 		}
