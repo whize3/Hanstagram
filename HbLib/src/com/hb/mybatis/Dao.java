@@ -35,11 +35,11 @@ public class Dao {
 	}
 
 	// 도서검색
-	public List<BookVO> search(String booksearch, String keyword , String desearch) {
+	public List<BookVO> search(String idx, String keyword /*String desearch*/) {
 		Map<String, String> map = new HashMap<>();
-		map.put("booksearch", booksearch);
+		map.put("idx", idx);
 		map.put("keyword",keyword);
-		map.put("desearch", desearch);
+		/*map.put("desearch", desearch);*/
 		List<BookVO> list = ss.selectList("booklist",map);
 		ss.close();
 		return list;

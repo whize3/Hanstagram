@@ -30,7 +30,7 @@
 	<div align="center">
 		<div class="searchdetail">
 			<li class="serchWord">
-			<select name="booksearch">
+			<select name="idx">
 					<option value="0">전체</option>
 					<option value="1">저자</option>
 					<option value="2">출판사</option>
@@ -38,6 +38,8 @@
 					<option value="4">분류</option>
 			</select> 
 			<input type="text" name="keyword" /> 
+			<input type="hidden" name="type" value="search" />
+			<input type="button" value="검색" onclick="search_go()" />
 	<br />
 		</div>
 		 <label> 비도서 <input  type="checkbox"     name="chk" value="1" /></label>
@@ -55,10 +57,7 @@
 					</select>
 					
 			
-			<input type="hidden" name="type" value="search" /> 
-			<br/>
-		
-			<input type="button" value="검색" onclick="search_go()" />
+			
   </div>
 </form>
 

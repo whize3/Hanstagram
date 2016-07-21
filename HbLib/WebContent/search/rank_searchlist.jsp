@@ -26,7 +26,7 @@
 		<%
 			List<Book_rankVO> list = (List<Book_rankVO>) request.getAttribute("list");
 		%>
-	
+		
 		<div class="rank">
 			<div align="center">
 				<table width="700">
