@@ -14,7 +14,9 @@ public class QnaWriteCommand implements Command {
 		qvo.setQa_subject(request.getParameter("qa_subject"));
 		qvo.setQa_content(request.getParameter("qa_content"));
 		qvo.setId(request.getParameter("id"));
+				
 		Dao dao = new Dao();
+		
 		dao.writeQna(qvo);
 		return "Controller?type=qnalist";
 	}
