@@ -119,13 +119,10 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
-
 		}else if(type.equals("yul")){
 			comm = new YulCommand();
-
 		}else if(type.equals("selectone")){
 			comm = new DtCommand();
-
 		}else if(type.equals("getRoom")){
 			if(request.getParameter("date")==null){
 				comm = new SRCommand();
@@ -137,12 +134,8 @@ public class Controller extends HttpServlet {
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
 			comm = new SRCommand();
-
-
-
 		}else if(type.equals("bookcomment")){
 			comm = new BookComment();
-
 		}else if(type.equals("main")){
 			comm = new MainCommand();
 		}else if(type.equals("onenotice")){

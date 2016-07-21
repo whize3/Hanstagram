@@ -372,9 +372,39 @@ function moveBanner(int a){
 		<div id="current">
 			<p>열람실 좌석 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
 			<ul>
-				<li>제 1 열람실 : 30/45</li>
-				<li>제 2 열람실 : 42/60</li>
-				<li>제 3 열람실 : 47/50</li>
+			<li>제 1 열람실 : <c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt2' }">
+				${k.value }
+			</c:if>
+			</c:forEach>
+			/
+			<c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt1' }">
+				${k.value }
+			</c:if>
+			</c:forEach></li>
+				<li>제 2 열람실 : <c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt4' }">
+				${k.value }
+			</c:if>
+			</c:forEach>
+			/
+			<c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt3' }">
+				${k.value }
+			</c:if>
+			</c:forEach></li>
+				<li>제 3 열람실 : <c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt6' }">
+				${k.value }
+			</c:if>
+			</c:forEach>
+			/
+			<c:forEach var="k" items="${map }">
+			<c:if test="${k.key=='cnt5' }">
+				${k.value }
+			</c:if>
+			</c:forEach></li>
 			</ul>
 			<p>스터디룸 이용 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
 			<ul>
@@ -384,7 +414,6 @@ function moveBanner(int a){
 			</ul>
 		</div>
 	</div>
-
 </div>
 </body>
 </html>
