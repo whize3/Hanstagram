@@ -29,11 +29,9 @@
 				<div class="mainviewnavi">◆자료검색 > 인기도서</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="구입신청">						
+												
 					</div>
 					<div align="center">
-					
-					<input type="hidden" class="id" value="${user.id}" >
 						<table>
 							<tr>
 								<th><th>번호</th><th>제목</th><th>분류</th><th>상태</th>

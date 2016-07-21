@@ -155,6 +155,8 @@ public class Controller extends HttpServlet {
 			comm = new QnaDeleteCommand();
 		}else if(type.equals("qnawrite")){
 			comm = new QnaWriteCommand();
+		}else if(type.equals("newbook")){
+			
 		}
 		
 		path = comm.exec(request, response);

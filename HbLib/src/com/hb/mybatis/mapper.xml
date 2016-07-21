@@ -199,8 +199,12 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<!-- qna 리스트 -->
 	<select id="qnalist" parameterType="Map" resultType="com.hb.mybatis.QnaVO">
 		select * from (select rownum r_num, a.* from(
-			select * from qna) a
+			select * from qna order by q_idx desc) a
 			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 메인에서 qna리스트  -->
+	<select id="m_qnalist" resultType="com.hb.mybatis.QnaVO">
+		select * from qna order by q_idx desc
 	</select>
 	<!-- QNA 하나 가져오기  -->
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
