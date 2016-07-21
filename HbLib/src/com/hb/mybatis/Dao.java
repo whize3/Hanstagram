@@ -272,6 +272,10 @@ public class Dao {
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
 			return qvo;
 		}
+	// QNA 댓글 가져오기
+		public List<Q_CommentVO> getQ_Comment(Map<String, Integer> map){
+			return ss.selectList("qclist", map);
+		}
 	// QNA 히트 수 업데이트
 		public void qnaHit(QnaVO qvo){
 			ss.update("qnahit", qvo);
