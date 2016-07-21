@@ -74,8 +74,8 @@
 				<div class="subMenuWrap">
 					<ul id="subMenu0">
 						<a href="/HbLib/search/search_all.jsp"><li>전체자료검색</li></a>
-						<a href="#"><li>신규도서</li></a>
 						<a href="#"><li>인기도서</li></a>
+						<a href="#"><li>신규도서</li></a>
 					</ul>
 				</div>
 			</li>

@@ -32,10 +32,6 @@
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
 			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
 		</insert>
-		
-			
-
-
 		<!-- 로그인  -->
 		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 			select * from users where id=#{id} and pwd=#{pwd}
