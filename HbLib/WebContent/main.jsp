@@ -52,7 +52,7 @@ function moveBanner(a){
 				<div>
 					<ul>
 						<c:forEach items="${notice}" var="k" begin="0" end="4">
-							<li><span class="noticeType">공지</span><a href="Controller?type=onenotice&n_idx=${k.n_idx}">${k.n_subject}</a></li>
+							<li><span class="noticeType">Q&A</span><a href="Controller?type=onenotice&n_idx=${k.n_idx}">${k.n_subject}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
