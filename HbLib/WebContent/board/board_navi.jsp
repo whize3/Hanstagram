@@ -9,8 +9,8 @@
 <body>
 <div id="mainnavi">
 				<ul class="navileft">
-					<li id="navi_01"><a href="Controller?type=noticelist">공지사항</a></li>
-					<li id="navi_02"><a href="Controller?type=qnalist">Q&A</a></li>
+					<li id="navi_01"><a href="/HbLib/Controller?type=noticelist">공지사항</a></li>
+					<li id="navi_02"><a href="/HbLib/Controller?type=qnalist">Q&A</a></li>
 				</ul>
 			</div>
 </body>

@@ -47,11 +47,13 @@
 
 		if (id == null) {%>
 				<a href="/HbLib/headerlogin.jsp">로그인</a>
-				&nbsp;|&nbsp;<%}else{%> 
-				<a href="#" onclick="logout_go()">로그아웃</a>
-				&nbsp;|&nbsp;<%}%>
-				
+				&nbsp;|&nbsp;
 				<a href="join.jsp">회원가입</a>
+				<%}else{%> 
+				<a href="#" onclick="logout_go()">로그아웃</a>
+				&nbsp;&nbsp;<%}%>
+				
+				
 			</div>
 		</div>
 	</div>

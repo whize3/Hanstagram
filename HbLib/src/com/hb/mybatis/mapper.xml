@@ -50,7 +50,7 @@
 		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
-		select * from book_draw where b_state='1' and b_num=#{b_num}
+		select bd_date+15 bd_date from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="Map">
 		select * from ( select rownum r_num, q.* from ( select a.bd_redate,b.isbn,b.writer,b.b_subject from 
@@ -154,7 +154,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select count(*) from book_draw where id=#{id} and b_state='0'
 	</select>
 	<select id="yul" resultType="com.hb.mybatis.YulVO">
-		select * from yul
+		select * from yul order by y_idx
 	</select>
 
 	
@@ -188,7 +188,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from notice where n_idx=#{n_idx}
 	</select>
 	<!-- 공지사항 hit 수 업데이트  -->
-	<update id="noticehit" parameterType="String">
+	<update id="noticehit" parameterType="com.hb.mybatis.NoticeVO">
 		update notice set n_hit = #{n_hit} where n_idx = #{n_idx}
 	</update>
 	
@@ -205,5 +205,8 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<!-- QNA 하나 가져오기  -->
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
 		select * from qna where q_idx=#{q_idx}
+	</select>
+	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
+		select * from b_comment where b_num = #{b_num}
 	</select>
 	</mapper>
