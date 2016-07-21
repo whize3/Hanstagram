@@ -23,6 +23,7 @@ import com.hb.command.DtCommand;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
+import com.hb.command.MainCommand;
 import com.hb.command.RankBookCommand;
 import com.hb.command.ReserveRoomCommand;
 import com.hb.command.SRCommand;
@@ -34,8 +35,12 @@ import com.hb.command.MyHistoryCommand;
 import com.hb.command.MyInfoCommand;
 import com.hb.command.MyInfoUpdateCommand;
 import com.hb.command.MyReserveCommand;
-import com.hb.command.NoticeAddCommand;
 import com.hb.command.NoticeListCommand;
+import com.hb.command.AdminNoticeAddCommand;
+import com.hb.command.AdminNoticeListCommand;
+import com.hb.command.OneNoticeCommand;
+import com.hb.command.OneQnaCommand;
+import com.hb.command.QnaListCommand;
 import com.hb.command.UsersJoinCommand;
 import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
@@ -65,6 +70,7 @@ public class Controller extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
+		
 		if(type.equals("applybook")){
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
@@ -103,9 +109,9 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("a_bookAdd")){
 			comm = new BookAddCommand();
 		}else if(type.equals("a_noticeList")){
-			comm = new NoticeListCommand();
+			comm = new AdminNoticeListCommand();
 		}else if(type.equals("a_NoticeAdd")){
-			comm = new NoticeAddCommand();
+			comm = new AdminNoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
 			path = comm.exec(request, response);
@@ -133,8 +139,20 @@ public class Controller extends HttpServlet {
 			comm = new SRCommand();
 
 
+
 		}else if(type.equals("bookcomment")){
 			comm = new BookComment();
+
+		}else if(type.equals("main")){
+			comm = new MainCommand();
+		}else if(type.equals("onenotice")){
+			comm = new OneNoticeCommand();
+		}else if(type.equals("noticelist")){
+			comm = new NoticeListCommand();
+		}else if(type.equals("qnalist")){
+			comm = new QnaListCommand();
+		}else if(type.equals("oneqna")){
+			comm = new OneQnaCommand();
 		}
 		
 		path = comm.exec(request, response);

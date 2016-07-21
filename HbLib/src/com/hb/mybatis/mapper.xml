@@ -165,16 +165,45 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
-
-		<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
+	
+	<!-- 스터디룸 정보 가져오기 -->
+	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom
 	</select>
-
+	<!-- 스터디룸 예약 접수 -->
 	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
 		insert into studyroom_reserve values(sr_seq.nextval, #{s_num},#{start_time},#{end_time},#{id},#{sr_state},#{sr_date})
 	</insert>
-	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
-		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	<!-- 예약된 시간 가져오기 -->	
+	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="Map">
+		select start_time, end_time from studyroom_reserve where sr_date=#{date} and s_num=#{s_num}
+	</select>
+	<!-- 공지사항 가져오기  -->
+	<select id="noticelist" resultType="com.hb.mybatis.NoticeVO">
+		select * from notice
+	</select>
+	<!-- 공지사항 하나 가져오기  -->
+	<select id="onenotice" parameterType="String" resultType="com.hb.mybatis.NoticeVO">
+		select * from notice where n_idx=#{n_idx}
+	</select>
+	<!-- 공지사항 hit 수 업데이트  -->
+	<update id="noticehit" parameterType="String">
+		update notice set n_hit = #{n_hit} where n_idx = #{n_idx}
+	</update>
+	
+	<!-- qna 총 게시물 수 -->
+	<select id="qnalistcount" resultType="int">
+		select count(*) from qna
+	</select>
+	<!-- qna 리스트 -->
+	<select id="qnalist" parameterType="Map" resultType="com.hb.mybatis.QnaVO">
+		select * from (select rownum r_num, a.* from(
+			select * from qna) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- QNA 하나 가져오기  -->
+	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
+		select * from qna where q_idx=#{q_idx}
 	</select>
 	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
 		select * from b_comment where b_num = #{b_num}

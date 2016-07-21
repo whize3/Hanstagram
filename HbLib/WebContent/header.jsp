@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="logoArea"><a href="/HbLib/main.jsp"><img src="/HbLib/img/logo.png"></a></div>
+		<div class="logoArea"><a href="/HbLib/index.jsp"><img src="/HbLib/img/logo.png"></a></div>
 		<div id="searchBar">
 			<div id="searchArea">
 				<form action="">

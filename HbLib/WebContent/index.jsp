@@ -19,12 +19,12 @@
 </script>
 
 </head>
-<body>
+<body onload="letsgo()">
 <div>
 </div>
 <div>
-<input type="button" value="test" class="test" />
+<!-- <input type="button" value="test" class="test" /> -->
 </div>
 
-</body onload="letsgo()">
+</body >
 </html>
