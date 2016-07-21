@@ -24,7 +24,7 @@
 
 	<jsp:include page="../header.jsp" />
 	<div class="searchview">
-		<jsp:include page="my_navi.jsp" />
+		<jsp:include page="search_navi.jsp" />
 	</div>
 	<form method="post" name="f">	
 	<div align="center">
@@ -40,9 +40,9 @@
 			<input type="text" name="keyword" /> 
 	<br />
 		</div>
-		 <label> 비도서   <input type="checkbox"   name="chk" value="1" /></label>
-		 <label>인기자료<input	type="checkbox"     name="chk" value="2" /></label> 
-		 <label>신착자료<input	type="checkbox"     name="chk" value="3" /></label>
+		 <label> 비도서 <input  type="checkbox"     name="chk" value="1" /></label>
+		 <label>인기자료<input	  type="checkbox"     name="chk" value="2" /></label> 
+		 <label>신착자료<input	  type="checkbox"     name="chk" value="3" /></label>
 
 	</div>
 	<br />

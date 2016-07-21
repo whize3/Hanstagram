@@ -16,15 +16,17 @@
 		$("#navi_02").css("background-color", "gray")
 	});	
 </script>
+
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<jsp:include page="my_navi.jsp" />
+	<jsp:include page="search_navi.jsp" />
 	
 	<form>
 		<%
 			List<Book_rankVO> list = (List<Book_rankVO>) request.getAttribute("list");
 		%>
+	
 		<div class="rank">
 			<div align="center">
 				<table width="700">
@@ -42,7 +44,7 @@
 						</tr>
 						<c:forEach var="k" items="${list}">
 							<tr align="center">
-								<td>${k.s_url}</td>
+								<td>gggggg${k.s_url}</td>
 								<td>${k.b_num}</td>
 								<td>${k.b_subject}</td>
 								<td>${k.writer}</td>
@@ -54,6 +56,7 @@
 			</div>
 		</div>
 
+	
 </from>
 </body>
 </html>
