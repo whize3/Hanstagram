@@ -263,12 +263,35 @@ public class Dao {
 			ss.close();
 			return list;
 		}
-		// QNA 한 개 가져오기
+	// 메인에서 QNA 리스트
+		public List<QnaVO> getQnaList(){
+			return ss.selectList("m_qnalist");
+		}
+	// QNA 한 개 가져오기
 		public QnaVO getOneQna(String q_idx){
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
-			ss.close();
 			return qvo;
-		}		
+		}
+	// QNA 히트 수 업데이트
+		public void qnaHit(QnaVO qvo){
+			ss.update("qnahit", qvo);
+			ss.close();
+	}
+	// QNA 수정
+		public void moidfyQna(QnaVO qvo){
+			ss.update("qnamodify", qvo);
+			ss.close();
+		}
+	// QNA 삭제
+		public void deleteQna(String q_idx){
+			ss.delete("qnadelete", q_idx);
+			ss.close();
+		}
+	// QNA 글쓰기
+		public void writeQna(QnaVO qvo){
+			ss.insert("qnawrite", qvo);
+			ss.close();
+		}
 
 }
 

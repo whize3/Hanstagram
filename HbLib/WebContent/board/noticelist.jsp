@@ -17,7 +17,7 @@
 </script>
 </head>
 <body>
-	<%System.out.println(request.getParameter("cPage")); %>
+	
 	<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">

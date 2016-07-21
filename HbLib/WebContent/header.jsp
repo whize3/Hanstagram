@@ -76,6 +76,7 @@
 						<a href="#"><li>전체자료검색</li></a>
 						<a href="#"><li>비도서</li></a>
 						<a href="#"><li>학위논문</li></a>
+						<a href="#"><li>신규도서</li></a>
 						<a href="#"><li>인기도서</li></a>
 					</ul>
 				</div>

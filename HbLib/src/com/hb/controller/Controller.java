@@ -40,7 +40,10 @@ import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
 import com.hb.command.OneNoticeCommand;
 import com.hb.command.OneQnaCommand;
+import com.hb.command.QnaDeleteCommand;
 import com.hb.command.QnaListCommand;
+import com.hb.command.QnaModifyCommand;
+import com.hb.command.QnaWriteCommand;
 import com.hb.command.UsersJoinCommand;
 import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
@@ -146,6 +149,14 @@ public class Controller extends HttpServlet {
 			comm = new QnaListCommand();
 		}else if(type.equals("oneqna")){
 			comm = new OneQnaCommand();
+		}else if(type.equals("qnamodify")){
+			comm = new QnaModifyCommand();
+		}else if(type.equals("qnadelete")){
+			comm = new QnaDeleteCommand();
+		}else if(type.equals("qnawrite")){
+			comm = new QnaWriteCommand();
+		}else if(type.equals("newbook")){
+			
 		}
 		
 		path = comm.exec(request, response);

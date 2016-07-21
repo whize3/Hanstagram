@@ -169,7 +169,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	
 	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
-		select * from studyroom
+		select * from studyroom order by s_num
 	</select>
 	<!-- 스터디룸 예약 접수 -->
 	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
@@ -199,14 +199,36 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<!-- qna 리스트 -->
 	<select id="qnalist" parameterType="Map" resultType="com.hb.mybatis.QnaVO">
 		select * from (select rownum r_num, a.* from(
-			select * from qna) a
+			select * from qna order by q_idx desc) a
 			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 메인에서 qna리스트  -->
+	<select id="m_qnalist" resultType="com.hb.mybatis.QnaVO">
+		select * from qna order by q_idx desc
 	</select>
 	<!-- QNA 하나 가져오기  -->
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
 		select * from qna where q_idx=#{q_idx}
 	</select>
+	<!-- qna hit 수 업데이트  -->
+	<update id="qnahit" parameterType="com.hb.mybatis.QnaVO">
+		update qna set qa_hit = #{qa_hit} where q_idx = #{q_idx}
+	</update>
+	<!-- QNA 수정하기  -->
+	<update id="qnamodify" parameterType="com.hb.mybatis.QnaVO">
+		update qna set qa_subject = #{qa_subject}, qa_content = #{qa_content} where q_idx = #{q_idx}
+	</update>
+	<!-- QNA 삭제 -->
+	<delete id="qnadelete" parameterType="String">
+		delete from qna where q_idx=#{q_idx}
+	</delete>
+	<!-- QNA 글쓰기 -->
+	<insert id="qnawrite" parameterType="com.hb.mybatis.QnaVO">
+		insert into qna values(qna_seq.nextval, #{qa_subject}, #{id}, #{qa_content}, '1', sysdate)
+	</insert>
+	
 	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
 		select * from b_comment where b_num = #{b_num}
 	</select>
+	
 	</mapper>

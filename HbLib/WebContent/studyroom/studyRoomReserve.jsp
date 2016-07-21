@@ -165,6 +165,28 @@ cursor:default;
 background:#dedede;
 color:#545454;
 }
+#btnArea{
+width:960px;
+height:100px;
+display: block;
+position: absolute;
+margin:50px 0;
+}
+#btnArea #subBtn{
+background:#FF7F66;
+border:0;
+width: 164px;
+height: 42px;
+color:#fff;
+display: block;
+position:relative;
+left:373px;
+
+}
+#btnArea #subBtn:HOVER {
+	background:#ffbeb0;
+	cursor:pointer;
+}
 
 </style>
 
@@ -333,23 +355,26 @@ $("#timeArea").html(result);
 		<div id="reserveInfo">
 			<h4 class="header"><span>04</span>예약 정보 확인</h4>
 			<p>
-				<input type="text" name="id" value="soojy6126" readonly="readonly">
+				<span>ID : </span><input type="text" name="id" value="<%=id %>" readonly="readonly">
 			</p>
 			<p>
-				<input type="text" name="name" value="이수현" readonly="readonly">
+				<span>이름 : </span><input type="text" name="name" value="<%=uvo.getName() %>" readonly="readonly">
 			</p>
 			<p>
-				<input type="text" name="rDate" value="" readonly="readonly">
+				<span>날짜 : </span><input type="text" name="rDate" value="" readonly="readonly">
 			</p>
 			<p id="info_room" style="display:none">
-				<input type="text" name="roomNum" value="" readonly="readonly" size="5"> 호
+				<span>스터디룸 : </span><input type="text" name="roomNum" value="" readonly="readonly" size="5"> 호
 			</p>
 			<p id="info_time" style="display:none">
+				<span>이용시간 : </span>
 				<input type="text" name="start" size="5" readonly="readonly">부터 <input type="text" name="end" size="5" readonly="readonly">까지
 				총 <input type="text" name="tot" size="2" readonly="readonly"> 시간
 			</p>
 		</div>
-		<input type="submit" value="예약하기">
+		<div id="btnArea">
+			<input type="submit" value="예약하기&nbsp;&nbsp;&gt;" id="subBtn">
+		</div>
 	</div>
 </form>
 </body>
