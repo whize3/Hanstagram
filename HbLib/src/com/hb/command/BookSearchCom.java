@@ -12,16 +12,17 @@ public class BookSearchCom implements Command{
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-	    String booksearch = request.getParameter("booksearch");
+	    String idx = request.getParameter("idx");
+	    System.out.println(idx);
 	    String keyword = request.getParameter("keyword");
-	    String desearch = request.getParameter("desearch");
+	    /*String desearch = request.getParameter("desearch");*/
 		String path = null;
 		
-		if(booksearch==null){
+		if(idx==null){
 			path = "search/searchall_result.jsp";
 		}else{
 			Dao dao  = new Dao();
-			List<BookVO> list = dao.search(booksearch, keyword,desearch);
+			List<BookVO> list = dao.search(idx,keyword)/*(booksearch keyword,desearch)*/;
 			request.setAttribute("booklist", list);
 			path = "search/searchall_result.jsp";
 		}

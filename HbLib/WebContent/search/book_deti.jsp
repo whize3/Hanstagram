@@ -24,23 +24,32 @@ header {
 }
  
 aside {
-    padding: 100px;
-    
+   /*  padding: -300px; */
+    padding: 25px 50px;
+    top: -250px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left:  150px
 }
 
-section{
-    margin-right:100px; */
-    border-right : 1px solid gray;
+/* section{
+    margin-right:100px; 
     padding: 1em;
-    /* overflow: hidden; */
+    display: inline-block;
+    top: -50px;
 
-}
-footer {
-    padding: 1em;
-    color: black;
-    background-color: gray;
-    clear: left;
-    text-align: center;
+} */
+
+
+
+mainnavi {
+    position: relative;
+    left: 5px;
+    top: -115px;
+    width: 200px;
+    height: 1px;
+    display: block;
+    text-align: left;
 }
 </style> 
 
@@ -57,9 +66,9 @@ footer {
  </header> 
 	
 	
-			<section>
+			<mainnavi>
 			  <jsp:include page="search_navi.jsp" />
-			</section>                     
+			</mainnavi>                     
 	
 		 <aside>   
 		 	
@@ -75,7 +84,7 @@ footer {
 		
 			  <p align="center">분류 : ${vo.category} iiiiii</p> 
 		</aside>
-		<footer>한빛 도서관</footer>
+	
 
 </body>
 </html>

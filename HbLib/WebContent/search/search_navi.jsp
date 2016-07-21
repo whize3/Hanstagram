@@ -11,7 +11,7 @@
 				<ul class="navileft">
 					<li id="navi_01"><a href="search_all.jsp">전체도서검색</a></li>
 					<li id="navi_02"><a href="/HbLib/Controller?type=rank">인기도서</a></li>
-					<li id="navi_03"><a href="/HbLib/Controller?type=newbook">신착도서</a></li>
+					<li id="navi_03"><a href="/HbLib/Controller?type=newbook">신규도서</a></li>
 					<li id="navi_04"><a href="my_comment.jsp">비도서</a></li>
 				</ul>
 			</div>

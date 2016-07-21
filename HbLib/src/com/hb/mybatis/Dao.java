@@ -35,11 +35,10 @@ public class Dao {
 	}
 
 	// 도서검색
-	public List<BookVO> search(String booksearch, String keyword , String desearch) {
+	public List<BookVO> search(String idx, String keyword /*String desearch*/) {
 		Map<String, String> map = new HashMap<>();
-		map.put("booksearch", booksearch);
+		map.put("idx", idx);
 		map.put("keyword",keyword);
-		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
 		ss.close();
 		return list;
@@ -272,6 +271,10 @@ public class Dao {
 		public QnaVO getOneQna(String q_idx){
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
 			return qvo;
+		}
+	// QNA 댓글 가져오기
+		public List<Q_CommentVO> getQ_Comment(Map<String, Integer> map){
+			return ss.selectList("qclist", map);
 		}
 	// QNA 히트 수 업데이트
 		public void qnaHit(QnaVO qvo){
