@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
+function modify_go(f) {
+	f.action = "/HbLib/Controller?type=qnamodify";
+	f.submit();
+}
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_02").css("background-color", "gray")

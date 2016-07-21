@@ -239,8 +239,8 @@ public class Dao {
 		return nvo;
 	}
 	// 공지사항 히트 수 업데이트
-	public void noticeHit(String n_idx){
-		ss.update("noticehit", n_idx);
+	public void noticeHit(NoticeVO nvo){
+		ss.update("noticehit", nvo);
 	}
 	
 	// Qna 전체 게시물의 수

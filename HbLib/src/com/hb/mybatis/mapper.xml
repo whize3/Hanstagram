@@ -184,7 +184,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from notice where n_idx=#{n_idx}
 	</select>
 	<!-- 공지사항 hit 수 업데이트  -->
-	<update id="noticehit" parameterType="String">
+	<update id="noticehit" parameterType="com.hb.mybatis.NoticeVO">
 		update notice set n_hit = #{n_hit} where n_idx = #{n_idx}
 	</update>
 	
