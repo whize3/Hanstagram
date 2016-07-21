@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<% request.setCharacterEncoding("utf-8"); %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,43 +10,19 @@
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 function modify_go(f) {
-	var login_id = "<c:out value="${user.id}" />";
-	var writer = "<c:out value="${qna.id}" />";
-	if(login_id===writer){
-		f.action = "/HbLib/board/qnamodify.jsp";
-		f.submit();
-	}else{
-		alert("권한이 없습니다.");
-	}
-	
-	
+	f.action="/HbLib/Controller?type=qnamodify";
+	f.submit();
 }
-function delete_go(f) {
-	var login_id = "<c:out value="${user.id}" />";
-	var writer = "<c:out value="${qna.id}" />";
-	if(login_id===writer){
-		var chk = confirm("정말 삭제 하시겠습니까?")
-		if(chk===true){
-			f.action = "/HbLib/Controller?type=qnadelete";
-			f.submit();	
-		}else{
-			return;
-		}
-		
-	}else{
-		alert("권한이 없습니다.");
-	}
-	
-	
-}
-	$(function() {
-		$(".navileft>li").addClass("navileft_li")
-		$("#navi_02").css("background-color", "gray")
-	});	
+$(function() {
+	$(".navileft>li").addClass("navileft_li")
+	$("#navi_02").css("background-color", "gray")
+});	
 </script>
 </head>
 <body>
-	<jsp:include page="../header.jsp" />
+<jsp:useBean id="qna" class="com.hb.mybatis.QnaVO"/>
+<jsp:setProperty property="*" name="qna"/>
+<jsp:include page="../header.jsp" />
 	<div class="mainArea">
 		<div class="mainArea2">
 			<jsp:include page="board_navi.jsp" />
@@ -64,7 +40,7 @@ function delete_go(f) {
 
 									<tr>
 										<th bgcolor="#B2EBF4">제목</th>
-										<td ><input type="hidden" name="qa_subject" value="${qna.qa_subject}">${qna.qa_subject}</td>
+										<td ><input type="text" name="qa_subject" value="${qna.qa_subject}"></td>
 									</tr>
 									<tr>
 										<th bgcolor="#B2EBF4">첨부파일</th>
@@ -78,16 +54,15 @@ function delete_go(f) {
 										<th bgcolor="#B2EBF4">내용</th>
 									</tr>
 									<tr>
-										<td colspan="2"><input type="hidden" name="qa_content" value="${qna.qa_content}"><pre>${qna.qa_content}</pre></td>
+										<td colspan="2"><textarea rows="8" cols="50" name="qa_content">${qna.qa_content}</textarea></td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td colspan="2"><input type="button" value="목록"
-											onclick="javascript:location.href='Controller?type=qnalist'" /> 
+											onclick="javascript:location.href='/HbLib/Controller?type=qnalist'" /> 
 											<input type="button" value="수정"
-											onclick="modify_go(this.form)" /> <input type="button"
-											value="삭제" onclick="delete_go(this.form)" /></td>
+											onclick="modify_go(this.form)" /> </td>
 									</tr>
 								</tfoot>
 							</table>
@@ -97,6 +72,8 @@ function delete_go(f) {
 			</div>
 		</div>
 	</div>
+
+
 
 </body>
 </html>

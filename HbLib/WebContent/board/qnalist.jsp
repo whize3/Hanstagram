@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
+	function write_go() {
+		var login_id = "<c:out value="${user.id}" />";
+		if(login_id !== ""){
+			location.href="/HbLib/board/qnawrite.jsp";
+		}else{
+			alert("로그인 해주세요.");
+		}
+		
+	}
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_02").css("background-color", "gray")
@@ -79,8 +88,12 @@
 										</c:otherwise>
 									</c:choose>
 								</ul>
+								<input type="button" value="글쓰기" onclick="write_go()">
 							</td>
+							
+							
 						</tr>
+							
 					</tfoot>
 				</table>
 				</div>

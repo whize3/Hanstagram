@@ -205,7 +205,21 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
 		select * from qna where q_idx=#{q_idx}
 	</select>
+	<!-- QNA 수정하기  -->
+	<update id="qnamodify" parameterType="com.hb.mybatis.QnaVO">
+		update qna set qa_subject = #{qa_subject}, qa_content = #{qa_content} where q_idx = #{q_idx}
+	</update>
+	<!-- QNA 삭제 -->
+	<delete id="qnadelete" parameterType="String">
+		delete from qna where q_idx=#{q_idx}
+	</delete>
+	<!-- QNA 글쓰기 -->
+	<insert id="qnawrite" parameterType="com.hb.mybatis.QnaVO">
+		insert into qna values(qna_seq.nextval, #{qa_subject}, #{id}, #{qa_content}, '1', sysdate)
+	</insert>
+	
 	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
 		select * from b_comment where b_num = #{b_num}
 	</select>
+	
 	</mapper>
