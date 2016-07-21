@@ -16,6 +16,7 @@ import com.hb.command.AdminLoginCommand;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
+import com.hb.command.BookComment;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
 import com.hb.command.DtCommand;
@@ -136,6 +137,12 @@ public class Controller extends HttpServlet {
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
 			comm = new SRCommand();
+
+
+
+		}else if(type.equals("bookcomment")){
+			comm = new BookComment();
+
 		}else if(type.equals("main")){
 			comm = new MainCommand();
 		}else if(type.equals("onenotice")){

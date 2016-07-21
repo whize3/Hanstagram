@@ -49,7 +49,7 @@
 		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
-		select * from book_draw where b_state='1' and b_num=#{b_num}
+		select bd_date+15 bd_date from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="Map">
 		select * from ( select rownum r_num, q.* from ( select a.bd_redate,b.isbn,b.writer,b.b_subject from 
@@ -153,7 +153,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select count(*) from book_draw where id=#{id} and b_state='0'
 	</select>
 	<select id="yul" resultType="com.hb.mybatis.YulVO">
-		select * from yul
+		select * from yul order by y_idx
 	</select>
 
 	
@@ -165,15 +165,18 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="forgotpwd" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
+	
+	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom
 	</select>
-
+	<!-- 스터디룸 예약 접수 -->
 	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
 		insert into studyroom_reserve values(sr_seq.nextval, #{s_num},#{start_time},#{end_time},#{id},#{sr_state},#{sr_date})
 	</insert>
-	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
-		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	<!-- 예약된 시간 가져오기 -->	
+	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="Map">
+		select start_time, end_time from studyroom_reserve where sr_date=#{date} and s_num=#{s_num}
 	</select>
 	<!-- 공지사항 가져오기  -->
 	<select id="noticelist" resultType="com.hb.mybatis.NoticeVO">
@@ -201,5 +204,8 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<!-- QNA 하나 가져오기  -->
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
 		select * from qna where q_idx=#{q_idx}
+	</select>
+	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
+		select * from b_comment where b_num = #{b_num}
 	</select>
 	</mapper>

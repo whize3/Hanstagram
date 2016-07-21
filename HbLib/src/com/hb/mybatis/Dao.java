@@ -226,6 +226,12 @@ public class Dao {
 		return ss.selectOne("forgotpwd", input);
 
 	}
+	public List<B_CommentVO> getBookComment(String b_num){
+		List<B_CommentVO> list = ss.selectList("bookComment",b_num);
+		ss.close();
+		return list;
+				
+	}
 	// 메인에서 공지사항 리스트 가져오기
 	
 	public List<NoticeVO> getNoticeList(){

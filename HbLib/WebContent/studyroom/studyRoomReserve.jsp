@@ -11,12 +11,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 #section {
-	width: 700px;
+	width: 535px;
 	display: block;
-	border: 1px solid #000;
 	margin: 0 auto;
 }
+
 
 /* 층 구분 탭 */
 #tabArea {
@@ -71,8 +72,12 @@
 	cursor:pointer;
 	background:#B2CCFF;
 }
-.room:HOVER{
+.room:HOVER,
+.selectedRoom,
+.selectedTime
+{
 	background:#7383BF;
+	color:#fff;
 }
 .room p{
 	display:table-cell;
@@ -82,8 +87,25 @@
 }
 
 .header{
-	border-bottom:2px solid #000;
+	border-bottom:1px solid #898989;
 	height:30px;
+	margin-bottom: 10px;
+    font-size: 16px;
+    color: #898989;
+    font-weight: 300;
+    margin-top:29px;
+}
+
+.header span{
+	font-size: 24px;
+    color: #FF7F66;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+#section > .header{
+	border:0;
+	color:#000;
 }
 #calArea {
 	width: 100%;
@@ -110,27 +132,40 @@ height:60px;
 margin-bottom:30px;
 }
 #timeArea ul{
+padding-left: 0;
 display:block;
-height:45px
+height:45px;
 }
 #timeArea li{
-border:1px solid #000;
+border:1px solid #898989;
 display:inline-table;
 float:left;
 margin:0;
-width:57px;
+width:47px;
 border-left:0;
 height:100%;
 vertical-align: middle;
 text-align:center;
 }
 #timeArea li:FIRST-CHILD{
-border-left:1px solid #000;
+border-left:1px solid #898989;
 }
 #timeArea li span{
 display:table-cell;
 vertical-align: middle;
 }
+#timeArea .can{
+cursor:pointer;
+}
+#timeArea .can:HOVER{
+font-weight:bold;
+}
+#timeArea .cant{
+cursor:default;
+background:#dedede;
+color:#545454;
+}
+
 </style>
 
 <link rel="stylesheet"
@@ -140,39 +175,132 @@ vertical-align: middle;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script>
-	$(function() {
-		$(".room").click(function(){
-			var rnum = $(this).find("input[type=hidden]").val();
-			console.log(rnum);
-			$("#info_room").show();
-			$("input[name=roomNum]").val(rnum);
-			var date = $("input[name=rDate]").val();
-			$.ajax({
-				url:'/HbLib/AjaxController?type=getRoom&date='+date,
-				type:'get',
-				dataType:'json',
-				success:function(data){
-					alert("성공");
-					 var table = "<tbody>" ;
-					 $.each(data,function(key,data){
-						table += "<tr>";
-						table +="<td>"+data.sr_idx+"</td>";
-						table +="<td>"+data.s_num +"</td>";
-						table +="<td>"+data.start_time +"</td>";
-						table +="<td>"+data.end_time +"</td>";
-						table +="<td>"+data.id +"</td>";
-						table += "</tr>";
-					 });
-					 table +="</tbody>";
-					 $("#timeArea").html(table);
-					
-				},error:function(request,status,error){
-			        console.log("error");
-				}
-			})
-			
-		});
+$(function() {
+	if($("input[name=rDate]").val()==""){
+		console.log("rDate is empty");
+		var str = $('input[name=year]').val()+"/"+$('input[name=month]').val()+"/"+$("#today").text();
+		console.log(str);
+		$("input[name=rDate]").val(str);
+	}
+	
+
+	$(document).on('click',".cant",function(){
+			alert("해당 시간대는 예약 할 수 없습니다.");
 	});
+	$(document).on('click',".can",function(){
+		
+		var t = $(this).text();
+
+		var a =$(this).text().split(":")[0];
+		
+		if($(this).attr("class")=="selectedTime"){
+			$(this).removeClass();
+		}else {
+			
+			switch($(".selectedTime").length){
+				case 0: 
+					$(this).addClass("selectedTime");
+						$("input[name=start]").val(t);
+						$("input[name=end]").val(a+":59");
+						$("#info_time").show();
+						$("input[name=tot]").val("1");
+						break;
+				case 1:
+					var b =$(".selectedTime").text().split(":")[0];
+					console.log(a+"/"+b);
+					if((a-1)==b){
+						$(this).addClass("selectedTime");
+						$("input[name=end]").val(a+":59");
+						$("input[name=tot]").val("2");
+					}else{
+						$(".selectedTime").removeClass("selectedTime");
+						$(this).addClass("selectedTime");
+						$("input[name=start]").val($(this).text());
+						$("input[name=end]").val(a+":59");
+					}
+					break;
+				default:
+					$(".selectedTime").removeClass("selectedTime");
+					$("#info_time").hide();
+			}
+		}
+	});
+	$(".room").click(function(){
+		$(".selectedRoom").removeClass("selectedRoom");
+		$(this).addClass("selectedRoom");
+		var rnum = $(this).find("input[type=hidden]").val();
+		console.log(rnum);
+		$("#info_room").show();
+		$("#time").show();
+		$("input[name=roomNum]").val(rnum);
+		$("input[name=start]").val(null);
+		$("input[name=end]").val(null);
+		$("#info_time").hide();
+		var date = $("input[name=rDate]").val();
+		$.ajax({
+			url:'/HbLib/AjaxController?type=getRoom&date='+date+'&r_num='+rnum,
+			type:'get',
+			dataType:'json',
+			success:function(data){
+				 var table = "<tbody>" ;
+				 $.each(data,function(key,data){
+					table += "<tr>";
+					table +="<td>"+data.sr_idx+"</td>";
+					table +="<td>"+data.s_num +"</td>";
+					table +="<td class='startTime'>"+data.start_time +"</td>";
+					table +="<td class='endTime'>"+data.end_time +"</td>";
+					table +="<td>"+data.id +"</td>";
+					table += "</tr>";
+				 });
+				 table +="</tbody>";
+				 $("#tmp").html(table); 
+				$("#tmp tbody").hide();
+				time();
+			},error:function(request,status,error){
+		        console.log("error");
+			}
+		})
+		
+	});
+	
+});
+function time(){
+console.log("time is started");
+var times = ["9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"];
+var result="<ul>";
+for(var i=0;i<times.length;i++){
+	var cls="can";
+	$("#timeArea").empty();
+	$("#tmp").find("tbody .startTime").each(function(){
+			if($(this).text()==times[i]){
+				cls = "cant";
+			}else{
+				if(cls!="cant"){
+					cls="can";
+				}
+			}
+		});
+	
+	$("#tmp").find("tbody .endTime").each(function(){
+		console.log("endTime");
+			var h = $(this).text().split(":");
+			var str = h[0]+":00";
+			
+			if(str==times[i]){
+				cls = "cant";
+			}else{
+				if(cls!="cant"){
+					cls="can";
+				}
+			}
+		});
+	
+	console.log(times[i]+"/"+cls);
+	result+="<li class='"+cls+"'><span>"+times[i]+"</span></li>";
+}
+result+="</ul>";
+$("#timeArea").html(result);
+}
 
 </script>
 </head>
@@ -183,39 +311,27 @@ vertical-align: middle;
 			<h3>스터디룸 예약하기</h3>
 		</div>
 		<div id="date">
-			<h4 class="header">날짜선택</h4>
+			<h4 class="header"><span>01</span>날짜선택</h4>
 			<div id="calArea"><%@ include file="calendar.jsp"%></div>
 
 		</div>
-		<h4 class="header">스터디룸 선택</h4>
-		<div id="srArea">
-				<%@ include file="studyroom.jsp" %>
+		<div id="studyR">
+			<h4 class="header"><span>02</span>스터디룸 선택</h4>
+			<div id="srArea">
+					<%@ include file="studyroom.jsp" %>
+			</div>
 		</div>
-		<div id="time">
-			<h4 class="header">시간 선택</h4>
+		<div id="time" style="display:none;">
+			<h4 class="header"><span>03</span>시간 선택</h4>
+			
+			<div id="tmp">
+			</div>
 			<div id="timeArea">
-			
-			<%
-			String[] times = {"9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"};
-			List<Studyroom_ReserveVO> time = (List)request.getAttribute("time");
-			if(time!=null){
-				System.out.println("room size : "+time.size());
-
-				for(int i=0;i<times.length;i++){
-					String this_time = times[i];
-					for(Studyroom_ReserveVO vo:time){
-
-						vo.getStart_time();
-					}
-				}
-			}
-			%>
-			
 			</div>
 
 		</div>
 		<div id="reserveInfo">
-			<h4 class="header">예약 정보 확인</h4>
+			<h4 class="header"><span>04</span>예약 정보 확인</h4>
 			<p>
 				<input type="text" name="id" value="soojy6126" readonly="readonly">
 			</p>
@@ -228,8 +344,9 @@ vertical-align: middle;
 			<p id="info_room" style="display:none">
 				<input type="text" name="roomNum" value="" readonly="readonly" size="5"> 호
 			</p>
-			<p>
-				<input type="text" name="start" value="9:00" size="5" readonly="readonly"> - <input type="text" name="end" size="5" value="11:00" readonly="readonly">
+			<p id="info_time" style="display:none">
+				<input type="text" name="start" size="5" readonly="readonly">부터 <input type="text" name="end" size="5" readonly="readonly">까지
+				총 <input type="text" name="tot" size="2" readonly="readonly"> 시간
 			</p>
 		</div>
 		<input type="submit" value="예약하기">
