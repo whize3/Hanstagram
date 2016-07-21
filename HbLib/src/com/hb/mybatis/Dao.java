@@ -39,7 +39,6 @@ public class Dao {
 		Map<String, String> map = new HashMap<>();
 		map.put("idx", idx);
 		map.put("keyword",keyword);
-		/*map.put("desearch", desearch);*/
 		List<BookVO> list = ss.selectList("booklist",map);
 		ss.close();
 		return list;
