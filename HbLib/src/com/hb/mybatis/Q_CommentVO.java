@@ -1,18 +1,44 @@
 package com.hb.mybatis;
 
 public class Q_CommentVO {
-	private String qc_idx, q_idx, id, qc_content;
+	private String qc_idx, q_idx, id, qc_content, r_num, qc_date;
 	public Q_CommentVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Q_CommentVO(String qc_idx, String q_idx, String id, String qc_content) {
+	
+	public Q_CommentVO(String qc_idx, String q_idx, String id, String qc_content, String r_num, String qc_date) {
 		super();
 		this.qc_idx = qc_idx;
 		this.q_idx = q_idx;
 		this.id = id;
 		this.qc_content = qc_content;
+		this.r_num = r_num;
+		this.qc_date = qc_date;
 	}
+
+
+	public String getQc_date() {
+		return qc_date;
+	}
+
+
+	public void setQc_date(String qc_date) {
+		this.qc_date = qc_date;
+	}
+
+
+	public String getR_num() {
+		return r_num;
+	}
+
+
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+
+
 
 	public String getQc_idx() {
 		return qc_idx;
