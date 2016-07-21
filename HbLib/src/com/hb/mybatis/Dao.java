@@ -190,7 +190,7 @@ public class Dao {
 	// notice 리스트
 	public List<NoticeVO> getNoticeList(Map<String, Integer> map){
 		List<NoticeVO> list = ss.selectList("a_noticeList",map);
-		
+		ss.close();
 		return list;
 	}
 	
@@ -241,12 +241,12 @@ public class Dao {
 	// 공지사항 한 개 가져오기
 	public NoticeVO getOneNotice(String n_idx){
 		NoticeVO nvo = ss.selectOne("onenotice", n_idx);
-		
 		return nvo;
 	}
 	// 공지사항 히트 수 업데이트
 	public void noticeHit(NoticeVO nvo){
 		ss.update("noticehit", nvo);
+		ss.close();
 	}
 	
 	// Qna 전체 게시물의 수
@@ -259,11 +259,13 @@ public class Dao {
 	// QNA 리스트
 		public List<QnaVO> getQnaList(Map<String, Integer> map){
 			List<QnaVO> list = ss.selectList("qnalist",map);
+			ss.close();
 			return list;
 		}
 		// QNA 한 개 가져오기
 		public QnaVO getOneQna(String q_idx){
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
+			ss.close();
 			return qvo;
 		}		
 

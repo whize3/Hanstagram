@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +10,16 @@
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 function modify_go(f) {
-	f.action = "/HbLib/Controller?type=qnamodify";
-	f.submit();
+	var login_id = "<c:out value="${user.id}" />";
+	var writer = "<c:out value="${qna.id}" />";
+	if(login_id===writer){
+		f.action = "/HbLib/Controller?type=qnamodify";
+		f.submit();
+	}else{
+		alert("권한이 없습니다.");
+	}
+	
+	
 }
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
@@ -19,6 +28,7 @@ function modify_go(f) {
 </script>
 </head>
 <body>
+
 <jsp:useBean id="qna" class="com.hb.mybatis.QnaVO" scope="request"/>
 <jsp:setProperty property="*" name="qna"/>
 	<jsp:include page="../header.jsp" />
@@ -29,7 +39,6 @@ function modify_go(f) {
 				<div class="mainviewnavi">◆게시판> 공지사항</div>
 				<div>
 					<div align="center">
-						<input type="hidden" class="id" value="${user.id}">
 						<form method="post">
 							<table width="300">
 								<tbody>
