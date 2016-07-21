@@ -18,8 +18,6 @@ function modify_go(f) {
 	}else{
 		alert("권한이 없습니다.");
 	}
-	
-	
 }
 function delete_go(f) {
 	var login_id = "<c:out value="${user.id}" />";
@@ -57,10 +55,7 @@ function delete_go(f) {
 						<form method="post">
 							<table width="300">
 								<tbody>
-									<tr>
-										<th bgcolor="#B2EBF4">번호</th>
-										<td ><input type="hidden" name="q_idx" value="${qna.q_idx}">${qna.q_idx}</td>
-									</tr>
+									<input type="hidden" name="q_idx" value="${qna.q_idx}">			
 
 									<tr>
 										<th bgcolor="#B2EBF4">제목</th>
@@ -75,11 +70,16 @@ function delete_go(f) {
 										<td><input type="hidden" name="qa_date" value="${qna.qa_date}">${qna.qa_date}</td>
 									</tr>
 									<tr>
+										<th bgcolor="#B2EBF4">조회수</th>
+										<td ><input type="hidden" name="qa_hit" value="${qna.qa_hit}">${qna.qa_hit}</td>
+									</tr>
+									<tr>
 										<th bgcolor="#B2EBF4">내용</th>
 									</tr>
 									<tr>
 										<td colspan="2"><input type="hidden" name="qa_content" value="${qna.qa_content}"><pre>${qna.qa_content}</pre></td>
 									</tr>
+									
 								</tbody>
 								<tfoot>
 									<tr>

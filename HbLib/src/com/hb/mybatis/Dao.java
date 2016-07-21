@@ -267,9 +267,13 @@ public class Dao {
 	// QNA 한 개 가져오기
 		public QnaVO getOneQna(String q_idx){
 			QnaVO qvo = ss.selectOne("oneqna", q_idx);
-			ss.close();
 			return qvo;
 		}
+	// QNA 히트 수 업데이트
+		public void qnaHit(QnaVO qvo){
+			ss.update("qnahit", qvo);
+			ss.close();
+	}
 	// QNA 수정
 		public void moidfyQna(QnaVO qvo){
 			ss.update("qnamodify", qvo);

@@ -206,6 +206,10 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="oneqna" parameterType="String" resultType="com.hb.mybatis.QnaVO">
 		select * from qna where q_idx=#{q_idx}
 	</select>
+	<!-- qna hit 수 업데이트  -->
+	<update id="qnahit" parameterType="com.hb.mybatis.QnaVO">
+		update qna set qa_hit = #{qa_hit} where q_idx = #{q_idx}
+	</update>
 	<!-- QNA 수정하기  -->
 	<update id="qnamodify" parameterType="com.hb.mybatis.QnaVO">
 		update qna set qa_subject = #{qa_subject}, qa_content = #{qa_content} where q_idx = #{q_idx}

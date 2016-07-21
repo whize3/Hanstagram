@@ -5,11 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/HbLib/ckeditor/ckeditor.js"></script>
+<script>
+   window.onload=function(){
+       CKEDITOR.replace('qa_content',{
+       });
+       CKEDITOR.instances.content.getData();
+   }
+</script>
 <script type="text/javascript">
 function sendData(f) {
-	
 	f.submit();
 }
 
@@ -33,12 +41,8 @@ function sendData(f) {
 			</tr>
 			<tr>
 				<td bgcolor="#B2EBF4">내용</td>
-				<td><textarea rows="10" cols="50" name="qa_content"></textarea>
+				<td><textarea rows="10" cols="50" name="qa_content" id="qa_content"></textarea>
 				</td>
-			</tr>
-			<tr>
-				<td bgcolor="#B2EBF4">첨부파일</td>
-				<td><input type="file" name="filename"></td>
 			</tr>
 			<tr>
 				<td colspan="2">
