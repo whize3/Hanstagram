@@ -24,28 +24,18 @@ header {
 }
  
 aside {
-   /*  padding: -300px; */
-    padding: 25px 50px;
+        padding: 25px 50px;
     top: -250px;
     padding-top: 0px;
     padding-right: 0px;
-    padding-left:  150px
+    padding-left: 516px;
+    
 }
 
-/* section{
-    margin-right:100px; 
-    padding: 1em;
-    display: inline-block;
-    top: -50px;
-
-} */
-
-
-
 mainnavi {
-    position: relative;
-    left: 5px;
-    top: -115px;
+         position: relative;
+    left: 214px;
+    top: -21px;
     width: 200px;
     height: 1px;
     display: block;
@@ -61,28 +51,68 @@ mainnavi {
 </head>
 
 <body>
-	<header> 
- 	<jsp:include page="../header.jsp" />
- </header> 
 	
+
+	<header> 
+ 		<jsp:include page="../header.jsp" />
+	 </header> 
+			
 	
 			<mainnavi>
 			  <jsp:include page="search_navi.jsp" />
 			</mainnavi>                     
-	
+ 
 		 <aside>   
-		 	
-			<p align="center"><img src="${vo.l_url}"> ggggggg</p>
+		 	<div align="left">
+			<li> <img src="${vo.l_url}"> </li>
+			</div>
+			<table align="center" style="color: black;">
 			
-			  <p align="center"> 위치 : ${vo.b_location} iiiii</p> 
+			<tr>
+			<th style="background-color: black;"></th>
+			</tr>	
 			
-			  <P align="center">제목 : ${vo.b_subject} iiiii</P> 
+			<tr>
+			<td>제목 :   ${vo.b_subject} </td>
+			</tr>	
+				
+			<tr>
+			<th style="background-color: black;"></th>
+			</tr>		
 			
-			 <p align="center"> 저자 : ${vo.writer} iiiiii</p> 
-		
-			 <p align="center">출판사 : ${vo.publisher} iiiiiii</p> 
-		
-			  <p align="center">분류 : ${vo.category} iiiiii</p> 
+			<tr>
+			<td>저자 :   ${vo.writer} </td>
+			</tr>	
+			
+			<tr>
+			<th style="background-color: black;"></th>
+			</tr>	
+				
+			<tr>
+			<td>출판사 :   ${vo.publisher} </td>
+			</tr>	
+				
+			<tr>
+			<th style="background-color: black;"></th>
+			</tr>	
+			
+			<tr>
+			<td>위치 :   ${vo.b_location} </td>
+			</tr>
+				
+			<tr>
+			<th style="background-color: black;"></th>
+			</tr>	
+			
+			<tr>
+			<td>분류 :   ${vo.category} </td>
+			</tr>
+				
+				
+				
+			
+		    
+			</table>
 		</aside>
 	
 

@@ -12,12 +12,21 @@
 		document.f.action = "/HbLib/Controller";
 		document.f.submit();
 	}
-
+	
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_01").css("background-color", "gray")
 	});
 </script>
+<style type="text/css">
+aside {
+     padding: 0;
+    margin-top: -15%;
+    padding-left: 116px;
+    
+}
+
+</style>
 </head>
 <body>
 
@@ -27,10 +36,13 @@
 		<jsp:include page="search_navi.jsp" />
 	</div>
 	<form method="post" name="f">	
+	
+	<aside>
 	<div align="center">
 		<div class="searchdetail">
+		<img src="/HbLib/img/search_img.JPG">
 			<li class="serchWord">
-			<select name="idx">
+			<select  name="idx">
 					<option value="0">전체</option>
 					<option value="1">저자</option>
 					<option value="2">출판사</option>
@@ -55,10 +67,11 @@
 							<option value="1">저자</option>
 							<option value="3">출판사</option>
 					</select>
-					
+				
 			
 			
   </div>
+  </aside>
 </form>
 
 </body>
