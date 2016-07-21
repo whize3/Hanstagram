@@ -169,7 +169,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	
 	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
-		select * from studyroom
+		select * from studyroom order by s_num
 	</select>
 	<!-- 스터디룸 예약 접수 -->
 	<insert id="reserve" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
