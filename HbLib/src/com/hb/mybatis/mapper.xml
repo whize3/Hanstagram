@@ -9,7 +9,7 @@
 	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
 		select * from book
 	      <choose>
-	      	<when test="idx ==0">where book b_num = #{keyword} </when>
+	      	<when test="idx ==0"></when>
 	      	<when test="idx ==1">where writer like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==2">where publisher like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==3">where b_subject   like '%' || #{keyword} || '%' </when>
