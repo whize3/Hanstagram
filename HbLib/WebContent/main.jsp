@@ -194,8 +194,7 @@
 	    word-break: break-all;
 	    white-space: nowrap;
 	    text-overflow: ellipsis;
-	    }
-	
+	}
 	#books ul > li .bookBtn{
 		position: absolute;
 	    top: 150px;
@@ -209,8 +208,6 @@
 		position:absolute;
 		right:22px;
 	}
-	
-	
 	#current{
 		position:relative;
 		right:0px;

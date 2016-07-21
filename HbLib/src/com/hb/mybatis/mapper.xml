@@ -49,7 +49,7 @@
 		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyreserve_chk" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
-		select * from book_draw where b_state='1' and b_num=#{b_num}
+		select bd_date+15 bd_date from book_draw where b_state='1' and b_num=#{b_num}
 	</select>
 	<select id="getmyhistory" resultType="com.hb.mybatis.MyDrawVO" parameterType="Map">
 		select * from ( select rownum r_num, q.* from ( select a.bd_redate,b.isbn,b.writer,b.b_subject from 
@@ -175,5 +175,8 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</insert>
 	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="String">
 		select start_time, end_time from studyroom_reserve where sr_date=#{date}
+	</select>
+	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
+		select * from b_comment where b_num = #{b_num}
 	</select>
 	</mapper>

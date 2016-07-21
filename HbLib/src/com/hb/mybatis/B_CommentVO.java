@@ -1,14 +1,24 @@
 package com.hb.mybatis;
 
 public class B_CommentVO {
-private String bc_idx, bc_content, ISBN, id;
-public B_CommentVO(String bc_idx, String bc_content, String iSBN, String id) {
+private String b_num,bc_idx, bc_content, ISBN, id;
+public B_CommentVO(String b_num, String bc_idx, String bc_content, String iSBN, String id) {
 	super();
+	this.b_num = b_num;
 	this.bc_idx = bc_idx;
 	this.bc_content = bc_content;
 	ISBN = iSBN;
 	this.id = id;
 }
+
+public String getB_num() {
+	return b_num;
+}
+
+public void setB_num(String b_num) {
+	this.b_num = b_num;
+}
+
 public String getISBN() {
 	return ISBN;
 }
