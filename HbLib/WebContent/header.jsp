@@ -106,7 +106,7 @@
 					<ul id="subMenu3">
 						<a href="/HbLib/guide/libinfo1.jsp"><li>도서관이용안내</li></a>
 						<a href="/HbLib/guide/libinfo2.jsp"><li>층별안내</li></a>
-						<a href="/HbLib/guide/libinfo3.jsp"><li>대출</li></a>
+						<a href="/HbLib/guide/libinfo3.jsp"><li>대출/반납안내</li></a>
 					</ul>
 				</div>
 			</li>
