@@ -94,6 +94,7 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("myinfo")){
 			comm = new MyInfoCommand();
 		}else if(type.equals("myupdate")){
+			System.out.println(request.getParameter("pwd")+request.getParameter("change")+request.getParameter("id"));
 			comm = new MyInfoUpdateCommand();
 		}else if(type.equals("chkid")){
 			comm = new JoinCheckIdCommand();
