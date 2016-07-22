@@ -12,7 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hb.command.AdminApplyBookCommand;
+import com.hb.command.AdminApplyOkCommand;
+import com.hb.command.AdminApplyRefuseCommand;
+import com.hb.command.AdminBookAddCommand;
+import com.hb.command.AdminBookListCommand;
 import com.hb.command.AdminLoginCommand;
+import com.hb.command.AdminMemberListCommand;
+import com.hb.command.AdminMemberOnelistCommand;
+import com.hb.command.AdminMemberSearchCommand;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
@@ -41,6 +49,10 @@ import com.hb.command.NewBookCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
+import com.hb.command.AdminNoticeOneCommand;
+import com.hb.command.AdminOneQnaCommand;
+import com.hb.command.AdminQNAListCommand;
+import com.hb.command.AdminQnaCommentWriteCommand;
 import com.hb.command.Admin_sdReserveCommand;
 import com.hb.command.OneNoticeCommand;
 import com.hb.command.OneQnaCommand;
@@ -105,20 +117,6 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("join")){
 			comm = new UsersJoinCommand();
-		}else if(type.equals("adminLogin")){
-			comm = new AdminLoginCommand();
-		}else if(type.equals("a_memberlist")){
-			comm = new MemberListCommand();			
-		}else if(type.equals("a_memberOnelist")){
-			comm = new MemberOnelistCommand();		
-		}else if(type.equals("a_booklist")){
-			comm = new BookListCommand();
-		}else if(type.equals("a_bookAdd")){
-			comm = new BookAddCommand();
-		}else if(type.equals("a_noticeList")){
-			comm = new AdminNoticeListCommand();
-		}else if(type.equals("a_NoticeAdd")){
-			comm = new AdminNoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
 			path = comm.exec(request, response);
@@ -167,6 +165,36 @@ public class Controller extends HttpServlet {
 			comm = new Admin_sdReserveCommand();
 		}else if(type.equals("stateModi")){
 			comm = new StateModiCommand();
+		}if(type.equals("adminLogin")){
+			comm = new AdminLoginCommand();
+		}else if(type.equals("a_memberlist")){
+			comm = new AdminMemberListCommand();			
+		}else if(type.equals("a_memberOnelist")){
+			comm = new AdminMemberOnelistCommand();		
+		}else if(type.equals("a_booklist")){
+			comm = new AdminBookListCommand();
+		}else if(type.equals("a_bookAdd")){
+			comm = new AdminBookAddCommand();
+		}else if(type.equals("a_noticeList")){
+			comm = new AdminNoticeListCommand();
+		}else if(type.equals("a_NoticeAdd")){
+			comm = new AdminNoticeAddCommand();
+		}else if(type.equals("noticeOneList")){
+			comm = new AdminNoticeOneCommand();
+		}else if(type.equals("a_applyBookList")){
+			comm = new AdminApplyBookCommand();
+		}else if(type.contentEquals("a_qnaList")){
+			comm = new AdminQNAListCommand();
+		}else if(type.equals("a_oneqna")){
+			comm = new AdminOneQnaCommand();
+		}else if(type.equals("a_writeqcomment")){
+			comm = new AdminQnaCommentWriteCommand();
+		}else if(type.equals("memberSearch")){
+			comm = new AdminMemberSearchCommand();
+		}else if(type.equals("a_applyOk")){
+			comm = new AdminApplyOkCommand();
+		}else if(type.equals("a_applyRefuse")){
+			comm = new AdminApplyRefuseCommand();
 		}
 		
 		path = comm.exec(request, response);

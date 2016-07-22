@@ -9,8 +9,7 @@
 <link href="/HbLib/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<jsp:useBean id="admin" class="com.hb.mybatis.AdminVO" scope="session"/>
-<jsp:setProperty property="*" name="admin"/>
+
 	<div class="header">
 		<nav class="navbar">
 			<div class="container">

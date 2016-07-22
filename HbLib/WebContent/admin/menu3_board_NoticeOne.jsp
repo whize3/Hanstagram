@@ -7,25 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
-
-<script type="text/javascript" src="/HbLib/ckeditor/ckeditor.js"></script>
-
-<script>
-   window.onload=function(){
-       CKEDITOR.replace('n_content',{
-       });
-       CKEDITOR.instances.content.getData();
-   }
-</script>
-<script type="text/javascript">
-	function notice_add(f) {
-		f.action="/HbLib/Controller";
-		f.submit();
-		
-	}
-</script>
-
-
 </head>
 <body>
 <jsp:include page="main.jsp"/>
@@ -45,22 +26,49 @@
 		<!-- 내용 -->
 		<div id="content">
 			<div class="page-header">
-				<h3>공지사항 글쓰기</h3>
+				<h3>공지사항</h3>
 			</div> 
+			
 			<hr/>
-			<form>
-				<div class="subject">
-					<input type="text" name="n_subject" style="width: 300px"/>
-				</div>
-				<div class="n_textarea">
-					<textarea name="n_content" id="n_content" rows="10" cols="100" style="height: 400px;"></textarea>
-					<br/><br/>				
-				</div>
-				<div align="center">			
-					<input type="button" value="글쓰기" onclick="notice_add(this.form)">
-					<input type="hidden" name="type" value="a_NoticeAdd"/>				
-				</div>
-			</form>
+			<div class="table-wrap">
+				<form method="post">
+							<table width="300">
+								<tbody>
+									<tr>
+										<th bgcolor="#B2EBF4">번호</th>
+										<td>${notice.n_idx}</td>
+									</tr>
+
+									<tr>
+										<th bgcolor="#B2EBF4">제목</th>
+										<td>${notice.n_subject}</td>
+									</tr>
+									<tr>
+										<th bgcolor="#B2EBF4">첨부파일</th>
+									</tr>
+
+									<tr>
+										<th bgcolor="#B2EBF4">날짜</th>
+										<td>${notice.n_date}</td>
+									</tr>
+									<tr>
+										<th bgcolor="#B2EBF4">내용</th>
+									</tr>
+									<tr>
+										<td colspan="2"><pre>${notice.n_content}</pre></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2"><input type="button" value="목록"
+											onclick="javascript:location.href='/HbLib/Controller?type=a_noticeList&cPage=${cPage}'" /> 
+
+									</tr>
+
+								</tfoot>
+							</table>
+						</form>
+			</div>
 		</div>
 	</div>
 </body>
