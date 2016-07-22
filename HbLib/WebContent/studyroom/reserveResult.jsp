@@ -92,7 +92,7 @@ background:#8b9eff;
   </tr>
  </table>
 </div> 
- <a href="#"><input type="button" value="메인으로 이동&nbsp;&gt;"></a>
+ <a href="/HbLib/Controller?type=main"><input type="button" value="메인으로 이동&nbsp;&gt;"></a>
 </div>
 </body>
 </html> 

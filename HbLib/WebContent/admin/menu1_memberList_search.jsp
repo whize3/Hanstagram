@@ -38,7 +38,7 @@
 		}); */
 	});
 	function search_go(f) {
-		f.action="/HbLib/Controller?type=memberSearch";
+		f.action="/HbLib/Controller";
 		f.submit();
 	}
 </script>
@@ -62,11 +62,6 @@
 		<div id="content">
 			<div class="page-header">
 				<h3>회원목록 
-					<small>
-						현재 회원 수 
-						<a style="color: red">${pvo.totalRecord}</a>
-						명
-					</small>
 				</h3>
 			</div>
 			<div class="page-header-f">
@@ -95,8 +90,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:if test="${!empty a_memberlist}">
-							<c:forEach items="${a_memberlist}" var="k">
+						<c:if test="${!empty memberSearchVO}">
+							<c:forEach items="${memberSearchVO}" var="k">
 								<tr>
 									<td class="td_id">${k.id}</td>
 									<td>${k.name}</td>
@@ -107,42 +102,7 @@
 								</tr>
 							</c:forEach>
 						</c:if>
-					</tbody>
-					<tfoot>
-						<tr style="text-align: center;">
-							<td colspan="5">
-								<ul class="paging">
-									<c:choose>
-										<c:when test="${pvo.beginPage<pvo.pagePerBlock}">
-											<li class="disable">이전으로</li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
-										</c:otherwise>
-									</c:choose>
-									
-									<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}" step="1">
-										<c:choose>
-											<c:when test="${k==pvo.nowPage}">
-												<li class="now">${k}</li>
-											</c:when>
-											<c:otherwise>
-												<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${k}">${k}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-									<c:choose>
-										<c:when test="${pvo.endPage>=pvo.totalPage}">
-											<li class="disable">다음으로</li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="/HbLib/Controller?type=a_memberlist&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
-										</c:otherwise>
-									</c:choose>
-								</ul>
-							</td>
-						</tr>
-					</tfoot>
+					</tbody>					
 				</table>
 			</div>
 		</div>

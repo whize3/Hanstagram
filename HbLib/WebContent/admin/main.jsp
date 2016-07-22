@@ -6,11 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="/HbLib/css/main.css" rel="stylesheet">
+<link href="/HbLib/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<jsp:useBean id="admin" class="com.hb.mybatis.AdminVO" scope="session"/>
-<jsp:setProperty property="*" name="admin"/>
+
 	<div class="header">
 		<nav class="navbar">
 			<div class="container">
@@ -30,7 +29,7 @@
 						<li class="bar"><a href="/HbLib/Controller?type=a_memberlist"; style="margin-left: 20px">회원관리</a><span class="bar-s"></span></li>
 						<li class="bar"><a href="/HbLib/Controller?type=a_booklist">도서관리</a><span class="bar-s"></span></li>
 						<li class="bar"><a href="/HbLib/Controller?type=a_noticeList">게시판관리</a><span class="bar-s"></span></li>
-						<li class="bar"><a href="menu4_studyroom.jsp">스터디룸관리</a></li>
+						<li class="bar"><a href="/HbLib/Controller?type=admin_sdReserve">스터디룸관리</a></li>
 					</ul>
 				</div>
 			</div>
