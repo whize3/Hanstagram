@@ -22,19 +22,33 @@
 aside {
      padding: 0;
     margin-top: -15%;
-    padding-left: 116px;
+    padding-left: 269px;
     
 }
+div1{
+    padding-left: 100px;
+}
 
+#mainnavi {
+    position: relative;
+    left: 250px;
+    top: 100px;
+    width: 200px;
+    height: 250px;
+    display: block;
+    text-align: left;
+}
 </style>
 </head>
 <body>
 
-
+	
 	<jsp:include page="../header.jsp" />
+	<div>
 	<div class="searchview">
 		<jsp:include page="search_navi.jsp" />
 	</div>
+	
 	<form method="post" name="f">	
 	
 	<aside>
