@@ -317,6 +317,11 @@ public class Dao {
 			ss.insert("qnawrite", qvo);
 			ss.close();
 		}
+	// QNA 댓글쓰기	
+		public void writeQComment(Q_CommentVO qcvo){
+			ss.insert("qcommentwrite", qcvo);
+			ss.close();
+		}
 
 }
 
