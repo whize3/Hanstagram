@@ -30,15 +30,10 @@
 	}
 	$(function(){
 		$("#name").click(function(){
+			$(".bubble").toggle();
 			console.log("버블")
-			$(".bubble").show();
 		});
 		
-		$(document).on("click",function(){
-			if($(this).attr("id")!="name"){
-				$(".bubble").hide();
-			}
-		});
 		
 	});
 </script>
@@ -68,12 +63,17 @@
 				<a href="join.jsp">회원가입</a>
 				&nbsp;|&nbsp;<%}else{%> 
 				<div class="bubble" >
-	<div>
-		<p id="id">${user.name}님(${user.id })</p>
-		<p>${user.name}</p>
-		<p>${user.name}</p>
-	</div>
-</div>
+					<span><img src="/HbLib/img/myInfo.gif"></span>
+					<div>
+						<p id="topName">${user.name}님<span><input type="button" value="로그아웃" onclick="logout_go()"></span></p>
+						<p id="id">${user.id}님</p>
+						<p>대출도서 ${user.draw}권</p>
+						<p>예약도서 ${user.reserve}권</p>
+						<p>연체도서 ${user.overdue}권</p>
+					</div>
+				</div>
+				
+				<span id="profile"><img src="/HbLib/img/myInfo.gif"></span>
 				<span id="name"><%=name %></span>님&nbsp;|&nbsp;
 				<a href="#" onclick="logout_go()">로그아웃</a>
 				<%}%>
@@ -108,7 +108,7 @@
 			<li class="firstMenu"><a href="#">서비스 이용</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu1">
-						<a href="/studyroom/studyRoomMain.jsp"><li>스터디룸 안내</li></a>
+						<a href="studyroom/studyRoomMain.jsp"><li>스터디룸 안내</li></a>
 						<a href="#"><li>스터디룸 예약</li></a>
 						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
 						<a href="/HbLib/Controller?type=applylist&id=${user.id}"><li>도서구입 신청현황</li></a>

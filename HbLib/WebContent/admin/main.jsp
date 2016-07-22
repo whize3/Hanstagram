@@ -30,7 +30,7 @@
 						<li class="bar"><a href="/HbLib/Controller?type=a_memberlist"; style="margin-left: 20px">회원관리</a><span class="bar-s"></span></li>
 						<li class="bar"><a href="/HbLib/Controller?type=a_booklist">도서관리</a><span class="bar-s"></span></li>
 						<li class="bar"><a href="/HbLib/Controller?type=a_noticeList">게시판관리</a><span class="bar-s"></span></li>
-						<li class="bar"><a href="menu4_studyroom.jsp">스터디룸관리</a></li>
+						<li class="bar"><a href="/HbLib/Controller?type=admin_sdReserve">스터디룸관리</a></li>
 					</ul>
 				</div>
 			</div>

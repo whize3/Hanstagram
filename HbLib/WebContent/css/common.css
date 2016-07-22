@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#table{
+	background:#fff;
+	width:300px;
+	border-collapse: 0;
+	border-spacing: 0;
+	border:1px solid #dedede;
+}
+
+#table th{
+	font-weight:normal;
+}
+
+#table tr{
+	height:20px;
+	text-align: left;
+	font-size:13px;
+}

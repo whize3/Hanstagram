@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/common.css">
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -62,28 +64,28 @@ function delete_go(f) {
 				<div>
 					<div align="center">
 						<form method="post">
-							<table width="300">
+							<table id="table">
 								<tbody>
 									<input type="hidden" name="q_idx" value="${qna.q_idx}">			
 
 									<tr>
-										<th bgcolor="#B2EBF4">제목</th>
+										<th>제목</th>
 										<td ><input type="hidden" name="qa_subject" value="${qna.qa_subject}">${qna.qa_subject}</td>
 									</tr>
 									<tr>
-										<th bgcolor="#B2EBF4">첨부파일</th>
+										<th>첨부파일</th><td></td>
 									</tr>
 
 									<tr>
-										<th bgcolor="#B2EBF4">날짜</th>
+										<th>날짜</th>
 										<td><input type="hidden" name="qa_date" value="${qna.qa_date}">${qna.qa_date}</td>
 									</tr>
 									<tr>
-										<th bgcolor="#B2EBF4">조회수</th>
+										<th>조회수</th>
 										<td ><input type="hidden" name="qa_hit" value="${qna.qa_hit}">${qna.qa_hit}</td>
 									</tr>
 									<tr>
-										<th bgcolor="#B2EBF4">내용</th>
+										<th>내용</th>
 									</tr>
 									<tr>
 										<td colspan="2"><input type="hidden" name="qa_content" value="${qna.qa_content}"><pre>${qna.qa_content}</pre></td>

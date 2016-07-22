@@ -173,6 +173,10 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
 	
+	<!-- 스터디룸 예약 리스트 -->
+	<select id="reserveList" resultType="com.hb.mybatis.Studyroom_ReserveVO">
+		select * from studyroom_reserve order by sr_idx
+	</select>
 	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom order by s_num
