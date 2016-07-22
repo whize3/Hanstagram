@@ -230,7 +230,7 @@ public class Dao {
 	}
 	public List<YulVO> getYul(){
 		List<YulVO> yulvo = ss.selectList("yul");
-		ss.close();
+		
 		return yulvo;}
 
 	
@@ -311,6 +311,11 @@ public class Dao {
 	// QNA 글쓰기
 		public void writeQna(QnaVO qvo){
 			ss.insert("qnawrite", qvo);
+			ss.close();
+		}
+	// QNA 댓글쓰기	
+		public void writeQComment(Q_CommentVO qcvo){
+			ss.insert("qcommentwrite", qcvo);
 			ss.close();
 		}
 

@@ -236,6 +236,10 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<insert id="qnawrite" parameterType="com.hb.mybatis.QnaVO">
 		insert into qna values(qna_seq.nextval, #{qa_subject}, #{id}, #{qa_content}, '1', sysdate)
 	</insert>
+	<!-- QNA COMMENT 쓰끼  -->
+	<insert id="qcommentwrite" parameterType="com.hb.mybatis.Q_CommentVO">
+		insert into q_comment values(q_comment_seq.nextval,#{q_idx},#{id},#{qc_content},sysdate)
+	</insert>
 	
 	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
 		select * from b_comment where b_num = #{b_num}

@@ -41,6 +41,7 @@ import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
 import com.hb.command.OneNoticeCommand;
 import com.hb.command.OneQnaCommand;
+import com.hb.command.QCommentWriteCommand;
 import com.hb.command.QnaDeleteCommand;
 import com.hb.command.QnaListCommand;
 import com.hb.command.QnaModifyCommand;
@@ -157,6 +158,8 @@ public class Controller extends HttpServlet {
 			comm = new QnaWriteCommand();
 		}else if(type.equals("newbook")){
 			comm = new NewBookCommand();
+		}else if(type.equals("writeqcomment")){
+			comm = new QCommentWriteCommand();
 		}
 		
 		path = comm.exec(request, response);
