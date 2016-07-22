@@ -6,6 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table {border-top:solid 2px #838383;width:100%;border-spacing:0;}
+	table th {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#f9f9f9;font-weight: bold;}
+	table th:first-child{border-left:none;}
+	table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#fff;  font-size: 15px;}
+	table td:first-child{border-left:none;}
+	input[type=text]{height: 25px;}
+	input[type=button]{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
+	.mainview_c_btn{margin-bottom: 10px;}	
+</style>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -43,7 +53,19 @@
 								<td>${k.ba_idx}</td>
 								<td>${k.b_subject}</td>
 								<td>${k.ba_date.substring(0,10)}</td>
-								<td>${k.ba_state}</td>
+								<td>
+								<c:choose>
+									<c:when test="${k.ba_state==0}">
+										신청중
+									</c:when>
+									<c:when test="${k.ba_state==1}">
+										구입완료
+									</c:when>
+									<c:when test="${k.ba_state==2}">
+										구입거절
+									</c:when>
+								</c:choose>
+								</td>
 							</tr>
 								
 							</c:forEach>

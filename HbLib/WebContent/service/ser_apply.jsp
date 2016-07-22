@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 <title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <style type="text/css">
 table {border-top:solid 2px #838383;width:100%;border-spacing:0;}
 table th {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#f9f9f9;font-weight: bold;}
@@ -15,13 +15,9 @@ table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-a
 table td:first-child{border-left:none;}
 input[type=text]{height: 25px;}
 input[type=button]{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
-
-
- </style>
-<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+.mainview_c_btn{margin-bottom: 10px;}
+</style>
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
-
-
 <script type="text/javascript">
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
@@ -117,7 +113,7 @@ history.go(-1)
 				<div class="mainviewnavi">◆서비스이용 > 도서구입신청</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="신청현황">						
+						<input type="button" value="신청현황" id="statebutton">						
 					</div>
 					<div align="center">
 						<table >
