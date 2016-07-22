@@ -134,7 +134,7 @@ function moveBanner(a){
 			</ul>
 		</div>
 		<div id="current">
-			<p>열람실 좌석 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
+			<p>열람실 좌석 현황 <a href="/HbLib/guide/libinfo1.jsp"><span class="currentType">이용안내</span></a></p>
 			<ul>
 				<li>제 1 열람실 : 
 				<c:forEach items="${map }" var="k">
