@@ -234,7 +234,7 @@ public class Dao {
 	}
 	public List<YulVO> getYul(){
 		List<YulVO> yulvo = ss.selectList("yul");
-		ss.close();
+		
 		return yulvo;}
 
 	

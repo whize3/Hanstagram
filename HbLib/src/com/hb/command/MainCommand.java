@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hb.mybatis.BookVO;
 import com.hb.mybatis.Dao;
 import com.hb.mybatis.NoticeVO;
 import com.hb.mybatis.QnaVO;
@@ -17,8 +18,13 @@ public class MainCommand implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		Dao dao = new Dao();
+		//공지사항 리스트
 		List<NoticeVO> notice = dao.getNoticeList();
+		
+		//QNA 리스트
 		List<QnaVO> qna = dao.getQnaList();
+		
+		//열람실현황
 		List<YulVO> yulvo = dao.getYul();
 		int cnt1 = 0,cnt2 =0,cnt3 =0,cnt4 =0,cnt5 =0,cnt6 = 0;
 		for (YulVO k : yulvo) {
@@ -51,6 +57,11 @@ public class MainCommand implements Command {
 		map.put("cnt4", cnt4);
 		map.put("cnt5", cnt5);
 		map.put("cnt6", cnt6);
+		
+		// 신규도서 리스트
+		List<BookVO> newbook = dao.getNewBook();
+		
+		request.setAttribute("newbook", newbook);
 		request.setAttribute("qna", qna);
 		request.setAttribute("map", map);
 		request.setAttribute("notice", notice);
