@@ -321,6 +321,11 @@ public class Dao {
 		public List<Studyroom_ReserveVO> getStudyroomState(){
 			return ss.selectList("studyroomstate");
 		}
+		public List<BookVO> getMainSearch(Map<String, String> map){
+			List<BookVO> list = ss.selectList("mainsearch",map);
+			ss.close();
+			return list;
+		}
 }
 
 	

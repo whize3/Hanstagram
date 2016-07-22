@@ -39,7 +39,9 @@
 				$(".bubble").hide();
 			}
 		});
-		
+		$("#searchBtn").click(function(){
+			location.href="/HbLib/Controller?type=mainsearch&keyword="+$("#keyword").val()+"&option=main";
+		});
 	});
 </script>
 </head>
