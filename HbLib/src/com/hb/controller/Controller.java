@@ -74,7 +74,6 @@ public class Controller extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
-		
 		if(type.equals("applybook")){
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){

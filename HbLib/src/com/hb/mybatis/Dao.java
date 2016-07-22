@@ -35,7 +35,7 @@ public class Dao {
 	}
 
 	// 도서검색
-	public List<BookVO> search(String idx, String keyword /*String desearch*/) {
+	public List<BookVO> search(String idx, String keyword) {
 		Map<String, String> map = new HashMap<>();
 		map.put("idx", idx);
 		map.put("keyword",keyword);
@@ -47,15 +47,11 @@ public class Dao {
 	public BookVO detisearch (String b_num){
 		BookVO bookvo = new BookVO();
 		bookvo =ss.selectOne("deti", b_num);
-		System.out.println(bookvo.getB_num());
-		System.out.println(bookvo.getB_location());
-		ss.close();
 		return bookvo;
 	}
 	// 인기도서
 	public List<Book_rankVO> ranking(){
 		List<Book_rankVO> list = ss.selectList("ranking");
-		System.out.println(list.size());
 		ss.close();
 		return list;
 	}

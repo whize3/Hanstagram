@@ -29,7 +29,7 @@ public class BookAddCommand implements Command{
 			bvo.setPublisher(publisher);
 			bvo.setWriter(writer);
 			bvo.setCategory(category);
-			bvo.setISBN(isbn);
+			bvo.setIsbn(isbn);
 			bvo.setS_url(s_url);
 			
 			Dao dao = new Dao();

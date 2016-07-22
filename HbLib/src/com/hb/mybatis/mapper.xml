@@ -8,7 +8,6 @@
 	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
 		select * from book
 	      <choose>
-	      	<when test="idx ==0">  </when>
 	      	<when test="idx ==0"></when>
 	      	<when test="idx ==1">where writer like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==2">where publisher like '%' || #{keyword} || '%' </when>
@@ -45,7 +44,7 @@
 	<!-- 책 구입신청  -->
 
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
-			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url},'')
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{isbn}, #{s_url},#{l_url},'')
 		</insert>
 		<!-- 로그인  -->
 
@@ -120,11 +119,6 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="a_bookMemberList" parameterType="String" resultType="com.hb.mybatis.Book_DrawVO">
 		select * from book_draw where id = #{id}
 	</select>
-	<!-- 도서목록
-	<select id="booklist" resultType="com.hb.mybatis.BookVO">
-		select * from book
-	</select> -->
-	<!-- 책 총 권수 -->
 	<select id="a_bookListCount" resultType="int">
 		select count(*) from book
 	</select>
