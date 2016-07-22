@@ -53,7 +53,7 @@
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_05").css("background-color", "gray")
 		$("#btn1").click(function(){
-			location.href="/HbLib/Controller?type=draw&id=aaa";
+			location.href="/HbLib/Controller?type=draw";
 		});
 	});
 </script>
