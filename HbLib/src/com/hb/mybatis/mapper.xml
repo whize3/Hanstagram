@@ -201,7 +201,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from b_comment where b_num = #{b_num}
 	</select>
 	
-<<<<<<< HEAD
+
 	<!-- admin -->
 	<!-- 로그인 비교 -->
 	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
