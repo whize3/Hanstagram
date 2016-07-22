@@ -239,6 +239,14 @@
 		position:absolute;
 		right:22px;
 	}
+	#books ul  li .bookBtn .hotbookpre{
+		position:absolute;
+		left:22px;
+	}
+	#books ul  li .bookBtn .hotbooknext{
+		position:absolute;
+		right:22px;
+	}
 	#current{
 		position:relative;
 		right:0px;

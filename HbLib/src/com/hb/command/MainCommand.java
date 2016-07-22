@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hb.mybatis.BookVO;
+import com.hb.mybatis.Book_rankVO;
 import com.hb.mybatis.Dao;
 import com.hb.mybatis.NoticeVO;
 import com.hb.mybatis.QnaVO;
@@ -61,7 +62,11 @@ public class MainCommand implements Command {
 		// 신규도서 리스트
 		List<BookVO> newbook = dao.getNewBook();
 		
+		// 인기도서 리스트
+		List<Book_rankVO> hotbook = dao.ranking();
+		
 		request.setAttribute("newbook", newbook);
+		request.setAttribute("hotbook", hotbook);
 		request.setAttribute("qna", qna);
 		request.setAttribute("map", map);
 		request.setAttribute("notice", notice);

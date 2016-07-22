@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/login.css">
-<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-3.0.0.js"></script> -->
 <script type="text/javascript">
 	$(function() {
 		$("#login_img").click(
