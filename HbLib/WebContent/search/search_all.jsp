@@ -5,27 +5,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	function search_go() {
 		document.f.action = "/HbLib/Controller";
 		document.f.submit();
-		
 	}
-
+	
+	$(function() {
+		$(".navileft>li").addClass("navileft_li")
+		$("#navi_01").css("background-color", "gray")
+	});
 </script>
+<style type="text/css">
+aside {
+     padding: 0;
+    margin-top: -15%;
+    padding-left: 116px;
+    
+}
+
+</style>
 </head>
 <body>
 
 
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="searchview">
-		<jsp:include page="my_navi.jsp" />
+		<jsp:include page="search_navi.jsp" />
 	</div>
 	<form method="post" name="f">	
+	
+	<aside>
 	<div align="center">
 		<div class="searchdetail">
+		<img src="/HbLib/img/search_img.JPG">
 			<li class="serchWord">
-			<select name="booksearch">
+			<select  name="idx">
 					<option value="0">전체</option>
 					<option value="1">저자</option>
 					<option value="2">출판사</option>
@@ -33,11 +50,13 @@
 					<option value="4">분류</option>
 			</select> 
 			<input type="text" name="keyword" /> 
+			<input type="hidden" name="type" value="search" />
+			<input type="button" value="검색" onclick="search_go()" />
 	<br />
 		</div>
-		 <label> 비도서   <input type="checkbox"   name="chk" value="1" /></label>
-		 <label>인기자료<input	type="checkbox"     name="chk" value="2" /></label> 
-		 <label>신착자료<input	type="checkbox"     name="chk" value="3" /></label>
+		 <label> 비도서 <input  type="checkbox"     name="chk" value="1" /></label>
+		 <label>인기자료<input	  type="checkbox"     name="chk" value="2" /></label> 
+		 <label>신착자료<input	  type="checkbox"     name="chk" value="3" /></label>
 
 	</div>
 	<br />
@@ -48,13 +67,11 @@
 							<option value="1">저자</option>
 							<option value="3">출판사</option>
 					</select>
-					
+				
 			
-			<input type="hidden" name="type" value="search" /> 
-			<br/>
-		
-			<input type="button" value="검색" onclick="search_go()" />
+			
   </div>
+  </aside>
 </form>
 
 </body>

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
+	function letsgo() {
+		location.href="Controller?type=main";
+	}
 	$(function() {
 		
 	});
@@ -16,14 +19,12 @@
 </script>
 
 </head>
-<body>
+<body onload="letsgo()">
 <div>
-<jsp:include page="header.jsp"/>
 </div>
 <div>
-<jsp:include page="login.jsp"/>
-<input type="button" value="test" class="test" />
+<!-- <input type="button" value="test" class="test" /> -->
 </div>
 
-</body>
+</body >
 </html>

@@ -2,6 +2,7 @@ package com.hb.mybatis;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -10,34 +11,59 @@ import org.apache.ibatis.session.SqlSession;
 public class StudyroomDAO {
 	private static SqlSession ss;
 	
-	private synchronized static SqlSession getSql(){
-		if(ss == null){
-			ss = DBService.getFactory().openSession();
-		}
-		return ss;
+	
+	public StudyroomDAO() {
+		ss = DBService.getFactory().openSession(true);
 	}
 	
 	public List<StudyroomVO> allStudyRoom(){
-		List<StudyroomVO> list = getSql().selectList("getRoom");
+		List<StudyroomVO> list = ss.selectList("getRoom");
 		return list;
 	}
 	
-	public List<StudyroomVO> getTime(String date){
-		System.out.println("getTime");
-		List<StudyroomVO> list = getSql().selectList("getTime",date);
-		System.out.println("list.size="+list.size());
+	public List<Studyroom_ReserveVO> getTime(Map<Object, Object> map){
+		List<Studyroom_ReserveVO> list = ss.selectList("getTime",map);
 		return list;
 	}
 	
 	public void roomReserve(Studyroom_ReserveVO rvo){
 		System.out.println("roomReserve"+rvo.getS_num());
 		try{
-			getSql().insert("reserve", rvo);
-			getSql().commit();
+			ss.insert("reserve", rvo);
+			ss.commit();
 		}catch(Exception e){
 			e.printStackTrace();
-			getSql().rollback();
-			
+			ss.rollback();
 		}
 	}
+	public List<Studyroom_ReserveVO> getReserveList(){
+		List<Studyroom_ReserveVO> list = ss.selectList("reserveList");
+		return list;
+	}
+	public void updateTime(){
+		
+		try {
+			ss.update("srUpdate");
+			ss.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			ss.rollback();
+		}
+	}
+	
+	public void updateState(String sr_idx){
+
+		try {
+			ss.update("srUpdate",sr_idx);
+			ss.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			ss.rollback();
+		}
+	}
+	public Studyroom_ReserveVO getResult(Studyroom_ReserveVO rvo){
+		Studyroom_ReserveVO vo = ss.selectOne("getResult", rvo); 
+		return vo;
+	}
+
 }

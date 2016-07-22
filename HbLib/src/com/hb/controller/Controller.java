@@ -16,14 +16,19 @@ import com.hb.command.AdminLoginCommand;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.ApplyListCommand;
 import com.hb.command.BookAddCommand;
+import com.hb.command.BookComment;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
+import com.hb.command.DtCommand;
 import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
+import com.hb.command.MainCommand;
 import com.hb.command.RankBookCommand;
+import com.hb.command.ReserveResultCommand;
 import com.hb.command.ReserveRoomCommand;
 import com.hb.command.SRCommand;
+import com.hb.command.StateModiCommand;
 import com.hb.command.MemberListCommand;
 import com.hb.command.MemberOnelistCommand;
 import com.hb.command.MyCommentCommand;
@@ -32,15 +37,26 @@ import com.hb.command.MyHistoryCommand;
 import com.hb.command.MyInfoCommand;
 import com.hb.command.MyInfoUpdateCommand;
 import com.hb.command.MyReserveCommand;
-import com.hb.command.NoticeAddCommand;
+import com.hb.command.NewBookCommand;
 import com.hb.command.NoticeListCommand;
+import com.hb.command.AdminNoticeAddCommand;
+import com.hb.command.AdminNoticeListCommand;
+import com.hb.command.Admin_sdReserveCommand;
+import com.hb.command.OneNoticeCommand;
+import com.hb.command.OneQnaCommand;
+import com.hb.command.QCommentWriteCommand;
+import com.hb.command.QnaDeleteCommand;
+import com.hb.command.QnaListCommand;
+import com.hb.command.QnaModifyCommand;
+import com.hb.command.QnaWriteCommand;
 import com.hb.command.UsersJoinCommand;
+import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
 
 
 
-//select count(b_num),b_num from book_draw where bd_date >= sysdate-15 group by b_num;
+
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -100,9 +116,9 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("a_bookAdd")){
 			comm = new BookAddCommand();
 		}else if(type.equals("a_noticeList")){
-			comm = new NoticeListCommand();
+			comm = new AdminNoticeListCommand();
 		}else if(type.equals("a_NoticeAdd")){
-			comm = new NoticeAddCommand();
+			comm = new AdminNoticeAddCommand();
 		}else if(type.equals("logout")){
 			comm = new LogoutCommand();
 			path = comm.exec(request, response);
@@ -110,17 +126,47 @@ public class Controller extends HttpServlet {
 			return;
 		}else if(type.equals("applylist")){
 			comm = new ApplyListCommand();
+		}else if(type.equals("yul")){
+			comm = new YulCommand();
+		}else if(type.equals("selectone")){
+			comm = new DtCommand();
 		}else if(type.equals("getRoom")){
 			if(request.getParameter("date")==null){
 				comm = new SRCommand();
 			}else{
-				System.out.println(request.getParameter("date"));
+				System.out.println(request.getParameter("date")+"111");
 				comm = new SRCommand(request.getParameter("date"));
 			}
 		}else if(type.equals("roomReserve")){
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
-			comm = new SRCommand();
+			comm = new ReserveResultCommand();
+		}else if(type.equals("bookcomment")){
+			comm = new BookComment();
+		}else if(type.equals("main")){
+			comm = new MainCommand();
+		}else if(type.equals("onenotice")){
+			comm = new OneNoticeCommand();
+		}else if(type.equals("noticelist")){
+			comm = new NoticeListCommand();
+		}else if(type.equals("qnalist")){
+			comm = new QnaListCommand();
+		}else if(type.equals("oneqna")){
+			comm = new OneQnaCommand();
+		}else if(type.equals("qnamodify")){
+			comm = new QnaModifyCommand();
+		}else if(type.equals("qnadelete")){
+			comm = new QnaDeleteCommand();
+		}else if(type.equals("qnawrite")){
+			comm = new QnaWriteCommand();
+		}else if(type.equals("newbook")){
+			comm = new NewBookCommand();
+		}else if(type.equals("writeqcomment")){
+			comm = new QCommentWriteCommand();
+		}else if(type.equals("admin_sdReserve")){
+			comm = new Admin_sdReserveCommand();
+		}else if(type.equals("stateModi")){
+			comm = new StateModiCommand();
 		}
 		
 		path = comm.exec(request, response);

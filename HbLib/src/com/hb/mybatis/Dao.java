@@ -17,6 +17,7 @@ public class Dao {
 	// �룄�꽌 �옄猷뚭뎄�엯�슂泥� 諛쏆� �뜲�씠�꽣 BOOKAPPLY�뿉 �궫�엯
 	public void bookApply(Book_ApplyVO bavo){
 		ss.insert("apply", bavo);
+		ss.close();
 	}
 	
 	// 濡쒓렇�씤
@@ -29,27 +30,55 @@ public class Dao {
 		result.setDraw(book.getDraw());
 		result.setReserve(book.getReserve());
 		result.setOverdue(book.getOverdue());
+		ss.close();
 		return result;
 	}
 
-	
-	public List<BookVO> search(String booksearch, String keyword , String desearch) {
+	// 도서검색
+	public List<BookVO> search(String idx, String keyword) {
 		Map<String, String> map = new HashMap<>();
-		map.put("booksearch", booksearch);
+		map.put("idx", idx);
 		map.put("keyword",keyword);
-		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
+		ss.close();
 		return list;
 	}
-
+	// 도서상세
+	public BookVO detisearch (String b_num){
+		BookVO bookvo = new BookVO();
+		bookvo =ss.selectOne("deti", b_num);
+		return bookvo;
+	}
+	// 인기도서
 	public List<Book_rankVO> ranking(){
 		List<Book_rankVO> list = ss.selectList("ranking");
-		System.out.println(list.size());
+		ss.close();
+		return list;
+	}
+	
+	// 신규도서
+	public List<BookVO> getNewBook(){
+		List<BookVO> list = ss.selectList("newbook");
+		for (BookVO k : list) {
+			String b_num = k.getB_num();
+			k.setB_state("0");
+			int draw = ss.selectOne("newbookstate1", b_num);
+			if(draw>0){
+				k.setB_state("1");
+			}
+			int reserve = ss.selectOne("newbookstate2", b_num);
+			if(reserve>0){
+				k.setB_state("2");
+			}
+				
+		}
+		ss.close();
 		return list;
 	}
 
 	public List<MyDrawVO> getMyDraw(String id){
 		List<MyDrawVO> list = ss.selectList("getmydraw",id);
+		System.out.println(list);
 		ss.close();
 		return list;
 	}
@@ -69,8 +98,8 @@ public class Dao {
 		ss.close();
 		return list;
 	}
-	public List<MyDrawVO> getMyHistory(String id){
-		List<MyDrawVO> list = ss.selectList("getmyhistory",id);
+	public List<MyDrawVO> getMyHistory(Map<Object, Object> map){
+		List<MyDrawVO> list = ss.selectList("getmyhistory",map);
 		ss.close();
 		return list;
 	}
@@ -118,12 +147,14 @@ public class Dao {
 	// 로그인
 	public AdminVO getAdminList(AdminVO avo){
 		AdminVO adminVo = ss.selectOne("adminLogin",avo);
+		ss.close();
 		return adminVo;
 	}
 	
 	// member 전체 게시물의 수
 	public int memberTotalCount(){
 		int count = ss.selectOne("a_memberTotalCount");
+		
 		return count;
 	}
 	
@@ -143,18 +174,21 @@ public class Dao {
 	// member 대출 현황 정보
 	public List<Book_DrawVO> getBookDraw(String id){
 		List<Book_DrawVO> list = ss.selectList("a_bookMemberList",id);
+		ss.close();
 		return list;
 	}
 	
 	// book count
 	public int bookTotalCount(){
 		int count = ss.selectOne("a_bookListCount");
+		ss.close();
 		return count;
 	}
 	
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
 		List<BookVO> list = ss.selectList("a_booklist",map);
+		ss.close();
 		return list;
 	}
 	
@@ -167,12 +201,14 @@ public class Dao {
 	// notice 전체 게시물의 수
 	public int noticeTotalCount(){
 		int count = ss.selectOne("a_noticeListCount");
+		
 		return count;
 	}
 	
 	// notice 리스트
 	public List<NoticeVO> getNoticeList(Map<String, Integer> map){
 		List<NoticeVO> list = ss.selectList("a_noticeList",map);
+		ss.close();
 		return list;
 	}
 	
@@ -187,9 +223,104 @@ public class Dao {
 		return ss.selectList("applylist", id);
 	}
 
+	public int historytotalCount(String id){
+		int count = ss.selectOne("historytotalCount" , id);
+		
+		return count ;
+	}
+	public List<YulVO> getYul(){
+		List<YulVO> yulvo = ss.selectList("yul");
+		
+		return yulvo;}
+
+	
+	// 아이디찾기
+	
+	public UsersVO forgotId(UsersVO input){
+		return ss.selectOne("forgotid", input);
+	}
+	// 비밀번호 찾기
+	public UsersVO forgotPwd(UsersVO input){
+		return ss.selectOne("forgotpwd", input);
+
+	}
+	public List<B_CommentVO> getBookComment(String b_num){
+		List<B_CommentVO> list = ss.selectList("bookComment",b_num);
+		ss.close();
+		return list;
+				
+	}
+	// 메인에서 공지사항 리스트 가져오기
+	
+	public List<NoticeVO> getNoticeList(){
+		List<NoticeVO> list = ss.selectList("noticelist");
+		return list;
+	}
+	// 공지사항 한 개 가져오기
+	public NoticeVO getOneNotice(String n_idx){
+		NoticeVO nvo = ss.selectOne("onenotice", n_idx);
+		return nvo;
+	}
+	// 공지사항 히트 수 업데이트
+	public void noticeHit(NoticeVO nvo){
+		ss.update("noticehit", nvo);
+		ss.close();
+	}
+	
+	// Qna 전체 게시물의 수
+		public int qnaTotalCount(){
+			int count = ss.selectOne("qnalistcount");
+			
+			return count;
+		}
+		
+	// QNA 리스트
+		public List<QnaVO> getQnaList(Map<String, Integer> map){
+			List<QnaVO> list = ss.selectList("qnalist",map);
+			ss.close();
+			return list;
+		}
+	// 메인에서 QNA 리스트
+		public List<QnaVO> getQnaList(){
+			return ss.selectList("m_qnalist");
+		}
+	// QNA 한 개 가져오기
+		public QnaVO getOneQna(String q_idx){
+			QnaVO qvo = ss.selectOne("oneqna", q_idx);
+			return qvo;
+		}
+	// QNA 댓글 가져오기
+		public List<Q_CommentVO> getQ_Comment(String q_idx){
+			return ss.selectList("qclist", q_idx);
+		}
+	// QNA 히트 수 업데이트
+		public void qnaHit(QnaVO qvo){
+			ss.update("qnahit", qvo);
+			ss.close();
+	}
+	// QNA 수정
+		public void moidfyQna(QnaVO qvo){
+			ss.update("qnamodify", qvo);
+			ss.close();
+		}
+	// QNA 삭제
+		public void deleteQna(String q_idx){
+			ss.delete("qnadelete", q_idx);
+			ss.close();
+		}
+	// QNA 글쓰기
+		public void writeQna(QnaVO qvo){
+			ss.insert("qnawrite", qvo);
+			ss.close();
+		}
+	// QNA 댓글쓰기	
+		public void writeQComment(Q_CommentVO qcvo){
+			ss.insert("qcommentwrite", qcvo);
+			ss.close();
+		}
+
 }
 
-	//由ъ뒪�듃�깮�꽦
-
+	
 	
 

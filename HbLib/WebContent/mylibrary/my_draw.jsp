@@ -15,6 +15,9 @@
 		$("#btn1").click(function(){
 			location.href="/HbLib/Controller?type=history&id=aaa";
 		});
+		$("#btn2").click(function(){
+			location.href="/HbLib/guide/libinfo3.jsp";
+		});
 	});
 </script>
 </head>

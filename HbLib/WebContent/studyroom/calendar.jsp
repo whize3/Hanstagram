@@ -107,7 +107,8 @@
 </style>
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="calendar.js"></script>
+<script type="text/javascript" src="/HbLib/studyroom/calendar.js"></script>
+
 
 </head>
 <body>

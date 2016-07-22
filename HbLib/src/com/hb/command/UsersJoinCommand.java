@@ -40,7 +40,7 @@ public class UsersJoinCommand implements Command{
 		usersVO.setTel(request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3"));
 		usersVO.setAddr(request.getParameter("addr"));
 		dao.UsersJoin(usersVO);
-		return "main.jsp";
+		return "index.jsp";
 	}
 
 }

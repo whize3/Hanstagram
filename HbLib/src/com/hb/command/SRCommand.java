@@ -28,9 +28,9 @@ public class SRCommand implements Command{
 			request.setAttribute("room", list);
 		}else{
 			System.out.println(date);
-			list = sdao.getTime(date);
+			
 			request.setAttribute("time", list);
 		}
-		return "studyRoomReserve.jsp";
+		return "/studyroom/studyRoomReserve.jsp";
 	}
 }

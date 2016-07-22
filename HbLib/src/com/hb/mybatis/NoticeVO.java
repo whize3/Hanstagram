@@ -1,19 +1,33 @@
 package com.hb.mybatis;
 
 public class NoticeVO {
-	private String n_idx, n_subject, n_content, n_hit, n_date;
+	private String n_idx, n_subject, n_content, n_hit, n_date, r_num;
 	
 	public NoticeVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public NoticeVO(String n_idx, String n_subject, String n_content, String n_hit, String n_date) {
+	
+
+	public NoticeVO(String n_idx, String n_subject, String n_content, String n_hit, String n_date, String r_num) {
 		super();
 		this.n_idx = n_idx;
 		this.n_subject = n_subject;
 		this.n_content = n_content;
 		this.n_hit = n_hit;
 		this.n_date = n_date;
+		this.r_num = r_num;
 	}
+
+
+	public String getR_num() {
+		return r_num;
+	}
+
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+
 
 	public String getN_idx() {
 		return n_idx;

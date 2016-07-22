@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 .loginSec {
-    width: 250px;
-    padding: 20px 0 18px 17px;
+    width: 259px;
+    padding: 20px 0 18px 29px;
     border: 1px solid #d0d2d4;
     background: #f4f5f7;
     color: #899197;
@@ -9,9 +9,6 @@
 .loginSec dt {
     float: left;
     width: 149px;
-}
-.loginSec ul{
-	margin-left: -40px;
 }
 .loginSec input {
     width: 129px;
@@ -42,7 +39,6 @@ a:link, a:visited, a:active {
     font-weight: normal;
     text-decoration: none;
     line-height: 150%;
-   
 }
 li {
     display: list-item;
@@ -54,28 +50,7 @@ ul {
 strong{
 	font-size: 15px;
 }
-.myaccount {
-    position: absolute;
-    z-index: 200;
-    top: 63px;
-    right: 48px;
-    width: 333px;
-    padding: 12px 25px;
-    min-height: 189px;
-    background: #fff;
-    border: 1px solid #d2d2d2;
-    box-sizing: content-box;
-    display: none;
-}
 
-.myaccount .myaccount-header .myaccount-logout {
-    display: inline-block;
-    text-align: center;
-    width: 60px;
-    height: 23px;
-    line-height: 23px;
-    background: #5aad07;
-    color: #fff;
-    font-size: .8em;
-    text-decoration: none;
+.myaccount{
+	display: none;
 }
