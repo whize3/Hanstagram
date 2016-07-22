@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title> <<<<<<< HEAD
+<title>Insert title here</title> 
 <link rel="stylesheet" href="/HbLib/css/common.css">
 <link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
