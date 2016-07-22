@@ -38,7 +38,7 @@
 								<td>${k.publisher}</td>
 								<td>${k.writer}</td>
 								<td>${k.category}</td>
-								<td>${k.ISBN}</td>
+								<td>${k.isbn}</td>
 							</tr>
 							<td colspan="8"></td>
 							</tr>

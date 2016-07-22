@@ -35,7 +35,7 @@ public class Dao {
 	}
 
 	// 도서검색
-	public List<BookVO> search(String idx, String keyword /*String desearch*/) {
+	public List<BookVO> search(String idx, String keyword) {
 		Map<String, String> map = new HashMap<>();
 		map.put("idx", idx);
 		map.put("keyword",keyword);
@@ -47,7 +47,10 @@ public class Dao {
 	public BookVO detisearch (String b_num){
 		BookVO bookvo = new BookVO();
 		bookvo =ss.selectOne("deti", b_num);
+<<<<<<< HEAD
 		ss.close();
+=======
+>>>>>>> branch 'master' of https://github.com/whize3/Practice.git
 		return bookvo;
 	}
 	// 인기도서

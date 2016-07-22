@@ -19,6 +19,7 @@ public class ReserveRoomCommand implements Command{
 		
 		StudyroomDAO sdao = new StudyroomDAO();
 		sdao.roomReserve(rvo);
+		request.setAttribute("rvo", rvo);
 		return "Controller?type=strSuc";
 	}
 }

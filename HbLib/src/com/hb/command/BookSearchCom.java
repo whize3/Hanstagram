@@ -13,7 +13,6 @@ public class BookSearchCom implements Command{
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 	    String idx = request.getParameter("idx");
-	    System.out.println(idx);
 	    String keyword = request.getParameter("keyword");
 	    /*String desearch = request.getParameter("desearch");*/
 		String path = null;

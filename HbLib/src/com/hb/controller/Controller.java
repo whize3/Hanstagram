@@ -25,8 +25,10 @@ import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
 import com.hb.command.MainCommand;
 import com.hb.command.RankBookCommand;
+import com.hb.command.ReserveResultCommand;
 import com.hb.command.ReserveRoomCommand;
 import com.hb.command.SRCommand;
+import com.hb.command.StateModiCommand;
 import com.hb.command.MemberListCommand;
 import com.hb.command.MemberOnelistCommand;
 import com.hb.command.MyCommentCommand;
@@ -39,6 +41,7 @@ import com.hb.command.NewBookCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
+import com.hb.command.Admin_sdReserveCommand;
 import com.hb.command.OneNoticeCommand;
 import com.hb.command.OneQnaCommand;
 import com.hb.command.QCommentWriteCommand;
@@ -75,7 +78,6 @@ public class Controller extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("type: "+type);
 		Command comm = null;
-		
 		if(type.equals("applybook")){
 			comm = new ApplyBookCommand();
 		}else if(type.equals("login")){
@@ -138,7 +140,7 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("roomReserve")){
 			comm = new ReserveRoomCommand();			
 		}else if(type.equals("strSuc")){
-			comm = new SRCommand();
+			comm = new ReserveResultCommand();
 		}else if(type.equals("bookcomment")){
 			comm = new BookComment();
 		}else if(type.equals("main")){
@@ -161,6 +163,10 @@ public class Controller extends HttpServlet {
 			comm = new NewBookCommand();
 		}else if(type.equals("writeqcomment")){
 			comm = new QCommentWriteCommand();
+		}else if(type.equals("admin_sdReserve")){
+			comm = new Admin_sdReserveCommand();
+		}else if(type.equals("stateModi")){
+			comm = new StateModiCommand();
 		}
 		
 		path = comm.exec(request, response);
