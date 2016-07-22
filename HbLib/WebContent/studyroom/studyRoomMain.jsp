@@ -208,7 +208,7 @@ button:hover {
 		<p>기타 문의사항은 각 층별 데스크에서 문의 바랍니다.</p>
 	</div>
 	<form>
-		<input type="button" value="예약하러가기&nbsp;&gt;" onclick="location.href='/library/Controller?type=getRoom'">
+		<input type="button" value="예약하러가기&nbsp;&gt;" onclick="location.href='/HbLib/Controller?type=getRoom'">
 	</form>
 </body>
 </html> -->

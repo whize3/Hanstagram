@@ -6,7 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 <jsp:include page="main.jsp"/>
@@ -15,11 +16,11 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
+			<div class="menu-header"><img src="/HbLib/img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
-					<li><span class="li-s">></span><a href="menu3_board_Notice.jsp">공지사항</a></li>
-					<li><span class="li-s">></span><a href="menu3_board_QNA.jsp">Q&A</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_noticeList">공지사항</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_qnaList">Q&A</a></li>
 				</ul>
 			</div>
 		</div>
@@ -35,20 +36,57 @@
 						<tr style="background-color: #BCBCBC;">
 							<th>순번</th>
 							<th>제목</th>
-							<th>글쓴이</th>
 							<th>작성일</th>
 							<th>조회</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>d</td>
-							<td>d</td>
-							<td>d</td>
-							<td>d</td>
-							<td>d</td>
-						</tr>
+						<c:forEach var="k" items="${qnalist}">
+							<tr>
+								<td>${pvo.totalRecord-k.r_num+1}</td>
+								<td><a href="Controller?type=a_oneqna&q_idx=${k.q_idx}&cPage=${cPage}">${k.qa_subject}</a></td>								
+								<td>${k.qa_date.substring(0,10)}</td>
+								<td>${k.qa_hit}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
+					<tfoot>
+						<tr style="text-align: center;">
+							<td colspan="5">
+								<ul class="paging">
+									<c:choose>
+										<c:when test="${pvo.beginPage<pvo.pagePerBlock}">
+											<li class="disable">이전으로</li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="/HbLib/Controller?type=a_qnaList&cPage=${pvo.beginPage-pvo.pagePerBlock}">이전으로</a></li>
+										</c:otherwise>
+									</c:choose>
+									
+									<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}" step="1">
+										<c:choose>
+											<c:when test="${k==pvo.nowPage}">
+												<li class="now">${k}</li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="/HbLib/Controller?type=a_qnaList&cPage=${k}">${k}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${pvo.endPage>=pvo.totalPage}">
+											<li class="disable">다음으로</li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="/HbLib/Controller?type=a_qnaList&cPage=${pvo.beginPage+pvo.pagePerBlock}">다음으로</a></li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
+							</td>
+		
+						</tr>
+							
+					</tfoot>
 				</table>
 			</div>
 		</div>
