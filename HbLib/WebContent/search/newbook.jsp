@@ -26,7 +26,7 @@
 		<div class="mainArea2">
 			<jsp:include page="search_navi.jsp" />
 			<div id="mainview">
-				<div class="mainviewnavi">◆자료검색 > 인기도서</div>
+				<div class="mainviewnavi">◆자료검색 > 신규도서</div>
 				<div>
 					<div class="mainview_c_btn">
 												
@@ -41,8 +41,21 @@
 								<td><img src="${k.s_url}"/></td>
 								<td>${k.b_num}</td>
 								<td>${k.b_subject}</td>
-								<td>${k.b_category}</td>
-								<td>${k.bd_state}</td>
+								<td>${k.category}</td>
+								<td>
+								<c:choose>
+									<c:when test="${k.b_state==0}">
+										대출가능									
+									</c:when>
+									<c:when test="${k.b_state==1}">
+										대출중									
+									</c:when>
+									<c:when test="${k.b_state==2}">
+										예약중									
+									</c:when>
+									
+								</c:choose>
+								</td>
 							</tr>
 								
 							</c:forEach>

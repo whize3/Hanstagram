@@ -59,9 +59,30 @@ public class Dao {
 		ss.close();
 		return list;
 	}
+	
+	// 신규도서
+	public List<BookVO> getNewBook(){
+		List<BookVO> list = ss.selectList("newbook");
+		for (BookVO k : list) {
+			String b_num = k.getB_num();
+			k.setB_state("0");
+			int draw = ss.selectOne("newbookstate1", b_num);
+			if(draw>0){
+				k.setB_state("1");
+			}
+			int reserve = ss.selectOne("newbookstate2", b_num);
+			if(reserve>0){
+				k.setB_state("2");
+			}
+				
+		}
+		ss.close();
+		return list;
+	}
 
 	public List<MyDrawVO> getMyDraw(String id){
 		List<MyDrawVO> list = ss.selectList("getmydraw",id);
+		System.out.println(list);
 		ss.close();
 		return list;
 	}

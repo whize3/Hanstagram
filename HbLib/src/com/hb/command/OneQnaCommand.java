@@ -1,14 +1,14 @@
 package com.hb.command;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hb.mybatis.Dao;
-import com.hb.mybatis.Paging;
+
 import com.hb.mybatis.Q_CommentVO;
 import com.hb.mybatis.QnaVO;
 
@@ -18,10 +18,7 @@ public class OneQnaCommand implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		String q_idx = request.getParameter("q_idx");
 		Dao dao = new Dao();
-		
-		
-		
-		
+				
 		//댓글 불러오기
 		List<Q_CommentVO> qclist = dao.getQ_Comment(q_idx);
 		

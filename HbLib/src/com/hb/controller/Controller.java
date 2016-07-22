@@ -35,6 +35,7 @@ import com.hb.command.MyHistoryCommand;
 import com.hb.command.MyInfoCommand;
 import com.hb.command.MyInfoUpdateCommand;
 import com.hb.command.MyReserveCommand;
+import com.hb.command.NewBookCommand;
 import com.hb.command.NoticeListCommand;
 import com.hb.command.AdminNoticeAddCommand;
 import com.hb.command.AdminNoticeListCommand;
@@ -156,7 +157,7 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("qnawrite")){
 			comm = new QnaWriteCommand();
 		}else if(type.equals("newbook")){
-			
+			comm = new NewBookCommand();
 		}
 		
 		path = comm.exec(request, response);

@@ -3,8 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="HbLib">
 	
-		<!-- 도서구입신청  -->
-
+	<!-- 도서구입신청  -->
 	<!-- 도서검색  -->
 	<select id="booklist" parameterType="map" resultType="com.hb.mybatis.BookVO">
 		select * from book
@@ -28,12 +27,28 @@
 		(select count(b_num) rank,b_num from book_draw where bd_date >= sysdate-15 
 		group by b_num) a, book b where b.b_num = a.b_num order by rank desc
 	</select>
+
+	
+	<!-- 신규도서 리스트  -->
+	<select id="newbook" resultType="com.hb.mybatis.BookVO">
+		select * from book where b_date> sysdate-90
+	</select>
+	<select id="newbookstate1" resultType="Integer" parameterType="String">
+		select count(b_state) from book_draw where b_num=#{b_num} and b_state=1
+	</select>
+	<select id="newbookstate2" resultType="Integer" parameterType="String">
+		select count(b_state) from book_draw where b_num=#{b_num} and b_state=2
+	</select>
 	
 	
+
+	<!-- 책 구입신청  -->
+
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
-			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
+			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url},'')
 		</insert>
 		<!-- 로그인  -->
+
 		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 			select * from users where id=#{id} and pwd=#{pwd}
 		</select>
