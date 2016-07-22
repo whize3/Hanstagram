@@ -47,7 +47,6 @@ public class Dao {
 	public BookVO detisearch (String b_num){
 		BookVO bookvo = new BookVO();
 		bookvo =ss.selectOne("deti", b_num);
-		ss.close();
 		return bookvo;
 	}
 	// 인기도서
@@ -373,7 +372,10 @@ public class Dao {
 			ss.insert("qcommentwrite", qcvo);
 			ss.close();
 		}
-
+	// 스터디룸 현황
+		public List<Studyroom_ReserveVO> getStudyroomState(){
+			return ss.selectList("studyroomstate");
+		}
 }
 
 	

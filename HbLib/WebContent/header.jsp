@@ -98,10 +98,9 @@
 			<li class="firstMenu"><a href="#">자료검색</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu0">
-						<a href="#"><li>전체자료검색</li></a>
-						<a href="#"><li>비도서</li></a>
-						<a href="#"><li>학위논문</li></a>
-						<a href="#"><li>인기도서</li></a>
+						<a href="/HbLib/search/search_all.jsp"><li>전체자료검색</li></a>
+						<a href="/HbLib/Controller?type=rank"><li>인기도서</li></a>
+						<a href="/HbLib/Controller?type=newbook"><li>신규도서</li></a>
 					</ul>
 				</div>
 			</li>
@@ -130,10 +129,9 @@
 			<li class="firstMenu"><a href="#">도서관 안내</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu3">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<a href="/HbLib/guide/libinfo1.jsp"><li>도서관이용안내</li></a>
+						<a href="/HbLib/guide/libinfo2.jsp"><li>층별안내</li></a>
+						<a href="/HbLib/guide/libinfo3.jsp"><li>대출/반납안내</li></a>
 					</ul>
 				</div>
 			</li>

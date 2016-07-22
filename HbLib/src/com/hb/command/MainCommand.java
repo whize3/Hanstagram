@@ -12,6 +12,7 @@ import com.hb.mybatis.Book_rankVO;
 import com.hb.mybatis.Dao;
 import com.hb.mybatis.NoticeVO;
 import com.hb.mybatis.QnaVO;
+import com.hb.mybatis.Studyroom_ReserveVO;
 import com.hb.mybatis.YulVO;
 
 public class MainCommand implements Command {
@@ -51,6 +52,7 @@ public class MainCommand implements Command {
 				}
 			}
 		}
+						
 		Map<String, Integer> map = new HashMap<>();
 		map.put("cnt1", cnt1);
 		map.put("cnt2", cnt2);
@@ -59,12 +61,32 @@ public class MainCommand implements Command {
 		map.put("cnt5", cnt5);
 		map.put("cnt6", cnt6);
 		
+		//스터디룸 현황
+		int studyroom1=0;
+		int studyroom2=0;
+		int studyroom3=0;
+		
+		List<Studyroom_ReserveVO> studyroom = dao.getStudyroomState();
+		for (Studyroom_ReserveVO k : studyroom) {
+			String floor = k.getS_num().substring(0,1);
+			if(floor.equals("1")){
+				studyroom1++;
+			}else if(floor.equals("2")){
+				studyroom2++;
+			}else if(floor.equals("3")){
+				studyroom3++;
+			}
+		}
+		
 		// 신규도서 리스트
 		List<BookVO> newbook = dao.getNewBook();
 		
 		// 인기도서 리스트
 		List<Book_rankVO> hotbook = dao.ranking();
 		
+		request.setAttribute("studyroom1", studyroom1);
+		request.setAttribute("studyroom2", studyroom2);
+		request.setAttribute("studyroom3", studyroom3);
 		request.setAttribute("newbook", newbook);
 		request.setAttribute("hotbook", hotbook);
 		request.setAttribute("qna", qna);

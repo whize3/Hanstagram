@@ -201,6 +201,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from b_comment where b_num = #{b_num}
 	</select>
 	
+<<<<<<< HEAD
 	<!-- admin -->
 	<!-- 로그인 비교 -->
 	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
@@ -298,4 +299,9 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<insert id="a_noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
 		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
 	</insert>
+	<!-- 스터디룸 현황 가져오기  -->
+	<select id="studyroomstate" resultType="com.hb.mybatis.Studyroom_ReserveVO">
+		select * from studyroom_reserve where (select to_char(sysdate,'hh24:mi') from dual) > start_time and end_time > (select to_char(sysdate,'hh24:mi')from dual) and sr_state=2
+	</select>
+	
 	</mapper>

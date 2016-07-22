@@ -38,7 +38,6 @@ import com.hb.command.ReserveRoomCommand;
 import com.hb.command.SRCommand;
 import com.hb.command.StateModiCommand;
 import com.hb.command.MemberListCommand;
-import com.hb.command.MemberOnelistCommand;
 import com.hb.command.MyCommentCommand;
 import com.hb.command.MyDrawCommand;
 import com.hb.command.MyHistoryCommand;
@@ -65,9 +64,6 @@ import com.hb.command.UsersJoinCommand;
 import com.hb.command.YulCommand;
 import com.hb.mybatis.MyDrawVO;
 import com.hb.command.BookSearchCom;
-
-
-
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
@@ -109,6 +105,7 @@ public class Controller extends HttpServlet {
 		}else if(type.equals("myinfo")){
 			comm = new MyInfoCommand();
 		}else if(type.equals("myupdate")){
+			System.out.println(request.getParameter("pwd")+request.getParameter("change")+request.getParameter("id"));
 			comm = new MyInfoUpdateCommand();
 		}else if(type.equals("chkid")){
 			comm = new JoinCheckIdCommand();
