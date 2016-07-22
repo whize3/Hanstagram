@@ -8,9 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title> <<<<<<< HEAD
 <link rel="stylesheet" href="/HbLib/css/common.css">
-=======
 <link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/whize3/HbLibrary.git
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
