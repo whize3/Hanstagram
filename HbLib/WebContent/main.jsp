@@ -155,7 +155,7 @@ function moveBanner(a){
 				</c:forEach>
 				</li>
 			</ul>
-			<p>스터디룸 이용 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
+			<p>스터디룸 이용 현황 <a href="/HbLib/guide/libinfo1.jsp"><span class="currentType">이용안내</span></a></p>
 			<ul>
 				<li>1층 : ${studyroom1}/3</li>
 				<li>2층 : ${studyroom2}/4</li>
