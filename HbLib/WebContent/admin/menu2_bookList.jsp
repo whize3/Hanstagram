@@ -6,10 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 	function addBook_go(f) {
-		f.action="menu2_bookList_add.jsp";
+		f.action="/HbLib/admin/menu2_bookList_add.jsp";
 		f.submit();
 	}
 </script>
@@ -21,11 +21,11 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
+			<div class="menu-header"><img src="/HbLib/img/icon_menu_book.jpg" class="img"/><h3>도서관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
-					<li><span class="li-s">></span><a href="menu2_bookList.jsp">도서 조회/추가</a></li>
-					<li><span class="li-s">></span><a href="menu2_bookList2.jsp">희망 도서 조회</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_booklist">도서 조회/추가</a>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_applyBookList">희망 도서 조회</a></li>
 				</ul>
 			</div>
 		</div>
@@ -45,6 +45,7 @@
 					<thead>
 						<tr style="background-color: #BCBCBC;">
 							<th>번호</th>
+							<th></th>
 							<th>제목</th>
 							<th>위치</th>
 							<th>출판사</th>
@@ -57,11 +58,13 @@
 						<c:forEach items="${a_booklist}" var="k">
 							<tr>
 								<td>${k.b_num}</td>
+								<td><img src="${k.s_url}"/></td>
 								<td>${k.b_subject}</td>
 								<td>${k.b_location}</td>
 								<td>${k.publisher}</td>
 								<td>${k.writer}</td>
 								<td>${k.category}</td>
+								<td>${k.ISBN}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

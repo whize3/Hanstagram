@@ -73,7 +73,7 @@ h3 {
 			}else{
 				var chk = confirm("비밀번호를 변경합니다.");
 				if(chk){
-					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&pwd="+$("#pwd").val()+"&change=change_pwd";
+					location.href="/HbLib/Controller?type=myupdate&id=<c:out value='${list.id }'/>"+"&pwd="+$("#pwd").val()+"&change=change_pwd";
 				}else
 					$("#pwd").focus();
 				return;

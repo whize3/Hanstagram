@@ -98,21 +98,20 @@
 			<li class="firstMenu"><a href="#">자료검색</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu0">
-						<a href="#"><li>전체자료검색</li></a>
-						<a href="#"><li>비도서</li></a>
-						<a href="#"><li>학위논문</li></a>
-						<a href="#"><li>인기도서</li></a>
+						<li><a href="/HbLib/search/search_all.jsp">전체자료검색</a></li>
+						<li><a href="/HbLib/Controller?type=rank">인기도서</a></li>
+						<li><a href="/HbLib/Controller?type=newbook">신규도서</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class="firstMenu"><a href="#">서비스 이용</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu1">
-						<a href="studyroom/studyRoomMain.jsp"><li>스터디룸 안내</li></a>
-						<a href="#"><li>스터디룸 예약</li></a>
-						<a href="/HbLib/service/ser_apply.jsp"><li>도서구입 신청</li></a>
-						<a href="/HbLib/Controller?type=applylist&id=${user.id}"><li>도서구입 신청현황</li></a>
-						<a href="/HbLib/Controller?type=yul"><li>열람실 현황</li></a>
+						<li><a href="/HbLib/studyroom/studyRoomMain.jsp">스터디룸 안내</a></li>
+						<li><a href="/HbLib/Controller?type=getRoom">스터디룸 예약</a></li>
+						<li><a href="/HbLib/service/ser_apply.jsp">도서구입 신청</a></li>
+						<li><a href="/HbLib/Controller?type=applylist&id=${user.id}">도서구입 신청현황</a></li>
+						<li><a href="/HbLib/Controller?type=yul">열람실 현황</a></li>
 					</ul>
 				</div>
 			</li>
@@ -130,10 +129,9 @@
 			<li class="firstMenu"><a href="#">도서관 안내</a>
 				<div class="subMenuWrap">
 					<ul id="subMenu3">
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
-						<a href="#"><li>냥냥냥</li></a>
+						<li><a href="/HbLib/guide/libinfo1.jsp">도서관이용안내</a></li>
+						<li><a href="/HbLib/guide/libinfo2.jsp">층별안내</a></li>
+						<li><a href="/HbLib/guide/libinfo3.jsp">대출/반납안내</a></li>
 					</ul>
 				</div>
 			</li>

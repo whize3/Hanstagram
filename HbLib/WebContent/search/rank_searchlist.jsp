@@ -16,7 +16,27 @@
 		$("#navi_02").css("background-color", "gray")
 	});	
 </script>
+<style type="text/css">
+#mainnavi {
+    position: relative;
+    left: 5px;
+    top: 69px;
+    width: 200px;
+    height: 37px;
+    display: block;
+    text-align: left;
+}
 
+.navileft {
+    font-size: 20px;
+    margin-left: 200px;
+    margin-top: 20px;
+    padding-left: 70px;
+}
+aside{
+margin-left: 400px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -26,7 +46,7 @@
 		<%
 			List<Book_rankVO> list = (List<Book_rankVO>) request.getAttribute("list");
 		%>
-		
+		<aside>
 		<div class="rank">
 			<div align="center">
 				<table width="700">
@@ -35,7 +55,8 @@
 							<th></th>
 							<th width="250">책번호</th>
 							<th width="250">제목</th>
-							<th width="250">작가</th>
+							<th width="250">저자
+						</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,7 +65,8 @@
 						</tr>
 						<c:forEach var="k" items="${list}">
 							<tr align="center">
-								<td>gggggg${k.s_url}</td>
+	
+								<td><img src="${k.s_url }"></td>
 								<td>${k.b_num}</td>
 								<td>${k.b_subject}</td>
 								<td>${k.writer}</td>
@@ -53,6 +75,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</aside>
 			</div>
 		</div>
 

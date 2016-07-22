@@ -35,10 +35,10 @@
 			<hr/>
 			<h3 align="left"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOGIN</i></h3>
 			<form>	
-			<input type="text" name="id" placeholder="아이디"/><br/>
-			<input type="password" name="pwd" placeholder="비밀번호"/><br/>
-			<input type="button" value="로그인" style="width: 165px;" onclick="login_go(this.form)"/>			
-			<input type="hidden" name="type" value="adminLogin"/>
+				<input type="text" name="id" placeholder="아이디"/><br/>
+				<input type="password" name="pwd" placeholder="비밀번호"/><br/>
+				<input type="button" value="로그인" style="width: 165px;" onclick="login_go(this.form)"/>			
+				<input type="hidden" name="type" value="adminLogin"/>
 			</form>
 		</div>
 	</div>

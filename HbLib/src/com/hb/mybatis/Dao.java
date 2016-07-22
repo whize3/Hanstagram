@@ -35,10 +35,11 @@ public class Dao {
 	}
 
 	// 도서검색
-	public List<BookVO> search(String idx, String keyword) {
+	public List<BookVO> search(String idx, String keyword ,String desearch) {
 		Map<String, String> map = new HashMap<>();
 		map.put("idx", idx);
 		map.put("keyword",keyword);
+		map.put("desearch", desearch);
 		List<BookVO> list = ss.selectList("booklist",map);
 		ss.close();
 		return list;
@@ -72,7 +73,6 @@ public class Dao {
 			}
 				
 		}
-		ss.close();
 		return list;
 	}
 
@@ -147,14 +147,12 @@ public class Dao {
 	// 로그인
 	public AdminVO getAdminList(AdminVO avo){
 		AdminVO adminVo = ss.selectOne("adminLogin",avo);
-		ss.close();
 		return adminVo;
 	}
 	
 	// member 전체 게시물의 수
 	public int memberTotalCount(){
 		int count = ss.selectOne("a_memberTotalCount");
-		
 		return count;
 	}
 	
@@ -171,30 +169,87 @@ public class Dao {
 		return uvo2;
 	}
 	
+	// member search
+	public List<UsersVO> getMemberSearch(Map<String, String> map){
+		return ss.selectList("a_memberSearch",map);
+	}
+	
 	// member 대출 현황 정보
-	public List<Book_DrawVO> getBookDraw(String id){
-		List<Book_DrawVO> list = ss.selectList("a_bookMemberList",id);
-		ss.close();
+	public List<BookDraw_memberVO> getBookDraw(String id){
+		List<BookDraw_memberVO> list = ss.selectList("a_bookMemberList",id);
 		return list;
+	}
+	
+	// member 예약 현황
+	public List<BookDraw_memberVO> getBookReserve(String id){
+		List<BookDraw_memberVO> reserveList = ss.selectList("a_bookReserve",id);
+		BookDraw_memberVO bdMemberVO = new BookDraw_memberVO();
+		String result = null;
+		for(BookDraw_memberVO k : reserveList){
+			result = ss.selectOne("a_bookReserve_cnt",k.getB_num());
+			if(result.equals("0")){
+				k.setBd_date("반납도서");
+			}else{
+				bdMemberVO = ss.selectOne("a_bookReserve_chk",k.getB_num());
+				k.setBd_date(bdMemberVO.getBd_date().substring(0,10));
+			}
+		}
+		return reserveList;
 	}
 	
 	// book count
 	public int bookTotalCount(){
 		int count = ss.selectOne("a_bookListCount");
-		ss.close();
 		return count;
 	}
 	
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
 		List<BookVO> list = ss.selectList("a_booklist",map);
-		ss.close();
 		return list;
 	}
 	
 	// book 추가
-	public void getBookAdd(BookVO bvo){
+	/*public void getBookAdd(BookVO bvo){
 		ss.insert("a_bookAdd",bvo);
+		ss.commit();
+	}*/
+	public void addBook(BookVO bvo){
+		ss.insert("a_bookAdd",bvo);
+		ss.commit();
+	}
+	
+	// 희망도서
+	public int applyBookTotalCount(){
+		int count = ss.selectOne("a_applyBookCount");
+		return count;
+	}
+	public List<Book_ApplyVO> getApplyBookList(Map<String, Integer> map){
+		List<Book_ApplyVO> list = ss.selectList("a_applyBookList",map);
+		return list;
+	}
+	
+	// 희망도서 검색
+	public Book_ApplyVO getApplyOneList(String ba_idx){
+		Book_ApplyVO bavo = ss.selectOne("a_applyOnelist",ba_idx);
+		return bavo;
+	}
+	
+	// 희망도서 상태 변경
+	public void getApplyState(String ba_idx){
+		ss.update("a_applyState",ba_idx);
+		ss.commit();
+	}
+	
+	// 희망도서 책에 추가하기
+	public void bookApplyAdd(BookVO bvo){
+		ss.insert("a_bookApplyAdd",bvo);
+		ss.commit();
+	}
+	
+	// 희망도서 거절
+	public void updateRefuse(Book_ApplyVO bavo){
+		ss.update("a_bookApplyRefuseAp",bavo);
 		ss.commit();
 	}
 	
@@ -318,7 +373,10 @@ public class Dao {
 			ss.insert("qcommentwrite", qcvo);
 			ss.close();
 		}
-
+	// 스터디룸 현황
+		public List<Studyroom_ReserveVO> getStudyroomState(){
+			return ss.selectList("studyroomstate");
+		}
 }
 
 	

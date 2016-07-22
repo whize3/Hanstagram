@@ -13,6 +13,9 @@
 	      	<when test="idx ==2">where publisher like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==3">where b_subject   like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==4">where category like '%' || #{keyword} || '%'</when>
+	      	<when test="desearch ==5"> where  writer</when>
+	      	<when test="desearch ==6"> where  b_subject </when>
+	      	<when test="desearch ==7"> where  publisher</when>
 	      </choose>
 	</select>
 	<!-- 상세보기  -->
@@ -92,55 +95,6 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		insert into users values(#{id},#{name},#{pwd},#{jumin},#{email},#{tel},#{addr})
 	</insert>
 
-	
-	
-	<!-- admin -->
-		<!-- 로그인 비교 -->
-	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
-		select * from admin where id = #{id} and pwd= #{pwd}
-	</select>
-	<!-- 회원 총 카운트 -->
-	<select id="a_memberTotalCount" resultType="int">
-		select count(*) from users
-	</select>
-	<!-- 회원정보 리스트 -->
-	<select id="a_memberlist" parameterType="Map" resultType="com.hb.mybatis.UsersVO">
-		select * from ( 
-            select rownum r_num, a.* from (
-            	select * from users
-            	) a 
-              ) where r_num between #{begin} and #{end}
-	</select>
-	<!-- 회원정보 -->
-	<select id="a_memberonelist" parameterType="String" resultType="com.hb.mybatis.UsersVO">
-		select * from users where id = #{id}
-	</select>
-	<!-- 회원 대출현황 리스트 -->
-	<select id="a_bookMemberList" parameterType="String" resultType="com.hb.mybatis.Book_DrawVO">
-		select * from book_draw where id = #{id}
-	</select>
-	<select id="a_bookListCount" resultType="int">
-		select count(*) from book
-	</select>
-	<select id="a_booklist" parameterType="Map" resultType="com.hb.mybatis.BookVO">
-		select * from (select rownum r_num, a.* from(
-			select * from book) a
-			) where r_num between #{begin} and #{end}
-	</select>
-	<!-- 공지사항 총 게시물 수 -->
-	<select id="a_noticeListCount" resultType="int">
-		select count(*) from notice
-	</select>
-	<!-- 공지사항 리스트 -->
-	<select id="a_noticeList" parameterType="Map" resultType="com.hb.mybatis.NoticeVO">
-		select * from (select rownum r_num, a.* from(
-			select * from notice) a
-			) where r_num between #{begin} and #{end}
-	</select>
-	<!-- 공지사항 게시물 추가 -->
-	<insert id="a_noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
-		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
-	</insert>
 	<!-- 로그인시 대출/예약/연체 도서 정보  -->
 	<select id="loginbook" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 		select count(case when id=#{id} and b_state='1' then 1 else null end)draw, count(case when id=#{id} and b_state='2' then 1 else null end)reserve, count(case when id=#{id} and b_state='1' and sysdate>bd_redate then 1 else null end)overdue from book_draw
@@ -252,6 +206,109 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	
 	<select id="bookComment" resultType="com.hb.mybatis.B_CommentVO" parameterType="String">
 		select * from b_comment where b_num = #{b_num}
+	</select>
+	
+
+	<!-- admin -->
+	<!-- 로그인 비교 -->
+	<select id="adminLogin" parameterType="com.hb.mybatis.AdminVO" resultType="com.hb.mybatis.AdminVO">
+		select * from admin where id = #{id} and pwd= #{pwd}
+	</select>
+	<!-- 회원 총 카운트 -->
+	<select id="a_memberTotalCount" resultType="int">
+		select count(*) from users
+	</select>
+	<!-- 회원정보 리스트 -->
+	<select id="a_memberlist" parameterType="Map" resultType="com.hb.mybatis.UsersVO">
+		select * from ( 
+            select rownum r_num, a.* from (
+            	select * from users
+            	) a 
+              ) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 회원정보 -->
+	<select id="a_memberonelist" parameterType="String" resultType="com.hb.mybatis.UsersVO">
+		select * from users where id = #{id}
+	</select>
+	<!-- 회원 검색 -->
+	<select id="a_memberSearch" parameterType="Map" resultType="com.hb.mybatis.UsersVO">
+		select * from users
+		<choose>
+			<when test="category==1">where id = #{id}</when>
+			<when test="category==2">where name = #{name}</when>
+			<when test="category==3">where jumin = #{jumin}</when>
+		</choose>
+	</select>
+	<!-- 회원 대출현황 리스트 -->
+	<select id="a_bookMemberList" parameterType="String" resultType="com.hb.mybatis.BookDraw_memberVO">
+		select a.*,b.b_subject,b.publisher,b.isbn from (select bd_date, b_state,b_num  from book_draw where id=#{id}) a , book b where a.b_num = b.b_num and a.b_state='1'
+	</select>
+	<!-- 회원 예약현황 리스트 -->
+	<select id="a_bookReserve" parameterType="String" resultType="com.hb.mybatis.BookDraw_memberVO">
+		select * from book where b_num in (select b_num from book_draw where id=#{id} and b_state='2')
+	</select>
+	<select id="a_bookReserve_cnt" parameterType="String" resultType="String">
+		select count(bd_date) from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+	<select id="a_bookReserve_chk" parameterType="String" resultType="com.hb.mybatis.BookDraw_memberVO">
+		select * from book_draw where b_state='1' and b_num=#{b_num}
+	</select>
+
+	<!-- 책 총 권수 -->
+	<select id="a_bookListCount" resultType="int">
+		select count(*) from book
+	</select>
+	<select id="a_booklist" parameterType="Map" resultType="com.hb.mybatis.BookVO">
+		select * from (select rownum r_num, a.* from(
+			select * from book order by b_num desc) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 도서 추가 -->
+	<insert id="a_bookAdd" parameterType="com.hb.mybatis.BookVO">
+		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{ISBN},#{s_url},#{l_url},sysdate)
+	</insert>
+	<!-- 희망도서 -->
+	<select id="a_applyBookCount" resultType="int">
+		select count(*) from book_apply
+	</select>
+	<select id="a_applyBookList" parameterType="Map" resultType="com.hb.mybatis.Book_ApplyVO">
+		select * from (select rownum r_num, a.* from(
+			select * from book_apply) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 희망도서 검색 -->
+	<select id="a_applyOnelist" resultType="com.hb.mybatis.Book_ApplyVO" parameterType="String">
+		select * from book_apply where ba_idx = #{ba_idx}
+	</select>
+	<!-- 희망도서 상태 변경 -->
+	<update id="a_applyState" parameterType="String">
+		update book_apply set ba_state = '1' where ba_idx = #{ba_idx}
+	</update>
+	<!-- 희망도서 책에 추가하기 -->
+	<insert id="a_bookApplyAdd" parameterType="com.hb.mybatis.BookVO">
+		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{ISBN},#{s_url},#{l_url})
+	</insert>
+	<!-- 희망도서 거절 사유 -->
+	<update id="a_bookApplyRefuseAp" parameterType="com.hb.mybatis.Book_ApplyVO">
+		update book_apply set refuse_reason=#{refuse_reason} , ba_state = '2' where ba_idx=#{ba_idx}
+	</update>
+	<!-- 공지사항 총 게시물 수 -->
+	<select id="a_noticeListCount" resultType="int">
+		select count(*) from notice
+	</select>
+	<!-- 공지사항 리스트 -->
+	<select id="a_noticeList" parameterType="Map" resultType="com.hb.mybatis.NoticeVO">
+		select * from (select rownum r_num, a.* from(
+			select * from notice order by n_idx desc) a
+			) where r_num between #{begin} and #{end}
+	</select>
+	<!-- 공지사항 게시물 추가 -->
+	<insert id="a_noticeAdd" parameterType="com.hb.mybatis.NoticeVO">
+		insert into notice values (notice_seq.nextval,#{n_subject},#{n_content},0,sysdate)
+	</insert>
+	<!-- 스터디룸 현황 가져오기  -->
+	<select id="studyroomstate" resultType="com.hb.mybatis.Studyroom_ReserveVO">
+		select * from studyroom_reserve where (select to_char(sysdate,'hh24:mi') from dual) > start_time and end_time > (select to_char(sysdate,'hh24:mi')from dual) and sr_state=2
 	</select>
 	
 	</mapper>

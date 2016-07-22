@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="../css/menuList.css" type="text/css" rel="stylesheet">
+<link href="/HbLib/css/menuList.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="main.jsp"/>
@@ -15,11 +15,11 @@
 		<!-- 메뉴 -->
 		<div id="menu">
 			<!-- menu 로고 -->
-			<div class="menu-header"><img src="../img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
+			<div class="menu-header"><img src="/HbLib/img/icon_menu_book.jpg" class="img"/><h3>게시판 관리</h3><hr/></div>
 			<div class="menu-wrap">
 				<ul class="submenu">
-					<li><span class="li-s">></span><a href="menu3_board_Notice.jsp">공지사항</a></li>
-					<li><span class="li-s">></span><a href="menu3_board_QNA.jsp">Q&A</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_noticeList">공지사항</a></li>
+					<li><span class="li-s">></span><a href="/HbLib/Controller?type=a_qnaList">Q&A</a></li>
 				</ul>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 			</div> 
 			<div class="page-header-f">
 				<form>
-					<input type="button" value="글쓰기" style="width: 150px;" onclick="javascript:location.href='menu3_board_Notice_add.jsp'"/>
+					<input type="button" value="글쓰기" style="width: 150px;" onclick="javascript:location.href='/HbLib/admin/menu3_board_Notice_add.jsp'"/>
 				</form>
 			</div>
 			<hr/>
@@ -47,8 +47,8 @@
 					<tbody>
 						<c:forEach var="k" items="${a_noticeList}">
 							<tr>
-								<td>${k.n_idx}</td>
-								<td>${k.n_subject}</td>								
+								<td>${pvo.totalRecord-k.r_num+1}</td>
+								<td><a href="/HbLib/Controller?type=noticeOneList&n_idx=${k.n_idx}&cPage=${cPage}">${k.n_subject}</a></td>								
 								<td>${k.n_date.substring(0,10)}</td>
 								<td>${k.n_hit}</td>
 							</tr>

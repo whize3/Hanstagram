@@ -164,7 +164,7 @@ div.colspan>div>div {
 							<div class="row">
 								<div class="cell2">책정보</div>
 								<div class="cell">
-									<img src="${vo.l_url }">
+									<img src="${vo.l_url}">
 								</div>
 							</div>
 							<div class="row">

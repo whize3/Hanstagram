@@ -1,7 +1,33 @@
 package com.hb.mybatis;
 
 public class Book_ApplyVO {
-private String ba_idx, ba_state, ba_date, id, b_subject, publisher, writer, category, ISBN, s_url, l_url;
+private String ba_idx, ba_state, ba_date, id, b_subject, publisher, writer, category, ISBN, s_url, l_url,refuse_reason;
+
+public Book_ApplyVO(String ba_idx, String ba_state, String ba_date, String id, String b_subject, String publisher,
+		String writer, String category, String iSBN, String s_url, String l_url, String refuse_reason) {
+	super();
+	this.ba_idx = ba_idx;
+	this.ba_state = ba_state;
+	this.ba_date = ba_date;
+	this.id = id;
+	this.b_subject = b_subject;
+	this.publisher = publisher;
+	this.writer = writer;
+	this.category = category;
+	ISBN = iSBN;
+	this.s_url = s_url;
+	this.l_url = l_url;
+	this.refuse_reason = refuse_reason;
+}
+
+public String getRefuse_reason() {
+	return refuse_reason;
+}
+
+public void setRefuse_reason(String refuse_reason) {
+	this.refuse_reason = refuse_reason;
+}
+
 public String getBa_idx() {
 	return ba_idx;
 }
@@ -17,21 +43,7 @@ public void setBa_state(String ba_state) {
 public String getBa_date() {
 	return ba_date;
 }
-public Book_ApplyVO(String ba_idx, String ba_state, String ba_date, String id, String b_subject, String publisher,
-		String writer, String category, String iSBN, String s_url, String l_url) {
-	super();
-	this.ba_idx = ba_idx;
-	this.ba_state = ba_state;
-	this.ba_date = ba_date;
-	this.id = id;
-	this.b_subject = b_subject;
-	this.publisher = publisher;
-	this.writer = writer;
-	this.category = category;
-	ISBN = iSBN;
-	this.s_url = s_url;
-	this.l_url = l_url;
-}
+
 public void setBa_date(String ba_date) {
 	this.ba_date = ba_date;
 }

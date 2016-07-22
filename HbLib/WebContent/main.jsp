@@ -17,7 +17,6 @@ $(function(){
 		$(this).addClass("on");
 	})
 	
-	
 });
 function moveBanner(a){
 	
@@ -66,7 +65,7 @@ function moveBanner(a){
 					<h2><a href="#">신규 도서</a></h2>
 					<div>
 					<div>
-						<ul style="width:2544px;left:0px;" id="bookbanner">
+						<ul style="width:2544px;left:0px;" id="newbookbanner">
 						<c:forEach var="k" items="${newbook}" begin="0" end="10">
 							<li class="newbookli">
 							<a href="">
@@ -89,13 +88,27 @@ function moveBanner(a){
 					</div>
 				</li>
 				<li>
-					<h2><a href="#">인기 도서</a></h2>
-					<div></div>
+					<h2><a href="#">인기  도서</a></h2>
+					<div>
+					<div>
+						<ul style="width:2544px;left:0px;" id="hotbookbanner">
+						<c:forEach var="k" items="${hotbook}" begin="0" end="10">
+							<li class="hotbookli">
+							<a href="">
+								<span class="bookCover"><img src="${k.s_url}"></span>
+								<span class="bookTit">${k.b_subject}</span>
+								<span class="writer">${k.writer}</span>
+							</a>
+						</li>
+						</c:forEach>
+						</ul>
+					</div>
+					</div>
 					<div class="bookBtn">
-					<a href="#" class="pre">
+					<a href="#" class="hotbookpre">
 						<img src="./img/main_prev.png">
 					</a>
-					<a href="#" class="next">
+					<a href="#" class="hotbooknext">
 						<img src="./img/main_next.png">
 					</a>
 					</div>
@@ -142,11 +155,11 @@ function moveBanner(a){
 				</c:forEach>
 				</li>
 			</ul>
-			<p>스터디룸 이용 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
+			<p>스터디룸 이용 현황 <a href="/HbLib/studyroom/studyRoomMain.jsp"><span class="currentType">이용안내</span></a></p>
 			<ul>
-				<li>1층 : 1/3</li>
-				<li>2층 : 0/4</li>
-				<li>3층 : 2/4</li>
+				<li>1층 : ${studyroom1}/3</li>
+				<li>2층 : ${studyroom2}/4</li>
+				<li>3층 : ${studyroom3}/4</li>
 			</ul>
 		</div>
 	</div>

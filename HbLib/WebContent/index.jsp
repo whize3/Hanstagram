@@ -10,12 +10,6 @@
 	function letsgo() {
 		location.href="Controller?type=main";
 	}
-	$(function() {
-		
-	});
-	/* $(document).on("click", ".test", function() {
-		$(".myaccount").css({"display" : "inline"});
-	}); 클릭했을때 개인정보 불러오는 function*/
 </script>
 
 </head>

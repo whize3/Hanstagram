@@ -6,11 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="/HbLib/css/main.css" rel="stylesheet">
+<link href="/HbLib/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<jsp:useBean id="admin" class="com.hb.mybatis.AdminVO" scope="session"/>
-<jsp:setProperty property="*" name="admin"/>
+
 	<div class="header">
 		<nav class="navbar">
 			<div class="container">
