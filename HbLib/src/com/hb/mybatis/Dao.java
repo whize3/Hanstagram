@@ -47,10 +47,7 @@ public class Dao {
 	public BookVO detisearch (String b_num){
 		BookVO bookvo = new BookVO();
 		bookvo =ss.selectOne("deti", b_num);
-<<<<<<< HEAD
 		ss.close();
-=======
->>>>>>> branch 'master' of https://github.com/whize3/Practice.git
 		return bookvo;
 	}
 	// 인기도서
