@@ -185,6 +185,11 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="getTime" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="Map">
 		select start_time, end_time from studyroom_reserve where sr_date=#{date} and s_num=#{s_num}
 	</select>
+	<!-- 예약결과 가져오기 -->	
+	<select id="getResult" resultType="com.hb.mybatis.Studyroom_ReserveVO" parameterType="com.hb.mybatis.Studyroom_ReserveVO">
+		select * from studyroom_reserve where id=#{id} and sr_date=#{sr_date} and start_time=#{start_time} and end_time=#{end_time} and s_num=#{s_num} and sr_state='1'
+	</select>
+	
 	<!-- 공지사항 가져오기  -->
 	<select id="noticelist" resultType="com.hb.mybatis.NoticeVO">
 		select * from notice

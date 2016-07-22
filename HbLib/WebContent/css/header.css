@@ -50,14 +50,14 @@
 	}
 	
 	/* 검색바 */
-	#keyword{
+	#keyword !important{
 		position:relative;
 		bottom:10px;
 		left:10px;
 		border:0;
 		outline: none;
-		width:350px;
-		height:20px;
+		width:350px !important;
+		height:20px !important;
 		font-size:15px;
 	}
 	#searchBtn{
@@ -147,3 +147,60 @@
 	#subMenu0{
 		
 	}
+	#name:HOVER{cursor:pointer;font-weight:bold;}
+.bubble 
+{
+	z-index:1000;
+position: absolute;
+width: 280px;
+height: 160px;
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+border: #7F7F7F solid 1px;
+top:49px;
+right:91px;
+}
+
+.bubble div{
+	width:219px;
+	display: block;
+	height: 150px;
+	margin:0 auto;
+	
+}
+.bubble p{
+	font-size:15px;
+}
+.bubble #id{
+	font-weight:bold;
+}
+.bubble:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 14px 20px;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+top: -20px;
+left: 189px;
+}
+
+.bubble:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 14px 20px;
+border-color: #7F7F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+top: -21px;
+left: 189px;
+}
