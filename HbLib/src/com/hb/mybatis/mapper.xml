@@ -13,6 +13,9 @@
 	      	<when test="idx ==2">where publisher like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==3">where b_subject   like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==4">where category like '%' || #{keyword} || '%'</when>
+	      	<when test="desearch ==5"> where  writer</when>
+	      	<when test="desearch ==6"> where  b_subject </when>
+	      	<when test="desearch ==7"> where  publisher</when>
 	      </choose>
 	</select>
 	<!-- 상세보기  -->
