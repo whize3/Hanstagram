@@ -19,6 +19,15 @@ function modify_go(f) {
 		alert("권한이 없습니다.");
 	}
 }
+function comment_go(f) {
+	var login_id = "<c:out value="${user.id}" />";
+	if(login_id===""){
+		alert("로그인 해주세요");
+	}else{
+		f.action = "/HbLib/Controller?type=writeqcomment";
+		f.submit();
+	}
+}
 function delete_go(f) {
 	var login_id = "<c:out value="${user.id}" />";
 	var writer = "<c:out value="${qna.id}" />";
@@ -101,9 +110,11 @@ function delete_go(f) {
 						
 						</div>
 						<div class="q_comment_write">
-							<form method="post" action="ans_write.jsp">
-								<textarea rows="4" cols="55" name="content"></textarea><br/>
-								<input type="submit" value="댓글쓰기"/> 
+							<form method="post" >
+								<textarea rows="4" cols="55" name="qc_content"></textarea><br/>
+								<input type="hidden" name="id" value="${user.id}"/>
+								<input type="hidden" name="q_idx" value="${qna.q_idx}"/>
+								<input type="button" value="댓글쓰기" onclick="comment_go(this.form)"/> 
 							</form>
 							<br/>
 						</div>

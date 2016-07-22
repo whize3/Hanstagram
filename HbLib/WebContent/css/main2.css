@@ -226,16 +226,16 @@
 	    white-space: nowrap;
 	    text-overflow: ellipsis;
 	}
-	#books ul > li .bookBtn{
+	#books ul li .bookBtn{
 		position: absolute;
-	    top: 150px;
+		top: 150px;
 	    left: 0;
 	}
-	#books ul > li .bookBtn .pre{
+	#books ul  li .bookBtn .newbookpre{
 		position:absolute;
 		left:22px;
 	}
-	#books ul > li .bookBtn .next{
+	#books ul  li .bookBtn .newbooknext{
 		position:absolute;
 		right:22px;
 	}

@@ -9,20 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/HbLib/css/main2.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/HbLib/main.js"></script>
 <script type="text/javascript">
 $(function(){
-	$(".bookBtn a").click(function(){
-		if($(this).hasClass("pre")){
-			console.log("pre");
-		}else{
-			console.log("next");
-		}
-	});
-	
 	$("#notice li").click(function(){
 		$("#notice .on").removeClass("on");
 		$(this).addClass("on");
 	})
+	
+	
 });
 function moveBanner(a){
 	
@@ -71,50 +66,24 @@ function moveBanner(a){
 					<h2><a href="#">신규 도서</a></h2>
 					<div>
 					<div>
-						<ul style="width:2544px;left:0px;">
-						<li>
+						<ul style="width:2544px;left:0px;" id="bookbanner">
+						<c:forEach var="k" items="${newbook}" begin="0" end="10">
+							<li class="newbookli">
 							<a href="">
-								<span class="bookCover"><img src="./img/8950965410_1.jpg"></span>
-								<span class="bookTit">니시우라 사진관의 비밀 : 미카미 엔  장편소설</span>
-								<span class="writer">삼상연</span>
+								<span class="bookCover"><img src="${k.l_url}"></span>
+								<span class="bookTit">${k.b_subject}</span>
+								<span class="writer">${k.writer}</span>
 							</a>
 						</li>
-						<li>
-							<a href="">
-								<span class="bookCover"><img src="./img/8950965410_1.jpg"></span>
-								<span class="bookTit">니시우라 사진관의 비밀 : 미카미 엔  장편소설</span>
-								<span class="writer">삼상연</span>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="bookCover"><img src="./img/8950965410_1.jpg"></span>
-								<span class="bookTit">니시우라 사진관의 비밀 : 미카미 엔  장편소설</span>
-								<span class="writer">삼상연</span>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="bookCover"><img src="./img/8950965410_1.jpg"></span>
-								<span class="bookTit">니시우라 사진관의 비밀 : 미카미 엔  장편소설</span>
-								<span class="writer">삼상연</span>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="bookCover"><img src="./img/8950965410_1.jpg"></span>
-								<span class="bookTit">니시우라 사진관의 비밀 : 미카미 엔  장편소설</span>
-								<span class="writer">삼상연</span>
-							</a>
-						</li>
+						</c:forEach>
 						</ul>
 					</div>
 					</div>
 					<div class="bookBtn">
-					<a href="#" class="pre">
+					<a href="#" class="newbookpre">
 						<img src="./img/main_prev.png">
 					</a>
-					<a href="#" class="next">
+					<a href="#" class="newbooknext">
 						<img src="./img/main_next.png">
 					</a>
 					</div>
