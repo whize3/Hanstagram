@@ -157,9 +157,9 @@ function moveBanner(a){
 			</ul>
 			<p>스터디룸 이용 현황 <a href="#"><span class="currentType">이용안내</span></a></p>
 			<ul>
-				<li>1층 : 1/3</li>
-				<li>2층 : 0/4</li>
-				<li>3층 : 2/4</li>
+				<li>1층 : ${studyroom1}/3</li>
+				<li>2층 : ${studyroom2}/4</li>
+				<li>3층 : ${studyroom3}/4</li>
 			</ul>
 		</div>
 	</div>

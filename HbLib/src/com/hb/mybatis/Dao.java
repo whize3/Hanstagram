@@ -318,7 +318,10 @@ public class Dao {
 			ss.insert("qcommentwrite", qcvo);
 			ss.close();
 		}
-
+	// 스터디룸 현황
+		public List<Studyroom_ReserveVO> getStudyroomState(){
+			return ss.selectList("studyroomstate");
+		}
 }
 
 	
