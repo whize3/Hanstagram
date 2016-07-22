@@ -24,6 +24,57 @@
 	padding-top: 100px;
 	padding-left: 150px;
 }
+a.button {
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  padding: 10px 10px 0px 10px;
+  margin: 5px 5px 5px 55px;
+  display: inline-block;
+  float: left;
+  text-decoration: none;
+   height: 27px; 
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  background-color: #3a57af; 
+  -webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+  -moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+  box-shadow: 0 3px rgba(58,87,175,.75);
+  transition: all 0.1s linear 0s; 
+  top: 0px;
+  position: relative;
+}
+a.button:hover {
+  top: 3px;
+  background-color:#2e458b;
+  -webkit-box-shadow: none; 
+  -moz-box-shadow: none; 
+  box-shadow: none;
+  
+}
+input[type=text],input[type=password]{
+  height: 20px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: -5px;
+  margin-top: 13px; 
+  padding-left: 10px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+  color: #4c4c4c;
+  text-align: center;
+  padding-top: 10px;
+  margin :0;
+}
 </style>
 <script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -300,26 +351,26 @@ $(function() {
 				<form name="inForm" method="post" id="inForm">
 					<table>
 						<tr>
-							<td width="150">아이디</td>
-							<td><input type="text" name="id" id="id" /><span class="id_chk">중복검사여부</span>
+							<td width="150"><h3>아이디</h3></td>
+							<td><input type="text" name="id" id="id" />&nbsp;&nbsp;<span class="id_chk">중복검사여부</span></td>
 						</tr>
 						<tr>
-							<td>이름</td>
+							<td><h3>이름</h3></td>
 							<td><input type="text" name="name" id="name" /></td>
 						</tr>
 						<tr>
-							<td>비밀번호</td>
+							<td><h3>비밀번호</h3></td>
 							<td><input type="password" name="pwd" id="pwd" /></td>
 						</tr>
 						<tr>
-							<td>비밀번호확인</td>
+							<td><h3>비밀번호확인</h3></td>
 							<td>
 								<input type="password" name="pwd_chk" id="pwd_chk" />
 								<span class="pwd_chk"></span>
 							</td>
 						</tr>
 						<tr>
-							<td>생년월일</td>
+							<td><h3>생년월일</h3></td>
 							<td>
 								<select name="birthdayYear" id="birthdayYear"></select>
 								<select name="birthdayMonth" id="birthdayMonth"></select>
@@ -327,14 +378,14 @@ $(function() {
 							</td>
 						</tr>
 						<tr>
-							<td>성별</td>
+							<td><h3>성별</h3></td>
 							<td>
 								<input type="radio" name="gender" id="man" value="1" /> 남 
 								<input type="radio" name="gender" id="woman" value="2" /> 여
 							</td>
 						</tr>
 						<tr>
-							<td>이메일</td>
+							<td><h3>이메일</h3></td>
 							<td>
 								<input type="text" name="email_1" id="email_1" size="10" />@
 								<input type="text" name="email_2" id="email_2" size="10" readonly />
@@ -349,7 +400,7 @@ $(function() {
 							</td>
 						</tr>
 						<tr>
-							<td>tel</td>
+							<td><h3>tel</h3></td>
 							<td>
 								<input type="text" name="tel1" id="tel1" size="3" maxlength="3" />
 								<input type="text" name="tel2" id="tel2" size="4" maxlength="4" />
@@ -357,11 +408,11 @@ $(function() {
 							</td>
 						</tr>
 						<tr>
-							<td>주소</td>
+							<td><h3>주소</h3></td>
 							<td><input type="text" name="addr" id="addr" /></td>
 						</tr>
 						<tr>
-							<td colspane="2"><input type="button" value="회원가입" id="join_ok" /></td>
+							<td colspane="2"><a href="#" id="join_ok" class="button">회원가입</a></td>
 						</tr>
 					</table>
 				</form>

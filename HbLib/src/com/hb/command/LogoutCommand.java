@@ -10,7 +10,7 @@ public class LogoutCommand implements Command {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
-		return "index.jsp";
+		return "/HbLib/index.jsp";
 		
 	}
 

@@ -6,6 +6,59 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+a.button {
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  padding: 10px 10px 0px 10px;
+  margin: 5px 5px 5px 5px;
+  display: inline-block;
+  float: left;
+  text-decoration: none;
+   height: 27px; 
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  background-color: #3a57af; 
+  -webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+  -moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+  box-shadow: 0 3px rgba(58,87,175,.75);
+  transition: all 0.1s linear 0s; 
+  top: 0px;
+  position: relative;
+}
+a.button:hover {
+  top: 3px;
+  background-color:#2e458b;
+  -webkit-box-shadow: none; 
+  -moz-box-shadow: none; 
+  box-shadow: none;
+  
+}
+input[type=text],input[type=password]{
+  height: 29px; 
+  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
+  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
+  background-color: #fff; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+  border: solid 1px #cbc9c9;
+  margin-left: -5px;
+  margin-top: 8px; 
+  padding-left: 10px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+  color: #4c4c4c;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+</style>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -75,39 +128,39 @@ history.go(-1)
 					<div align="left">
 						<table class="myinfoview">
 							<tr>
-								<td width="100">아이디</td>
+								<td width="100"><h3>아이디</h3></td>
 								<td width="300"><input type="text" name="id" id="id" size="30" value="${list.id }" readonly/></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">이름</td>
+								<td width="100"><h3>이름</h3></td>
 								<td><input type="text" name="name" value="${list.name }" size="30" readonly /></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">비밀번호</td>
+								<td width="100"><h3>비밀번호</h3></td>
 								<td><input type="password" name="pwd" size="30" id="pwd"/></td>
-								<td width="120"><input type="button" value="비밀번호변경" id="change_pwd" /></td>
+								<td width="120"><a href="#" id="change_pwd" class="button">비밀번호변경</a></td>
 							</tr>
 							<tr>
-								<td>생년월일</td>
+								<td><h3>생년월일</h3></td>
 								<td><input type="text" name="jumin" size="30" value="${list.jumin }" readonly /></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td width="100">이메일</td>
+								<td width="100"><h3>이메일</h3></td>
 								<td><input type="text" name="email" size="30" id="email" value="${list.email }"/></td>
-								<td><input type="button" value="이메일변경" id="change_email" /></td>
+								<td><a href="#" id="change_email" class="button">이메일변경</a></td>
 							</tr>
 							<tr>
-								<td width="100">전화번호</td>
+								<td width="100"><h3>전화번호</h3></td>
 								<td><input type="text" name="tel" size="30" id="tel" value="${list.tel }"/></td>
-								<td><input type="button" value="전화번호변경" id="change_tel" /></td>
+								<td><a href="#" id="change_tel" class="button">전화번호변경</a></td>
 							</tr>
 							<tr>
-								<td width="100">주소</td>
+								<td width="100"><h3>주소</h3></td>
 								<td><input type="text" name="addr" size="30" value="${list.addr }"/></td>
-								<td><input type="button" value="주소변경" /></td>
+								<td><a href="#" class="button">주소변경</a></td>
 							</tr>
 						</table>
 					</div>

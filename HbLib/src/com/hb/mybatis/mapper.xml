@@ -10,6 +10,7 @@
 		select * from book
 	      <choose>
 	      	<when test="idx ==0">  </when>
+	      	<when test="idx ==0"></when>
 	      	<when test="idx ==1">where writer like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==2">where publisher like '%' || #{keyword} || '%' </when>
 	      	<when test="idx ==3">where b_subject   like '%' || #{keyword} || '%' </when>
@@ -32,10 +33,6 @@
 		<insert id="apply" parameterType="com.hb.mybatis.Book_ApplyVO">
 			insert into book_apply values(book_apply_seq.nextval, 0, sysdate, #{id}, #{b_subject}, #{publisher}, #{writer}, #{category}, #{ISBN}, #{s_url},#{l_url})
 		</insert>
-		
-			
-
-
 		<!-- 로그인  -->
 		<select id="login" parameterType="com.hb.mybatis.UsersVO" resultType="com.hb.mybatis.UsersVO">
 			select * from users where id=#{id} and pwd=#{pwd}
@@ -212,9 +209,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</select>
 	<!-- QNA COMMENT 가져오기  -->
 	<select id="qclist" parameterType="Map" resultType="com.hb.mybatis.Q_CommentVO">
-		select * from (select rownum r_num, a.* from(
-			select * from q_comment where q_idx=#{q_idx} order by qc_idx desc) a
-			) where r_num between #{begin} and #{end}
+		select * from q_comment where q_idx=#{q_idx}
 	</select>
 	<!-- qna hit 수 업데이트  -->
 	<update id="qnahit" parameterType="com.hb.mybatis.QnaVO">

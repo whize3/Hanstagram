@@ -19,28 +19,11 @@ public class OneQnaCommand implements Command {
 		String q_idx = request.getParameter("q_idx");
 		Dao dao = new Dao();
 		
-		//댓글 페이징
-		Paging pvo = new Paging();
-		String qPage = request.getParameter("qPage");
 		
-		if(qPage != null){
-			pvo.setNowPage(Integer.parseInt(qPage));
-		}
 		
-		pvo.setTotalRecord(dao.qnaTotalCount());
-		pvo.setTotalPage();
-		
-		pvo.setBegin((pvo.getNowPage()-1)*pvo.getNumPerPage()+1);
-		pvo.setEnd((pvo.getBegin()-1)+pvo.getNumPerPage());
-		
-		Map<String, Integer> map = new HashMap<>();
-		
-		map.put("begin", pvo.getBegin());
-		map.put("end", pvo.getEnd());
-		map.put("q_idx", Integer.parseInt(q_idx));
 		
 		//댓글 불러오기
-		List<Q_CommentVO> qclist = dao.getQ_Comment(map);
+		List<Q_CommentVO> qclist = dao.getQ_Comment(q_idx);
 		
 		//글 내용 가져오기
 		QnaVO qna = dao.getOneQna(q_idx);
@@ -50,7 +33,7 @@ public class OneQnaCommand implements Command {
 		qna.setQa_hit(String.valueOf(hit));
 		dao.qnaHit(qna);
 		
-		request.setAttribute("qPage", qPage);
+		
 		request.setAttribute("qclist", qclist);
 		request.setAttribute("qna", qna);
 		request.setAttribute("cPage", request.getParameter("cPage"));
