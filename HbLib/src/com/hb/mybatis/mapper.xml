@@ -69,7 +69,7 @@
 book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q order by bd_redate desc) where r_num between #{begin} and #{end} 
 	</select>
 	<select id="getmycomment" resultType="com.hb.mybatis.MyDrawVO" parameterType="String">
-		select b.bc_idx,a.b_subject,b.bc_date from (select b_num, b_subject from book where b_num in(select b_num from b_comment where id=#{id})) a, b_comment b where a.b_num=b.b_num
+		select b.bc_idx,a.b_subject,b.bc_date,a.b_num from (select b_num, b_subject from book where b_num in(select b_num from b_comment where id=#{id})) a, b_comment b where a.b_num=b.b_num
 	</select>
 	<select id="getmycommentcnt" resultType="String" parameterType="String">
 		select count(*) from b_comment where id=#{id}

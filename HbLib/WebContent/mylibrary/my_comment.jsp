@@ -52,7 +52,7 @@ history.go(-1)
 								<c:forEach var="k" items="${list }">
 								<tr>
 									<td>${k.bc_idx }</td>
-									<td>${k.b_subject }</td>
+									<td><a href="/HbLib/Controller?type=selectone&b_num=${k.b_num }">${k.b_subject }</a></td>
 									<td>${k.bc_date.substring(0,10) }</td>
 								</tr>
 								<tr>
