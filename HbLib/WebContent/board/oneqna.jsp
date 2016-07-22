@@ -82,6 +82,10 @@
 											value="${qna.qa_subject}">${qna.qa_subject}</td>
 
 									</tr>
+									<tr>
+										<td colspan="2" id="content"><pre>${qna.qa_content}</pre></td>
+
+									</tr>
 
 								</tbody>
 								<tfoot>
