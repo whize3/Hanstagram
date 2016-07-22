@@ -34,7 +34,14 @@
 			console.log("버블")
 		});
 		
-		
+		$(document).on("click",function(){
+			if($(this).attr("id")!="name"){
+				$(".bubble").hide();
+			}
+		});
+		$("#searchBtn").click(function(){
+			location.href="/HbLib/Controller?type=mainsearch&keyword="+$("#keyword").val()+"&option=main";
+		});
 	});
 </script>
 </head>

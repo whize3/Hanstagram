@@ -310,5 +310,15 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="studyroomstate" resultType="com.hb.mybatis.Studyroom_ReserveVO">
 		select * from studyroom_reserve where (select to_char(sysdate,'hh24:mi') from dual) > start_time and end_time > (select to_char(sysdate,'hh24:mi')from dual) and sr_state=2
 	</select>
-	
+	<select id="mainsearch" resultType="com.hb.mybatis.BookVO" parameterType="Map">
+select * from book where 
+	 <choose>
+	 		<when test="option.equals('main')"> b_subject like '%' || #{keyword} || '%' or writer like '%' || #{keyword} || '%' or publisher like '%' || #{keyword} || '%' or isbn like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainsubject')"> b_subject like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainwriter')"> writer like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainpublisher')"> publisher like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainisbn')"> isbn like '%' || #{keyword} || '%'</when>
+		</choose>
+	</select>
+	 
 	</mapper>

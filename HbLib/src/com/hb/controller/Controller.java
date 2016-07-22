@@ -23,7 +23,6 @@ import com.hb.command.AdminMemberOnelistCommand;
 import com.hb.command.AdminMemberSearchCommand;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.ApplyListCommand;
-import com.hb.command.BookAddCommand;
 import com.hb.command.BookComment;
 import com.hb.command.BookListCommand;
 import com.hb.command.Command;
@@ -32,6 +31,7 @@ import com.hb.command.JoinCheckIdCommand;
 import com.hb.command.LoginCommand;
 import com.hb.command.LogoutCommand;
 import com.hb.command.MainCommand;
+import com.hb.command.MainSearchCommand;
 import com.hb.command.RankBookCommand;
 import com.hb.command.ReserveResultCommand;
 import com.hb.command.ReserveRoomCommand;
@@ -162,6 +162,8 @@ public class Controller extends HttpServlet {
 			comm = new Admin_sdReserveCommand();
 		}else if(type.equals("stateModi")){
 			comm = new StateModiCommand();
+		}else if(type.equals("mainsearch")){
+			comm = new MainSearchCommand();
 		}if(type.equals("adminLogin")){
 			comm = new AdminLoginCommand();
 		}else if(type.equals("a_memberlist")){
