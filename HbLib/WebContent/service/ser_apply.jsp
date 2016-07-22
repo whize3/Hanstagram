@@ -7,6 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <title>Insert title here</title>
+<style type="text/css">
+table {border-top:solid 2px #838383;width:100%;border-spacing:0;}
+table th {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#f9f9f9;font-weight: bold;}
+table th:first-child{border-left:none;}
+table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#fff;  font-size: 15px;}
+table td:first-child{border-left:none;}
+input[type=text]{height: 25px;}
+input[type=button]{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
+
+
+ </style>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 
@@ -21,7 +32,7 @@
 			$.getJSON(url, function(data) {
 				var result = "<h2>검색결과</h2><br/>";
 				result +="<table><tr><th></th><th>제목</th><th>저자</th><th>분류</th>"+
-					"<th>출판사</th><th>고유번호</th></tr>";
+					"<th>출판사</th><th>고유번호</th><th></th></tr>";
 				
 				for (var i in data.channel.item)
 				{
@@ -111,9 +122,8 @@ history.go(-1)
 					<div align="center">
 						<table >
 							<tr>
-								<td width="100">검색어</td>
-								<td><input type="text" name="pwd" size="30" id="q" /></td>
-								<td width="120"><input type="button" value="검색" id="go" ></td>
+								<td><input type="text" name="pwd" size="60" id="q" height="150" />
+								<input type="button" value="검색" id="go" ></td>
 							</tr>
 						</table>
 					</div>
