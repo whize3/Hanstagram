@@ -5,6 +5,16 @@
 	pageEncoding="utf-8"%>
 <%@ include file="../header.jsp"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+if(id==null){
+	%>
+	<script>alert('로그인이 필요한 서비스 입니다.');
+		location.href="/HbLib/Controller?type=main";
+	</script>
+	<%
+}else{
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,6 +81,7 @@
 	border:0;
 	cursor:pointer;
 	background:#B2CCFF;
+	margin-top:10px;
 }
 .room:HOVER,
 .selectedRoom,
@@ -358,7 +369,7 @@ $("#timeArea").html(result);
 				<span>ID : </span><input type="text" name="id" value="<%=id %>" readonly="readonly">
 			</p>
 			<p>
-				<span>이름 : </span><input type="text" name="name" value="" readonly="readonly">
+				<span>이름 : </span><input type="text" name="name" value="<%=uvo.getName() %>" readonly="readonly">
 			</p>
 			<p>
 				<span>날짜 : </span><input type="text" name="rDate" value="" readonly="readonly">
@@ -379,3 +390,7 @@ $("#timeArea").html(result);
 </form>
 </body>
 </html>
+
+<%
+}
+%>

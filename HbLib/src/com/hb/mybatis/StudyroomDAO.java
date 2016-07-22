@@ -36,4 +36,34 @@ public class StudyroomDAO {
 			ss.rollback();
 		}
 	}
+	public List<Studyroom_ReserveVO> getReserveList(){
+		List<Studyroom_ReserveVO> list = ss.selectList("reserveList");
+		return list;
+	}
+	public void updateTime(){
+		
+		try {
+			ss.update("srUpdate");
+			ss.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			ss.rollback();
+		}
+	}
+	
+	public void updateState(String sr_idx){
+
+		try {
+			ss.update("srUpdate",sr_idx);
+			ss.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			ss.rollback();
+		}
+	}
+	public Studyroom_ReserveVO getResult(Studyroom_ReserveVO rvo){
+		Studyroom_ReserveVO vo = ss.selectOne("getResult", rvo); 
+		return vo;
+	}
+
 }
