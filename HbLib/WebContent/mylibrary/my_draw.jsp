@@ -13,7 +13,7 @@
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_01").css("background-color", "gray")
 		$("#btn1").click(function(){
-			location.href="/HbLib/Controller?type=history&id=aaa";
+			location.href="/HbLib/Controller?type=history&id=${user.id}";
 		});
 		$("#btn2").click(function(){
 			location.href="/HbLib/guide/libinfo3.jsp";

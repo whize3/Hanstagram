@@ -15,9 +15,9 @@ public class MyInfoUpdateCommand implements Command{
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 
 		String pathgo=null;
-
+		Dao dao = new Dao();
 		if(request.getParameter("change").equals("change_pwd")){
-			Dao dao = new Dao();
+			System.out.println(request.getParameter("change")+request.getParameter("pwd"));
 			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
 			Map<String , String> map = new HashMap<>();
@@ -27,7 +27,6 @@ public class MyInfoUpdateCommand implements Command{
 			dao.getMyInfoUpdate(map);
 			pathgo="/Controller?type=myinfo&id="+id;
 		}else if(request.getParameter("change").equals("change_email")){
-			Dao dao = new Dao();
 			String id = request.getParameter("id");
 			String email = request.getParameter("email");
 			Map<String , String> map = new HashMap<>();
@@ -37,7 +36,6 @@ public class MyInfoUpdateCommand implements Command{
 			dao.getMyInfoUpdate(map);
 			pathgo="/Controller?type=myinfo&id="+id;
 		}else if(request.getParameter("change").equals("change_tel")){
-			Dao dao = new Dao();
 			String id = request.getParameter("id");
 			String tel = request.getParameter("tel");
 			Map<String , String> map = new HashMap<>();
