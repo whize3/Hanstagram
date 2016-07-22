@@ -88,7 +88,7 @@ function moveBanner(a){
 					</div>
 				</li>
 				<li>
-					<h2><a href="#">인기 도서</a></h2>
+					<h2><a href="#">인기  도서</a></h2>
 					<div>
 					<div>
 						<ul style="width:2544px;left:0px;" id="hotbookbanner">
