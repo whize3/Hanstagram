@@ -64,7 +64,7 @@
 						</c:forEach>
 						</c:if>
 						<c:if test="${empty bdvo}">
-							<tr><td colspan="5">대출 내역이 없습니다.</td></tr>
+							<tr><td colspan="5" style="text-align: center;">대출 내역이 없습니다.</td></tr>
 						</c:if>
 					</tbody>
 				</table>
@@ -93,7 +93,7 @@
 						</c:forEach>
 						</c:if>
 						<c:if test="${empty reserveList}">
-							<tr><td colspan="5">예약 내역이 없습니다.</td></tr>
+							<tr><td colspan="5" style="text-align: center;">예약 내역이 없습니다.</td></tr>
 						</c:if>
 					</tbody>
 				</table>

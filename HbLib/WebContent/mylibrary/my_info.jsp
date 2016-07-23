@@ -86,7 +86,7 @@ h3 {
 			}else{
 				var chk = confirm("이메일을 변경합니다.");
 				if(chk){
-					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&email="+$("#email").val()+"&change=change_email";
+					location.href="/HbLib/Controller?type=myupdate&id="+$("input[name=id]").val()+"&email="+$("#email").val()+"&change=change_email";
 				}else
 					$("#email").focus();
 				return;
@@ -99,7 +99,7 @@ h3 {
 			}else{
 				var chk = confirm("전화번호를 변경합니다.");
 				if(chk){
-					location.href="/HbLib/Controller?type=myupdate&id="+$("#id").val()+"&tel="+$("#tel").val()+"&change=change_tel";
+					location.href="/HbLib/Controller?type=myupdate&id="+$("input[name=id]").val()+"&tel="+$("#tel").val()+"&change=change_tel";
 				}else
 					$("#tel").focus();
 				return;
