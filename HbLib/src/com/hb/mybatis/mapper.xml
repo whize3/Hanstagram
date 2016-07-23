@@ -33,7 +33,7 @@
 	
 	<!-- 신규도서 리스트  -->
 	<select id="newbook" resultType="com.hb.mybatis.BookVO">
-		select * from book where b_date> sysdate-90
+		select * from book where b_date> sysdate-90 order by b_date desc
 	</select>
 	<select id="newbookstate1" resultType="Integer" parameterType="String">
 		select count(b_state) from book_draw where b_num=#{b_num} and b_state=1
