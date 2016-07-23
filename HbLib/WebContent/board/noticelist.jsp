@@ -15,6 +15,100 @@
 		$("#navi_01").css("background-color", "gray")
 	});	
 </script>
+<style type="text/css">
+<style>
+.table-wrap .table{
+border-bottom:0;}
+table{
+border-collapse: 0;
+border-spacing: 0;
+border:0;
+}
+table thead tr{
+background-color:#dedede !important;
+}
+table td{
+border-bottom: 1px solid #dedede;
+}
+tfoot td{
+border-bottom:0;
+
+}
+thead th{
+height:35px;
+}
+tbody td{
+padding-left:16px;
+height:30px;
+}
+
+
+table tfoot ul.paging li a:HOVER{
+border:1px solid #7383bf;
+background:#fff;
+color:#000000 !important;
+}
+table tfoot ul.paging li a{
+	border:0;
+	
+	
+}
+tfoot td{
+height:80px;
+}
+#writeBtn:HOVER{
+	background:#7383bf;
+	cursor:pointer;
+}
+#writeBtn{
+	background:#a3b4f3;
+	color:#fff;
+	border:0;
+	width:100px;
+	height:30px;
+}
+.paging{
+    display: block;
+    margin: 0 auto;
+    height: 31px;
+    width: 300px;
+    margin-top:80px;
+}
+table tfoot tr:LAST-CHILD{
+height:50px;
+}
+.now{
+	display: block;
+    padding: 3px 7px;
+    background: #7383bf;
+    font-weight: bold;
+    list-style: none;
+    color:#fff;
+}
+.paging li:LAST-CHILD a, .paging li:FIRST-CHILD a{
+	border: 1px solid #545454;
+	
+}
+.paging li:LAST-CHILD a:HOVER, .paging li:FIRST-CHILD a:HOVER{
+background:#ddd;
+border:0;
+font-weight: normal;
+}
+
+tfoot tr td div{
+width:100%;
+height:50%;
+display:block;
+}
+#btnArea{
+width:100%;
+height:50px;
+display: block;
+position: relative;
+    right: -264px;
+}
+</style>
+</style>
 </head>
 <body>
 	
