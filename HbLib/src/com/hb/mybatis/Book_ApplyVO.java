@@ -1,10 +1,11 @@
 package com.hb.mybatis;
 
 public class Book_ApplyVO {
-private String ba_idx, ba_state, ba_date, id, b_subject, publisher, writer, category, ISBN, s_url, l_url,refuse_reason;
+private String ba_idx, ba_state, ba_date, id, b_subject, publisher, writer, category, isbn, s_url, l_url,refuse_reason;
+
 
 public Book_ApplyVO(String ba_idx, String ba_state, String ba_date, String id, String b_subject, String publisher,
-		String writer, String category, String iSBN, String s_url, String l_url, String refuse_reason) {
+		String writer, String category, String isbn, String s_url, String l_url, String refuse_reason) {
 	super();
 	this.ba_idx = ba_idx;
 	this.ba_state = ba_state;
@@ -14,10 +15,18 @@ public Book_ApplyVO(String ba_idx, String ba_state, String ba_date, String id, S
 	this.publisher = publisher;
 	this.writer = writer;
 	this.category = category;
-	ISBN = iSBN;
+	this.isbn = isbn;
 	this.s_url = s_url;
 	this.l_url = l_url;
 	this.refuse_reason = refuse_reason;
+}
+
+public String getIsbn() {
+	return isbn;
+}
+
+public void setIsbn(String isbn) {
+	this.isbn = isbn;
 }
 
 public String getRefuse_reason() {
@@ -77,9 +86,7 @@ public String getCategory() {
 public void setCategory(String category) {
 	this.category = category;
 }
-public String getISBN() {
-	return ISBN;
-}
+
 public String getS_url() {
 	return s_url;
 }
@@ -92,9 +99,7 @@ public String getL_url() {
 public void setL_url(String l_url) {
 	this.l_url = l_url;
 }
-public void setISBN(String iSBN) {
-	ISBN = iSBN;
-}
+
 
 public Book_ApplyVO() {
 	// TODO Auto-generated constructor stub

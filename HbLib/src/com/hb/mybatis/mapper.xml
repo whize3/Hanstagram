@@ -261,7 +261,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</select>
 	<!-- 도서 추가 -->
 	<insert id="a_bookAdd" parameterType="com.hb.mybatis.BookVO">
-		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{ISBN},#{s_url},#{l_url},sysdate)
+		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{isbn},#{s_url},#{l_url},sysdate)
 	</insert>
 	<!-- 희망도서 -->
 	<select id="a_applyBookCount" resultType="int">
@@ -282,7 +282,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</update>
 	<!-- 희망도서 책에 추가하기 -->
 	<insert id="a_bookApplyAdd" parameterType="com.hb.mybatis.BookVO">
-		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{ISBN},#{s_url},#{l_url})
+		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{isbn},#{s_url},#{l_url})
 	</insert>
 	<!-- 희망도서 거절 사유 -->
 	<update id="a_bookApplyRefuseAp" parameterType="com.hb.mybatis.Book_ApplyVO">

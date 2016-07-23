@@ -53,7 +53,7 @@
 }
 #content{
 	position: relative;
-	padding-left: 160px;
+    margin-left: 160px;
 }
 .page-header-f{
 	position: absolute;

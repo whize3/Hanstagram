@@ -33,7 +33,7 @@ public class AdminApplyOkCommand implements Command{
 		bookAdd.setPublisher(bavo.getPublisher());
 		bookAdd.setWriter(bavo.getWriter());
 		bookAdd.setCategory(bavo.getCategory());
-		bookAdd.setIsbn(bavo.getISBN());
+		bookAdd.setIsbn(bavo.getIsbn());
 		bookAdd.setS_url(bavo.getS_url());
 		bookAdd.setL_url(bavo.getL_url());
 		dao.bookApplyAdd(bookAdd);
