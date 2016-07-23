@@ -122,7 +122,7 @@ history.go(-1)
 						<table >
 							<tr>
 								<td><input type="text" name="pwd" size="60" id="q" height="150" />
-								<input type="button" value="검색" class="apply" ></td>
+								<input type="button" value="검색" class="apply" id="go"></td>
 							</tr>
 						</table>
 					</div>

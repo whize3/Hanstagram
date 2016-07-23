@@ -84,7 +84,6 @@
 			$(".bookAdd").hide();
 		});
 		$(document).on("click",".bookAdd",function(){
-			alert("here");
 			var isbn = $(this).attr("isbn");
 			var b_location = $("."+isbn+" .b_location").val();
 			console.log(b_location);
