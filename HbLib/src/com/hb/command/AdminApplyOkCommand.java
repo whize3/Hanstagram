@@ -24,8 +24,16 @@ public class AdminApplyOkCommand implements Command{
 		Book_ApplyVO bavo = new Book_ApplyVO();
 		bavo = dao.getApplyOneList(ba_idx);
 		dao.getApplyState(ba_idx);
-		
+		String s_url = bavo.getS_url();
+		String l_url = bavo.getL_url();
+		if(s_url==null){
+			s_url="";					
+		}
+		if(l_url==null){
+			l_url="";					
+		}
 		// 책 정보 추가하기
+		
 		BookVO bookAdd = new BookVO();
 		bookAdd.setB_num(b_num);
 		bookAdd.setB_subject(bavo.getB_subject());
@@ -34,8 +42,8 @@ public class AdminApplyOkCommand implements Command{
 		bookAdd.setWriter(bavo.getWriter());
 		bookAdd.setCategory(bavo.getCategory());
 		bookAdd.setIsbn(bavo.getIsbn());
-		bookAdd.setS_url(bavo.getS_url());
-		bookAdd.setL_url(bavo.getL_url());
+		bookAdd.setS_url(s_url);
+		bookAdd.setL_url(l_url);
 		dao.bookApplyAdd(bookAdd);
 		
 		

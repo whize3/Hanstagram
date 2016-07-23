@@ -156,13 +156,15 @@
 	#topMenu span{
 		
 	}
-	#profile img{
-		display:inline-block;
-		width:26px;
-		height:26px;
-		position: absolute;
-		top:6px;
-	}
+	#profile img {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 18px;
+    right: 100px;
+    
+}
 .bubble 
 {
 	text-align:left;

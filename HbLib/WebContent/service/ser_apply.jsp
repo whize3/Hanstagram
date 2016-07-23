@@ -14,7 +14,7 @@ table th:first-child{border-left:none;}
 table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#fff;  font-size: 15px;}
 table td:first-child{border-left:none;}
 input[type=text]{height: 25px;}
-input[type=button]{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
+.apply{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
 .mainview_c_btn{margin-bottom: 10px;}
 </style>
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
@@ -113,13 +113,13 @@ history.go(-1)
 				<div class="mainviewnavi">◆서비스이용 > 도서구입신청</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="신청현황" id="statebutton">						
+						<input type="button" value="신청현황" class="apply">						
 					</div>
 					<div align="center">
 						<table >
 							<tr>
 								<td><input type="text" name="pwd" size="60" id="q" height="150" />
-								<input type="button" value="검색" id="go" ></td>
+								<input type="button" value="검색" class="apply" ></td>
 							</tr>
 						</table>
 					</div>

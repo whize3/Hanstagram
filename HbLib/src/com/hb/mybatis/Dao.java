@@ -206,6 +206,7 @@ public class Dao {
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
 		List<BookVO> list = ss.selectList("a_booklist",map);
+		ss.close();
 		return list;
 	}
 	
@@ -225,6 +226,7 @@ public class Dao {
 	}
 	public List<Book_ApplyVO> getApplyBookList(Map<String, Integer> map){
 		List<Book_ApplyVO> list = ss.selectList("a_applyBookList",map);
+		ss.close();
 		return list;
 	}
 	

@@ -9,7 +9,7 @@
 </head>
 <script type="text/javascript">
 	alert("아이디 또는 비밀번호가 잘못되었습니다.");
-	location.href="login.jsp";
+	location.href="/HbLib/admin/login.jsp";
 </script>
 <body>
 

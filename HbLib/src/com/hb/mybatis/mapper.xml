@@ -273,7 +273,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</select>
 	<select id="a_applyBookList" parameterType="Map" resultType="com.hb.mybatis.Book_ApplyVO">
 		select * from (select rownum r_num, a.* from(
-			select * from book_apply) a
+			select * from book_apply order by ba_state asc) a
 			) where r_num between #{begin} and #{end}
 	</select>
 	<!-- 희망도서 검색 -->
@@ -286,7 +286,7 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	</update>
 	<!-- 희망도서 책에 추가하기 -->
 	<insert id="a_bookApplyAdd" parameterType="com.hb.mybatis.BookVO">
-		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{isbn},#{s_url},#{l_url})
+		insert into book values(book_seq.nextval,#{b_subject},#{b_location},#{publisher},#{writer},#{category},#{isbn},#{s_url},#{l_url},sysdate)
 	</insert>
 	<!-- 희망도서 거절 사유 -->
 	<update id="a_bookApplyRefuseAp" parameterType="com.hb.mybatis.Book_ApplyVO">
