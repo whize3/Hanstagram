@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+
+#table{
+	background:#fff;
+	width:655px;
+	border-collapse: 0;
+	border-spacing: 0;
+/* 	border-top:1px solid #dedede; */
+}
+
+#table th{
+	color:#666;
+	padding-left:5px;
+	width:25px;
+	font-weight:normal;
+	border-bottom: 1px solid #dedede;
+	font-size:12px;
+}
+#table td{
+	border-bottom: 1px solid #dedede;
+	padding:5px 11px;
+}
+
+#table tr{
+	height:20px;
+	text-align: left;
+	font-size:15px;
+}
+#table tr:FIRST-CHILD{
+	height:30px;
+}
+.hit{
+	position:relative;
+	right:-388px;
+}
+.hit,.date{
+	
+	font-size:13px;
+}
+#title{
+	height:30px;
+	font-weight: bold;
+}
+.content{
+	
+}
+tfoot tr td{
+	height:100px;
+	border:0 !important;
+}
+#table input[type=button]{
+	border:0;
+	width:150px;
+	height:30px;
+	display: inline-block;
+}
+#table input[type=button]:HOVER{
+	cursor:pointer;
+}
+#table input[name=list]{
+	background:#FF7F66;
+	color:#fff;
+	position:relative;
+	right:-321px;
+}
+#table input[name=modi],#table input[name=del]{
+	width:75px;
+	border:2px solid #FF7F66;
+	color:#FF7F66;
+	background:#fff;
+	font-weight: bold;
+	
+}
+.q_comment_write{
+	margin-top:50px;
+}
+textarea[name=qc_content]{
+	resize: none;
+	display: inline-block;
+}
+.q_comment{
+	position:absolute;
+	width:650px;
+	text-align: left;
+	margin-left:22px;
+	border-top:1px solid #dedede;
+}
+.re{
+background: #FF7F66;
+    border: 0;
+    color: #fff;
+    height: 50px;
+    position:relative;
+    top:-28px;}
+.c_id{
+	font-weight:bold;
+}
+
+.c_date{
+	top: -66px;
+    position: relative;
+    right: -550px;
+    font-size: 13px;
+    color:#565656;
+}

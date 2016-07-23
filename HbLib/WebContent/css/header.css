@@ -147,9 +147,25 @@
 	#subMenu0{
 		
 	}
-	#name:HOVER{cursor:pointer;font-weight:bold;}
+	#name:HOVER{cursor:pointer;text-decoration: underline;}
+	#profile{
+		width:26px;
+		height:26px;
+		display: inline-block;
+	}
+	#topMenu span{
+		
+	}
+	#profile img{
+		display:inline-block;
+		width:26px;
+		height:26px;
+		position: absolute;
+		top:6px;
+	}
 .bubble 
 {
+	text-align:left;
 	z-index:1000;
 position: absolute;
 width: 280px;
@@ -161,21 +177,50 @@ background: #FFFFFF;
 border-radius: 2px;
 border: #7F7F7F solid 1px;
 top:49px;
-right:91px;
+right:299px;
 }
 
 .bubble div{
-	width:219px;
-	display: block;
+	width:150px;
+	display: inline-block;
 	height: 150px;
-	margin:0 auto;
-	
+	margin-left:15px;
 }
 .bubble p{
+	font-size:13px;
+	margin:0;
+}
+.bubble p input[type=button]{
+	border:1px solid #dedede;
+	background:#fff;
+	color:#666;
+	font-size:12px;
+	position: absolute;
+	right:-100px;
+	
+}
+.bubble div,.bubble span{
+	margin-top:5px;
+}
+.bubble #topName,.bubble p:FIRST-CHILD{
+	margin-top:10px;
 	font-size:15px;
 }
-.bubble #id{
+.bubble span{
+	    position: relative;
+    top: -2px;
+    left: 5px;
+}
+.bubble img{
+	display: inline-block;
+	position:relative;
+	top:-17px;
+}
+.bubble #topName{
 	font-weight:bold;
+}
+#id{
+	margin-bottom:10px;
 }
 .bubble:after 
 {

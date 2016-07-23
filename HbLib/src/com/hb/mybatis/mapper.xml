@@ -127,6 +127,10 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 		select * from users where name=#{name} and jumin=#{jumin} and id=#{id}	
 	</select>
 	
+	<!-- 스터디룸 예약 리스트 -->
+	<select id="reserveList" resultType="com.hb.mybatis.Studyroom_ReserveVO">
+		select * from studyroom_reserve order by sr_idx
+	</select>
 	<!-- 스터디룸 정보 가져오기 -->
 	<select id="getRoom" resultType="com.hb.mybatis.StudyroomVO">
 		select * from studyroom order by s_num
@@ -306,5 +310,15 @@ book b where a.b_num = b.b_num and a.b_state='0' order by bd_redate desc) q orde
 	<select id="studyroomstate" resultType="com.hb.mybatis.Studyroom_ReserveVO">
 		select * from studyroom_reserve where (select to_char(sysdate,'hh24:mi') from dual) > start_time and end_time > (select to_char(sysdate,'hh24:mi')from dual) and sr_state=2
 	</select>
-	
+	<select id="mainsearch" resultType="com.hb.mybatis.BookVO" parameterType="Map">
+select * from book where 
+	 <choose>
+	 		<when test="option.equals('main')"> b_subject like '%' || #{keyword} || '%' or writer like '%' || #{keyword} || '%' or publisher like '%' || #{keyword} || '%' or isbn like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainsubject')"> b_subject like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainwriter')"> writer like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainpublisher')"> publisher like '%' || #{keyword} || '%'</when>
+			<when test="option.equals('mainisbn')"> isbn like '%' || #{keyword} || '%'</when>
+		</choose>
+	</select>
+	 
 	</mapper>

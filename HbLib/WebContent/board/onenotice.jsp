@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
+<link rel="stylesheet" href="/HbLib/css/common.css">
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -28,27 +29,24 @@
 					<div align="center">
 						<input type="hidden" class="id" value="${user.id}">
 						<form method="post">
-							<table width="300">
+							<table id="table">
 								<tbody>
 									<tr>
-										<th bgcolor="#B2EBF4">번호</th>
+										<th>번호</th>
 										<td>${notice.n_idx}</td>
 									</tr>
 
 									<tr>
-										<th bgcolor="#B2EBF4">제목</th>
+										<th>제목</th>
 										<td>${notice.n_subject}</td>
-									</tr>
-									<tr>
-										<th bgcolor="#B2EBF4">첨부파일</th>
 									</tr>
 
 									<tr>
-										<th bgcolor="#B2EBF4">날짜</th>
+										<th>날짜</th>
 										<td>${notice.n_date}</td>
 									</tr>
 									<tr>
-										<th bgcolor="#B2EBF4">내용</th>
+										<th>내용</th>
 									</tr>
 									<tr>
 										<td colspan="2"><pre>${notice.n_content}</pre></td>

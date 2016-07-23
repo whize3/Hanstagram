@@ -30,8 +30,8 @@
 	}
 	$(function(){
 		$("#name").click(function(){
+			$(".bubble").toggle();
 			console.log("버블")
-			$(".bubble").show();
 		});
 		
 		$(document).on("click",function(){
@@ -39,7 +39,9 @@
 				$(".bubble").hide();
 			}
 		});
-		
+		$("#searchBtn").click(function(){
+			location.href="/HbLib/Controller?type=mainsearch&keyword="+$("#keyword").val()+"&option=main";
+		});
 	});
 </script>
 </head>
@@ -68,12 +70,17 @@
 				<a href="join.jsp">회원가입</a>
 				&nbsp;|&nbsp;<%}else{%> 
 				<div class="bubble" >
-	<div>
-		<p id="id">${user.name}님(${user.id })</p>
-		<p>${user.name}</p>
-		<p>${user.name}</p>
-	</div>
-</div>
+					<span><img src="/HbLib/img/myInfo.gif"></span>
+					<div>
+						<p id="topName">${user.name}님<span><input type="button" value="로그아웃" onclick="logout_go()"></span></p>
+						<p id="id">${user.id}님</p>
+						<p>대출도서 ${user.draw}권</p>
+						<p>예약도서 ${user.reserve}권</p>
+						<p>연체도서 ${user.overdue}권</p>
+					</div>
+				</div>
+				
+				<span id="profile"><img src="/HbLib/img/myInfo.gif"></span>
 				<span id="name"><%=name %></span>님&nbsp;|&nbsp;
 				<a href="#" onclick="logout_go()">로그아웃</a>
 				<%}%>
