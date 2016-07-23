@@ -15,7 +15,7 @@ table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-a
 table td:first-child{border-left:none;}
 input[type=text]{height: 25px;}
 .apply{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
-.mainview_c_btn{margin-bottom: 10px;}
+.mainview_c_btn{margin-bottom: 10px;} 
 </style>
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
@@ -122,7 +122,7 @@ history.go(-1)
 						<table >
 							<tr>
 								<td><input type="text" name="pwd" size="60" id="q" height="150" />
-								<input type="button" value="검색" class="apply" ></td>
+								<input type="button" value="검색" class="apply"></td>
 							</tr>
 						</table>
 					</div>
