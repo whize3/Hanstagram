@@ -22,6 +22,9 @@
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_04").css("background-color", "gray")
+		$("#move").click(function() {
+			location.href="/HbLib/service/ser_apply.jsp";
+		});
 	});	
 </script>
 <style type="text/css">
@@ -39,7 +42,7 @@
 				<div class="mainviewnavi">◆서비스이용 > 도서구입신청 현황</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="구입신청" class="apply">						
+						<input type="button" value="구입신청" class="apply" id="move">						
 					</div>
 					<div align="center">
 					

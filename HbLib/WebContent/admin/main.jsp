@@ -18,7 +18,7 @@
 				</div>
 				<div class="navbar-side">
 					<ul class="side-list">
-						<li class="bar"><a href="" style="color: #2A75C1">한빛도서관 홈페이지로 이동</a></li>
+						<li class="bar"><a href="/HbLib/index.jsp" style="color: #2A75C1">한빛도서관 홈페이지로 이동</a></li>
 						<li class="bar"><a style="color: #A2A2A2">${admin.name}</a></li>
 						<li class="bar"><a href="logout.jsp" style="color: red;">로그아웃</a></li>
 					</ul>

@@ -93,6 +93,9 @@ input[type=text]{height: 25px;}
 				}				
 			});
 		});
+		$("#move").click(function() {
+			location.href="/HbLib/Controller?type=applylist&id=${user.id}";
+		});
 	});
 	
 	
@@ -113,7 +116,7 @@ history.go(-1)
 				<div class="mainviewnavi">◆서비스이용 > 도서구입신청</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="신청현황" class="apply">						
+						<input type="button" value="신청현황" class="apply" id="move">						
 					</div>
 					<div align="center">
 						<table >
