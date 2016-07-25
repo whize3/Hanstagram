@@ -43,7 +43,7 @@ public class StudyroomDAO {
 	public void updateTime(){
 		
 		try {
-			ss.update("srUpdate");
+			ss.update("srUpdateAuto");
 			ss.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,6 +56,7 @@ public class StudyroomDAO {
 		try {
 			ss.update("srUpdate",sr_idx);
 			ss.commit();
+			ss.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			ss.rollback();

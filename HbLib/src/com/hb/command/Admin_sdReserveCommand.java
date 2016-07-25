@@ -20,8 +20,7 @@ public class Admin_sdReserveCommand implements Command{
 		StudyroomDAO sdao = new StudyroomDAO();
 		Dao pdao = new Dao();  
 		
-	/*	sdao.updateTime();
-		*/
+		sdao.updateTime();
 		String cPage = request.getParameter("cPage");
 		if(cPage=="") cPage="1";
 		if(cPage != null){
