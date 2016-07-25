@@ -197,6 +197,9 @@ font-size:12px;
 	padding: 6px 12px;
 	display: table-cell;
 }
+.rowh:hover{
+background-color: aqua;
+}
 </style>
 </head>
 <body>
@@ -231,12 +234,16 @@ font-size:12px;
 							</div>
 							<c:forEach items="${list }" var="k">
 								<div class="row">
+								<div class="rowh">
+								<a href="/HbLib/Controller?type=selectone&b_num=${k.b_num }">
 									<div class="cell">${k.b_subject }</div>
 									<div class="cell">${k.b_location }</div>
 									<div class="cell">${k.publisher }</div>
 									<div class="cell">${k.writer }</div>
 									<div class="cell">${k.category }</div>
 									<div class="cell">${k.isbn }</div>
+								</a>
+								</div>
 								</div>
 								<br />
 							</c:forEach>
