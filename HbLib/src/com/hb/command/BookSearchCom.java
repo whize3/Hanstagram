@@ -15,13 +15,14 @@ public class BookSearchCom implements Command{
 	    String idx = request.getParameter("idx");
 	    String keyword = request.getParameter("keyword");
 	    String desearch = request.getParameter("desearch");
+	 
 		String path = null;
 		
 		if(idx==null){
 			path = "search/searchall_result.jsp";
 		}else{
 			Dao dao  = new Dao();
-			List<BookVO> list = dao.search(idx, keyword,desearch);
+			List<BookVO> list = dao.search(idx, keyword, desearch);
 			request.setAttribute("booklist", list);
 			path = "search/searchall_result.jsp";
 		}
