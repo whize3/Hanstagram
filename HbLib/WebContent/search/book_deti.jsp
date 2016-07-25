@@ -90,6 +90,7 @@ h3 {
 .row3 {
 	display: none;
 	background: #f6f6f6;
+	width: 700px;
 }
 
 .row:nth-of-type(odd) {
@@ -136,6 +137,9 @@ div.colspan>div>div {
 	position: relative;
 	width: 660px;
 	overflow: hidden;
+}
+.pre1{
+ white-space:pre-wrap;
 }
 </style>
 <style type="text/css">
@@ -217,7 +221,7 @@ div.colspan>div>div {
 								<div class="row3" id="${k.bc_idx }show">
 									<div class="cell colspan">
 										<div>
-											<div><pre>${k.bc_content }</pre></div>
+											<div><pre class="pre1">${k.bc_content }</pre></div>
 										</div>
 									</div>
 									<div class="cell"></div>
