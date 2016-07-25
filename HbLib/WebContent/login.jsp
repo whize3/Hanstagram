@@ -23,12 +23,11 @@
 							if (data != "fail") {
 								parent.document.location.reload();
 							} else {
-								alert("아이디, 비번 틀림");
+								alert("일치하는 정보가 없습니다.");
 							}
 						},
 						error : function(request, status, error) {
-							alert("request: " + request + " status: " + status
-									+ " error: " + error);
+							alert("일치하는 정보가 없습니다.");
 						}
 					});
 				});
