@@ -66,7 +66,7 @@ function moveBanner(a){
 					<div>
 					<div>
 						<ul style="width:2544px;left:0px;" id="newbookbanner">
-						<c:forEach var="k" items="${newbook}" begin="0" end="10">
+						<c:forEach var="k" items="${newbook}" begin="0" end="14">
 							<li class="newbookli">
 							<a href="">
 								<span class="bookCover"><img src="${k.l_url}"></span>
