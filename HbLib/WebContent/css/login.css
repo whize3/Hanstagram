@@ -46,6 +46,7 @@ li {
 }
 ul {
     list-style: none;
+    padding: 0px;
 }
 strong{
 	font-size: 15px;
