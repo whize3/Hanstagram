@@ -67,12 +67,12 @@ div1{
 			<input type="hidden" name="type" value="search" />
 			<input type="button" value="검색" onclick="search_go()" />
 	<br />
-		</div>
-		 <label> 비도서 <input     type="checkbox"     name="chk" value="1" /></label>
-		 <label>인기자료<input	  type="checkbox"     name="chk" value="2" /></label> 
-		 <label>신착자료<input	  type="checkbox"     name="chk" value="3" /></label>
+		<!-- </div>
+		 <label> 비도서 <input     type="checkbox"     name="chk" value="8" /></label>
+		 <label>인기자료<input	  type="checkbox"     name="chk" value="9" /></label> 
+		 <label>신착자료<input	  type="checkbox"     name="chk" value="10" /></label>
 
-	</div>
+	</div> -->
 	<br />
 	<div align="center">
 					<span>정렬</span> 
