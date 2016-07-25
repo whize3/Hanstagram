@@ -326,7 +326,7 @@ select * from book where
 	</update>
 	 <!-- 스터디룸 자동 상태 변경  -->
 	<update id="srUpdateAuto">
-		update studyroom_reserve set sr_state='0' where sr_state='2' 
+		update studyroom_reserve set sr_state='0' where sr_state='2' or sr_state='1'
 		<choose>
 			<when test="sysdate > sr_date"></when>
 			<when test="sr_date >= sysdate">and (select to_char(sysdate,'hh24:mi')from dual) > end_time</when>

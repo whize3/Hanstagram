@@ -72,7 +72,13 @@ $(function(){
 							<td>${k.start_time}</td>
 							<td>${k.end_time}</td>
 							<td>${k.id}</td>
-							<td>${k.sr_state}</td>
+							
+							<c:choose>
+								<c:when test="${k.sr_state==0}"><td style="color: black;">이용 신청 가능</td></c:when>
+								<c:when test="${k.sr_state==1}"><td style="color: red;">승인 대기중</td></c:when>
+								<c:when test="${k.sr_state==2}"><td style="color: blue;">사용/예약 중</td></c:when>
+							</c:choose>
+							
 							<td>
 							<c:choose>
 								<c:when test="${k.sr_state == '1'}">
