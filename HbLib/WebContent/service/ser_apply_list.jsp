@@ -13,7 +13,7 @@
 	table td {border-left:solid 1px #dfdfdf; border-bottom: solid 1px #dfdfdf;text-align:center;background-color:#fff;  font-size: 15px;}
 	table td:first-child{border-left:none;}
 	input[type=text]{height: 25px;}
-	input[type=button]{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
+	.apply{color:white; background-color: #7189d0; border: 0; height: 30px; margin-top: 10px;}
 	.mainview_c_btn{margin-bottom: 10px;}	
 </style>
 <link rel="stylesheet" href="/HbLib/css/mylibrary.css">
@@ -22,6 +22,9 @@
 	$(function() {
 		$(".navileft>li").addClass("navileft_li")
 		$("#navi_04").css("background-color", "gray")
+		$("#move").click(function() {
+			location.href="/HbLib/service/ser_apply.jsp";
+		});
 	});	
 </script>
 <style type="text/css">
@@ -39,7 +42,7 @@
 				<div class="mainviewnavi">◆서비스이용 > 도서구입신청 현황</div>
 				<div>
 					<div class="mainview_c_btn">
-						<input type="button" value="구입신청">						
+						<input type="button" value="구입신청" class="apply" id="move">						
 					</div>
 					<div align="center">
 					

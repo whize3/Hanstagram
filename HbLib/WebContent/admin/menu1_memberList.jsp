@@ -12,7 +12,6 @@
 	$(function() {
 		
 		$('td').dblclick(function() {
-			alert("ddd");
 			var id = $(this).closest("tr").find(".td_id").text();
 			location.href="/HbLib/Controller?type=a_memberOnelist&id="+id;
 			

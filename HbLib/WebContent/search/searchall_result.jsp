@@ -33,7 +33,7 @@
 							<tr>
 								<td><img src="${k.s_url}"></td>
 								<td><a href="/HbLib/Controller?type=selectone&b_num=${k.b_num }">${k.b_num}>${k.b_num}</a></td>
-								<td>${k.b_subject}</td>
+								<td><a href="/HbLib/Controller?type=selectone&b_num=${k.b_num }">${k.b_subject}</a></td>
 								<td>${k.b_location}</td>
 								<td>${k.publisher}</td>
 								<td>${k.writer}</td>

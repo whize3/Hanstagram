@@ -11,11 +11,6 @@
 <script type="text/javascript" src="/HbLib/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	$(function() {
-		/* $('td').dblclick(function() {
-			var subject = $(this).closest("tr").find(".b_subject").text();
-			location.href="admin/menu2_bookList_add.jsp?subject="+subject;
-		}); */
-		
 		$("input[name=applyBtn]").click(function(){
 			/* $(".locationInput").show(); */
 			var btnId = $(this).attr("id");
@@ -48,20 +43,12 @@
 		$("#refuse_go").click(function() {
 			var ba_idx = $(this).closest("tr").find(".ba_idx").text();
 			var refuse = $("input[name=refuse]").val();
-			location.href="/HbLib/Controller?type=a_applyRefuse&refuse="+refuse+"&ba_idx="+ba_idx;
+			alert("구입거절 되었습니다.");
+			location.href="/HbLib/Controller?type=a_applyRefuse&refuse="+refuse+"&ba_idx="+ba_idx;			
 		});
 				
 	});
-	
-/* 	$(document).ready(function(){
-		var ba_state =  $(this).closest("tr").find(".ba_state").text();
-		if(ba_state==="구입완료"){
-			$("#applyForm").hide();
-			console.log(ba_state);
-		}
-		
-	});
- */
+
 </script>
 
 </head>
@@ -117,7 +104,7 @@
 											위치 : <input type="text" name="location" />
 											<input type="button" value="등록" id="applyOk" />
 											<input type="button" value="취소" class="${k.ba_idx}" id="cancle"/>
-											<input type="hidden" name="type" value="a_applyOk"/>
+											
 										</p>
 										<p class="${k.ba_idx}2" style="display:none;">
 											거절사유 : <input type="text" name="refuse" />

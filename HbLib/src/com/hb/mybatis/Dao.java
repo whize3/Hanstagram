@@ -206,6 +206,7 @@ public class Dao {
 	// book list
 	public List<BookVO> getBookList(Map<String, Integer> map){
 		List<BookVO> list = ss.selectList("a_booklist",map);
+		ss.close();
 		return list;
 	}
 	
@@ -216,7 +217,6 @@ public class Dao {
 	}*/
 	public void addBook(BookVO bvo){
 		ss.insert("a_bookAdd",bvo);
-		ss.commit();
 	}
 	
 	// 희망도서
@@ -226,6 +226,7 @@ public class Dao {
 	}
 	public List<Book_ApplyVO> getApplyBookList(Map<String, Integer> map){
 		List<Book_ApplyVO> list = ss.selectList("a_applyBookList",map);
+		ss.close();
 		return list;
 	}
 	
@@ -238,19 +239,19 @@ public class Dao {
 	// 희망도서 상태 변경
 	public void getApplyState(String ba_idx){
 		ss.update("a_applyState",ba_idx);
-		ss.commit();
+		
 	}
 	
 	// 희망도서 책에 추가하기
 	public void bookApplyAdd(BookVO bvo){
 		ss.insert("a_bookApplyAdd",bvo);
-		ss.commit();
+		
 	}
 	
 	// 희망도서 거절
 	public void updateRefuse(Book_ApplyVO bavo){
 		ss.update("a_bookApplyRefuseAp",bavo);
-		ss.commit();
+		
 	}
 	
 	// notice 전체 게시물의 수
@@ -270,7 +271,7 @@ public class Dao {
 	// notice 글쓰기
 	public void getNoticeAdd(NoticeVO nvo){
 		ss.insert("a_noticeAdd", nvo);
-		ss.commit();
+	
 	}
 	
 	// 도서구입신청현황 리스트

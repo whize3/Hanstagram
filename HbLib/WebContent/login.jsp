@@ -21,7 +21,6 @@
 						dataType : "text",
 						success : function(data) {
 							if (data != "fail") {
-								alert("로그인 성공ㅇㅇ!");
 								parent.document.location.reload();
 							} else {
 								alert("아이디, 비번 틀림");

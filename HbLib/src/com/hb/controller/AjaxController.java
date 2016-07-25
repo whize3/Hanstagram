@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hb.command.AdminBookAddCommand;
 import com.hb.command.ApplyBookCommand;
 import com.hb.command.BookSearchCom;
 import com.hb.command.Command;
@@ -51,6 +52,8 @@ public class AjaxController extends HttpServlet {
 			comm = new ForgotPwdCommand();
 		}else if(type.equals("getRoom")){
 			comm = new SRCommand2();
+		}else if(type.equals("a_bookAdd")){
+			comm = new AdminBookAddCommand();
 		}
 		String result = comm.exec(request, response);
 		System.out.println(result);
