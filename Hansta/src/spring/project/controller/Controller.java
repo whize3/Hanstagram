@@ -47,17 +47,19 @@ public class Controller {
 		}
 		
 		int idx = 0;
-		for (UsersVO k : list) {
-			idx ++;
-			result += "{";
-			result += "\"keyword\" : \"" + k.getId() + "\"";
-			result += "}";
-			if(idx != list.size()){
-				result += ",";
+		if(list!=null){
+			for (UsersVO k : list) {
+				idx ++;
+				result += "{";
+				result += "\"keyword\" : \"" + k.getId() + "\"";
+				result += "}";
+				if(idx != list.size()){
+					result += ",";
+				}
 			}
 		}
+		
 		result += "]";
-		System.out.println(result);
 		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
 	

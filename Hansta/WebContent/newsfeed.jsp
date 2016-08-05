@@ -23,7 +23,7 @@ $(function() {
 	background-color: #fafafa;
 }
 .container{
-	width: 50%;
+	width: 35%;
 	margin: 0 auto;
 }
 .a1{
@@ -126,6 +126,7 @@ border: none;
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 <div class="wrap">
 	<div class="container">
 		<c:forEach begin="0" end="5">

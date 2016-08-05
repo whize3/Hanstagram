@@ -5,9 +5,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+li:HOVER {
+	background-color: lightblue;
+	cursor: pointer;
+}
+
+#search_div {
+	border: 1px solid lightgray;
+	border-top: none;
+	position:absolute;
+	background-color: white;
+	width: 100%;
+}
+.selected {
+	background-color: lightblue;
+}
+
+</style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 $(function() {
+	var which;
 	$("#search").keyup(function(e) {
 		$.ajax({
 			type: "post",
@@ -26,7 +51,7 @@ $(function() {
 						location.href="" + $(this).text();
 					})              
 				});
-				var which;
+							
 				if(e.which == 40){
 					which++;
 					if(which >= $("#search_list").children().length)
