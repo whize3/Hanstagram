@@ -1,15 +1,20 @@
 package spring.project.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import spring.project.db.Dao;
+import org.springframework.web.servlet.ModelAndView;
+
+
+
+import spring.project.db.Dao; 
 import spring.project.db.Page;
 
 
@@ -26,13 +31,11 @@ public class Controller {
 	public Page getPage() { return page; }
 	public void setPage(Page page) { this.page = page; }
 	
-	@RequestMapping("/search.do")
-	@ResponseBody
-	public String test(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-		String keyword = request.getParameter("keyword");
-		return keyword;		
+	@RequestMapping(value = "/search.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
+	public ResponseEntity<String> search(HttpServletRequest request, HttpServletResponse response){
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		return new ResponseEntity<String>(request.getParameter("keyword"),responseHeaders, HttpStatus.CREATED);
 	}
 	
 /*	// 로그인
