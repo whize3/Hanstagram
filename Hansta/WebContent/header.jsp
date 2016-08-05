@@ -74,7 +74,7 @@ border:1px solid #000;
 	<div id="header">
 		<div class="header">
 		
-			<a href="#" id="logoArea"><img src="/tmp/img/headerLogo.PNG"></a>
+			<a href="#" id="logoArea"><img src="/Hansta/img/headerLogo.PNG"></a>
 			<div>
 				<!-- <span class="searchMask"></span> --><input type="text" placeholder="검색">
 			</div>
