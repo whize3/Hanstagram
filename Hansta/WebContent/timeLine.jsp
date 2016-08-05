@@ -239,7 +239,7 @@ margin:15px;
 
       <header class="profile">
          <div class="profileImg">
-            <img src="/tmp/img/a.jpg"/>
+            <img src="/Hansta/img/a.jpg"/>
          </div>
          <div class="profileInfo">
             <div>
@@ -259,19 +259,19 @@ margin:15px;
       	<!-- <div class="line">
       		<a href="#">
       			<div class="wrap">	
-	      			<div class="contents"><img src="/tmp/img/0001.jpg"></div>
+	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
 	      			<div class="box"></div>
       			</div>
       		</a>
       		<a href="#">
       			<div class="wrap">
-	      			<div class="contents"><img src="/tmp/img/0002.jpg"></div>
+	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
 	      			<div class="box"></div>
       			</div>
       		</a>
       		<a href="#">
       			<div class="wrap">
-	      			<div class="contents"><img src="/tmp/img/0002.jpg"></div>
+	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
 	      			<div class="box"></div>
       			</div>
       		</a>
@@ -280,7 +280,7 @@ margin:15px;
       	<div id="none">
       		<h2>소중한 순간을 포착하여 공유해보세요.</h2>
 			<h3>첫 사진이나 동영상을 공유해보세요</h3>
-			<a href="#"><img src="/tmp/img/plus.png"></a>
+			<a href="#"><img src="/Hansta/img/plus.png"></a>
 		</div>
       </div>
 
@@ -290,7 +290,7 @@ margin:15px;
 </main>
 
 <div id="pop">
-	<img src="/tmp/img/cancel.png" id="cancel">
+	<img src="/Hansta/img/cancel.png" id="cancel">
 </div>
 <div class="popArea">
 	<div class="popTable">
