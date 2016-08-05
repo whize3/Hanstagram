@@ -3,5 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hanstagram">
-	
+	<select id="search" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id like '%' || lower(#{keyword}) || '%'
+	</select>
 </mapper>

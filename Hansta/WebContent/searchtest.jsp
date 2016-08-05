@@ -13,10 +13,36 @@ $(function() {
 			type: "post",
 			url: "search.do",
 			data: {"keyword" : $("#search").val()},
-			dataType: "text",
+			dataType: "json",
 			success: function(data){
 				$("#search_div").empty();
-				$("#search_div").append(data);
+				$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
+				
+				for(var i=0; i<data.length; i++)
+					$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
+				
+				$("li.keyword").each(function(){
+					$(this).on("click", function(){
+						location.href="" + $(this).text();
+					})              
+				});
+				var which;
+				if(e.which == 40){
+					which++;
+					if(which >= $("#search_list").children().length)
+						which = 0;
+					$("#search_list").children().eq(which).attr("class","selected");
+				} else if(e.which == 38) {
+					which--;
+					if(which < 0)
+						which = 0;
+					$("#search_list").children().eq(which).attr("class","selected");
+				} else if(e.which == 13){
+					$("#search_list").children().eq(which).attr("class","selected");
+					$(".selected").trigger("click");
+				} else {
+					which = -1;
+				}
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

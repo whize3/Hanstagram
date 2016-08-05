@@ -18,6 +18,9 @@ public class Dao {
 		this.template = template;
 	}
 	
+	public List<UsersVO> search(String keyword){
+		return template.selectList("search", keyword);		
+	}
 	
 	
 }

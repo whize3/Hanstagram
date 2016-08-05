@@ -1,5 +1,7 @@
 package spring.project.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import spring.project.db.Dao; 
 import spring.project.db.Page;
+import spring.project.db.UsersVO;
 
 
 
@@ -35,7 +38,27 @@ public class Controller {
 	public ResponseEntity<String> search(HttpServletRequest request, HttpServletResponse response){
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		return new ResponseEntity<String>(request.getParameter("keyword"),responseHeaders, HttpStatus.CREATED);
+		String keyword = request.getParameter("keyword");
+		List<UsersVO> list = null;
+		
+		String result = "[";
+		if(keyword !=null && keyword.trim()!= ""){
+			list = dao.search(keyword);
+		}
+		
+		int idx = 0;
+		for (UsersVO k : list) {
+			idx ++;
+			result += "{";
+			result += "\"keyword\" : \"" + k.getId() + "\"";
+			result += "}";
+			if(idx != list.size()){
+				result += ",";
+			}
+		}
+		result += "]";
+		System.out.println(result);
+		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
 	
 /*	// 로그인
