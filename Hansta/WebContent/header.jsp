@@ -83,7 +83,10 @@ li:HOVER {
 	border-top: none;
 	position:absolute;
 	background-color: white;
-	width: 100%;
+	display: block;
+    top: 77px;
+    left: 40%;
+    width: 347px;
 }
 .selected {
 	background-color: lightblue;
