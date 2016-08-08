@@ -33,6 +33,27 @@ li:HOVER {
 <script type="text/javascript">
 $(function() {
 	var which;
+/* 	$("#search").keyup(function(e) {
+				if(e.which == 40){
+					which++;
+					if(which >= $("#search_list").children().length)
+						which = 0;
+					$("#search_list").children().eq(which).attr("class","selected");
+					alert($("#search_list").children().eq(which).text());
+					$("#search").val($("#search_list").children().eq(which).text());
+				} else if(e.which == 38) {
+					which--;
+					if(which < 0)
+						which = 0;
+					$("#search_list").children().eq(which).attr("class","selected");
+					$("#search").text($("search_list").children().eq(which).val());
+				} else if(e.which == 13){
+					$("#search_list").children().eq(which).attr("class","selected");
+					$(".selected").trigger("click");
+				} else {
+					which = -1;
+				}		
+	}); */
 	$("#search").keyup(function(e) {
 		$.ajax({
 			type: "post",
@@ -40,40 +61,44 @@ $(function() {
 			data: {"keyword" : $("#search").val()},
 			dataType: "json",
 			success: function(data){
-				$("#search_div").empty();
-				$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
-				
-				for(var i=0; i<data.length; i++)
-					$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
-				
+				if(e.which != 40 && e.which!=38){
+					$("#search_div").empty();
+					$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
+					
+					for(var i=0; i<data.length; i++)
+						$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
+				}
 				$("li.keyword").each(function(){
 					$(this).on("click", function(){
 						location.href="" + $(this).text();
-					})              
+					})
 				});
-							
 				if(e.which == 40){
 					which++;
 					if(which >= $("#search_list").children().length)
 						which = 0;
+					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
+					$("#search").val($("#search_list").children().eq(which).text());
 				} else if(e.which == 38) {
 					which--;
 					if(which < 0)
 						which = 0;
+					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
+					$("#search").val($("#search_list").children().eq(which).text());
 				} else if(e.which == 13){
 					$("#search_list").children().eq(which).attr("class","selected");
 					$(".selected").trigger("click");
 				} else {
 					which = -1;
-				}
+				}	
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		    }
 		});
-	})
+	});
 	
 })
 

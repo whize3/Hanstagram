@@ -3,7 +3,34 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hanstagram">
+	<!-- 검색(일단 아이디만)  -->
 	<select id="search" parameterType="String" resultType="spring.project.db.UsersVO">
 		select * from users_3 where id like '%' || lower(#{keyword}) || '%'
 	</select>
+	
+	<!-- 팔로우 리스트  -->
+	<select id="follow" parameterType="String" resultType="spring.project.db.FollowVO">
+		select * from follow_3 where follower = #{id}
+	</select>
+	
+	<!-- 게시글 불러오기  -->
+	<select id="board" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where id = #{id}
+	</select>
+	
+	<!-- 좋아요 상태 확인하기  -->
+	<select id="likestate" parameterType="Map" resultType="spring.project.db.LikeVO">
+		select * from like_3 where id = #{id} and b_idx = #{b_idx}
+	</select>
+	
+	<!-- 좋아요 삽입  -->
+	<insert id="insertlike" parameterType="Map">
+		insert into like_3 values(#{b_idx},#{id})
+	</insert>
+	
+	<!-- 좋아요 삭제  -->
+	<insert id="deletelike" parameterType="Map">
+		delete from like_3 where id = #{id} and b_idx = #{b_idx}
+	</insert>
+	
 </mapper>

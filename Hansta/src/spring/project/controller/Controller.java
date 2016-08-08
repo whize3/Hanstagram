@@ -1,5 +1,7 @@
 package spring.project.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-import spring.project.db.Dao; 
+import spring.project.db.BoardVO;
+import spring.project.db.Dao;
+import spring.project.db.FollowVO;
+import spring.project.db.LikeVO;
 import spring.project.db.Page;
 import spring.project.db.UsersVO;
 
@@ -61,6 +64,41 @@ public class Controller {
 		
 		result += "]";
 		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping("/newsfeed.do")
+	public ModelAndView followingList(HttpServletRequest request, HttpServletResponse response){
+		String id = "whoyoung"; // 하드코딩
+		List<FollowVO> followlist = dao.getFollowList(id);
+		List<BoardVO> boardlist = new ArrayList<>();
+		for (FollowVO f : followlist) {
+			List<BoardVO> onelist = dao.getBooardList(f.getFollowee());
+			for (BoardVO b : onelist) {
+				boardlist.add(b);
+			}
+		}
+		Calendar calendar = Calendar.getInstance();
+	
+		for (BoardVO b : boardlist) {
+			b.getB_time();
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("boardlist", boardlist);
+		return mv;
+	}
+	
+	@RequestMapping("/like.do")
+	public ModelAndView like(HttpServletRequest request, HttpServletResponse response){
+		String b_idx = request.getParameter("b_idx");
+		String id = "whoyoung"; // 하드코딩
+		LikeVO lvo = dao.likeState(b_idx, id);
+		if(lvo !=null){
+			dao.deleteLike(b_idx, id);
+		}else{
+			dao.insertLike(b_idx, id);
+		}		
+		ModelAndView mv = new ModelAndView();		
+		return mv;
 	}
 	
 /*	// 로그인
