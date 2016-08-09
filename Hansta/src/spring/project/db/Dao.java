@@ -37,8 +37,9 @@ public class Dao {
 	public LikeVO likeState(String b_idx, String id){
 		Map<String, String> map = new HashMap<>();
 		map.put("b_idx", b_idx);
-		map.put("id", id);		
-		return template.selectOne("likestate", map);
+		map.put("id", id);
+		LikeVO lvo = template.selectOne("likestate", map);
+		return lvo;
 	}
 	
 	// 좋아요 삽입
@@ -62,4 +63,21 @@ public class Dao {
 	public int getHashCnt(String hashtag){
 		return template.selectOne("hashCnt", hashtag);
 	}
+	
+	public int likeCount(String b_idx){
+		return template.selectOne("likecount", b_idx);		
+	}
+	
+	public List<CommentVO> getComment(String b_idx){
+		return template.selectList("commentlist", b_idx);
+	}
+	
+	public void insertComment(String id,String b_idx, String c_content){
+		Map<String, String> map = new HashMap<>();
+		map.put("b_idx", b_idx);
+		map.put("id", id);
+		map.put("c_content", c_content);
+		template.insert("insertcomment", map);
+	}
+	
 }
