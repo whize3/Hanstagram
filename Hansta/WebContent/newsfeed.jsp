@@ -114,15 +114,6 @@ border: none;
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-/* function like_go(f) {
-	var src = $(".comment_write > a > img").attr("src");
-	var b_idx =$(".comment_write > a > img").attr("b_idx");
-	src = (src==="img/like.PNG")
-	? "img/liked.PNG"
-	: "img/like.PNG";		
-	$(".comment_write > a > img").attr("src",src);
-	location.href="like.do?b_idx="+b_idx;
-} */
 $(function() {
 	$(".heart").on("click",$(".comment_write>*"),function() {
 		var index = $(".comment_write>a>img").index(this);
@@ -157,19 +148,21 @@ $(function() {
 			<header class="h1"> 
 				<a class="profile" href="#"><img class="profile_img"
 				src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg"></a>
-				<a class="id" href="#" title="beyonce">${k.id}</a> 
+				<a class="id" href="#">${k.id}</a> 
 				<span class="date">${k.b_time}</span> 
 			</header>
 			<div class="image-wrap">
 				<img class="image" src="upload/${k.img_url}.jpg" style="">				
 			</div>
 			<div class="comment-wrap">
-				<div class="like">좋아요 993개</div>
+				<div class="like">좋아요 ${k.like_count}개</div>
 				<div class="comment">
 					<ul>
 						<li><button>댓글 더보기</button></li>
-						<c:forEach begin="0" end="10">
-						<li><a class="comment_id">아이디</a><span class="comment_content">여기에 댓글 내용이 나옴</span></li>
+						<c:forEach var="c" items="${commentlist}">
+						<c:if test="${c.b_idx==k.b_idx}">
+							<li><a class="comment_id">${c.id}</a><span class="comment_content">${c.c_content}</span></li>
+						</c:if>						
 						</c:forEach>
 					</ul>
 				</div>

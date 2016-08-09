@@ -33,4 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from like_3 where id = #{id} and b_idx = #{b_idx}
 	</insert>
 	
+	<!-- 게시글 좋아요 갯수 불러오기  -->
+	<select id="likecount" parameterType="String" resultType="Integer">
+		select count(id) from like_3 where b_idx = #{b_idx}
+	</select>
+	
+	<!-- 댓글 불러오기  -->
+	<select id="commentlist" parameterType="String" resultType="spring.project.db.CommentVO">
+		select * from comment_3 where b_idx = #{b_idx}
+	</select>
+	
 </mapper>

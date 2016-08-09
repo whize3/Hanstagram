@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.project.db.BoardVO;
+import spring.project.db.CommentVO;
 import spring.project.db.Dao;
 import spring.project.db.FollowVO;
 import spring.project.db.LikeVO;
@@ -72,6 +73,7 @@ public class Controller {
 		String id = "whoyoung"; // 하드코딩
 		List<FollowVO> followlist = dao.getFollowList(id);
 		List<BoardVO> boardlist = new ArrayList<>();
+		List<CommentVO> commentlist = new ArrayList<>();
 		
 		//현재 시간 불러오기
 		Calendar calendar = Calendar.getInstance();
@@ -87,6 +89,11 @@ public class Controller {
 			List<BoardVO> onelist = dao.getBooardList(f.getFollowee());
 			// 각 게시글 VO에 좋아요 정보와 시간정보를 넣음
 			for (BoardVO boardVO : onelist) {
+				//댓글 리스트 넣기
+				List<CommentVO> onecommentlist = dao.getComment(boardVO.getB_idx());
+				for (CommentVO k : onecommentlist) {
+					commentlist.add(k);
+				}
 				//좋아요 상태 삽입
 				LikeVO lvo = new LikeVO();
 				lvo = dao.likeState(boardVO.getB_idx(), id);
@@ -114,7 +121,11 @@ public class Controller {
 				}else{
 					boardVO.setB_time("방금전");
 				}
-				//전체 팔로우 게시글 리스트
+				
+				//좋아요 갯수 삽입
+				boardVO.setLike_count(String.valueOf(dao.likeCount(boardVO.getB_idx())));
+				
+				//전체 팔로우 게시글 리스트에 삽입
 				boardlist.add(boardVO);
 			}			
 		}
@@ -125,6 +136,7 @@ public class Controller {
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("boardlist", boardlist);
+		mv.addObject("commentlist", commentlist);
 		return mv;
 	}
 	

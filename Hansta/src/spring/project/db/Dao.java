@@ -58,4 +58,12 @@ public class Dao {
 		template.delete("deletelike", map);
 	}
 	
+	public int likeCount(String b_idx){
+		return template.selectOne("likecount", b_idx);		
+	}
+	
+	public List<CommentVO> getComment(String b_idx){
+		return template.selectList("commentlist", b_idx);
+	}
+	
 }
