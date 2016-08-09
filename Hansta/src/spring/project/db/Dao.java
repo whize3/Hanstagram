@@ -56,5 +56,10 @@ public class Dao {
 		map.put("id", id);
 		template.delete("deletelike", map);
 	}
-	
+	public List<BoardVO> searchHash(String keyword){
+		return template.selectList("searchHash", keyword);
+	}
+	public int getHashCnt(String hashtag){
+		return template.selectOne("hashCnt", hashtag);
+	}
 }
