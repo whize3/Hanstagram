@@ -1,21 +1,39 @@
 package spring.project.db;
 
 public class BoardVO {
-	String b_idx, id, b_time, img_url, b_content, like;
+	String b_idx, id, b_time, img_url, b_content, like_state;
 public BoardVO() {
 	
 }
 
 
-public BoardVO(String b_idx, String id, String b_time, String img_url, String b_content, String like) {
+
+
+public BoardVO(String b_idx, String id, String b_time, String img_url, String b_content, String like_state) {
 	super();
 	this.b_idx = b_idx;
 	this.id = id;
 	this.b_time = b_time;
 	this.img_url = img_url;
 	this.b_content = b_content;
-	this.like = like;
+	this.like_state = like_state;
 }
+
+
+
+
+public String getLike_state() {
+	return like_state;
+}
+
+
+
+
+public void setLike_state(String like_state) {
+	this.like_state = like_state;
+}
+
+
 
 
 public String getB_idx() {
@@ -49,15 +67,6 @@ public void setB_content(String b_content) {
 	this.b_content = b_content;
 }
 
-
-public String getLike() {
-	return like;
-}
-
-
-public void setLike(String like) {
-	this.like = like;
-}
 
 
 }

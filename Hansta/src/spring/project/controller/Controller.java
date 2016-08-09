@@ -50,7 +50,7 @@ public class Controller {
 		}
 		
 		int idx = 0;
-		if(list!=null){
+		if(list!=null){	
 			for (UsersVO k : list) {
 				idx ++;
 				result += "{";
@@ -73,12 +73,19 @@ public class Controller {
 		List<BoardVO> boardlist = new ArrayList<>();
 		for (FollowVO f : followlist) {
 			List<BoardVO> onelist = dao.getBooardList(f.getFollowee());
-			for (BoardVO b : onelist) {
-				boardlist.add(b);
-			}
+			for (BoardVO boardVO : onelist) {
+				LikeVO lvo = new LikeVO();
+				lvo = dao.likeState(boardVO.getB_idx(), id);
+				if(lvo != null){
+					boardVO.setLike_state("1");
+				}else{
+					boardVO.setLike_state("0");
+				}
+				boardlist.add(boardVO);
+			}			
 		}
-		Calendar calendar = Calendar.getInstance();
 	
+		Calendar calendar = Calendar.getInstance();
 		for (BoardVO b : boardlist) {
 			b.getB_time();
 		}
@@ -97,7 +104,7 @@ public class Controller {
 		}else{
 			dao.insertLike(b_idx, id);
 		}		
-		ModelAndView mv = new ModelAndView();		
+		ModelAndView mv = new ModelAndView("newsfeedgo");		
 		return mv;
 	}
 	

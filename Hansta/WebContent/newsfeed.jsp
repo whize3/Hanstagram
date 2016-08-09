@@ -114,26 +114,38 @@ border: none;
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+/* function like_go(f) {
+	var src = $(".comment_write > a > img").attr("src");
+	var b_idx =$(".comment_write > a > img").attr("b_idx");
+	src = (src==="img/like.PNG")
+	? "img/liked.PNG"
+	: "img/like.PNG";		
+	$(".comment_write > a > img").attr("src",src);
+	location.href="like.do?b_idx="+b_idx;
+} */
 $(function() {
-	$(".heart").click(function() {
+	$(".heart").on("click",$(".comment_write>*"),function() {
+		var index = $(".comment_write>a>img").index(this);
+		var src = $(this).attr("src");
+		var b_idx = $(this).attr("b_idx");
+		src = (src==="img/like.PNG")
+		? "img/liked.PNG"
+		: "img/like.PNG";		
+		$(this).attr("src",src);	
 		$.ajax({
 			type: "post",
 			url: "like.do",
-			data: {"b_idx" : $(this).attr("b_idx"), /* "id" : ${user.id} */},
+			data: {"b_idx" : b_idx /* , "id" : ${user.id}  */},
 			dataType: "text",
 			success: function(data){
-				var src = ($(this).attr("src")==="img/like.PNG")
-				? "img/liked.PNG"
-				: "img/like.PNG";		
-				$(this).attr("src",src);				
+							
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		    }
-		});
-	
+		});	
 	});	
-});
+}); 
 </script>
 </head>
 <body>
@@ -162,7 +174,15 @@ $(function() {
 					</ul>
 				</div>
 				<div class="comment_write">
-					<a class="heart_link" href="#"><img class="heart" b_idx="${k.b_idx}" src="img/like.PNG"></a>
+					<c:choose>
+						<c:when test="${k.like_state==0}">
+							<a class="heart_link"><img class="heart" b_idx="${k.b_idx}" src="img/like.PNG" onclick="like_go(this)"></a>
+						</c:when>
+						<c:when test="${k.like_state==1}">
+							<a class="heart_link"><img class="heart" b_idx="${k.b_idx}" src="img/liked.PNG" onclick="like_go(this)"></a>
+						</c:when>
+					</c:choose>
+					
 					<input type="text" class="comment_write_content" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
 			</div>		

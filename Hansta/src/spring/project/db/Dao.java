@@ -37,8 +37,9 @@ public class Dao {
 	public LikeVO likeState(String b_idx, String id){
 		Map<String, String> map = new HashMap<>();
 		map.put("b_idx", b_idx);
-		map.put("id", id);		
-		return template.selectOne("likestate", map);
+		map.put("id", id);
+		LikeVO lvo = template.selectOne("likestate", map);
+		return lvo;
 	}
 	
 	// 좋아요 삽입
