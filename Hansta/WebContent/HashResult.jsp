@@ -36,7 +36,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
@@ -48,7 +48,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
@@ -60,7 +60,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
@@ -74,7 +74,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
@@ -86,7 +86,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
@@ -98,7 +98,7 @@ $(function(){
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
 		      			<span>0</span>
-		      			<img src="/Hansta/img/like.png">
+		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
