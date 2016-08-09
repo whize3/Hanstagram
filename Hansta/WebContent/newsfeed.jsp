@@ -6,24 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript">
-$(function() {
-	$(".heart").click(function() {
-		var src = ($(this).attr("src")==="img/like.PNG")
-		? "img/liked.PNG"
-		: "img/like.PNG";
-		$(this).attr("src",src);	
-	});
-	
-});
-</script>
 <style type="text/css">
 .wrap {
 	background-color: #fafafa;
 }
 .container{
-	width: 50%;
+	width: 35%;
 	margin: 0 auto;
 }
 .a1{
@@ -124,20 +112,44 @@ border: none;
 }
 
 </style>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$(function() {
+	$(".heart").click(function() {
+		$.ajax({
+			type: "post",
+			url: "like.do",
+			data: {"b_idx" : $(this).attr("b_idx"), /* "id" : ${user.id} */},
+			dataType: "text",
+			success: function(data){
+				var src = ($(this).attr("src")==="img/like.PNG")
+				? "img/liked.PNG"
+				: "img/like.PNG";		
+				$(this).attr("src",src);				
+			},
+			error : function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+		});
+	
+	});	
+});
+</script>
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 <div class="wrap">
 	<div class="container">
-		<c:forEach begin="0" end="5">
+		<c:forEach var="k" begin="0" end="5" items="${boardlist}">		
 		<article class="a1"> 
 			<header class="h1"> 
 				<a class="profile" href="#"><img class="profile_img"
 				src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg"></a>
-				<a class="id" href="#" title="beyonce">beyonce</a> 
+				<a class="id" href="#" title="beyonce">${k.id}</a> 
 				<span class="date">5일</span> 
 			</header>
 			<div class="image-wrap">
-				<img class="image" src="https://scontent.cdninstagram.com/t51.2885-15/e35/13774582_1749496125311582_207598600_n.jpg?ig_cache_key=MTMwNDc2NTYyMDY0MjMyODU1NQ%3D%3D.2" style="">
+				<img class="image" src="upload/${k.img_url}.jpg" style="">				
 			</div>
 			<div class="comment-wrap">
 				<div class="like">좋아요 993개</div>
@@ -150,7 +162,7 @@ border: none;
 					</ul>
 				</div>
 				<div class="comment_write">
-					<a class="heart_link" href="#"><img class="heart" src="img/like.PNG"></a>
+					<a class="heart_link" href="#"><img class="heart" b_idx="${k.b_idx}" src="img/like.PNG"></a>
 					<input type="text" class="comment_write_content" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
 			</div>		

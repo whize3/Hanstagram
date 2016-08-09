@@ -6,6 +6,67 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.body{
+margin:0;
+background:#fafafa;
+padding:0;
+}
+nav{
+width:100%;
+display: block;
+margin:0;
+border-bottom:solid 1px #dbdbdb;
+background:#fff;
+}
+
+#header{
+display: block;
+width:960px;
+height:77px;
+margin:0 auto;
+}
+
+.header{
+display: table;
+text-align: center;
+width:100%;
+padding-top:20px;
+}
+.header div{
+display: table-cell;
+vertical-align: middle;
+}
+.header div input{
+padding:3px 10px 3px 26px;
+border-radius:3px;
+/* outline:none; */
+border:solid 1px #dbdbdb;
+width:177px;
+height:20px;
+
+}
+.searchMask{
+width:177px;
+height:20px;
+border:1px solid #000;
+display: inline-block;
+}
+
+#logoArea{
+position:relative;
+display: table-cell;
+vertical-align: middle;
+
+}
+#logoArea img{
+display: inline-block;
+}
+#iconArea{
+display:inline-block;
+width:132px;
+height:24px;
+border:1px solid #000;
+}
 ul {
 	list-style: none;
 	padding: 0px;
@@ -22,38 +83,19 @@ li:HOVER {
 	border-top: none;
 	position:absolute;
 	background-color: white;
-	width: 100%;
+	display: block;
+    top: 77px;
+    left: 40%;
+    width: 347px;
 }
 .selected {
 	background-color: lightblue;
 }
-
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 $(function() {
 	var which;
-/* 	$("#search").keyup(function(e) {
-				if(e.which == 40){
-					which++;
-					if(which >= $("#search_list").children().length)
-						which = 0;
-					$("#search_list").children().eq(which).attr("class","selected");
-					alert($("#search_list").children().eq(which).text());
-					$("#search").val($("#search_list").children().eq(which).text());
-				} else if(e.which == 38) {
-					which--;
-					if(which < 0)
-						which = 0;
-					$("#search_list").children().eq(which).attr("class","selected");
-					$("#search").text($("search_list").children().eq(which).val());
-				} else if(e.which == 13){
-					$("#search_list").children().eq(which).attr("class","selected");
-					$(".selected").trigger("click");
-				} else {
-					which = -1;
-				}		
-	}); */
 	$("#search").keyup(function(e) {
 		$.ajax({
 			type: "post",
@@ -104,8 +146,19 @@ $(function() {
 
 </script>
 </head>
-<body>
-	<input type="text" id="search" aria-label="검색" placeholder="검색">
-	<div id="search_div"></div>
+<body class="body">
+<nav>
+	<div id="header">
+		<div class="header">
+		
+			<a href="#" id="logoArea"><img src="/Hansta/img/headerLogo.PNG"></a>
+			<div>
+				<!-- <span class="searchMask"></span> --><input type="text" id="search" placeholder="검색">
+			</div>
+			<div id="search_div"></div>
+			<div id="iconArea"></div>
+		</div>
+	</div>
+</nav>
 </body>
 </html>
