@@ -158,7 +158,7 @@ $(function() {
 				<a class="profile" href="#"><img class="profile_img"
 				src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg"></a>
 				<a class="id" href="#" title="beyonce">${k.id}</a> 
-				<span class="date">5일</span> 
+				<span class="date">${k.b_time}</span> 
 			</header>
 			<div class="image-wrap">
 				<img class="image" src="upload/${k.img_url}.jpg" style="">				

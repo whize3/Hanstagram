@@ -2,6 +2,7 @@ package spring.project.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,9 +72,22 @@ public class Controller {
 		String id = "whoyoung"; // 하드코딩
 		List<FollowVO> followlist = dao.getFollowList(id);
 		List<BoardVO> boardlist = new ArrayList<>();
+		
+		//현재 시간 불러오기
+		Calendar calendar = Calendar.getInstance();
+		int c_year = calendar.get(Calendar.YEAR);
+		int c_month = calendar.get(Calendar.MONTH);
+		int c_date = calendar.get(Calendar.DATE);
+		int c_hour = calendar.get(Calendar.HOUR);
+		int c_minute = calendar.get(Calendar.MINUTE);
+		
+		//팔로우 리스트를 처음에 불러옴
 		for (FollowVO f : followlist) {
+			//팔로워들의 게시글을 불러옴
 			List<BoardVO> onelist = dao.getBooardList(f.getFollowee());
+			// 각 게시글 VO에 좋아요 정보와 시간정보를 넣음
 			for (BoardVO boardVO : onelist) {
+				//좋아요 상태 삽입
 				LikeVO lvo = new LikeVO();
 				lvo = dao.likeState(boardVO.getB_idx(), id);
 				if(lvo != null){
@@ -81,11 +95,31 @@ public class Controller {
 				}else{
 					boardVO.setLike_state("0");
 				}
+				//시간정보 삽입				
+				int b_year = Integer.parseInt((boardVO.getB_time().substring(0, 4)));
+				int b_month = Integer.parseInt((boardVO.getB_time().substring(5, 7)));
+				int b_date = Integer.parseInt((boardVO.getB_time().substring(8, 10)));
+				int b_hour = Integer.parseInt((boardVO.getB_time().substring(11, 13)));
+				int b_minute = Integer.parseInt((boardVO.getB_time().substring(14, 16)));
+				if(c_year>b_year){
+					boardVO.setB_time(c_year-b_year+"년");
+				}else if(c_month>b_month){
+					boardVO.setB_time(c_month-b_month+"개월");
+				}else if(c_date>b_date){
+					boardVO.setB_time(c_date-b_date+"일");
+				}else if(c_hour>b_hour){
+					boardVO.setB_time(c_hour-b_hour+"일");
+				}else if(c_minute>b_minute){
+					boardVO.setB_time(c_minute-b_minute+"분");
+				}else{
+					boardVO.setB_time("방금전");
+				}
+				//전체 팔로우 게시글 리스트
 				boardlist.add(boardVO);
 			}			
 		}
-	
-		Calendar calendar = Calendar.getInstance();
+		
+		
 		for (BoardVO b : boardlist) {
 			b.getB_time();
 		}
