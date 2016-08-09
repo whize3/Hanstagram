@@ -66,4 +66,12 @@ public class Dao {
 		return template.selectList("commentlist", b_idx);
 	}
 	
+	public void insertComment(String id,String b_idx, String c_content){
+		Map<String, String> map = new HashMap<>();
+		map.put("b_idx", b_idx);
+		map.put("id", id);
+		map.put("c_content", c_content);
+		template.insert("insertcomment", map);
+	}
+	
 }

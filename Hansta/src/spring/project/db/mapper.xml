@@ -43,4 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from comment_3 where b_idx = #{b_idx}
 	</select>
 	
+	<!-- 댓글 삽입  -->
+	<insert id="insertcomment" parameterType="Map">
+		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
+	</insert>
+	
 </mapper>

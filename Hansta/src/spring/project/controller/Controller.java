@@ -150,7 +150,18 @@ public class Controller {
 		}else{
 			dao.insertLike(b_idx, id);
 		}		
-		ModelAndView mv = new ModelAndView("newsfeedgo");		
+		ModelAndView mv = new ModelAndView("newsfeed");		
+		return mv;
+	}
+	
+	@RequestMapping("/commentwrite.do")
+	public ModelAndView commentWrite(HttpServletRequest request, HttpServletResponse response){
+		String id = "whoyoung"; // 로그인만들어주세요 
+		String b_idx = request.getParameter("b_idx");		
+		String c_content = request.getParameter("c_content");
+		dao.insertComment(id,b_idx,c_content);
+		ModelAndView mv = new ModelAndView("newsfeed");
+		mv.addObject(id);
 		return mv;
 	}
 	
