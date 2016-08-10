@@ -57,6 +57,12 @@ public class Dao {
 		map.put("id", id);
 		template.delete("deletelike", map);
 	}
+	public List<BoardVO> searchHash(String keyword){
+		return template.selectList("searchHash", keyword);
+	}
+	public int getHashCnt(String hashtag){
+		return template.selectOne("hashCnt", hashtag);
+	}
 	
 	public int likeCount(String b_idx){
 		return template.selectOne("likecount", b_idx);		
@@ -64,6 +70,14 @@ public class Dao {
 	
 	public List<CommentVO> getComment(String b_idx){
 		return template.selectList("commentlist", b_idx);
+	}
+	
+	public void insertComment(String id,String b_idx, String c_content){
+		Map<String, String> map = new HashMap<>();
+		map.put("b_idx", b_idx);
+		map.put("id", id);
+		map.put("c_content", c_content);
+		template.insert("insertcomment", map);
 	}
 	
 }

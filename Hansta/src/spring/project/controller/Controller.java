@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
 import spring.project.db.BoardVO;
 import spring.project.db.CommentVO;
 import spring.project.db.Dao;
 import spring.project.db.FollowVO;
+import spring.project.db.HashCountVO;
 import spring.project.db.LikeVO;
 import spring.project.db.Page;
 import spring.project.db.UsersVO;
@@ -150,7 +154,18 @@ public class Controller {
 		}else{
 			dao.insertLike(b_idx, id);
 		}		
-		ModelAndView mv = new ModelAndView("newsfeedgo");		
+		ModelAndView mv = new ModelAndView("newsfeed");		
+		return mv;
+	}
+	
+	@RequestMapping("/commentwrite.do")
+	public ModelAndView commentWrite(HttpServletRequest request, HttpServletResponse response){
+		String id = "whoyoung"; // 로그인만들어주세요 
+		String b_idx = request.getParameter("b_idx");		
+		String c_content = request.getParameter("c_content");
+		dao.insertComment(id,b_idx,c_content);
+		ModelAndView mv = new ModelAndView("newsfeed");
+		mv.addObject(id);
 		return mv;
 	}
 	
@@ -179,8 +194,86 @@ public class Controller {
 
 		return mv;
 	}*/
-	
-	
+	@RequestMapping(value = "/searchhash.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
+	public ResponseEntity<String> searchhash(HttpServletRequest request, HttpServletResponse response){
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		String keyword = request.getParameter("keyword");
+		List<BoardVO> list = null;
 		
+		String result = "[";
+		if(keyword !=null && keyword.trim()!= ""){
+			list = dao.searchHash(keyword);
+		}
+		List hashlist = new ArrayList();
+		String content = null;
+		for(BoardVO k : list){
+			content = k.getB_content();
+			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
+			    Matcher m = p.matcher(content);
+			    String extractHashTag = null;
+			while(m.find()) {
+				
+			    extractHashTag = sepcialCharacter_replace(m.group());
+			 
+			    if(extractHashTag != null) {
+			    	if(extractHashTag.length()>=keyword.length())
+			    		if(extractHashTag.substring(0,keyword.length()).equals(keyword))
+			    	hashlist.add(extractHashTag);
+			    }
+			    }
+			
+		}
+		for(int i=hashlist.size()-1;i>0;i--){
+			for(int j=i-1;j>=0;j--){
+				if(hashlist.get(i).equals(hashlist.get(j))){
+					hashlist.remove(j);
+					i--;
+					j--;
+				}
+			}
+		}
+		for(int i=0;i<hashlist.size();i++){
+			for(int j=i+1;j<hashlist.size();j++){
+				if(((String)hashlist.get(i)).length() > ((String)hashlist.get(j)).length()){					
+					hashlist.add(hashlist.get(i));
+					hashlist.remove(i);
+					if(i>0){
+						i--;
+					}
+				}
+			}
+		}
+		
+		List hashcnt = new ArrayList();
+		for(int i=0;i<hashlist.size();i++){
+				hashcnt.add(dao.getHashCnt((String)hashlist.get(i)));
+		}
+		
+		if(hashlist.size()>0){
+			for (int i=0;i<hashlist.size();i++) {
+				result += "{";
+				result += "\"keyword\" : \"" + hashlist.get(i) + "\"";
+				result += ",\"hashcnt\" : \"" + hashcnt.get(i) + "\"";
+				result += "}";
+				if(i != hashlist.size()-1){
+					result += ",";
+				}
+			}
+		}
+		
+		result += "]";
+		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+	}
+	
+	public String sepcialCharacter_replace(String str) {
+	    str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`） ","");
+	 
+	    if(str.length() < 1) {
+	    return null;
+	    }
+	 
+	    return str;
+	}
 	
 }

@@ -115,8 +115,9 @@ border: none;
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 $(function() {
+	//좋아요 클릭 이벤트
 	$(".heart").on("click",$(".comment_write>*"),function() {
-		var index = $(".comment_write>a>img").index(this);
+		/* var index = $(".comment_write>a>img").index(this); */
 		var src = $(this).attr("src");
 		var b_idx = $(this).attr("b_idx");
 		src = (src==="img/like.PNG")
@@ -129,13 +130,35 @@ $(function() {
 			data: {"b_idx" : b_idx /* , "id" : ${user.id}  */},
 			dataType: "text",
 			success: function(data){
-							
+						
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		    }
 		});	
 	});	
+	
+	//댓글 입력(엔터) 이벤트
+	$(".comment_write_content").keyup(function(e) {
+	    if (e.keyCode == 13){
+	    	var index = $(".comment_write_content").index(this);	    	
+	    	/* var index = $(".comment_write>a>img").index(this); */
+	    	var c_content = $(this).val();
+	    	var b_idx = $(this).attr("b_idx");
+	    	$.ajax({
+				type: "post",
+				url: "commentwrite.do",
+				data: {"b_idx" : b_idx, "c_content" : c_content},
+				dataType: "text",
+				success: function(data){
+								
+				},
+				error : function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
+			});	
+	    };        
+	});
 }); 
 </script>
 </head>
@@ -176,7 +199,7 @@ $(function() {
 						</c:when>
 					</c:choose>
 					
-					<input type="text" class="comment_write_content" aria-label="댓글 달기..." placeholder="댓글 달기...">
+					<input type="text" class="comment_write_content" b_idx="${k.b_idx}" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
 			</div>		
 		</article>		
@@ -184,8 +207,6 @@ $(function() {
 	</div>
 	
 </div>
-
-
 
 </body>
 </html>
