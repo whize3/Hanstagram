@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,12 +50,77 @@ public class Controller {
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		String keyword = request.getParameter("keyword");
 		List<UsersVO> list = null;
-		
+		List<BoardVO> listb = null;
+		String keyword_h = "#"+request.getParameter("keyword");
 		String result = "[";
 		if(keyword !=null && keyword.trim()!= ""){
 			list = dao.search(keyword);
+			listb = dao.searchHash(keyword_h);
 		}
-		
+		List hashlist = new ArrayList();
+		String content = null;
+		for(BoardVO k : listb){
+			content = k.getB_content();
+			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
+			    Matcher m = p.matcher(content);
+			    String extractHashTag = null;
+			while(m.find()) {
+				
+			    extractHashTag = sepcialCharacter_replace(m.group());
+			 
+			    if(extractHashTag != null) {
+			    	if(extractHashTag.length()>=keyword_h.length())
+			    		if(extractHashTag.substring(0,keyword_h.length()).equals(keyword_h))
+			    	hashlist.add(extractHashTag);
+			    }
+			    }
+			
+		}
+		for(int i=hashlist.size()-1;i>0;i--){
+			for(int j=i-1;j>=0;j--){
+				if(hashlist.get(i).equals(hashlist.get(j))){
+					hashlist.remove(j);
+					i--;
+				}
+			}
+		}
+		for(int i=0;i<hashlist.size();i++){
+			for(int j=i+1;j<hashlist.size();j++){
+				if(((String)hashlist.get(i)).length() > ((String)hashlist.get(j)).length()){					
+					hashlist.add(hashlist.get(i));
+					hashlist.remove(i);
+					if(i>0){
+						i--;
+					}
+				}
+			}
+		}
+		List hashcnt = new ArrayList();
+		int cnt;
+		for(int i=0;i<hashlist.size();i++){
+				cnt = dao.getHashCnt((String)hashlist.get(i));
+				if(cnt<5){
+					hashlist.remove(i);
+					i--;
+				}else{
+					hashcnt.add(cnt);
+				}
+		}
+		if(hashlist.size()>0){
+			for (int i=0;i<hashlist.size();i++) {
+				result += "{";
+				result += "\"keyword\" : \"" + hashlist.get(i) + "\"";
+				result += ",\"hashcnt\" : \"" + hashcnt.get(i) + "\"";
+				result += "}";
+				if(i != hashlist.size()-1){
+					result += ",";
+				}
+				
+			}
+		}
+		if(list.size()>0 && hashlist.size()>0){
+			result += ",";
+		}
 		int idx = 0;
 		if(list!=null){	
 			for (UsersVO k : list) {
@@ -168,7 +234,20 @@ public class Controller {
 		mv.addObject(id);
 		return mv;
 	}
-	
+	@RequestMapping("/hashlist.do")
+	public ModelAndView hashList(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mv = new ModelAndView("HashResult");
+		String keyword = "#"+request.getParameter("keyword");
+//		StringTokenizer tokens = new StringTokenizer(keyword," ");
+//		for(int x = 1; x<2; x++ ){
+//			keyword = tokens.nextToken();
+//			}
+		List<BoardVO> list = null;
+		list = dao.getHashList(keyword);
+		
+		mv.addObject("list", list);
+		return mv;
+	}
 /*	// 로그인
 	@RequestMapping(value={"login/login.do","playerTest/login.do"})
 	public ModelAndView login(UserVO vo) throws Exception{
@@ -229,7 +308,6 @@ public class Controller {
 				if(hashlist.get(i).equals(hashlist.get(j))){
 					hashlist.remove(j);
 					i--;
-					j--;
 				}
 			}
 		}

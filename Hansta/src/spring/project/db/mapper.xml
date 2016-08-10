@@ -55,5 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertcomment" parameterType="Map">
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
 	</insert>
-	
+	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where b_content like '%' || #{keyword} || '%'
+	</select>
 </mapper>

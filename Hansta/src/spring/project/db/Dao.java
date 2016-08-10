@@ -79,5 +79,8 @@ public class Dao {
 		map.put("c_content", c_content);
 		template.insert("insertcomment", map);
 	}
+	public List<BoardVO> getHashList(String keyword){
+		return template.selectList("hashlist", keyword);
+	}
 	
 }
