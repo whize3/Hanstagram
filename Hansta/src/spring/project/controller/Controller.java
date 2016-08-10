@@ -291,7 +291,7 @@ public class Controller {
 		String content = null;
 		for(BoardVO k : list){
 			content = k.getB_content();
-			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z媛�-�옡]*)");
+			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
 			    Matcher m = p.matcher(content);
 			    String extractHashTag = null;
 			while(m.find()) {
@@ -348,7 +348,7 @@ public class Controller {
 	}
 	
 	public String sepcialCharacter_replace(String str) {
-	    str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`竊� ","");
+	    str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`） ","");
 	 
 	    if(str.length() < 1) {
 	    return null;
