@@ -191,7 +191,7 @@ display: block;
 width:100%;
 }
 #pop{
-display: block;
+display: none;
 width:100%;
 height:100%;
 background:#000;
@@ -199,15 +199,16 @@ z-index:100;
 position:absolute;
 top:0;
 left:0;
-opacity:0.75;
+opacity:0.55;
 }
 #cancel{
-display:inline-block;
+display:none;
 position:inherit;
 top:10px;
 right:20px;
 width:20px;
 height:auto;
+cursor:pointer;
 }
 .popTable{
 display: table;
@@ -216,7 +217,7 @@ width:600px;
 height:550px;
 opacity:1;
 margin:0 auto;
-margin-top:150px;
+margin-top:80px;
 }
 .popArea{
 width:100%;
@@ -226,12 +227,16 @@ top:0;
 left:0;
 background:none;
 z-index:1000;
+display: none;
 }
 .popTable ul{
 display: block;
 width:100%;
 overflow-y:scroll;
+overflow-x:hidden;
 height:551px; 
+margin:0;
+padding:0;
 }
 .popTable header{
 display: block;
@@ -242,7 +247,43 @@ border-bottom:1px solid #dbdbdb;
 display: block;
 width:100%;
 border-bottom:1px solid #efefef;
-height:50px;
+height:60px;
+display: table;
+padding-left:24px;
+}
+.popTable li .person{
+	display: table-cell;
+	vertical-align: middle;
+}
+.popTable li .person img{
+	display: inline-block;
+	border-radius:50%;
+	border:1px solid #dedede;
+	width:28px;
+	height:28px;
+}
+.person span{
+	display: block;
+}
+.personId a{
+	font-size:15px;
+	font-weight:bold;
+	color:#545454;
+}
+.personName{
+	font-size: 12px;
+}
+.person{
+	display: table;
+}
+.person .btnArea{
+	display: inline-block;
+	width:60px;
+	height:50px;
+}
+.person div{
+	width:390px;
+	margin-left:20px;
 }
 .popTable header{
 height:40px;
@@ -252,4 +293,16 @@ display: block;
 margin:15px;
 font-weight:bold;
 color:#545454;
+}
+
+#ableFollow button{
+	background:#ffffff;
+	border:1px solid #ba32c7;
+	color:#ba32c7;
+}
+
+#enableFollow button{
+	background:#ba32c7;
+	color:#ffffff;
+	border:0;
 }
