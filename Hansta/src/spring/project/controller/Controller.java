@@ -243,8 +243,9 @@ public class Controller {
 //			keyword = tokens.nextToken();
 //			}
 		List<BoardVO> list = null;
+		int hashcnt = dao.hashListCnt(keyword);
 		list = dao.getHashList(keyword);
-		
+		mv.addObject("hashcnt",hashcnt);
 		mv.addObject("list", list);
 		return mv;
 	}

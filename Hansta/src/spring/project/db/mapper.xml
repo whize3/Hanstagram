@@ -56,7 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
 	</insert>
 	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
-		select * from board_3 where b_content like '%' || #{keyword} || '%'
+		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc
+	</select>
+	<select id="hashlistcnt" parameterType="String" resultType="Integer">
+		select count(*) from board_3 where b_content like '%' || #{keyword} || '%'
 	</select>
 
 	

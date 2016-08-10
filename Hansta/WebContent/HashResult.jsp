@@ -28,91 +28,116 @@ $(function(){
 <%-- <c:forEach var="k" items="${list }"> --%>
 <%-- 		      			${k.b_idx } --%>
 <%-- 		      			</c:forEach> --%>
-${fn:length(list) } 
+${fn:length(list) }
 <main>
 
    <article>
       <div class="Container">
-      <c:if test="${fn:length(list) < 10} ">
+      <c:if test="${fn:length(list) <10 }">
       	<div class="line">
+      	<c:forEach var="k" items="${list }" end="2">
       		<a href="#">
       			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
 	      			<div class="box"></div>
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
-		      			<span></span>
+		      			<span>${k.b_idx }</span>
 		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
       		</a>
-      		
-      		
-      		<a href="#">
-      			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
-	      			<div class="box"></div>
-	      			<span>
-		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
-		      			<img src="/Hansta/img/likeWhite.png">
-		      			<span>0</span>
-		      		</span>
-      			</div>
-      		</a>
-      		<a href="#">
-      			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
-	      			<div class="box"></div>
-	      			<span>
-		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
-		      			<img src="/Hansta/img/likeWhite.png">
-		      			<span>0</span>
-		      		</span>
-      			</div>
-      		</a>
+      		</c:forEach>
       	</div>
       	</c:if>
+      	
+      	<c:if test="${fn:length(list) <15 }">
       	<div class="line">
-      		<a href="#">
-      			<div class="wrap">	
-	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
-	      			<div class="box"></div>
-	      			<span>
-		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
-		      			<img src="/Hansta/img/likeWhite.png">
-		      			<span>0</span>
-		      		</span>
-      			</div>
-      		</a>
+      	<c:forEach var="k" items="${list }" end="2">
       		<a href="#">
       			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
 	      			<div class="box"></div>
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
+		      			<span>${k.b_idx }</span>
 		      			<img src="/Hansta/img/likeWhite.png">
 		      			<span>0</span>
 		      		</span>
       			</div>
       		</a>
-      		<a href="#">
-      			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
-	      			<div class="box"></div>
-	      			<span>
-		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
-		      			<img src="/Hansta/img/likeWhite.png">
-		      			<span>0</span>
-		      		</span>
-      			</div>
-      		</a>
+      		</c:forEach>
       	</div>
+      	<div class="line">
+      	<c:forEach var="k" items="${list }" begin="3" end="5">
+      		<a href="#">
+      			<div class="wrap">
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
+	      			<div class="box"></div>
+	      			<span>
+		      			<img src="/Hansta/img/bubble.png">
+		      			<span>${k.b_idx }</span>
+		      			<img src="/Hansta/img/likeWhite.png">
+		      			<span>0</span>
+		      		</span>
+      			</div>
+      		</a>
+      		</c:forEach>
+      	</div>
+      	</c:if>
+      	
+      	<c:if test="${fn:length(list) <15 }">
+      	<div class="line">
+      	<c:forEach var="k" items="${list }" end="2">
+      		<a href="#">
+      			<div class="wrap">
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
+	      			<div class="box"></div>
+	      			<span>
+		      			<img src="/Hansta/img/bubble.png">
+		      			<span>${k.b_idx }</span>
+		      			<img src="/Hansta/img/likeWhite.png">
+		      			<span>0</span>
+		      		</span>
+      			</div>
+      		</a>
+      		</c:forEach>
+      	</div>
+      	<div class="line">
+      	<c:forEach var="k" items="${list }" begin="3" end="5">
+      		<a href="#">
+      			<div class="wrap">
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
+	      			<div class="box"></div>
+	      			<span>
+		      			<img src="/Hansta/img/bubble.png">
+		      			<span>${k.b_idx }</span>
+		      			<img src="/Hansta/img/likeWhite.png">
+		      			<span>0</span>
+		      		</span>
+      			</div>
+      		</a>
+      		</c:forEach>
+      	</div>
+      	<div class="line">
+      	<c:forEach var="k" items="${list }" begin="6" end="8">
+      		<a href="#">
+      			<div class="wrap">
+	      			<div class="contents"><img src="${k.img_url }" alt="이미지"></div>
+	      			<div class="box"></div>
+	      			<span>
+		      			<img src="/Hansta/img/bubble.png">
+		      			<span>${k.b_idx }</span>
+		      			<img src="/Hansta/img/likeWhite.png">
+		      			<span>0</span>
+		      		</span>
+      			</div>
+      		</a>
+      		</c:forEach>
+      	</div>
+      	</c:if>
+      	
       </div>
 
 

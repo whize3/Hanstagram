@@ -89,6 +89,9 @@ public class Dao {
 		map.put("id", id);
 		
 	}
+	public int hashListCnt(String keyword){
+		return template.selectOne("hashlistcnt",keyword);
+	}
 	public FollowVO followCheck(String id, String followeeId){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
