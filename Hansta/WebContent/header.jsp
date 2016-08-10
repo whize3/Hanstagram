@@ -39,7 +39,6 @@ vertical-align: middle;
 .header div input{
 padding:3px 10px 3px 26px;
 border-radius:3px;
-/* outline:none; */
 border:solid 1px #dbdbdb;
 width:177px;
 height:20px;
@@ -67,6 +66,7 @@ width:132px;
 height:24px;
 border:1px solid #000;
 }
+
 ul {
 	list-style: none;
 	padding: 0px;
@@ -91,6 +91,7 @@ li:HOVER {
 .selected {
 	background-color: lightblue;
 }
+
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
