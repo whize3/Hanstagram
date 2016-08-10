@@ -1,14 +1,21 @@
 package spring.project.db;
 
 public class FollowVO {
-	String follower, followee;
+	String follower, followee, state;
 	public FollowVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public FollowVO(String follower, String followee) {
+	public FollowVO(String follower, String followee,String state) {
 		super();
 		this.follower = follower;
 		this.followee = followee;
+		this.state = state;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	public String getFollower() {
 		return follower;
