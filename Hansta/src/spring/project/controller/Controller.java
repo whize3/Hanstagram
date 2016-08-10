@@ -140,12 +140,12 @@ public class Controller {
 	
 	@RequestMapping("/newsfeed.do")
 	public ModelAndView followingList(HttpServletRequest request, HttpServletResponse response){
-		String id = "whoyoung"; // 하드코딩
+		String id = "whoyoung"; // �븯�뱶肄붾뵫
 		List<FollowVO> followlist = dao.getFollowList(id);
 		List<BoardVO> boardlist = new ArrayList<>();
 		List<CommentVO> commentlist = new ArrayList<>();
 		
-		//현재 시간 불러오기
+		//�쁽�옱 �떆媛� 遺덈윭�삤湲�
 		Calendar calendar = Calendar.getInstance();
 		int c_year = calendar.get(Calendar.YEAR);
 		int c_month = calendar.get(Calendar.MONTH);
@@ -153,18 +153,18 @@ public class Controller {
 		int c_hour = calendar.get(Calendar.HOUR);
 		int c_minute = calendar.get(Calendar.MINUTE);
 		
-		//팔로우 리스트를 처음에 불러옴
+		//�뙏濡쒖슦 由ъ뒪�듃瑜� 泥섏쓬�뿉 遺덈윭�샂
 		for (FollowVO f : followlist) {
-			//팔로워들의 게시글을 불러옴
+			//�뙏濡쒖썙�뱾�쓽 寃뚯떆湲��쓣 遺덈윭�샂
 			List<BoardVO> onelist = dao.getBooardList(f.getFollowee());
-			// 각 게시글 VO에 좋아요 정보와 시간정보를 넣음
+			// 媛� 寃뚯떆湲� VO�뿉 醫뗭븘�슂 �젙蹂댁� �떆媛꾩젙蹂대�� �꽔�쓬
 			for (BoardVO boardVO : onelist) {
-				//댓글 리스트 넣기
+				//�뙎湲� 由ъ뒪�듃 �꽔湲�
 				List<CommentVO> onecommentlist = dao.getComment(boardVO.getB_idx());
 				for (CommentVO k : onecommentlist) {
 					commentlist.add(k);
 				}
-				//좋아요 상태 삽입
+				//醫뗭븘�슂 �긽�깭 �궫�엯
 				LikeVO lvo = new LikeVO();
 				lvo = dao.likeState(boardVO.getB_idx(), id);
 				if(lvo != null){
@@ -172,30 +172,30 @@ public class Controller {
 				}else{
 					boardVO.setLike_state("0");
 				}
-				//시간정보 삽입				
+				//�떆媛꾩젙蹂� �궫�엯				
 				int b_year = Integer.parseInt((boardVO.getB_time().substring(0, 4)));
 				int b_month = Integer.parseInt((boardVO.getB_time().substring(5, 7)));
 				int b_date = Integer.parseInt((boardVO.getB_time().substring(8, 10)));
 				int b_hour = Integer.parseInt((boardVO.getB_time().substring(11, 13)));
 				int b_minute = Integer.parseInt((boardVO.getB_time().substring(14, 16)));
 				if(c_year>b_year){
-					boardVO.setB_time(c_year-b_year+"년");
+					boardVO.setB_time(c_year-b_year+"�뀈");
 				}else if(c_month>b_month){
-					boardVO.setB_time(c_month-b_month+"개월");
+					boardVO.setB_time(c_month-b_month+"媛쒖썡");
 				}else if(c_date>b_date){
-					boardVO.setB_time(c_date-b_date+"일");
+					boardVO.setB_time(c_date-b_date+"�씪");
 				}else if(c_hour>b_hour){
-					boardVO.setB_time(c_hour-b_hour+"일");
+					boardVO.setB_time(c_hour-b_hour+"�씪");
 				}else if(c_minute>b_minute){
-					boardVO.setB_time(c_minute-b_minute+"분");
+					boardVO.setB_time(c_minute-b_minute+"遺�");
 				}else{
-					boardVO.setB_time("방금전");
+					boardVO.setB_time("諛⑷툑�쟾");
 				}
 				
-				//좋아요 갯수 삽입
+				//醫뗭븘�슂 媛��닔 �궫�엯
 				boardVO.setLike_count(String.valueOf(dao.likeCount(boardVO.getB_idx())));
 				
-				//전체 팔로우 게시글 리스트에 삽입
+				//�쟾泥� �뙏濡쒖슦 寃뚯떆湲� 由ъ뒪�듃�뿉 �궫�엯
 				boardlist.add(boardVO);
 			}			
 		}
@@ -213,7 +213,7 @@ public class Controller {
 	@RequestMapping("/like.do")
 	public ModelAndView like(HttpServletRequest request, HttpServletResponse response){
 		String b_idx = request.getParameter("b_idx");
-		String id = "whoyoung"; // 하드코딩
+		String id = "whoyoung"; // �븯�뱶肄붾뵫
 		LikeVO lvo = dao.likeState(b_idx, id);
 		if(lvo !=null){
 			dao.deleteLike(b_idx, id);
@@ -226,7 +226,7 @@ public class Controller {
 	
 	@RequestMapping("/commentwrite.do")
 	public ModelAndView commentWrite(HttpServletRequest request, HttpServletResponse response){
-		String id = "whoyoung"; // 로그인만들어주세요 
+		String id = "whoyoung"; // 濡쒓렇�씤留뚮뱾�뼱二쇱꽭�슂 
 		String b_idx = request.getParameter("b_idx");		
 		String c_content = request.getParameter("c_content");
 		dao.insertComment(id,b_idx,c_content);
@@ -249,6 +249,9 @@ public class Controller {
 		return mv;
 	}
 /*	// 로그인
+	
+/*	// 濡쒓렇�씤
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 	@RequestMapping(value={"login/login.do","playerTest/login.do"})
 	public ModelAndView login(UserVO vo) throws Exception{
 
@@ -288,7 +291,7 @@ public class Controller {
 		String content = null;
 		for(BoardVO k : list){
 			content = k.getB_content();
-			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z가-힣]*)");
+			 Pattern p = Pattern.compile("\\#([0-9a-zA-Z媛�-�옡]*)");
 			    Matcher m = p.matcher(content);
 			    String extractHashTag = null;
 			while(m.find()) {
@@ -345,7 +348,7 @@ public class Controller {
 	}
 	
 	public String sepcialCharacter_replace(String str) {
-	    str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`） ","");
+	    str = StringUtils.replace(str, "-_+=!@#$%^&*()[]{}|\\;:'\"<>,.?/~`竊� ","");
 	 
 	    if(str.length() < 1) {
 	    return null;
@@ -354,4 +357,19 @@ public class Controller {
 	    return str;
 	}
 	
+	
+	@RequestMapping("/follow.do")
+	public ModelAndView follow(HttpServletRequest request, HttpServletResponse response){
+		String id = "heehyun";
+		String followeeId = request.getParameter("followeeId");
+		FollowVO result = dao.followCheck(id, followeeId);
+
+		if(result == null){
+			dao.insertFollow(id, followeeId);
+		}else if(result.getState().equals("0")){
+			dao.followState(id, followeeId);
+		}		
+		ModelAndView mv = new ModelAndView("newsfeed");		
+		return mv;
+	}
 }

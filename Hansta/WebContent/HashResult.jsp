@@ -33,9 +33,8 @@ ${fn:length(list) }
 
    <article>
       <div class="Container">
+      <c:if test="${fn:length(list) } "></c:if>
       	<div class="line">
-      	
-      	
       		<a href="#">
       			<div class="wrap">
 	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
