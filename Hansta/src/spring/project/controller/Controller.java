@@ -90,7 +90,8 @@ public class Controller {
 					hashlist.add(hashlist.get(i));
 					hashlist.remove(i);
 					if(i>0){
-						i--;
+						i=0;
+						j=i+1;
 					}
 				}
 			}
