@@ -20,22 +20,25 @@ public class Dao {
 		this.template = template;
 	}
 	
-	// 메인에서검색
-	public List<UserVO> search(String keyword){
+	/*// 메인에서검색
+	public List<UsersVO> search(String keyword){
+	// 硫붿씤�뿉�꽌寃��깋
+	public List<UsersVO> search(String keyword){
+      branch 'master' of https://github.com/whize3/Hanstagram.git
 		return template.selectList("search", keyword);		
-	}
+	}*/
 	
-	// 팔로우 리스트 불러오기
+	// �뙏濡쒖슦 由ъ뒪�듃 遺덈윭�삤湲�
 	public List<FollowVO> getFollowList(String id){
 		return template.selectList("follow", id);
 	}
 	
-	// 아이디 주고 게시글 불러오기
+	// �븘�씠�뵒 二쇨퀬 寃뚯떆湲� 遺덈윭�삤湲�
 	public List<BoardVO> getBooardList(String id){
 		return template.selectList("board", id);
 	}
 	
-	// 게시글 좋아요 상태 확인하기
+	// 寃뚯떆湲� 醫뗭븘�슂 �긽�깭 �솗�씤�븯湲�
 	public LikeVO likeState(String b_idx, String id){
 		Map<String, String> map = new HashMap<>();
 		map.put("b_idx", b_idx);
@@ -44,7 +47,7 @@ public class Dao {
 		return lvo;
 	}
 	
-	// 좋아요 삽입
+	// 醫뗭븘�슂 �궫�엯
 	public void insertLike(String b_idx, String id){
 		Map<String, String> map = new HashMap<>();
 		map.put("b_idx", b_idx);
@@ -52,7 +55,7 @@ public class Dao {
 		template.insert("insertlike", map);
 	}
 	
-	// 좋아요 삭제
+	// 醫뗭븘�슂 �궘�젣
 	public void deleteLike(String b_idx, String id){
 		Map<String, String> map = new HashMap<>();
 		map.put("b_idx", b_idx);
@@ -81,34 +84,56 @@ public class Dao {
 		map.put("c_content", c_content);
 		template.insert("insertcomment", map);
 	}
-	
-	// 로그인
-		@RequestMapping("login/login.do")
-		public ModelAndView login(UserVO vo) throws Exception{
+	public List<BoardVO> getHashList(String keyword){
+		return template.selectList("hashlist", keyword);
 
-			boolean flag = false;
-			UserVO result = dao.selectOne(vo);
-			
-			
-			if (result != null)
-				if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
-					flag = true;
-
-			ModelAndView mv;
-			if (flag) {
-				mv = new ModelAndView("login/login");
-				mv.addObject("login_vo", result);
-				session_id = result.getId();
-				session_code = result.getUser_info_code();
-			} else {
-				mv = new ModelAndView("login/login_form");
-				mv.addObject("result", "fail");
-			}
-
-			return mv;
+	}
+	public void followState(String id, String followeeId){
+		Map<String, String> map = new HashMap<>();
+		map.put("followeeId", followeeId);
+		map.put("id", id);
+		
+	}
+	public int hashListCnt(String keyword){
+		return template.selectOne("hashlistcnt",keyword);
+	}
+	public FollowVO followCheck(String id, String followeeId){
+		Map<String, String> map = new HashMap<>();
+		map.put("followeeId", followeeId);
+		map.put("id", id);
+		FollowVO result = template.selectOne("followCnt", map);
+		return result;
+	}
+	public void insertFollow(String id, String followeeId){
+		Map<String, String> map = new HashMap<>();
+		map.put("followeeId", followeeId);
+		map.put("id", id);
+		template.insert("follow", map);
+	}
+	// 유저 데이터 모두 가져오기
+		public List<UsersVO> selectAll(){
+			return template.selectList("selectAll");
 		}
-
-
-
+		// 유저 하나 읽어오기
+		public UsersVO selectOne(UsersVO vo){
+			return template.selectOne("selectOne", vo.getId());
+		}
 	
+	
+		// 유저 하나 삽입
+		public void insertOne(UsersVO vo){
+			template.insert("insertOne", vo);
+		}
+		/*// 해당 유저 검색
+		public List<UsersVO> selectUser(Map<String, Integer> map){
+			return template.selectList("selectUser", map);
+		}
+		// 유저 삭제
+		public void deleteUser(String str){
+			template.delete("deleteUser", str);
+		}
+		// 유저 검색
+		public List<UsersVO> searchUser(String id){
+			return template.selectList("searchUser", id);
+		}*/
 }

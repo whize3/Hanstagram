@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hanstagram">
+<mapper namespace="Hansta">
 	<!-- 검색(일단 아이디만)  -->
 	<select id="search" parameterType="String" resultType="spring.project.db.UsersVO">
 		select * from users_3 where id like '%' || lower(#{keyword}) || '%'
@@ -37,9 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchHash" parameterType="String" resultType="spring.project.db.BoardVO">
 		select * from board_3 where b_content like '%' || #{keyword} || '%'
 	</select>
-	<select id="hashCnt" parameterType="String" resultType="Integer">
+	<!-- <select id="hashCnt" parameterType="String" resultType="Integer">
 		select count(*) hashcnt from board_3 where b_content like '%' || #{hashtag} || '%'
-	</select>
+	</select> -->
 
 	<!-- 게시글 좋아요 갯수 불러오기  -->
 	<select id="likecount" parameterType="String" resultType="Integer">
@@ -51,12 +51,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from comment_3 where b_idx = #{b_idx}
 	</select>
 	
-	<!-- 댓글 삽입  -->
+	 <!-- 댓글 삽입  -->
 	<insert id="insertcomment" parameterType="Map">
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
-	</insert>
+	</insert> 
 	<!-- 회원가입  -->
-	<insert id="insert" parameterType="spring.project.db.MemberVO">
-	insert into USERS_3 values (USERS_3_seq.NEXTVAL,#{ID},#{NAME},#{PWD},#{Email},#{AGE},#{PROFILE_URL})
+	<insert id="insertOne" parameterType="spring.project.db.UsersVO">
+		insert into users_3 values(users_3_seq.nextval,#{id},#{name},#{pwd},#{email},#{age})
 	</insert>
+	
+	
+	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc
+	</select>
+	<select id="hashlistcnt" parameterType="String" resultType="Integer">
+		select count(*) from board_3 where b_content like '%' || #{keyword} || '%'
+	</select>
+
+	
+	
+	<!-- 팔로우하기 -->
+ 	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
+		select * from follow_3 where follower=#{id} and followee = #{followeeId}
+	</select>
+<!-- 	<insert id="follow" parameterType="Map">
+		insert into follow_3 values(#{id},#{followeeId},0)
+	</insert> -->
+ 
+	<!-- 언팔로우하기 -->
+<!-- 	<update id="unfolllow" parameterType="Map">
+		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
+	</update>
+	 -->
 </mapper>
