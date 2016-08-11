@@ -97,6 +97,7 @@ height:auto;
     margin:0 auto;
     width: 347px;
     position:relative;
+   
     left:34px;
     top:12px;
     overflow-x:hidden;
