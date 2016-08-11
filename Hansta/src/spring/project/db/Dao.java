@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Repository
 public class Dao {
@@ -19,7 +21,7 @@ public class Dao {
 	}
 	
 	// 메인에서검색
-	public List<UsersVO> search(String keyword){
+	public List<UserVO> search(String keyword){
 		return template.selectList("search", keyword);		
 	}
 	
@@ -79,5 +81,48 @@ public class Dao {
 		map.put("c_content", c_content);
 		template.insert("insertcomment", map);
 	}
+	// 로그인
+		@RequestMapping("login/login.do")
+		public ModelAndView login(UserVO vo) throws Exception{
+
+			boolean flag = false;
+			UserVO result = dao.selectOne(vo);
+			
+			
+			if (result != null)
+				if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
+					flag = true;
+
+			ModelAndView mv;
+			if (flag) {
+				mv = new ModelAndView("login/login");
+				mv.addObject("login_vo", result);
+				session_id = result.getId();
+				session_code = result.getUser_info_code();
+			} else {
+				mv = new ModelAndView("login/login_form");
+				mv.addObject("result", "fail");
+			}
+
+			return mv;
+		}
+
+		// 회원가입 화면
+		@RequestMapping("login/register_view.do")
+		public ModelAndView register_view() {
+			ModelAndView mv = new ModelAndView("login/user_register_user");
+			List<UserVO> list = dao.selectAll();
+
+			mv.addObject("list", list);
+			return mv;
+		}
+
+		// 회원 가입
+		@RequestMapping("login/register_ok.do")
+		public ModelAndView register_ok(UserVO vo) {
+			dao.insertOne(vo);
+			return new ModelAndView("login/login_form");
+		}
+
 	
 }

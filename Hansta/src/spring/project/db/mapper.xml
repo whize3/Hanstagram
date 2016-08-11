@@ -55,5 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertcomment" parameterType="Map">
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
 	</insert>
-	
+	<!-- 회원가입  -->
+	<insert id="insert" parameterType="spring.project.db.MemberVO">
+	insert into USERS_3 values (USERS_3_seq.NEXTVAL,#{ID},#{NAME},#{PWD},#{Email},#{AGE},#{PROFILE_URL})
+	</insert>
 </mapper>
