@@ -52,7 +52,7 @@ ${fn:length(list) }
       	</div>
       	</c:if>
       	
-      	<c:if test="${fn:length(list) <15 }">
+      	<c:if test="${(fn:length(list) <15) && (fn:length(list) >=10) }">
       	<div class="line">
       	<c:forEach var="k" items="${list }" end="2">
       		<a href="#">
@@ -87,7 +87,7 @@ ${fn:length(list) }
       	</div>
       	</c:if>
       	
-      	<c:if test="${fn:length(list) <15 }">
+      	<c:if test="${fn:length(list) >=15 }">
       	<div class="line">
       	<c:forEach var="k" items="${list }" end="2">
       		<a href="#">

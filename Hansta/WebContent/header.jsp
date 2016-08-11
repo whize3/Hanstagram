@@ -104,138 +104,144 @@ height:auto;
 .selected {
 	background-color: lightblue;
 }
+.#search_div li div{
+display: inline-block;
+}
+.fuckingproject{
+margin-top:14px;
+position:absolute;
+left:5px;
+}
+.ttt{
+margin-top:14px;
+width:50px;
+position: absolute;
+right: 5px;
+text-align: right;
+font-size:13px;
+}
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 $(function() {
-   var which;
-   var res_split;
-   $("#search").keyup(function(e) {
-      if($("#search").val().length>0){
-         if($("#search").val().substr(0,1)=="#"){
-      $.ajax({
-         type: "post",
-         url: "searchhash.do",
-         data: {"keyword" : $("#search").val()},
-         dataType: "json",
-         success: function(data){
-            if(e.which != 40 && e.which!=38){
-               $("#search_div").empty();
-               $("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
-               
-               if(data.length!=0){
-   				if(data.length>=6){
-   					$("#search_div").css("height","300px").css("overflow-y","scroll");
-   				}else{
-   					$("#search_div").css("height","auto").css("overflow-y","hidden");
-   				}
-   				
-               for(var i=0; i<data.length; i++)
-                  $("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]+"   "+data[i]["hashcnt"]+"개").appendTo("#search_list");
-               }
-               }
-            
-            
-            
-            
-            $("li.keyword").each(function(){
-               $(this).on("click", function(){
-//                   $.ajax({
-//                      type: "post",
-//                      url: "hashlist.do",
-//                      data: {"keyword" : $(this).text()},
-//                      dataType: "text",
-//                      success: function(data){
-//                               alert("gdgd");
-                              
-//                      },
-//                      error : function(request,status,error){
-//                         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-//                       }
-//                   });   
-                  res_split = $(this).text().split(" ");
-                  location.href="hashlist.do?keyword="+res_split[0].substr(1,res_split[0].length);
-               })
-            });
-            if(e.which == 40){
-               which++;
-               if(which >= $("#search_list").children().length)
-                  which = 0;
-               $("#search_list").children().attr("class","");
-               $("#search_list").children().eq(which).attr("class","selected");
-               $("#search").val($("#search_list").children().eq(which).text());
-            } else if(e.which == 38) {
-               which--;
-               if(which < 0)
-                  which = 0;
-               $("#search_list").children().attr("class","");
-               $("#search_list").children().eq(which).attr("class","selected");
-               $("#search").val($("#search_list").children().eq(which).text());
-            } else if(e.which == 13){
-               $("#search_list").children().eq(which).attr("class","selected");
-               $(".selected").trigger("click");
-            } else {
-               which = -1;
-            }
-         },
-         error : function(request,status,error){
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-          }
-      });
-         }else{
-            $.ajax({
-               type: "post",
-               url: "search.do",
-               data: {"keyword" : $("#search").val()},
-               dataType: "json",
-               success: function(data){
-                  if(e.which != 40 && e.which!=38){
-                     $("#search_div").empty();
-                     $("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
-                     
-                     for(var i=0; i<data.length; i++)
-                        if(data[i]["hashcnt"]>0){
-                        $("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]+"   "+data[i]["hashcnt"]+"개").appendTo("#search_list");
-                        }else{
-                        $("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
-                        }
-                  }
-                  $("li.keyword").each(function(){
-                     $(this).on("click", function(){
-                        location.href="" + $(this).text();
-                     })
-                  });
-                  if(e.which == 40){
-                     which++;
-                     if(which >= $("#search_list").children().length)
-                        which = 0;
-                     $("#search_list").children().attr("class","");
-                     $("#search_list").children().eq(which).attr("class","selected");
-                     $("#search").val($("#search_list").children().eq(which).text());
-                  } else if(e.which == 38) {
-                     which--;
-                     if(which < 0)
-                        which = 0;
-                     $("#search_list").children().attr("class","");
-                     $("#search_list").children().eq(which).attr("class","selected");
-                     $("#search").val($("#search_list").children().eq(which).text());
-                  } else if(e.which == 13){
-                     $("#search_list").children().eq(which).attr("class","selected");
-                     $(".selected").trigger("click");
-                  } else {
-                     which = -1;
-                  }   
-               },
-               error : function(request,status,error){
-                  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-            });
-         }
-   }else{
-      $("#search_div").empty();
-   }
-   });
-   
+
+	var which;
+	var res_split;
+	$("#search").keyup(function(e) {
+		if($("#search").val().length>0){
+			if($("#search").val().substr(0,1)=="#"){
+		$.ajax({
+			type: "post",
+			url: "searchhash.do",
+			data: {"keyword" : $("#search").val()},
+			dataType: "json",
+			success: function(data){
+				if(e.which != 40 && e.which!=38){
+					$("#search_div").empty();
+					$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
+					
+					for(var i=0; i<data.length; i++)
+						$("<li>").attr("class","keyword").attr("id", i+"sli").html("<div class='fuckingproject'>"+data[i]["keyword"]+"</div><div class='ttt'> "+data[i]["hashcnt"]+"개</div>").appendTo("#search_list");
+				}
+				$("li.keyword").each(function(){
+					$(this).on("click", function(){
+// 						$.ajax({
+// 							type: "post",
+// 							url: "hashlist.do",
+// 							data: {"keyword" : $(this).text()},
+// 							dataType: "text",
+// 							success: function(data){
+// 										alert("gdgd");
+										
+// 							},
+// 							error : function(request,status,error){
+// 								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 						    }
+// 						});	
+						res_split = $(this).text().split(" ");
+						location.href="hashlist.do?keyword="+res_split[0].substr(1,res_split[0].length);
+					})
+				});
+				if(e.which == 40){
+					which++;
+					if(which >= $("#search_list").children().length)
+						which = 0;
+					$("#search_list").children().attr("class","");
+					$("#search_list").children().eq(which).attr("class","selected");
+					$("#search").val($("#search_list").children().eq(which).text());
+				} else if(e.which == 38) {
+					which--;
+					if(which < 0)
+						which = 0;
+					$("#search_list").children().attr("class","");
+					$("#search_list").children().eq(which).attr("class","selected");
+					$("#search").val($("#search_list").children().eq(which).text());
+				} else if(e.which == 13){
+					$("#search_list").children().eq(which).attr("class","selected");
+					$(".selected").trigger("click");
+				} else {
+					which = -1;
+				}
+			},
+			error : function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+		});
+			}else{
+				$.ajax({
+					type: "post",
+					url: "search.do",
+					data: {"keyword" : $("#search").val()},
+					dataType: "json",
+					success: function(data){
+						if(e.which != 40 && e.which!=38){
+							$("#search_div").empty();
+							
+							$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
+							
+							for(var i=0; i<data.length; i++)
+								if(data[i]["hashcnt"]>0){
+								$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]+"   "+data[i]["hashcnt"]+"개").appendTo("#search_list");
+								}else{
+								$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
+								}
+						}
+						$("li.keyword").each(function(){
+							$(this).on("click", function(){
+								location.href="" + $(this).text();
+							})
+						});
+						if(e.which == 40){
+							which++;
+							if(which >= $("#search_list").children().length)
+								which = 0;
+							$("#search_list").children().attr("class","");
+							$("#search_list").children().eq(which).attr("class","selected");
+							$("#search").val($("#search_list").children().eq(which).text());
+						} else if(e.which == 38) {
+							which--;
+							if(which < 0)
+								which = 0;
+							$("#search_list").children().attr("class","");
+							$("#search_list").children().eq(which).attr("class","selected");
+							$("#search").val($("#search_list").children().eq(which).text());
+						} else if(e.which == 13){
+							$("#search_list").children().eq(which).attr("class","selected");
+							$(".selected").trigger("click");
+						} else {
+							which = -1;
+						}	
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});
+			}
+	}else{
+		$("#search_div").empty();
+	}
+	});
+	
 })
 
 </script>

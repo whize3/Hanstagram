@@ -92,6 +92,11 @@ public class Dao {
 	public int hashListCnt(String keyword){
 		return template.selectOne("hashlistcnt",keyword);
 	}
+	public List<BoardVO> getHashBestList(String keyword){
+		return template.selectList("hashbestlist",keyword);
+	}
+	
+	
 	public FollowVO followCheck(String id, String followeeId){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
