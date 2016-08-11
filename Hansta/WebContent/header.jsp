@@ -144,14 +144,16 @@ $(function() {
 						which = 0;
 					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
-					$("#search").val($("#search_list").children().eq(which).text());
+					res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+					$("#search").val(res_split[0]);
 				} else if(e.which == 38) {
 					which--;
 					if(which < 0)
 						which = 0;
 					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
-					$("#search").val($("#search_list").children().eq(which).text());
+					res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+					$("#search").val(res_split[0]);
 				} else if(e.which == 13){
 					$("#search_list").children().eq(which).attr("class","selected");
 					$(".selected").trigger("click");
