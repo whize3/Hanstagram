@@ -18,7 +18,7 @@
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 			body {
-				background: #563c55 url(../images/blurred.jpg) no-repeat center top;
+				background: #563c55 url(."src/spring/project/db/Dao.java"./images/blurred.jpg) no-repeat center top;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				background-size: cover;

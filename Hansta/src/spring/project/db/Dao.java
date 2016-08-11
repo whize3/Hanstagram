@@ -81,6 +81,7 @@ public class Dao {
 		map.put("c_content", c_content);
 		template.insert("insertcomment", map);
 	}
+	
 	// 로그인
 		@RequestMapping("login/login.do")
 		public ModelAndView login(UserVO vo) throws Exception{
@@ -107,22 +108,7 @@ public class Dao {
 			return mv;
 		}
 
-		// 회원가입 화면
-		@RequestMapping("login/register_view.do")
-		public ModelAndView register_view() {
-			ModelAndView mv = new ModelAndView("login/user_register_user");
-			List<UserVO> list = dao.selectAll();
 
-			mv.addObject("list", list);
-			return mv;
-		}
-
-		// 회원 가입
-		@RequestMapping("login/register_ok.do")
-		public ModelAndView register_ok(UserVO vo) {
-			dao.insertOne(vo);
-			return new ModelAndView("login/login_form");
-		}
 
 	
 }
