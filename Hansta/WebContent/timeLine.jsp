@@ -56,7 +56,7 @@ $(function(){
                <h1>UserIDUserIDUserID</h1>
                <!-- 팔로우 여부에 따라 다른 버튼 공개 -->
 <!--                <span class="fBtn" id="ableFollow"><button>팔로우</button></span> -->
-               <span class="fBtn" id="enableFollow"><button onclick="location.href('follow.do')">팔로잉</button></span>
+               <span class="fBtn" id="enableFollow"><button onclick="location.href='follow.do'">팔로잉</button></span>
             </div>
             
             <!-- 내 타임라인인 경우 -->

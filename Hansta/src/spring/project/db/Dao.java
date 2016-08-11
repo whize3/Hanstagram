@@ -97,13 +97,14 @@ public class Dao {
 		map.put("followeeId", followeeId);
 		map.put("id", id);
 		FollowVO result = template.selectOne("followCnt", map);
+		
 		return result;
 	}
 	public void insertFollow(String id, String followeeId){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
 		map.put("id", id);
-		template.insert("follow", map);
+		template.update("unfollow", map);
 	}
 	
 }

@@ -361,16 +361,26 @@ public class Controller {
 	
 	@RequestMapping("/follow.do")
 	public ModelAndView follow(HttpServletRequest request, HttpServletResponse response){
-		String id = "heehyun";
-		String followeeId = request.getParameter("followeeId");
+		String id = "aaaa";
+		String followeeId = "bbbb";
 		FollowVO result = dao.followCheck(id, followeeId);
-
+		if(result == null){
+			System.out.println(id+">>"+followeeId);
+			dao.insertFollow(id, followeeId);
+		}else{
+			System.out.println("result : "+result.getFollowee());
+		}
+		
+		
+		/*
 		if(result == null){
 			dao.insertFollow(id, followeeId);
 		}else if(result.getState().equals("0")){
 			dao.followState(id, followeeId);
-		}		
-		ModelAndView mv = new ModelAndView("newsfeed");		
+		}
+		*/
+		
+		ModelAndView mv = new ModelAndView("newsfeed");
 		return mv;
 	}
 }
