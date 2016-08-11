@@ -3,6 +3,7 @@ package spring.project.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -10,7 +11,10 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.sis.util.logging.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.googlecode.mp4parser.util.Logger;
+
 import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
 import spring.project.db.BoardVO;
 import spring.project.db.CommentVO;
@@ -28,7 +34,8 @@ import spring.project.db.FollowVO;
 import spring.project.db.HashCountVO;
 import spring.project.db.LikeVO;
 import spring.project.db.Page;
-import spring.project.db.UsersVO;
+import spring.project.db.UserVO;
+
 
 
 
@@ -92,7 +99,8 @@ public class Controller {
 					hashlist.add(hashlist.get(i));
 					hashlist.remove(i);
 					if(i>0){
-						i--;
+						i=0;
+						j=i+1;
 					}
 				}
 			}
@@ -239,15 +247,18 @@ public class Controller {
 	@RequestMapping("/hashlist.do")
 	public ModelAndView hashList(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mv = new ModelAndView("HashResult");
-		String keyword = "#"+request.getParameter("keyword");
+		String keyword = "#"+request.getParameter("keyword")+" ";
 //		StringTokenizer tokens = new StringTokenizer(keyword," ");
 //		for(int x = 1; x<2; x++ ){
 //			keyword = tokens.nextToken();
 //			}
 		List<BoardVO> list = null;
+		List<BoardVO> list_b = null;
 		int hashcnt = dao.hashListCnt(keyword);
+		list_b = dao.getHashBestList(keyword);
 		list = dao.getHashList(keyword);
 		mv.addObject("hashcnt",hashcnt);
+		mv.addObject("list_b", list_b);
 		mv.addObject("list", list);
 		return mv;
 	}
@@ -295,7 +306,8 @@ public class Controller {
 					hashlist.add(hashlist.get(i));
 					hashlist.remove(i);
 					if(i>0){
-						i--;
+						i=0;
+						j=i+1;
 					}
 				}
 			}
@@ -347,47 +359,48 @@ public class Controller {
 		ModelAndView mv = new ModelAndView("newsfeed");		
 		return mv;
 	}
-	// 로그인
-		@RequestMapping("login/login.do")
-		public ModelAndView login(UsersVO vo) throws Exception{
-
-			boolean flag = false;
-			UsersVO result = dao.selectOne(vo);
-			
-			
-			if (result != null)
-				if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
-					flag = true;
-
-			ModelAndView mv;
-			if (flag) {
-				mv = new ModelAndView("login/login");
-				mv.addObject("login_vo", result);
-				session_id = result.getId();
-				session_code = result.getId();
-			} else {
-				mv = new ModelAndView("login/login_form");
-				mv.addObject("result", "fail");
-			}
-
-			return mv;
-		}
-
 	
+	
+	// 로그인
+	@RequestMapping("login/login.do")
+	public ModelAndView login(UserVO vo) throws Exception{
+
+		boolean flag = false;
+		UserVO result = dao.selectOne(vo);
+		
+		
+		if (result != null)
+			if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
+				flag = true;
+
+		ModelAndView mv;
+		if (flag) {
+			mv = new ModelAndView("login/login");
+			mv.addObject("login_vo", result);
+			session_id = result.getId();
+			session_code = result.getId();
+		} else {
+			mv = new ModelAndView("login/login_form");
+			mv.addObject("result", "fail");
+		}
+
+		return mv;
+	}
+
 	// 회원가입 화면
-		@RequestMapping("login/register_view.do")
-		public ModelAndView register_view() {
-			ModelAndView mv = new ModelAndView("login/user_register_user");
-			List<UsersVO> list = dao.selectAll();
+	@RequestMapping("login/register_view.do")
+	public ModelAndView register_view() {
+		ModelAndView mv = new ModelAndView("login/user_register_user");
+		List<UserVO> list = dao.selectAll();
 
-			mv.addObject("list", list);
-			return mv;
-		}
+		mv.addObject("list", list);
+		return mv;
+	}
 
-		// 회원 가입
-		@RequestMapping("login/register_ok.do")
-		public ModelAndView register_ok(UsersVO vo) {
-			dao.insertOne(vo);
-			return new ModelAndView("login/login_form");
-		}
+	// 회원 가입
+	@RequestMapping("login/register_ok.do")
+	 public ModelAndView register_ok(UserVO vo) {
+		dao.insertOne(vo);
+		return new ModelAndView("login/login_form");
+	}
 }

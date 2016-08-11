@@ -91,7 +91,12 @@ li:HOVER {
 .selected {
 	background-color: lightblue;
 }
-
+.fuckingproject{
+display: inline-block;
+}
+.ttt{
+display: inline-block;
+}
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
@@ -112,7 +117,7 @@ $(function() {
 					$("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
 					
 					for(var i=0; i<data.length; i++)
-						$("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]+"   "+data[i]["hashcnt"]+"개").appendTo("#search_list");
+						$("<li>").attr("class","keyword").attr("id", i+"sli").html("<div class='fuckingproject'>"+data[i]["keyword"]+"</div><div class='ttt'> "+data[i]["hashcnt"]+"개</div>").appendTo("#search_list");
 				}
 				$("li.keyword").each(function(){
 					$(this).on("click", function(){
@@ -139,14 +144,16 @@ $(function() {
 						which = 0;
 					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
-					$("#search").val($("#search_list").children().eq(which).text());
+					res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+					$("#search").val(res_split[0]);
 				} else if(e.which == 38) {
 					which--;
 					if(which < 0)
 						which = 0;
 					$("#search_list").children().attr("class","");
 					$("#search_list").children().eq(which).attr("class","selected");
-					$("#search").val($("#search_list").children().eq(which).text());
+					res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+					$("#search").val(res_split[0]);
 				} else if(e.which == 13){
 					$("#search_list").children().eq(which).attr("class","selected");
 					$(".selected").trigger("click");
@@ -187,14 +194,16 @@ $(function() {
 								which = 0;
 							$("#search_list").children().attr("class","");
 							$("#search_list").children().eq(which).attr("class","selected");
-							$("#search").val($("#search_list").children().eq(which).text());
+							res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+							$("#search").val(res_split[0]);
 						} else if(e.which == 38) {
 							which--;
 							if(which < 0)
 								which = 0;
 							$("#search_list").children().attr("class","");
 							$("#search_list").children().eq(which).attr("class","selected");
-							$("#search").val($("#search_list").children().eq(which).text());
+							res_split = res_split = $("#search_list").children().eq(which).text().split(" ");
+							$("#search").val(res_split[0]);
 						} else if(e.which == 13){
 							$("#search_list").children().eq(which).attr("class","selected");
 							$(".selected").trigger("click");

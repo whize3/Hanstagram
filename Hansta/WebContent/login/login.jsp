@@ -9,13 +9,13 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function go_manage_user() {
-		window.open("newsfeed.do", "",
+		window.open("user_list_view.do", "",
 				"width=430, height=500, toolbar=no, scrollbar=yes");
 	}
 </script>
 </head>
 <body>
-<jsp:useBean id="vo" class="spring.project.db.UsersVO" />
+	<jsp:useBean id="vo" class="spring.project.db.UserVO" />
 	<jsp:setProperty property="*" name="vo" />
 	<c:choose>
 		<c:when
@@ -23,12 +23,12 @@
 			<script type="text/javascript">
 				alert('${login_vo.id}');
 			</script>
-			<!-- <input type="button" onclick="go_manage_user()" value="회원 관리"> -->
+			<input type="button" onclick="go_manage_user()" value="회원 관리">
 		</c:when>
 		<c:otherwise>
 				${login_vo.id } </br>
 				${login_vo.name } </br>
-		
+			
 		</c:otherwise>
 	</c:choose>
 </body>

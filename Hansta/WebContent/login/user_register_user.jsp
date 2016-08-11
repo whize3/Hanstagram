@@ -4,7 +4,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-		
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Custom Login Form Styling</title>
+        <meta name="description" content="Custom Login Form Styling with CSS3" />
+        <meta name="keywords" content="css3, login, form, custom, input, submit, button, html5, placeholder" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<script src="../js/modernizr.custom.63321.js"></script>
+		<!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
+		<style>
+			@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+			body {
+				background: #563c55 url(../images/blurred.jpg) no-repeat center top;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				background-size: cover;
+			}
+			.container > header h1,
+			.container > header h2 {
+				color: #fff;
+				text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+			}
+		</style>
         <script type="text/javascript">
             function register(f){
                 for (var i = 0; i < document.forms[0].elements.length; i++) {
@@ -71,6 +95,7 @@
         </script>
     </head>
     <body>
+			
 			<section class="main">
 				<form class="form-3" name="f">
 				    <p class="clearfix">
@@ -78,39 +103,33 @@
 				        <input type="text" name="id" class="login" placeholder="Username">
                         <input type="button" name="chk" class="login" value="check" onclick="duplicate_chk()">
 				    </p>
-				    
 				    <p class="clearfix">
-				        <label for="Name">Name</label>
-				        <input type="text" name="name" placeholder="Password"> 
-				    </p>
-				    
-				    <p class="clearfix">
-				        <label for="password">Password</label>
+				        <label for="password">비밀번호</label>
 				        <input type="password" name="pwd" placeholder="Password"> 
 				    </p>
                     <p class="clearfix">
-				        <label for="password" class="password">PasswordCheck</label>
+				        <label for="password" class="password">비밀번호확인</label>
 				        <input type="password" name="pwd_chk" class="password" placeholder="PwdCheck">
                         <input type="button" name="chk" class="password" value="check" onclick="pwd_check()">
 				    </p>
-                    
-				    <p class="clearfix">
-				        <label for="name">Age</label>
-				        <input type="text" name="age" placeholder="Age"> 
+                    <p class="clearfix">
+				        <label for="name">Name</label>
+				        <input type="text" name="name" placeholder="Password"> 
 				    </p>
                     <p class="clearfix">
 				        <label for="email">email</label>
 				        <input type="text" name="email" placeholder="email"> 
 				    </p>
-				    <!-- <p class="clearfix">
-				        <label for="Profile_url">Profile_url</label>
-				        <input type="text" name="profile_url" placeholder="Profile_url"> 
-				    </p> -->
 				    <p class="clearfix">
-				        <input type="button" value="이전화면" onclick="back()">
+				        <label for="age">나이</label>
+				        <input type="text" name="age" placeholder="Age"> 
+				    </p>
+				    
+				    <p class="clearfix">
+				        <input type="button" value="Back" onclick="back()">
 				    </p>
 				    <p class="clearfix">
-                        <input type="button" value="가입" onclick="register(this.form)">
+                        <input type="button" value="Register" onclick="register(this.form)">
 				    </p>
 				</form>​
 			</section>
