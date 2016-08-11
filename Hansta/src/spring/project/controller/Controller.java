@@ -366,26 +366,45 @@ public class Controller {
 	
 	@RequestMapping("/follow.do")
 	public ModelAndView follow(HttpServletRequest request, HttpServletResponse response){
-		String id = "aaaa";
-		String followeeId = "bbbb";
+		String id = "heehyuneee";
+		String followeeId = "aaaa";
 		FollowVO result = dao.followCheck(id, followeeId);
 		if(result == null){
-			System.out.println(id+">>"+followeeId);
 			dao.insertFollow(id, followeeId);
 		}else{
-			System.out.println("result : "+result.getFollowee());
+			dao.followState(id, followeeId,"0");
 		}
 		
-		
-		/*
-		if(result == null){
-			dao.insertFollow(id, followeeId);
-		}else if(result.getState().equals("0")){
-			dao.followState(id, followeeId);
-		}
-		*/
-		
-		ModelAndView mv = new ModelAndView("newsfeed");
+		ModelAndView mv = new ModelAndView("timeLine");
+
 		return mv;
 	}
+	
+	@RequestMapping("/unfollow.do")
+	public ModelAndView unfollow(HttpServletRequest request, HttpServletResponse response){
+		String id = "heehyuneee";
+		String followeeId = "aaaa";
+		dao.followState(id, followeeId,"10");
+		
+		ModelAndView mv = new ModelAndView("timeLine");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/followerList.do")
+	public ModelAndView followerList(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("followerList.do");
+		
+		String followerId = request.getParameter("follower");
+		System.out.println("followerId : "+followerId);
+		String followeeId = request.getParameter("followee");
+		String flag = request.getParameter("flag");
+		dao.followList(followerId, followeeId, flag);
+		
+		ModelAndView mv = new ModelAndView("timeLine");
+		
+		return mv;
+	}
+	
+	
 }

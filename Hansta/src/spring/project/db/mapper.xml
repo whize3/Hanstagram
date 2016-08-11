@@ -71,14 +71,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
 		select * from follow_3 where FOLLOWER=#{id} and FOLLOWEE = #{followeeId}
 	</select>
-<!--   	<insert id="follow" parameterType="Map">
+   	<insert id="followInsert" parameterType="Map">
 		insert into follow_3 values(#{id},#{followeeId},0)
-	</insert> -->
+	</insert>
 	
 	
-	<!-- 언팔로우하기 -->
- 	<update id="unfolllow" parameterType="Map">
-		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId}
+	<!-- 팔로우상태변경하기 -->
+ 	<update id="folllowState" parameterType="Map">
+		update follow_3 set state = #{state} where follower = #{id} and followee = #{followeeId}
 	</update>
+	
+	<!-- 팔로워 명단 -->
+	<select id="getfollower" parameterType="Map" resultType="String">
+		select follower from follow_3 where state = 0 and followee = #{followeeId}
+	</select>
+	
+	<select id="getfollowee" parameterType="Map" resultType="String">
+		select followee from follow_3 where follower = #{followerId} and state = 0
+	</select>
+	
+	<select id="getfinfo" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id = #{id}
+	</select>
 	 
 </mapper>

@@ -105,7 +105,7 @@ height:auto;
 .selected {
 	background-color: lightblue;
 }
-.#search_div li div{
+#search_div li div{
 display: inline-block;
 }
 .fuckingproject{

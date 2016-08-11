@@ -35,13 +35,41 @@ $(function(){
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
 		$(".popArea").css("display","block");
+		
+		$.ajax({
+			type:"post",
+			url:"followerList.do",
+			data:{
+				"follower":$("#followerId").val(),
+				"followee":$("#followeeId").val(),
+				"flag":"follower"},
+			dataType:"json",
+			success:function(data){
+				console.log("성공")
+				$("#flist").empty();
+				for(var i=0; i<data.length;i++){
+					var str = "<a href='#'><img src='/Hansta/img/person.jpg'></a>"
+					str += "<div><span class='personId'>";
+					str += "<a href='#'>"+"LeeSue"+"</a></span>";
+					str += "<span class='personName'>"+이수현+"</span></div>"
+					str += "<button>팔로우</button></div>"
+					
+					$("<li>").html(str).appendTo("#flist");
+				}
+			},
+			error:function(){
+				console.log("실패");
+			}
+			
+		})
 	});
 });
 </script>
 </head>
 
 <body class="body">
-
+<input type="hidden" id="followerId" value="aaaa">
+<input type="hidden" id="followeeId" value="aaaa">
 <main>
 
    <article>
@@ -55,7 +83,7 @@ $(function(){
             <div>
                <h1>UserIDUserIDUserID</h1>
                <!-- 팔로우 여부에 따라 다른 버튼 공개 -->
-<!--                <span class="fBtn" id="ableFollow"><button>팔로우</button></span> -->
+<!--                <span class="fBtn" id="ableFollow"><button onclick="location.href='unfollow.do'">팔로우</button></span> -->
                <span class="fBtn" id="enableFollow"><button onclick="location.href='follow.do'">팔로잉</button></span>
             </div>
             
@@ -131,7 +159,7 @@ $(function(){
 	<img src="/Hansta/img/cancel.png" id="cancel">
 	<div class="popTable">
 		<header><span>팔로워</span></header>
-		<ul>
+		<ul id="flist">
 			<li>
 				<div class="person">
 					<a href="#"><img src="/Hansta/img/person.jpg"></a>

@@ -83,20 +83,16 @@ public class Dao {
 		return template.selectList("hashlist", keyword);
 
 	}
-	public void followState(String id, String followeeId){
+	public void followState(String id, String followeeId, String state){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
 		map.put("id", id);
-		
+		map.put("state", state);
+		template.update("folllowState",map);
 	}
 	public int hashListCnt(String keyword){
 		return template.selectOne("hashlistcnt",keyword);
 	}
-	public List<BoardVO> getHashBestList(String keyword){
-		return template.selectList("hashbestlist",keyword);
-	}
-	
-	
 	public FollowVO followCheck(String id, String followeeId){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
@@ -109,7 +105,30 @@ public class Dao {
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
 		map.put("id", id);
-		template.update("unfollow", map);
+		template.insert("followInsert", map);
 	}
-	
+	public List<UsersVO> followList(String followerId, String followeeId, String flag){
+		List<UsersVO> list = null;
+		Map<String, String> map = new HashMap<>();
+		map.put("followerId", followerId);
+		map.put("followeeId", followeeId);
+		
+		List<String> flist = null;
+		
+		
+		if(flag.equals("follower")){
+			System.out.println("followerID : "+followerId);
+			System.out.println("followeeID : "+followeeId);
+			flist = template.selectList("getfollower", map);
+		}else if(flag.equals("followee")){
+			System.out.println("follee");
+			flist = template.selectList("getfollowee", map);
+		}
+		if(list !=null ){
+			for(String id:flist){
+				list.add(template.selectOne("getfinfo", id));
+			}
+		}
+		return list;
+	}
 }
