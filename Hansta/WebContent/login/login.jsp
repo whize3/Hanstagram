@@ -8,28 +8,72 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function go_manage_user() {
-		window.open("user_list_view.do", "",
-				"width=430, height=500, toolbar=no, scrollbar=yes");
-	}
+function loginsuccess(){
+	alert("로그인중기다려주십시오.");
+	location.href='index.do';
+}
+function loginCheck(){
+	var param = "id" + "=" + $("#id").val() + "&" +"pw" + "="+ $("#pw").val();
+	$.ajax({
+		url : "/login.do",
+		type : "GET",
+		data : param,
+		cache : false,
+		async : false,
+		dataType : "text",
+
+		success : function(response) {								
+			if(response=='1')
+			{
+				loginsuccess();
+			}
+			else
+			{
+				alert("아이디 또는 비번이 틀렸습니다. 다시 입력하세요.")
+				return false;
+			}	
+			
+			alert(check);
+		},
+		error : function(request, status, error) {
+			if (request.status != '0') {
+				alert("code : " + request.status + "\r\nmessage : "
+						+ request.reponseText + "\r\nerror : " + error);
+			}
+		}
+
+	});
+}
+
 </script>
 </head>
 <body>
-	<jsp:useBean id="vo" class="spring.project.db.UserVO" />
-	<jsp:setProperty property="*" name="vo" />
-	<c:choose>
-		<c:when
-			test="${vo.id == 'admin1' || vo.id == 'admin2' || vo.id == 'admin3' || vo.id == 'admin4' || vo.id == 'admin5'}">
-			<script type="text/javascript">
-				alert('${login_vo.id}');
-			</script>
-			<input type="button" onclick="go_manage_user()" value="회원 관리">
-		</c:when>
-		<c:otherwise>
-				${login_vo.id } </br>
-				${login_vo.name } </br>
-			
-		</c:otherwise>
-	</c:choose>
+	<form name="frm" id = "frm" action = "/session.do">
+		<P align="center">
+			<FONT size="6"><B>로그인 페이지</B></FONT>
+		</P>
+		<table border="0" align="center" cellspacing="1" bgcolor="PapayaWhip" width="300" height="150">
+			<tr>
+				<td colspan="2" bgcolor="PeachPuff" align="center" height="30"><b>로그인 확인</b></td>
+			</tr>
+
+			<tr align="center">
+				<td bgcolor="PeachPuff" width="100">아이디</td>
+				<td><input type="text" id="id" name="id" size="12" maxlength="12"></td>
+			</tr>
+
+			<tr align="center">
+				<td bgcolor="PeachPuff">비밀번호</td>
+				<td><input type="password" id="pw" name="pw" size="12" maxlength="12"></td>
+			</tr>
+
+			<tr>
+				<td colspan="2" bgcolor="PeachPuff" align="center" height="30">
+					<input type="button" value="로그인" onclick='loginCheck()'> 
+					<input type="button" value="회원 가입" onclick="javascript:location.href='/membership.do';">
+					<input type="button" value="비번찾기" onclick="javascript:location.href='/password_search.do';"> 
+				</td>
+			</tr>
+		</table>
 </body>
 </html>

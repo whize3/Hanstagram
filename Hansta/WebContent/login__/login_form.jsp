@@ -15,20 +15,6 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
 		<script src="../js/modernizr.custom.63321.js"></script>
 		<!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
-		<style>
-			@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
-			body {
-				background: #563c55 url(../images/blurred.jpg) no-repeat center top;
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				background-size: cover;
-			}
-			.container > header h1,
-			.container > header h2 {
-				color: #fff;
-				text-shadow: 0 1px 1px rgba(0,0,0,0.7);
-			}
-		</style>
         <script type="text/javascript">
             if("${result}" == "fail")
                 alert("Login fail");
@@ -52,27 +38,6 @@
         </script>
     </head>
     <body>
-        <div class="container">
-			<!-- Codrops top bar -->
-            <div class="codrops-top">
-                <a href="http://tympanus.net/Tutorials/RealtimeGeolocationNode/">
-                    <strong>&laquo; Previous Demo: </strong>Real-Time Geolocation Service with Node.js
-                </a>
-                <span class="right">
-                    <a href="http://tympanus.net/codrops/?p=11372">
-                        <strong>Back to the Codrops Article</strong>
-                    </a>
-                </span>
-            </div><!--/ Codrops top bar -->
-			
-			<header>
-				<h1>Listream <strong>Login Form</strong></h1>
-				<h2>List Stream : Make Your PlayListm, Enjoy Your Music</h2>
-				<div class="support-note">
-					<span class="note-ie">Sorry, only modern browsers.</span>
-				</div>
-			</header>
-            
 			<section class="main">
 				<form class="form-3">
 				    <p class="clearfix">
