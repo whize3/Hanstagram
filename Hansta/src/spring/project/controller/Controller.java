@@ -238,17 +238,15 @@ public class Controller {
 	@RequestMapping("/hashlist.do")
 	public ModelAndView hashList(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mv = new ModelAndView("HashResult");
-		String keyword = "#"+request.getParameter("keyword")+" ";
+		String keyword = "#"+request.getParameter("keyword");
 //		StringTokenizer tokens = new StringTokenizer(keyword," ");
 //		for(int x = 1; x<2; x++ ){
 //			keyword = tokens.nextToken();
 //			}
 		List<BoardVO> list = null;
 		List<BoardVO> list_b = null;
-		int hashcnt = dao.hashListCnt(keyword);
 		list_b = dao.getHashBestList(keyword);
 		list = dao.getHashList(keyword);
-		mv.addObject("hashcnt",hashcnt);
 		mv.addObject("list_b", list_b);
 		mv.addObject("list", list);
 		return mv;
@@ -319,19 +317,20 @@ public class Controller {
 				}
 			}
 		}
-		for(int i=0;i<hashlist.size();i++){
-			for(int j=i+1;j<hashlist.size();j++){
-				if(((String)hashlist.get(i)).length() > ((String)hashlist.get(j)).length()){					
-					hashlist.add(hashlist.get(i));
-					hashlist.remove(i);
-					if(i>0){
-						i=0;
-						j=i+1;
-					}
+		
+		int k=0;
+		int h=0;
+		while(k<hashlist.size()){
+		outer:for(k=0;k<hashlist.size();k++){
+			for(h=k+1;h<hashlist.size();h++){
+				if(((String)hashlist.get(k)).length() > ((String)hashlist.get(h)).length()){
+					hashlist.add(hashlist.get(k));
+					hashlist.remove(k);
+					break outer;
 				}
 			}
 		}
-		
+		}
 		List hashcnt = new ArrayList();
 		for(int i=0;i<hashlist.size();i++){
 				hashcnt.add(dao.getHashCnt((String)hashlist.get(i)));

@@ -38,7 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from board_3 where b_content like '%' || #{keyword} || '%'
 	</select>
 	<select id="hashCnt" parameterType="String" resultType="Integer">
-		select count(*) hashcnt from board_3 where b_content like '%' || #{hashtag} || '%'
+		select count(*) from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b where regexp_like(a.b_content,#{hashtag}||' ' || '|' || #{hashtag}||'$') and a.b_idx=b.b_idx order by b_time desc
+<!-- 		select count(*) hashcnt from board_3 where b_content like '%' || #{hashtag} || '%' -->
 	</select>
 
 	<!-- 게시글 좋아요 갯수 불러오기  -->
@@ -56,17 +57,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
 	</insert>
 	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
-		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc
+	select b.* from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b where regexp_like(a.b_content,#{keyword}||' ' || '|' || #{keyword}||'$') and a.b_idx=b.b_idx order by b_time desc
+<!-- 		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc -->
 	</select>
-	<select id="hashlistcnt" parameterType="String" resultType="Integer">
-		select count(*) from board_3 where b_content like '%' || #{keyword} || '%'
+	<select id="hashlistcnt" parameterType="String" resultType="String">
+		select count(*) like_count from like_3 where b_idx=#{b_idx}
 	</select>
-	
 	<select id="hashbestlist" parameterType="String" resultType="spring.project.db.BoardVO">
-		select a.*,b.* from board_3 a,(select b_idx,count(*) like_count from like_3 group by b_idx) b where a.b_content like '%' || #{keyword} || '%' and a.b_idx=b.b_idx order by like_count desc
+		select b.*,c.like_count from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b,(select b_idx,count(*) like_count from like_3 group by b_idx) c where regexp_like(a.b_content,#{keyword}||' ' || '|' || #{keyword}||'$') and a.b_idx=b.b_idx and a.b_idx=c.b_idx order by like_count desc
+
 	</select>
-	
-	
 	<!-- 팔로우하기 -->
  	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
 		select * from follow_3 where follower=#{id} and followee = #{followeeId}

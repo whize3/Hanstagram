@@ -80,7 +80,13 @@ public class Dao {
 		template.insert("insertcomment", map);
 	}
 	public List<BoardVO> getHashList(String keyword){
-		return template.selectList("hashlist", keyword);
+		 String b_idx=null;
+		 List<BoardVO> list = template.selectList("hashlist", keyword);
+		 for(BoardVO k : list){
+			 b_idx = k.getB_idx();
+			 k.setLike_count(template.selectOne("hashlistcnt", b_idx));
+		 }
+		 return list;
 
 	}
 	public void followState(String id, String followeeId){
@@ -88,9 +94,6 @@ public class Dao {
 		map.put("followeeId", followeeId);
 		map.put("id", id);
 		
-	}
-	public int hashListCnt(String keyword){
-		return template.selectOne("hashlistcnt",keyword);
 	}
 	public List<BoardVO> getHashBestList(String keyword){
 		return template.selectList("hashbestlist",keyword);

@@ -306,3 +306,19 @@ color:#545454;
 	color:#ffffff;
 	border:0;
 }
+.bnn{
+	color: #999;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    text-align: left;
+    text-transform: uppercase;
+}
+h2{
+	    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}

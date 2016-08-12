@@ -206,20 +206,14 @@ $(function() {
                         if(data[i]["hashcnt"]>0){
                         $("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]+"   "+data[i]["hashcnt"]+"개").appendTo("#search_list");
                         }else{
-                        $("<li>").attr("class","keyword_id").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
+                        $("<li>").attr("class","keyword").attr("id", i).text(data[i]["keyword"]).appendTo("#search_list");
                         }
                   }
                   $("li.keyword").each(function(){
                      $(this).on("click", function(){
-                    	 res_split = $(this).text().split(" ");
-                         location.href="hashlist.do?keyword="+res_split[0].substr(1,res_split[0].length);
+                        location.href="" + $(this).text();
                      })
                   });
-                  $("li.keyword_id").each(function(){
-                      $(this).on("click", function(){
-                          location.href="searchid.do?userid="+$(this).text();
-                      })
-                   });
                   if(e.which == 40){
                      which++;
                      if(which >= $("#search_list").children().length)
