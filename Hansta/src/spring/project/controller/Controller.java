@@ -405,7 +405,7 @@ public class Controller {
 
 		ModelAndView mv;
 		if (flag) {
-			mv = new ModelAndView("login/login");
+			mv = new ModelAndView("redirect:/newsfeed.do");
 			mv.addObject("login_vo", result);
 			session_id = result.getId();
 			session_code = result.getId();
