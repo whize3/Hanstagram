@@ -35,14 +35,15 @@ $(function(){
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
 		$(".popArea").css("display","block");
-		
+		$("#followTitle").empty().text("팔로워");
 		$.ajax({
 			type:"post",
 			url:"followerList.do",
 			data:{
 				"follower":$("#followerId").val(),
 				"followee":$("#followeeId").val(),
-				"flag":"follower"},
+				"flag":"follower"
+				},
 			dataType:"json",
 			success:function(data){
 				console.log("성공")
@@ -73,7 +74,6 @@ $(function(){
 <main>
 
    <article>
-
       <header class="profile">
          <div class="profileImg">
             <img src="/Hansta/img/a.jpg"/>
@@ -106,7 +106,7 @@ $(function(){
       </header>
       <div class="Container">
       <!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
-      	<!-- <div class="line">
+      	 <div class="line">
       		<a href="#">
       			<div class="wrap">	
 	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
@@ -131,7 +131,7 @@ $(function(){
 	      			<div class="box"></div>
       			</div>
       		</a>
-      	</div> -->
+      	</div> 
       	
       	<!-- 내 타임라인인데 게시물이 없는 경우 -->
       	<!-- <div id="none">
@@ -141,9 +141,9 @@ $(function(){
 		</div> -->
 		
 		<!-- 타인의 타임라인에 게시물이 없는 경우 -->
-		<div id="none">
+<!-- 		<div id="none">
 			<h3>아직 게시물이 없습니다.</h4>
-		</div>
+		</div> -->
       </div>
 
 
@@ -158,7 +158,7 @@ $(function(){
 
 	<img src="/Hansta/img/cancel.png" id="cancel">
 	<div class="popTable">
-		<header><span>팔로워</span></header>
+		<header><span id="followTitle"></span></header>
 		<ul id="flist">
 			<li>
 				<div class="person">
@@ -174,7 +174,19 @@ $(function(){
 		</ul>
 	</div>
 </div>
+<div class="detailArea">
+	<img src="/Hansta/img/cancel.png" id="cancel">
+	<div class="contentsArea">
+		<article>
+			<header></header>
+			<div>
+				<img src="/Hansta/img/img01.jpg">
+			</div>
+			<div></div>
+		</article>
+	</div>
 
+</div>
 </body>
 
 </html>

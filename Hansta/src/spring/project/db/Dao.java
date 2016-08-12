@@ -112,7 +112,6 @@ public class Dao {
 		map.put("id", id);
 		template.insert("followInsert", map);
 	}
-<<<<<<< HEAD
 	public List<UsersVO> followList(String followerId, String followeeId, String flag){
 		List<UsersVO> list = null;
 		Map<String, String> map = new HashMap<>();
@@ -137,20 +136,18 @@ public class Dao {
 		}
 		return list;
 	}
-=======
 	// 회원가입
-		public void insertOne(UserVO vo){
+		public void insertOne(UsersVO vo){
 			template.insert("insertOne", vo);
 		}
 		// 유저 데이터 모두 가져오기
-		public List<UserVO> selectAll(){
+		public List<UsersVO> selectAll(){
 			return template.selectList("selectAll");
 		}
 		// 유저 하나 읽어오기
-		public UserVO selectOne(UserVO vo){
+		public UsersVO selectOne(UsersVO vo){
 			return template.selectOne("selectOne", vo.getId());
 		}
 		
 
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }

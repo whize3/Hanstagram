@@ -34,7 +34,7 @@ import spring.project.db.FollowVO;
 import spring.project.db.HashCountVO;
 import spring.project.db.LikeVO;
 import spring.project.db.Page;
-import spring.project.db.UserVO;
+import spring.project.db.UsersVO;
 
 
 
@@ -255,7 +255,7 @@ public class Controller {
 		List<BoardVO> list = null;
 		List<BoardVO> list_b = null;
 		int hashcnt = dao.hashListCnt(keyword);
-		list_b = dao.getHashBestList(keyword);
+		/*list_b = dao.getHashBestList(keyword);*/
 		list = dao.getHashList(keyword);
 		mv.addObject("hashcnt",hashcnt);
 		mv.addObject("list_b", list_b);
@@ -361,7 +361,6 @@ public class Controller {
 		return mv;
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/unfollow.do")
 	public ModelAndView unfollow(HttpServletRequest request, HttpServletResponse response){
 		String id = "heehyuneee";
@@ -389,14 +388,13 @@ public class Controller {
 	}
 	
 	
-=======
 	
 	// 로그인
 	@RequestMapping("login/login.do")
-	public ModelAndView login(UserVO vo) throws Exception{
+	public ModelAndView login(UsersVO vo) throws Exception{
 
 		boolean flag = false;
-		UserVO result = dao.selectOne(vo);
+		UsersVO result = dao.selectOne(vo);
 		
 		
 		if (result != null)
@@ -421,7 +419,7 @@ public class Controller {
 	@RequestMapping("login/register_view.do")
 	public ModelAndView register_view() {
 		ModelAndView mv = new ModelAndView("login/user_register_user");
-		List<UserVO> list = dao.selectAll();
+		List<UsersVO> list = dao.selectAll();
 
 		mv.addObject("list", list);
 		return mv;
@@ -429,9 +427,8 @@ public class Controller {
 
 	// 회원 가입
 	@RequestMapping("login/register_ok.do")
-	 public ModelAndView register_ok(UserVO vo) {
+	 public ModelAndView register_ok(UsersVO vo) {
 		dao.insertOne(vo);
 		return new ModelAndView("login/login_form");
 	}
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }

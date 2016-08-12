@@ -86,7 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 팔로우상태변경하기 -->
  	<update id="folllowState" parameterType="Map">
 		update follow_3 set state = #{state} where follower = #{id} and followee = #{followeeId}
- 	</update>
+	</update>
+	 
 	<!-- 언팔로우하기 -->
 <!-- 	<update id="unfolllow" parameterType="Map">
 		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
