@@ -1,10 +1,10 @@
 package spring.project.db;
 
-public class UsersVO {
-	String id, name, pwd, email, age;
+public class MembersVO {
+	String id, name, pwd, email, age, profile_url;
 	
-	public UsersVO(){}
-	public UsersVO(String id, String name, String pwd, String email, String age, String profile_url) {
+	public MembersVO(){}
+	public MembersVO(String id, String name, String pwd, String email, String age, String profile_url) {
 		super();
 		this.id = id;
 		this.name = name;

@@ -3,6 +3,7 @@ package spring.project.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -10,7 +11,10 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.sis.util.logging.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.googlecode.mp4parser.util.Logger;
 
 import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
 import spring.project.db.BoardVO;
@@ -32,19 +38,22 @@ import spring.project.db.UsersVO;
 
 
 
+
 //start
 @org.springframework.stereotype.Controller
 @SessionAttributes("login_vo")
 public class Controller {
 	private Dao dao;
 	private Page page;
+	private String session_id;
+	private String session_code;
 	
 	public Dao getDao() { return dao; }
 	public void setDao(Dao dao) { this.dao = dao; }
 	public Page getPage() { return page; }
 	public void setPage(Page page) { this.page = page; }
 	
-	@RequestMapping(value = "/search.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/search.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> search(HttpServletRequest request, HttpServletResponse response){
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
@@ -138,7 +147,7 @@ public class Controller {
 		result += "]";
 		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
-	
+	*/
 	@RequestMapping("/newsfeed.do")
 	public ModelAndView followingList(HttpServletRequest request, HttpServletResponse response){
 		String id = "whoyoung"; // �븯�뱶肄붾뵫
@@ -246,39 +255,13 @@ public class Controller {
 		List<BoardVO> list = null;
 		List<BoardVO> list_b = null;
 		list_b = dao.getHashBestList(keyword);
+		int hashcnt = dao.hashListCnt(keyword);
+		/*list_b = dao.getHashBestList(keyword);*/
 		list = dao.getHashList(keyword);
 		mv.addObject("list_b", list_b);
 		mv.addObject("list", list);
 		return mv;
 	}
-/*	// 로그인
-	
-/*	// 濡쒓렇�씤
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
-	@RequestMapping(value={"login/login.do","playerTest/login.do"})
-	public ModelAndView login(UserVO vo) throws Exception{
-
-		boolean flag = false;
-		UserVO result = dao.selectOne(vo);
-		
-		
-		if (result != null)
-			if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
-				flag = true;
-
-		ModelAndView mv;
-		if (flag) {
-			mv = new ModelAndView("login/login");
-			mv.addObject("login_vo", result);
-			session_id = result.getId();
-			session_code = result.getUser_info_code();
-		} else {
-			mv = new ModelAndView("login/login_form");
-			mv.addObject("result", "fail");
-		}
-
-		return mv;
-	}*/
 	@RequestMapping(value = "/searchhash.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> searchhash(HttpServletRequest request, HttpServletResponse response){
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -365,16 +348,88 @@ public class Controller {
 	
 	@RequestMapping("/follow.do")
 	public ModelAndView follow(HttpServletRequest request, HttpServletResponse response){
-		String id = "heehyun";
-		String followeeId = request.getParameter("followeeId");
+		String id = "heehyuneee";
+		String followeeId = "aaaa";
 		FollowVO result = dao.followCheck(id, followeeId);
-
 		if(result == null){
 			dao.insertFollow(id, followeeId);
-		}else if(result.getState().equals("0")){
-			dao.followState(id, followeeId);
-		}		
-		ModelAndView mv = new ModelAndView("newsfeed");		
+		}else{
+			dao.followState(id, followeeId,"0");
+		}
+		
+		ModelAndView mv = new ModelAndView("timeLine");
+
 		return mv;
+	}
+	
+	@RequestMapping("/unfollow.do")
+	public ModelAndView unfollow(HttpServletRequest request, HttpServletResponse response){
+		String id = "heehyuneee";
+		String followeeId = "aaaa";
+		dao.followState(id, followeeId,"10");
+		
+		ModelAndView mv = new ModelAndView("timeLine");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/followerList.do")
+	public ModelAndView followerList(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("followerList.do");
+		
+		String followerId = request.getParameter("follower");
+		System.out.println("followerId : "+followerId);
+		String followeeId = request.getParameter("followee");
+		String flag = request.getParameter("flag");
+		dao.followList(followerId, followeeId, flag);
+		
+		ModelAndView mv = new ModelAndView("timeLine");
+		
+		return mv;
+	}
+	
+	
+	
+	// 로그인
+	@RequestMapping("login/login.do")
+	public ModelAndView login(UsersVO vo) throws Exception{
+
+		boolean flag = false;
+		UsersVO result = dao.selectOne(vo);
+		
+		
+		if (result != null)
+			if (result.getId().equals(vo.getId()) && result.getPwd().equals(vo.getPwd()))
+				flag = true;
+
+		ModelAndView mv;
+		if (flag) {
+			mv = new ModelAndView("redirect:/newsfeed.do");
+			mv.addObject("login_vo", result);
+			session_id = result.getId();
+			session_code = result.getId();
+		} else {
+			mv = new ModelAndView("login/login_form");
+			mv.addObject("result", "fail");
+		}
+
+		return mv;
+	}
+
+	// 회원가입 화면
+	@RequestMapping("login/register_view.do")
+	public ModelAndView register_view() {
+		ModelAndView mv = new ModelAndView("login/user_register_user");
+		List<UsersVO> list = dao.selectAll();
+
+		mv.addObject("list", list);
+		return mv;
+	}
+
+	// 회원 가입
+	@RequestMapping("login/register_ok.do")
+	 public ModelAndView register_ok(UsersVO vo) {
+		dao.insertOne(vo);
+		return new ModelAndView("login/login_form");
 	}
 }
