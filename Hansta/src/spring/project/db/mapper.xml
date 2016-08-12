@@ -75,34 +75,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 팔로우하기 -->
-<<<<<<< HEAD
  	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
 		select * from follow_3 where FOLLOWER=#{id} and FOLLOWEE = #{followeeId}
 	</select>
    	<insert id="followInsert" parameterType="Map">
-=======
- <!-- 	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
-		select * from follow_3 where follower=#{id} and followee = #{followeeId}
-	</select> -->
-<!-- 	<insert id="follow" parameterType="Map">
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 		insert into follow_3 values(#{id},#{followeeId},0)
-<<<<<<< HEAD
 	</insert>
 	
 	
 	<!-- 팔로우상태변경하기 -->
  	<update id="folllowState" parameterType="Map">
 		update follow_3 set state = #{state} where follower = #{id} and followee = #{followeeId}
-=======
-	</insert> -->
- 
+ 	</update>
 	<!-- 언팔로우하기 -->
 <!-- 	<update id="unfolllow" parameterType="Map">
 		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 	</update>
-<<<<<<< HEAD
+	-->
 	
 	<!-- 팔로워 명단 -->
 	<select id="getfollower" parameterType="Map" resultType="String">
@@ -117,7 +106,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from users_3 where id = #{id}
 	</select>
 	 
-=======
-	 -->
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 </mapper>
