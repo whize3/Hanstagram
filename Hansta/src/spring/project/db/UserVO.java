@@ -1,17 +1,17 @@
 package spring.project.db;
 
-public class UsersVO {
+public class UserVO {
 	String id, name, pwd, email, age, profile_url;
 	
-	public UsersVO(){}
-	public UsersVO(String id, String name, String pwd, String email, String age, String profile_url) {
+	public UserVO(){}
+	public UserVO(String id, String name, String pwd, String email, String age, String profile_url) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.pwd = pwd;
 		this.email = email;
 		this.age = age;
-		this.profile_url = profile_url;
+		/*this.profile_url = profile_url;*/
 	}
 
 	public String getId() {
@@ -54,13 +54,13 @@ public class UsersVO {
 		this.age = age;
 	}
 
-	public String getProfile_url() {
+	/*public String getProfile_url() {
 		return profile_url;
 	}
 
 	public void setProfile_url(String profile_url) {
 		this.profile_url = profile_url;
-	}
+	}*/
 	
 
 }

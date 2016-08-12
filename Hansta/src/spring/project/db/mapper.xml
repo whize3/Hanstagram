@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hanstagram">
+<mapper namespace="Hansta">
 	<!-- 검색(일단 아이디만)  -->
 	<select id="search" parameterType="String" resultType="spring.project.db.UsersVO">
 		select * from users_3 where id like '%' || lower(#{keyword}) || '%'
@@ -37,9 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchHash" parameterType="String" resultType="spring.project.db.BoardVO">
 		select * from board_3 where b_content like '%' || #{keyword} || '%'
 	</select>
-	<select id="hashCnt" parameterType="String" resultType="Integer">
+	<!-- <select id="hashCnt" parameterType="String" resultType="Integer">
 		select count(*) hashcnt from board_3 where b_content like '%' || #{hashtag} || '%'
-	</select>
+	</select> -->
 
 	<!-- 게시글 좋아요 갯수 불러오기  -->
 	<select id="likecount" parameterType="String" resultType="Integer">
@@ -51,16 +51,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from comment_3 where b_idx = #{b_idx}
 	</select>
 	
-	<!-- 댓글 삽입  -->
+	 <!-- 댓글 삽입  -->
 	<insert id="insertcomment" parameterType="Map">
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
+	</insert> 
+	<!-- 회원가입  -->
+	<insert id="insertOne" parameterType="spring.project.db.UsersVO">
+		insert into users_3 values(users_3_seq.nextval,#{id},#{name},#{pwd},#{email},#{age})
 	</insert>
+	
+	
 	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
 		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc
 	</select>
 	<select id="hashlistcnt" parameterType="String" resultType="Integer">
 		select count(*) from board_3 where b_content like '%' || #{keyword} || '%'
 	</select>
+
 	
 	<select id="hashbestlist" parameterType="String" resultType="spring.project.db.BoardVO">
 		select a.*,b.* from board_3 a,(select b_idx,count(*) like_count from like_3 group by b_idx) b where a.b_content like '%' || #{keyword} || '%' and a.b_idx=b.b_idx order by like_count desc
@@ -68,18 +75,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 팔로우하기 -->
+<<<<<<< HEAD
  	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
 		select * from follow_3 where FOLLOWER=#{id} and FOLLOWEE = #{followeeId}
 	</select>
    	<insert id="followInsert" parameterType="Map">
+=======
+ <!-- 	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
+		select * from follow_3 where follower=#{id} and followee = #{followeeId}
+	</select> -->
+<!-- 	<insert id="follow" parameterType="Map">
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 		insert into follow_3 values(#{id},#{followeeId},0)
+<<<<<<< HEAD
 	</insert>
 	
 	
 	<!-- 팔로우상태변경하기 -->
  	<update id="folllowState" parameterType="Map">
 		update follow_3 set state = #{state} where follower = #{id} and followee = #{followeeId}
+=======
+	</insert> -->
+ 
+	<!-- 언팔로우하기 -->
+<!-- 	<update id="unfolllow" parameterType="Map">
+		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 	</update>
+<<<<<<< HEAD
 	
 	<!-- 팔로워 명단 -->
 	<select id="getfollower" parameterType="Map" resultType="String">
@@ -94,4 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from users_3 where id = #{id}
 	</select>
 	 
+=======
+	 -->
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 </mapper>

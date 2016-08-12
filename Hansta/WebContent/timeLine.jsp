@@ -51,7 +51,7 @@ $(function(){
 					var str = "<a href='#'><img src='/Hansta/img/person.jpg'></a>"
 					str += "<div><span class='personId'>";
 					str += "<a href='#'>"+"LeeSue"+"</a></span>";
-					str += "<span class='personName'>"+이수현+"</span></div>"
+					str += "<span class='personName'>"+"이수현"+"</span></div>"
 					str += "<button>팔로우</button></div>"
 					
 					$("<li>").html(str).appendTo("#flist");

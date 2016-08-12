@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Repository
 public class Dao {
@@ -18,10 +20,13 @@ public class Dao {
 		this.template = template;
 	}
 	
+	/*// 메인에서검색
+	public List<UsersVO> search(String keyword){
 	// 硫붿씤�뿉�꽌寃��깋
 	public List<UsersVO> search(String keyword){
+      branch 'master' of https://github.com/whize3/Hanstagram.git
 		return template.selectList("search", keyword);		
-	}
+	}*/
 	
 	// �뙏濡쒖슦 由ъ뒪�듃 遺덈윭�삤湲�
 	public List<FollowVO> getFollowList(String id){
@@ -107,6 +112,7 @@ public class Dao {
 		map.put("id", id);
 		template.insert("followInsert", map);
 	}
+<<<<<<< HEAD
 	public List<UsersVO> followList(String followerId, String followeeId, String flag){
 		List<UsersVO> list = null;
 		Map<String, String> map = new HashMap<>();
@@ -131,4 +137,20 @@ public class Dao {
 		}
 		return list;
 	}
+=======
+	// 회원가입
+		public void insertOne(UserVO vo){
+			template.insert("insertOne", vo);
+		}
+		// 유저 데이터 모두 가져오기
+		public List<UserVO> selectAll(){
+			return template.selectList("selectAll");
+		}
+		// 유저 하나 읽어오기
+		public UserVO selectOne(UserVO vo){
+			return template.selectOne("selectOne", vo.getId());
+		}
+		
+
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }
