@@ -208,7 +208,7 @@ $(function(){
 					</li>
 				</ul>
 				<section id="comment">
-					<span><img src="/Hansta/img/like.png"></span>
+					<span><img src="/Hansta/img/littleLike.png"></span>
 					<form><input type="text" placeholder="댓글 달기..."></form>
 				</section>
 			</div>
