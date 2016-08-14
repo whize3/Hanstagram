@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file ="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +19,11 @@ $(function(){
 	}
 	);
 	
+	$("#cancel0").click(function(){
+		$(this).css("display","none");
+		$("#pop").css("display","none");
+		$(".detailArea").css("display","none");
+	});
 	$("#cancel").click(function(){
 		$(this).css("display","none");
 		$("#pop").css("display","none");
@@ -29,6 +34,7 @@ $(function(){
 		$("#cancel").css("display","none");
 		$("#pop").css("display","none");
 		$(".popArea").css("display","none");
+		$(".detailArea").css("display","none");
 	});
 	
 	$("#follower").click(function(){
@@ -175,14 +181,38 @@ $(function(){
 	</div>
 </div>
 <div class="detailArea">
-	<img src="/Hansta/img/cancel.png" id="cancel">
+	<img src="/Hansta/img/cancel.png" id="cancel0">
 	<div class="contentsArea">
 		<article>
-			<header></header>
-			<div>
-				<img src="/Hansta/img/img01.jpg">
+		<div>
+			<header>
+				<a href="#"><img src="/Hansta/img/a.jpg"></a>
+				<div class="name"><a href="">_suhyuneee</a></div>
+<!-- 				<span><button class="follow">팔로우</button></span> -->
+				<span><button class="following">팔로잉</button></span>
+			</header>
+			<div class="left">
+				<img src="https://scontent.cdninstagram.com/t51.2885-15/e35/13687040_1563987130573588_1209261600_n.jpg?ig_cache_key=MTI5NzE4MTA0MzgyNDg2MTQ3Mg%3D%3D.2">
 			</div>
-			<div></div>
+			<div class="detailCon">
+				<section id="info">
+					<div>좋아요 0개</div>
+					<div>날짜</div>
+				</section>
+				<ul>
+					<li>
+						<div>
+							<a href="#" class="name00">username!</a>
+							늦어서 미안합니다!!!!!!!!!!!!ㅠㅠㅠ <a href="#" class="hashTag">#해시태그는</a> 이렇게 하까?
+						</div>
+					</li>
+				</ul>
+				<section id="comment">
+					<span><img src="/Hansta/img/like.png"></span>
+					<form><input type="text" placeholder="댓글 달기..."></form>
+				</section>
+			</div>
+			</div>
 		</article>
 	</div>
 
