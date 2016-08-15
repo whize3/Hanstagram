@@ -241,6 +241,7 @@ $(function(){
 					<div class="detailArea_date">날짜</div>
 				</section>
 				<ul id="detailArea_comment_ul">
+
 					<li>
 						<div>
 							<a href="#" class="name00">username!</a>
