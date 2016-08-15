@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file ="header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +21,11 @@ $(function(){
 	}
 	);
 	
+	$("#cancel0").click(function(){
+		$(this).css("display","none");
+		$("#pop").css("display","none");
+		$(".detailArea").css("display","none");
+	});
 	$("#cancel").click(function(){
 		$(this).css("display","none");
 		$("#pop").css("display","none");
@@ -29,6 +36,7 @@ $(function(){
 		$("#cancel").css("display","none");
 		$("#pop").css("display","none");
 		$(".popArea").css("display","none");
+		$(".detailArea").css("display","none");
 	});
 	
 	$("#follower").click(function(){
@@ -64,6 +72,31 @@ $(function(){
 			
 		})
 	});
+	$(".wrap").each(function(){
+		 $(this).on("click", function(){
+			 var b_idx = $(this).attr("b_idx");
+			 var da_date = $(this).children($("<span>")).children(".date").attr("date");
+			 var da_like = $(this).children($("<span>")).children(".likecnt").text()
+			 $(".detailArea").css("display","inline-block");
+			 $(".detailArea_like").text(da_like);
+			 $(".detailArea_date").text(da_date);
+			 $("#detailArea_comment_ul").text("");
+				$.ajax({
+					type: "post",
+					url: "timelinecomment.do",
+					data: {"b_idx" : b_idx},
+					dataType: "json",
+					success: function(data){
+						for(var i=0; i<data.length; i++){
+	                        $("<li>").html("<div><a href='#' class='name00'>"+data[i]["id"]+"</a>"+data[i]["c_content"]+"</div>").appendTo("#detailArea_comment_ul");
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});	
+		 });
+	});	
 });
 </script>
 </head>
@@ -81,7 +114,7 @@ $(function(){
          <div class="profileInfo">
          <!-- 다른 유저의 타임라인인 경우 -->
             <div>
-               <h1>UserIDUserIDUserID</h1>
+               <h1>${usersvo.id }</h1>
                <!-- 팔로우 여부에 따라 다른 버튼 공개 -->
 <!--                <span class="fBtn" id="ableFollow"><button onclick="location.href='unfollow.do'">팔로우</button></span> -->
                <span class="fBtn" id="enableFollow"><button onclick="location.href='follow.do'">팔로잉</button></span>
@@ -96,43 +129,57 @@ $(function(){
                <span class="fBtn" id="write"><button>게시글 작성</button></span>
             </div>
 -->
-            <div class="name info">UserName</div>
+            <div class="name info">${usersvo.name }</div>
             <ul class="info">
-               <li><span>게시물 <span class="number">0</span> 개</span></li>
-               <li><a href="#" id="follower"><span>팔로워 <span class="number">0</span> 명</span></a></li>
-               <li><a href="#" id="follow"><span>팔로우 <span class="number">0</span> 명</span></a></li>
+               <li><span>게시물 <span class="number">${boardcount }</span> 개</span></li>
+               <li><a href="#" id="follower"><span>팔로워 <span class="number">${fn:length(followervo) }</span> 명</span></a></li>
+               <li><a href="#" id="follow"><span>팔로우 <span class="number">${fn:length(followeevo) }</span> 명</span></a></li>
             </ul>
          </div>
       </header>
       <div class="Container">
+     
       <!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
+      <c:set var="view" value="0"/>
+      <c:if test="${fn:length(boardvo)>0 }">
+      
+      <c:forEach var="k" items="${boardvo }">
+      
+      <c:choose>
+   		 <c:when test="${view==0}">
       	 <div class="line">
+       	 </c:when>
+       
+      
+       </c:choose>
+       <c:if test="${view>2 }">
+       <c:choose>
+        	 <c:when test="${view%3==0 }">
+       	 <div class="line">
+       	 </c:when>
+       </c:choose>
+       </c:if><c:set var="view" value="${view+1 }"/>
       		<a href="#">
-      			<div class="wrap">	
+      			<div class="wrap" b_idx="${k.b_idx }">	
 	      			<div class="contents"><img src="/Hansta/img/0001.jpg"></div>
 	      			<div class="box"></div>
 	      			<span>
 		      			<img src="/Hansta/img/bubble.png">
-		      			<span>0</span>
+		      			<span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 		      			<img src="/Hansta/img/likeWhite.png">
-		      			<span>0</span>
+		      			<span class="likecnt">${k.like_count }개</span>
 		      		</span>
       			</div>
       		</a>
-      		<a href="#">
-      			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
-	      			<div class="box"></div>
-      			</div>
-      		</a>
-      		<a href="#">
-      			<div class="wrap">
-	      			<div class="contents"><img src="/Hansta/img/0002.jpg"></div>
-	      			<div class="box"></div>
-      			</div>
-      		</a>
-      	</div> 
-      	
+      		
+      		<c:if test="${view>2 }">
+      		<c:if test="${view%3==0 }">
+      		</div>
+      		</c:if>
+      		</c:if>
+      	 
+      	</c:forEach>
+      	</c:if>
       	<!-- 내 타임라인인데 게시물이 없는 경우 -->
       	<!-- <div id="none">
       		<h2>소중한 순간을 포착하여 공유해보세요.</h2>
@@ -175,19 +222,44 @@ $(function(){
 	</div>
 </div>
 <div class="detailArea">
-	<img src="/Hansta/img/cancel.png" id="cancel">
+	<img src="/Hansta/img/cancel.png" id="cancel0">
 	<div class="contentsArea">
 		<article>
-			<header></header>
-			<div>
-				<img src="/Hansta/img/img01.jpg">
+		<div>
+			<header>
+				<a href="#"><img src="/Hansta/img/a.jpg"></a>
+				<div class="name"><a href="">_suhyuneee</a></div>
+<!-- 				<span><button class="follow">팔로우</button></span> -->
+				<span><button class="following">팔로잉</button></span>
+			</header>
+			<div class="left">
+				<img src="https://scontent.cdninstagram.com/t51.2885-15/e35/13687040_1563987130573588_1209261600_n.jpg?ig_cache_key=MTI5NzE4MTA0MzgyNDg2MTQ3Mg%3D%3D.2">
 			</div>
-			<div></div>
+			<div class="detailCon">
+				<section id="info">
+					<div>좋아요 <span class="detailArea_like">0개</span> </div>
+					<div class="detailArea_date">날짜</div>
+				</section>
+				<ul id="detailArea_comment_ul">
+					<li>
+						<div>
+							<a href="#" class="name00">username!</a>
+							늦어서 미안합니다!!!!!!!!!!!!ㅠㅠㅠ <a href="#" class="hashTag">#해시태그는</a> 이렇게 하까?
+						</div>
+					</li>
+				</ul>
+				<section id="comment">
+					<span><img src="/Hansta/img/littleLike.png"></span>
+					<form><input type="text" placeholder="댓글 달기..."></form>
+				</section>
+			</div>
+			</div>
 		</article>
 	</div>
 
 </div>
 </body>
+
 
 </html>
     

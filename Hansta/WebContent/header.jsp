@@ -71,28 +71,17 @@ li{
 list-style: none;
 }
 #search_div ul {
-<<<<<<< HEAD
    list-style: none;
    padding: 0px;
    margin: 0px;
-=======
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }
 
 #search_div li{
 height:50px;
 }
 #search_div li:HOVER {
-<<<<<<< HEAD
    background-color: lightblue;
    cursor: pointer;
-=======
-	background-color: lightblue;
-	cursor: pointer;
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }
 #area{
 display: block;
@@ -101,17 +90,10 @@ height:auto;
 }
 
 #search_div {
-<<<<<<< HEAD
    border: 1px solid lightgray;
    border-top: none;
    background-color: white;
    display:block;
-=======
-	border: 1px solid lightgray;
-	border-top: none;
-	background-color: white;
-	display:block;
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
     margin:0 auto;
     width: 347px;
     position:relative;
@@ -125,16 +107,6 @@ height:auto;
 }
 #search_div li div{
 display: inline-block;
-}
-<<<<<<< HEAD
-.fuckingproject{
-margin-top:14px;
-position:absolute;
-left:5px;
-=======
-#search_div li div{
-display: inline-block;
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 }
 .fuckingproject{
 margin-top:14px;
@@ -245,7 +217,7 @@ $(function() {
                   });
                   $("li.keyword_id").each(function(){
                       $(this).on("click", function(){
-                          location.href="searchid.do?userid="+$(this).text();
+                          location.href="timeline.do?id="+$(this).text();
                       })
                    });
                   if(e.which == 40){
@@ -286,11 +258,12 @@ $(function() {
 </script>
 </head>
 <body class="body">
+ID  :  ${user.id }
 <nav>
    <div id="header">
       <div class="header">
       
-         <a href="#" id="logoArea"><img src="/Hansta/img/headerLogo.PNG"></a>
+         <a href="#" id="logoArea"><img src=""></a>
          <div>
             <!-- <span class="searchMask"></span> --><input type="text" id="search" placeholder="검색">
          </div>

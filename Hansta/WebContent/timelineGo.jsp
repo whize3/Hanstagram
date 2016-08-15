@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% response.sendRedirect("timeline.do"); %>
+<% response.sendRedirect("timeline.do?id=123"); %>
 <div id="result"></div>
 
 </body>

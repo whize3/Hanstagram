@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Hansta">
+<mapper namespace="hanstagram">
 	<!-- 검색(일단 아이디만)  -->
 	<select id="search" parameterType="String" resultType="spring.project.db.UsersVO">
 		select * from users_3 where id like '%' || lower(#{keyword}) || '%'
@@ -14,14 +14,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 게시글 불러오기  -->
-	<select id="board" parameterType="String" resultType="spring.project.db.BoardVO">
-		select * from board_3 where id = #{id}
+	
+	<select id="boardlistmore" parameterType="Map" resultType="spring.project.db.BoardVO">
+	select * from (select rownum r_num,a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc) a)  where r_num between #{begin} and #{end}
 	</select>
 	
-	<!-- 좋아요 상태 확인하기  -->
-	<select id="likestate" parameterType="Map" resultType="spring.project.db.LikeVO">
-		select * from like_3 where id = #{id} and b_idx = #{b_idx}
+	<select id="boardlistcnt" parameterType="String" resultType="Integer">
+		select count(*) from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc
 	</select>
+	
+	<select id="boardlist" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc
+	</select>
+	
+	<select id="likecnt" parameterType="String" resultType="String">
+		select count(*) from like_3 where b_idx = #{b_idx}
+	</select>
+	
+	<select id="likestatechk" parameterType="Map" resultType="String">
+		select count(*) from like_3 where b_idx = #{b_idx} and id = #{id}
+	</select>
+	
+	<select id="commentlist" resultType="spring.project.db.CommentVO">
+		select * from comment_3 order by c_time asc
+	</select>
+	
+	<select id="commentone" parameterType="Map" resultType="String">
+		select max(c_idx) from comment_3 where id=#{id} and b_idx = #{b_idx}
+	</select>
+	<delete id="deletecomment" parameterType="String">
+		delete from comment_3 where c_idx=#{c_idx}
+	</delete>
+	<!-- 좋아요 상태 확인하기  -->
 	
 	<!-- 좋아요 삽입  -->
 	<insert id="insertlike" parameterType="Map">
@@ -47,21 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(id) from like_3 where b_idx = #{b_idx}
 	</select>
 	
-	<!-- 댓글 불러오기  -->
-	<select id="commentlist" parameterType="String" resultType="spring.project.db.CommentVO">
-		select * from comment_3 where b_idx = #{b_idx}
-	</select>
-	
-	 <!-- 댓글 삽입  -->
+	<!-- 댓글 삽입  -->
 	<insert id="insertcomment" parameterType="Map">
 		insert into comment_3 values(comment_3_seq.nextval,#{id},#{c_content},sysdate,#{b_idx})
-	</insert> 
-	<!-- 회원가입  -->
-	<insert id="insertOne" parameterType="spring.project.db.UsersVO">
-		insert into users_3 values(users_3_seq.nextval,#{id},#{name},#{pwd},#{email},#{age})
 	</insert>
-	
-	
 	<select id="hashlist" parameterType="String" resultType="spring.project.db.BoardVO">
 	select b.* from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b where regexp_like(a.b_content,#{keyword}||' ' || '|' || #{keyword}||'$') and a.b_idx=b.b_idx order by b_time desc
 <!-- 		select * from board_3 where b_content like '%' || #{keyword} || '%' order by b_time desc -->
@@ -69,43 +82,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="hashlistcnt" parameterType="String" resultType="String">
 		select count(*) like_count from like_3 where b_idx=#{b_idx}
 	</select>
-
-	
 	<select id="hashbestlist" parameterType="String" resultType="spring.project.db.BoardVO">
 		select b.*,c.like_count from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b,(select b_idx,count(*) like_count from like_3 group by b_idx) c where regexp_like(a.b_content,#{keyword}||' ' || '|' || #{keyword}||'$') and a.b_idx=b.b_idx and a.b_idx=c.b_idx order by like_count desc
 
 	</select>
 	<!-- 팔로우하기 -->
  	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
-		select * from follow_3 where FOLLOWER=#{id} and FOLLOWEE = #{followeeId}
+		select * from follow_3 where follower=#{id} and followee = #{followeeId}
 	</select>
-   	<insert id="followInsert" parameterType="Map">
+	<select id="login" parameterType="Map" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id=#{id} and pwd=#{pwd}
+	</select>
+	
+	<!--  타임라인 -->
+	<select id="timelinelist" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where id=#{id}
+	</select>
+		<select id="commentcount" parameterType="String" resultType="String">
+		select count(*) from comment_3 where b_idx =#{b_idx}
+	</select>
+	<select id="timeuser" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id=#{id}
+	</select>
+	<select id="t_boardcount" parameterType="String" resultType="String">
+		select count(*) from board_3 where id=#{id}
+	</select>
+	<select id="follower_tl" parameterType="String" resultType="spring.project.db.FollowVO">
+		select * from follow_3 where followee=#{id} and state='0'
+	</select>
+	<select id="followee_tl" parameterType="String" resultType="spring.project.db.FollowVO">
+		select * from follow_3 where follower=#{id} and state='0'
+	</select>
+		<select id="timelinecomment" parameterType="String" resultType="spring.project.db.CommentVO">
+		select * from comment_3 where b_idx=#{b_idx}
+	</select>
+<!-- 	<insert id="follow" parameterType="Map">
 		insert into follow_3 values(#{id},#{followeeId},0)
-	</insert>
-	
-	
-	<!-- 팔로우상태변경하기 -->
- 	<update id="folllowState" parameterType="Map">
-		update follow_3 set state = #{state} where follower = #{id} and followee = #{followeeId}
-	</update>
-	 
+	</insert> -->
+ 
 	<!-- 언팔로우하기 -->
 <!-- 	<update id="unfolllow" parameterType="Map">
 		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
 	</update>
-	-->
-	
-	<!-- 팔로워 명단 -->
-	<select id="getfollower" parameterType="Map" resultType="String">
-		select follower from follow_3 where state = 0 and followee = #{followeeId}
-	</select>
-	
-	<select id="getfollowee" parameterType="Map" resultType="String">
-		select followee from follow_3 where follower = #{followerId} and state = 0
-	</select>
-	
-	<select id="getfinfo" parameterType="String" resultType="spring.project.db.UsersVO">
-		select * from users_3 where id = #{id}
-	</select>
-	 
+	 -->
 </mapper>
