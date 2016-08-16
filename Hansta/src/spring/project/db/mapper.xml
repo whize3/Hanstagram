@@ -113,6 +113,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="timelinecomment" parameterType="String" resultType="spring.project.db.CommentVO">
 		select * from comment_3 where b_idx=#{b_idx}
 	</select>
+<!-- 	<insert id="follow" parameterType="Map">
+		insert into follow_3 values(#{id},#{followeeId},0)
+	</insert> -->
+ 
+	<!-- 언팔로우하기 -->
+<!-- 	<update id="unfolllow" parameterType="Map">
+		update follow_3 set state = 3 where follower = #{id} and followee = #{fooloweeId};
+	</update>
+	 -->
+	 <!-- 게시글 등록 -->
+	<insert id="insertPost" parameterType="spring.project.db.BoardVO">
+		insert into board_3 values(board_3_seq.nextval,#{id},sysdate,#{img_url},0,#{b_content})
+	</insert>
+	
+	<!-- b_idx 큰값 가져오기 -->
+	<select id="getMax_idx" resultType="Integer">
+		select max(b_idx) from board_3
+	</select>
+
+	
+	<insert id="usersJoin" parameterType="spring.project.db.UsersVO">
+		insert into users_3 values(#{id},#{name},#{pwd},#{email},#{age},null)
+	</insert>
+	
+	<select id="confirmName" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id = #{id}
+	</select>
+	
+	<update id="pwdUpdate" parameterType="Map">
+		update users_3 set pwd = #{pwd} where id = #{id}
+	</update>
+	
+	<update id="usersUpdate" parameterType="spring.project.db.UsersVO">
+		update users_3 set id=#{id},name=#{name},pwd=#{pwd},email=#{email} where id= #{id}
+	</update>
+	
+	<delete id="deleteUsers" parameterType="String">
+		delete from users_3 where id = #{id};
+	</delete>
 	
    <!-- 팔로우하기 -->
     <select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">

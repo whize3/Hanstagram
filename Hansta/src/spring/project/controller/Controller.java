@@ -1,5 +1,6 @@
 package spring.project.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
@@ -571,4 +574,110 @@ public class Controller {
 	//			session.setAttribute("boardvo2", boardvo2);
 	//		 return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	//	}
+	
+	@RequestMapping("write.do")
+	public ModelAndView write(HttpServletRequest request) throws Exception{
+		// string b_idx, id, b_time, img_url, b_content, like_state,like_count;
+		
+		//b_idx 중에 가장 큰 값을 가져온다.
+		String Max_idx = String.valueOf(dao.getMax_idx()+1);
+		
+		//파일 이름을 가져온 값으로 설정해준다.
+				// 바보 기미현
+		request.setCharacterEncoding("utf-8");
+		final String filePath = request.getServletContext().getRealPath("/upload/");
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
+		MultipartFile fileImg = mr.getFile("photoSel");
+		
+		HttpSession session = request.getSession();
+		UsersVO user = (UsersVO)session.getAttribute("user");
+		String id = user.getId();
+		
+		String b_content = request.getParameter("b_content");
+		String fileName = null;
+		File file = null;
+		BoardVO bvo = null;
+		
+		if(!fileImg.isEmpty()){
+			bvo = new BoardVO();
+			fileName = Max_idx+"_"+fileImg.getOriginalFilename(); //이걸 가져온 값으로 바꿔준다
+			file = new File(filePath+fileName);
+			
+			// 파일 업로드 저장
+			fileImg.transferTo(file);
+			
+			bvo.setId(id);
+			bvo.setImg_url("/Hansta/upload/"+fileName);
+			bvo.setB_content(b_content);
+			dao.insertPost(bvo);
+		}
+		
+		ModelAndView mv = new ModelAndView("timelineGo");
+		mv.addObject("fid",id);
+		
+		return mv;
+	}
+	@RequestMapping("/join.do")
+	public ModelAndView join(HttpServletRequest request) throws Exception{
+		System.out.println("dd");
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		String age = request.getParameter("age");
+		String pwd = request.getParameter("pwd");
+		
+		ModelAndView mv = new ModelAndView("login");
+		
+		UsersVO uvo = new UsersVO();
+		uvo.setEmail(email);
+		uvo.setName(name);
+		uvo.setId(id);
+		uvo.setAge(age);
+		uvo.setPwd(pwd);
+		
+		dao.join(uvo);
+		
+		return mv;
+	}
+	@RequestMapping("/nameConfirm.do")
+	public ModelAndView confirm(HttpServletRequest request) throws Exception{
+		System.out.println("dddd");
+		String id = request.getParameter("id");
+		ModelAndView mv = null;
+		System.out.println(id);
+		UsersVO uvo = dao.nameConfirm(id);
+		System.out.println(uvo.getId());
+		if(uvo.getId()==null){
+			mv = new ModelAndView(""); // 해당 아이디 없음.
+			return mv;
+		}else{
+			mv = new ModelAndView("pwdreset");
+			mv.addObject(uvo);
+			return mv;
+		}
+	}
+	@RequestMapping("/pwdUpdate.do")
+	public ModelAndView pwdUpdate (HttpServletRequest request) throws Exception{
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd1");
+		System.out.println("pwdupdate"+id+" / "+pwd);
+		
+		ModelAndView mv = new ModelAndView("pwdUpdateOk");
+		
+		dao.pwdUpdate(id,pwd);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/profileSel.do")
+	public ModelAndView usersSel (HttpServletRequest request) throws Exception{
+		String id = "kheehyun93";
+		
+		ModelAndView mv = new ModelAndView("profileModify");
+		UsersVO uvo = dao.nameConfirm(id);
+		mv.addObject(uvo);
+		return mv;
+	}
+	
+	
 }

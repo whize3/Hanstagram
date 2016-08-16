@@ -30,11 +30,11 @@
 		width: 240px;
 	}
 
-	/* .join_go{
+	.join{
 		display:table-row;
 		vertical-align : bottom;
 		border: 1px solid #EFEFEF;
-	} */
+	}
 	.leftImg{
 		width: 100%;
 		text-align: center;
@@ -55,7 +55,7 @@
 		display: table-row;
 		vertical-align: middle;
 	}
-	.loginBtn{
+	.joinBtn{
 		width: 200px;
 		height: 27px;
 		background: #3897F0;
@@ -64,69 +64,66 @@
 		border-radius: 3px;
 		margin-bottom: 10px;
 	}
-	
-	.right_wrap{
-		margin-top: 90px;
-		width: 292px;
-	}
-	.join_go{
-		border: 1px solid #EFEFEF;
-		font-size: 14px;
-		margin-top: 47px;
-	}
-	#join_go{
-		font-size: 14px;
-	}
-	#join_go>a{
-		color: #38B1F5;
-		cursor: pointer;
-		text-decoration: none;
-	}
-	#username{
+	.email{
 		margin-bottom: 6px;
 		width: 195px;
 		height: 21px;
 	}
-	#password{
-		margin-bottom: 28px;
+	.name{
+		margin-bottom: 6px;
 		width: 195px;
 		height: 21px;
 	}
-	.pwd_div{
-		position: relative;
+	.id{
+		margin-bottom: 6px;
+		width: 195px;
+		height: 21px;
 	}
-	.pwd_div>a{
-		position: absolute;
-		right: 50px;
-    	top: -51px;
-    	font-size: 12px;
-    	text-decoration: none;
-    	cursor: pointer;
-    	color: #4F3580;
+	.age{
+		margin-bottom: 6px;
+		width: 195px;
+		height: 21px;
+	}
+	.pwd{
+		margin-bottom: 24px;
+		width: 195px;
+		height: 21px;
+	}
+	.right_wrap{
+		margin-top: 35px;
+		width: 292px;
+	}
+	.login_go{
+		border: 1px solid #EFEFEF;
+		font-size: 14px;
+		margin-top: 24px;
+	}
+	#login_go{
+		font-size: 14px;
+	}
+	#login_go>a{
+		color: #38B1F5;
+		cursor: pointer;
+		text-decoration: none;
 	}
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-$(function() {
-	$(".loginBtn").click(
-			function() {
-				$.ajax({
-					type : "post",
-					url : "login.do",
-					data : {"id" : $("#username").val() , "pwd" : $("#password").val()},
-					dataType : "json",
-					success : function(data) {
-						alert("로그인성공");
-						location.href="loginok.do?id="+data[0]["id"];
-					},
-					error : function(request, status, error) {
-						alert("request: " + request + " status: " + status
-								+ " error: " + error);
-					}
-				});
-			});
-});
-	</script>
+	function join_go(f) {
+		f.action="join.do";
+		f.submit();
+	}
+/* 	$(function() {
+		$(".joinBtn").click(function() {
+			alert($(".email").val());
+			if($(".email").val()==""||$(".name").val()==""||$(".id").val()==""||$(".age").val()==""||$(".email").val()==""||$(".pwd").val()==""){
+				alert("회원 정보를 입력해주세요.")
+			}else{
+				alert("회원가입 완료");
+				location.href="join.do";
+			}
+		});
+	}); */
 </script>
 </head>
 <body>
@@ -134,7 +131,7 @@ $(function() {
 		<div class="wrap2">
 			<div class="left">
 				<div class="leftImg">
-					<img src="img/insta_login.PNG"  width="240px" height="372px"/>
+					<img src="img/insta_login.PNG" id="leftImg" width="240px" height="372px"/>
 				</div>
 			</div>
 			<div class="right">
@@ -144,17 +141,20 @@ $(function() {
 					</div>
 					<div class="right_form">
 						<form>
-							<input type="text" id="username" name="username" placeholder="사용자 이름"/>					
-							<input type="password" id="password" name="password" placeholder="비밀번호"/>
-							<div class="pwd_div">
-								<a href="findpwd.jsp">비밀번호를 잊으셨나요?</a>
+							<div>
+								<input type="text" class="email" name="email" placeholder="이메일"/>
+								<input type="text" class="name" name="name" placeholder="성명"/>
+								<input type="text" class="id" name="id" placeholder="사용자 이름"/>
+								<input type="text" class="age" name="age" placeholder="사용자 나이"/>
+								<input type="password" class="pwd" name="pwd" placeholder="비밀번호"/>								
+							<div>
+								<input type="button" class="joinBtn" value="가입" onclick="join_go(this.form)"/>
 							</div>
-							<input type="button" class="loginBtn" value="로그인"/>
 						</form>
-					</div>					
+					</div>
 				</div>
-				<div class="join_go">
-					<p id="join_go">계정이 없으신가요? <a href="join.jsp">가입하기</a></p>
+				<div class="login_go">
+					<p id="login_go">계정이 있으신가요? <a href="login.jsp">로그인</a></p>
 				</div>
 			</div>
 		</div>
