@@ -313,7 +313,7 @@ display:none;
 				<div>
 					<h1>${user.id }</h1>
 					<span class="fBtn"><button>프로필 편집</button></span> <span
-						class="fBtn" id="write"><button>게시글 작성</button></span>
+						class="fBtn" id="write"><button onclick="location.href='write.jsp?id=${user.id}'">게시글 작성</button></span>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -567,4 +567,4 @@ display:none;
 </body>
 
 
-</html>
+</html>

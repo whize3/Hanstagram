@@ -265,7 +265,7 @@ ID  :  ${user.id }
    <div id="header">
       <div class="header">
       
-         <a href="#" id="logoArea"><img src="/Hansta/img/headerLogo.png"></a>
+         <a href="newsfeedgo.jsp" id="logoArea"><img src="/Hansta/img/headerLogo.png"></a>
          <div>
             <!-- <span class="searchMask"></span> --><input type="text" id="search" placeholder="검색">
          </div>

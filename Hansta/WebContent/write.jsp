@@ -202,10 +202,10 @@
 					<div class="prWrap">
 						<div class="profile">
 							<div class="profileImg">
-								<a class=""><img id="profileImg" src="img/a.jpg" width="38px" height="38px"/></a>
+								<a class=""><img id="profileImg" src="${user.profile_url }" width="38px" height="38px"/></a>
 							</div>
 							<div class="profileId">
-								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">kheehyun93</a>
+								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${user.id }</a>
 							</div>
 						</div>
 						<div class="text">

@@ -35,6 +35,8 @@ padding-left:36px;
 .profile .profileImg{
 margin:-2px 60px;
 overflow: hidden;
+width:150px;
+height:150px;
 border-radius:50%;
 border:1px solid #dbdbdb;
 display: inline-block;
@@ -42,6 +44,8 @@ display: inline-block;
 
 .profile .profileImg img{
 display: inline-block;
+width:auto;
+height:150px;
 }
 .profile h1{
 display:inline-block;
