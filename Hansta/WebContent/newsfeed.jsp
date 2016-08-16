@@ -327,7 +327,7 @@ $(function() {
 		</c:forEach>
 		
 <!-- 		<div class="test99"> -->
-<%-- 		<c:if test="${fn:length(boardvo)>6 }"> --%>
+<%-- 		<c:if test="${fn:length(boardvo)>6 }">dsdf --%>
 <!-- 		<h2 class="listshowmore" cPage="2">더보기</h2> -->
 <%-- 		</c:if> --%>
 <!-- 		</div> -->
