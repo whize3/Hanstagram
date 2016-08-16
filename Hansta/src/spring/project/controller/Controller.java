@@ -181,6 +181,7 @@ public class Controller {
 	}
 	@RequestMapping(value = "/commentwrite.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> commentwrite(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("여기1");
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
@@ -189,11 +190,13 @@ public class Controller {
 		String b_idx = request.getParameter("b_idx");		
 		String c_content = request.getParameter("c_content");
 		String c_idx = dao.insertComment(id,b_idx,c_content);
+		System.out.println("여기2");
 		String result = "[";
 		result += "{";
 		result += "\"c_idx\" : \"" + c_idx + "\"";
 		result += "}";
 		result += "]";
+		System.out.println("여기3");
 		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
 	@RequestMapping("/hashlist.do")
@@ -375,8 +378,21 @@ public class Controller {
 	@RequestMapping("/timeline.do")
 	public ModelAndView timeline(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
+		
+		HttpSession session = request.getSession();
+		UsersVO user = (UsersVO)session.getAttribute("user");
+		String id2 = user.getId();
+		if(id!=null){
+		System.out.println("gdgd11");
+		session.setAttribute("id", id);
+		}
+		if(id==null){
+			id = (String) session.getAttribute("id");
+			System.out.println("gdgd22");
+		}
+		System.out.println(id);
 		ModelAndView mv = new ModelAndView("timeLine");
-		List<BoardVO> boardvo = dao.getTimeLine(id);
+		List<BoardVO> boardvo = dao.getTimeLine(id,id2);
 		UsersVO usersvo = dao.getTimeUser(id);
 		String boardcount = dao.getboardcount(id);
 		List<FollowVO> followervo = dao.getfollower_tl(id);
