@@ -131,10 +131,12 @@ public class Dao {
 		 return list;
 
 	}
-	public void followState(String id, String followeeId){
+	public void followState(String id, String followeeId, String state){
 		Map<String, String> map = new HashMap<>();
 		map.put("followeeId", followeeId);
 		map.put("id", id);
+		map.put("state", state);
+		template.update("folllowState",map);
 		
 	}
 	public List<BoardVO> getHashBestList(String keyword){
@@ -149,12 +151,14 @@ public class Dao {
 		FollowVO result = template.selectOne("followCnt", map);
 		return result;
 	}
-	public void insertFollow(String id, String followeeId){
-		Map<String, String> map = new HashMap<>();
-		map.put("followeeId", followeeId);
-		map.put("id", id);
-		template.insert("follow", map);
-	}
+	
+	   public void insertFollow(String id, String followeeId){
+	      Map<String, String> map = new HashMap<>();
+	      map.put("followeeId", followeeId);
+	      map.put("id", id);
+	      template.insert("followInsert", map);
+	   }
+	
 	public UsersVO login(String id, String pwd){
 		Map<String, String> map = new HashMap<>();
 		map.put("id", id);
@@ -179,10 +183,10 @@ public class Dao {
 	public String getboardcount(String id){
 		return template.selectOne("t_boardcount", id);
 	}
-	public List<FollowVO> getfollower_tl(String id){
+	public List<UsersVO> getfollower_tl(String id){
 		return template.selectList("follower_tl",id);
 	}
-	public List<FollowVO> getfollowee_tl(String id){
+	public List<UsersVO> getfollowee_tl(String id){
 		return template.selectList("followee_tl",id);
 	}
 	public List<CommentVO> getTimeLineComment(String b_idx){

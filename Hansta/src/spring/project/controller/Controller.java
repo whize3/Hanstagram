@@ -333,18 +333,39 @@ public class Controller {
 
 	@RequestMapping("/follow.do")
 	public ModelAndView follow(HttpServletRequest request, HttpServletResponse response){
-		String id = "heehyun";
+		HttpSession session = request.getSession();
+		UsersVO user = (UsersVO)session.getAttribute("user");
+		String id = user.getId();
 		String followeeId = request.getParameter("followeeId");
+		System.out.println(id+"/"+followeeId);
+		
 		FollowVO result = dao.followCheck(id, followeeId);
 
 		if(result == null){
 			dao.insertFollow(id, followeeId);
-		}else if(result.getState().equals("0")){
-			dao.followState(id, followeeId);
+		}else{
+			dao.followState(id, followeeId, "0");
 		}		
-		ModelAndView mv = new ModelAndView("newsfeed");		
+		System.out.println(followeeId+" follow.do");
+		ModelAndView mv = new ModelAndView("timelineGo");
+		mv.addObject("fid", followeeId);		
 		return mv;
 	}
+	
+	   @RequestMapping("/unfollow.do")
+	   public ModelAndView unfollow(HttpServletRequest request, HttpServletResponse response){
+		   HttpSession session = request.getSession();
+			UsersVO user = (UsersVO)session.getAttribute("user");
+			String id = user.getId();
+			String followeeId = request.getParameter("followeeId");
+			System.out.println(followeeId);
+	      dao.followState(id, followeeId,"10");
+	      
+	      ModelAndView mv = new ModelAndView("timelineGo");
+	      mv.addObject("id", followeeId);
+	      return mv;
+	   }
+	
 	@RequestMapping("/loginok.do")
 	public ModelAndView loginok(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
@@ -375,17 +396,24 @@ public class Controller {
 	@RequestMapping("/timeline.do")
 	public ModelAndView timeline(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
+
+		HttpSession session = request.getSession();
+		UsersVO user = (UsersVO)session.getAttribute("user");
+		String myid = user.getId();
+		
 		ModelAndView mv = new ModelAndView("timeLine");
 		List<BoardVO> boardvo = dao.getTimeLine(id);
 		UsersVO usersvo = dao.getTimeUser(id);
 		String boardcount = dao.getboardcount(id);
-		List<FollowVO> followervo = dao.getfollower_tl(id);
-		List<FollowVO> followeevo = dao.getfollowee_tl(id);
+		List<UsersVO> followervo = dao.getfollower_tl(id);
+		List<UsersVO> followeevo = dao.getfollowee_tl(id);
+		List<UsersVO> myfollowList = dao.getfollowee_tl(myid);
 		mv.addObject("boardvo",boardvo);
 		mv.addObject("usersvo",usersvo);
 		mv.addObject("boardcount",boardcount);
 		mv.addObject("followervo",followervo);
 		mv.addObject("followeevo",followeevo);
+		mv.addObject("myfollowList",myfollowList);
 		return mv;
 	}
 	@RequestMapping(value = "/timelinecomment.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)

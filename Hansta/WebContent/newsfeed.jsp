@@ -268,7 +268,7 @@ $(function() {
 		<c:forEach var="k" begin="0" end="${fn:length(boardvo) }" items="${boardvo}">
 		<article class="a1"> 
 			<header class="h1"> 
-				<a class="profile" href="#"><img class="profile_img"
+				<a class="profile" href="timeline.do?id=${k.id }"><img class="profile_img"
 				src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg"></a>
 				<a class="id" href="timeline.do?id=${k.id }">${k.id}</a> 
 				<span class="date">${k.b_time.substring(0,16)}</span> 
