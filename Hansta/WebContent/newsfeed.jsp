@@ -274,7 +274,7 @@ $(function() {
 				<span class="date">${k.b_time.substring(0,16)}</span> 
 			</header>
 			<div class="image-wrap">
-				<img class="image" src="upload/${k.img_url}.jpg" style="">				
+				<img class="image" src="${k.img_url}" style="">				
 			</div>
 			<div class="comment-wrap">
 				<div class="like"><span id="${k.b_idx }">좋아요 ${k.like_count}개</span></div>
