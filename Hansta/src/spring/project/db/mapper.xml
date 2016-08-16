@@ -86,10 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select b.*,c.like_count from (select b_idx, REPLACE(b_content, CHR(13),' ') AS b_content from board_3) a,board_3 b,(select b_idx,count(*) like_count from like_3 group by b_idx) c where regexp_like(a.b_content,#{keyword}||' ' || '|' || #{keyword}||'$') and a.b_idx=b.b_idx and a.b_idx=c.b_idx order by like_count desc
 
 	</select>
-	<!-- 팔로우하기 -->
- 	<select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
-		select * from follow_3 where follower=#{id} and followee = #{followeeId}
-	</select>
+	
 	<select id="login" parameterType="Map" resultType="spring.project.db.UsersVO">
 		select * from users_3 where id=#{id} and pwd=#{pwd}
 	</select>
@@ -107,11 +104,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="t_boardcount" parameterType="String" resultType="String">
 		select count(*) from board_3 where id=#{id}
 	</select>
-	<select id="follower_tl" parameterType="String" resultType="spring.project.db.FollowVO">
-		select * from follow_3 where followee=#{id} and state='0'
+	<select id="follower_tl" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id in (select follower from follow_3 where followee=#{id} and state='0')
 	</select>
-	<select id="followee_tl" parameterType="String" resultType="spring.project.db.FollowVO">
-		select * from follow_3 where follower=#{id} and state='0'
+	<select id="followee_tl" parameterType="String" resultType="spring.project.db.UsersVO">
+		select * from users_3 where id in (select followee from follow_3 where follower=#{id} and state='0')
 	</select>
 		<select id="timelinecomment" parameterType="String" resultType="spring.project.db.CommentVO">
 		select * from comment_3 where b_idx=#{b_idx}
@@ -134,9 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMax_idx" resultType="Integer">
 		select max(b_idx) from board_3
 	</select>
-	<select id="getImg" parameterType="String" resultType="spring.project.db.TimelineVO">
-		select * from board_3 a, (select * from users_3 where id=#{id}) b where a.id=b.id
-	</select>
+
 	
 	<insert id="usersJoin" parameterType="spring.project.db.UsersVO">
 		insert into users_3 values(#{id},#{name},#{pwd},#{email},#{age},null)
@@ -157,4 +152,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUsers" parameterType="String">
 		delete from users_3 where id = #{id};
 	</delete>
+	
+   <!-- 팔로우하기 -->
+    <select id="followCnt" parameterType="Map" resultType="spring.project.db.FollowVO">
+      select * from follow_3 where FOLLOWER=#{id} and FOLLOWEE = #{followeeId}
+   </select>
+      <insert id="followInsert" parameterType="Map">
+      insert into follow_3 values(#{id},#{followeeId},0)
+   </insert>
+   
+   
+   <!-- 팔로우상태변경하기 -->
+    <update id="folllowState" parameterType="Map">
+      update follow_3 set state = #{state} where follower = #{id} and FOLLOWEE = #{followeeId}
+   </update>
 </mapper>
