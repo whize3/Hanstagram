@@ -147,6 +147,8 @@
 	
 }
 </style>
+ <jsp:useBean id="uvo" class="spring.project.db.UsersVO" />
+ <jsp:setProperty property="*" name="uvo"/> 
 <script type="text/javascript">
 	function share_go(f) {
 		f.action="write.do";
@@ -202,7 +204,7 @@
 					<div class="prWrap">
 						<div class="profile">
 							<div class="profileImg">
-								<a class=""><img id="profileImg" src="${user.profile_url }" width="38px" height="38px"/></a>
+								<a class=""><img id="profileImg" src="${uvo.profile_url}" width="38px" height="38px"/></a>
 							</div>
 							<div class="profileId">
 								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${user.id }</a>

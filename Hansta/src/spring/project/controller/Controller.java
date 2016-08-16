@@ -593,6 +593,8 @@ public class Controller {
 		UsersVO user = (UsersVO)session.getAttribute("user");
 		String id = user.getId();
 		
+		UsersVO uvo = dao.nameConfirm(id);
+		
 		String b_content = request.getParameter("b_content");
 		String fileName = null;
 		File file = null;
@@ -614,6 +616,7 @@ public class Controller {
 		
 		ModelAndView mv = new ModelAndView("timelineGo");
 		mv.addObject("fid",id);
+		mv.addObject(uvo);
 		
 		return mv;
 	}
