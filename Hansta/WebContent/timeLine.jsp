@@ -207,17 +207,19 @@ $(function(){
 	<div class="popTable">
 		<header><span id="followTitle"></span></header>
 		<ul id="flist">
+		<c:forEach var="k" items="${followervo }">
+		
 			<li>
 				<div class="person">
 					<a href="#"><img src="/Hansta/img/person.jpg"></a>
 					<div>
-						<span class="personId"><a href="#">LeeSue</a></span>
+						<span class="personId"><a href="#">${k.follower }</a></span>
 						<span class="personName">이수현</span>
 					</div>
 						<button>팔로우</button>
 				</div>
 			</li>
-		
+		</c:forEach>
 		</ul>
 	</div>
 </div>
