@@ -42,7 +42,7 @@ display:none;
 			$(".popArea").css("display", "none");
 			$(".detailArea").css("display", "none");
 		});
-/* 
+
 		$("#follower")
 				.click(
 						function() {
@@ -146,8 +146,21 @@ display:none;
 											});
 						});
 	});
- */
-
+<<<<<<< HEAD
+=======
+	$("#cancel").click(function(){
+		$(this).css("display","none");
+		$("#pop").css("display","none");
+		$(".popArea").css("display","none");
+	});
+	$("#pop").click(function(){
+		console.log("bye");
+		$("#cancel").css("display","none");
+		$("#pop").css("display","none");
+		$(".popArea").css("display","none");
+		$(".detailArea").css("display","none");
+	});
+	
 	$("#follower").click(function(){
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
@@ -188,8 +201,6 @@ display:none;
 			 var da_like = $(this).children($("<span>")).children(".likecnt").text()
 			 var da_likestate = $("#likestate").val();
 			 var uservoid = $("#uservoid").val();
-			 $("#pop").css("display","inline-block");
-			 $("#cancel0").css("display","inline-block");
 			 $(".detailArea").css("display","inline-block");
 			 $(".detailArea_like").text(da_like);
 			 $(".detailArea_date").text(da_date);
@@ -292,12 +303,16 @@ display:none;
 							//좋아요 클릭 이벤트
 							
 });
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 </script>
 </head>
 
 <body class="body">
+	<input type="hidden" id="followerId" value="aaaa">
+	<input type="hidden" id="followeeId" value="aaaa">
 	<main> <article> <header class="profile">
 	<div class="profileImg">
+<<<<<<< HEAD
 		<c:choose>
 			<c:when test="${usersvo.profile_url == null }">
 				<img src="/Hansta/img/default.jpg" />
@@ -339,10 +354,45 @@ display:none;
 				</div>
 			</c:otherwise>
 		</c:choose>
+=======
+		<img src="/Hansta/img/a.jpg" />
+	</div>
+	<div class="profileInfo">
+		<!-- 다른 유저의 타임라인인 경우 -->
+		<div>
+			<h1>${usersvo.id }</h1>
+			<input type="hidden" id="uservoid" value="${usersvo.id }"/>
+			<!-- 팔로우 여부에 따라 다른 버튼 공개 -->
+			<!--                <span class="fBtn" id="ableFollow"><button onclick="location.href='unfollow.do'">팔로우</button></span> -->
+			<span class="fBtn" id="enableFollow"><button
+					onclick="location.href='follow.do'">팔로잉</button></span>
+		</div>
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 
+<<<<<<< HEAD
+		<div class="name info">${usersvo.name }</div>
+		<ul class="info">
+			<li><span>게시물 <span class="number">${boardcount }</span>
+					개
+			</span></li>
+			<li><a href="#" id="follower"><span>팔로워 <span
+						class="number">${fn:length(followervo) }</span> 명
+				</span></a></li>
+			<li><a href="#" id="follow"><span>팔로우 <span
+						class="number">${fn:length(followeevo) }</span> 명
+				</span></a></li>
+		</ul>
+	</div>
+	</header>
+	<div class="Container">
+=======
 		<!-- 내 타임라인인 경우 -->
+		<!--
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
+
+<<<<<<< HEAD
 		<!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
-<%-- 		<c:set var="view" value="0" />
+		<c:set var="view" value="0" />
 		<c:if test="${fn:length(boardvo)>0 }">
 
 			<c:forEach var="k" items="${boardvo }">
@@ -371,10 +421,13 @@ display:none;
 						<span> <img src="/Hansta/img/bubble.png"> <span
 							class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 							<img src="/Hansta/img/likeWhite.png"> <span class="likecnt">${k.like_count }개</span>
- --%> 
-
-
-
+=======
+            <div>
+               <h1>UserIDUserIDUserID</h1>
+               <span class="fBtn"><button>프로필 편집</button></span>
+               <span class="fBtn" id="write"><button>게시글 작성</button></span>
+            </div>
+-->
 		<div class="name info">${usersvo.name }</div>
 		<ul class="info">
 			<li><span>게시물 <span class="number">${boardcount }</span>
@@ -393,9 +446,10 @@ display:none;
 
 		<!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
 		<c:set var="view" value="0" />
-	<c:choose>
-		<c:when test="${fn:length(boardvo)>0}">
+		<c:if test="${fn:length(boardvo)>0 }">
+
 			<c:forEach var="k" items="${boardvo }">
+
 				<c:choose>
 					<c:when test="${view==0}">
 						<div class="line">
@@ -414,45 +468,28 @@ display:none;
 				<a href="#">
 					<div class="wrap" b_idx="${k.b_idx }">
 						<div class="contents">
-							<img src="${k.img_url}">
+							<img src="/Hansta/img/0001.jpg">
 						</div>
 						<div class="box"></div>
-						<span>
-						<img src="/Hansta/img/bubble.png">
-						<span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
-						<img src="/Hansta/img/likeWhite.png">
-						<span class="likecnt">${k.like_count }개</span>
-						<input type="hidden" id="likestate" value="${k.like_state }"/>
+						<span> <img src="/Hansta/img/bubble.png"> <span
+							class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
+							<img src="/Hansta/img/likeWhite.png"> <span class="likecnt">${k.like_count }개</span>
+							<input type="hidden" id="likestate" value="${k.like_state }"/>
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 						</span>
 					</div>
 				</a>
 
 				<c:if test="${view>2 }">
 					<c:if test="${view%3==0 }">
-						</div>
-					</c:if>
-				</c:if>
-				
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-				<c:when test="${uservo.id eq user.id }">
-					<div id="none">
-			      		<h2>소중한 순간을 포착하여 공유해보세요.</h2>
-						<h3>첫 사진이나 동영상을 공유해보세요</h3>
-						<a href="#"><img src="/Hansta/img/plus.png"></a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div id="none">
-						<h3>아직 게시물이 없습니다.</h4>
-					</div>
-				</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-
+	</div>
+	</c:if> </c:if> </c:forEach> </c:if> <!-- 내 타임라인인데 게시물이 없는 경우 --> <!-- <div id="none">
+      		<h2>소중한 순간을 포착하여 공유해보세요.</h2>
+			<h3>첫 사진이나 동영상을 공유해보세요</h3>
+			<a href="#"><img src="/Hansta/img/plus.png"></a>
+		</div> --> <!-- 타인의 타임라인에 게시물이 없는 경우 --> <!-- 		<div id="none">
+			<h3>아직 게시물이 없습니다.</h4>
+		</div> -->
 	</div>
 
 
@@ -464,12 +501,18 @@ display:none;
 
 		<img src="/Hansta/img/cancel.png" id="cancel">
 		<div class="popTable">
+<<<<<<< HEAD
 			<header>
 			<span id="followTitle"></span></header>
+=======
+			<header> <span id="followTitle"></span></header>
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 			<ul id="flist">
 				<c:forEach var="k" items="${followervo }">
+
 					<li>
 						<div class="person">
+<<<<<<< HEAD
 						<c:choose>
 							<c:when test="${k.profile_url == null }">
 								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
@@ -496,34 +539,36 @@ display:none;
 									<button>팔로잉</button>
 								</c:when>
 							</c:choose>
+=======
+							<a href="#"><img src="/Hansta/img/person.jpg"></a>
+							<div>
+								<span class="personId"><a href="#">${k.follower }</a></span> <span
+									class="personName">이수현</span>
+							</div>
+							<button>팔로우</button>
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 						</div>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 	</div>
-	
-	
-	<!-- 여기 이후로는 합치기 성공 -->
 	<div class="detailArea">
 		<img src="/Hansta/img/cancel.png" id="cancel0">
 		<div class="contentsArea">
 			<article>
 			<div>
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
+<<<<<<< HEAD
 				<div class="name">
 					<a href="">_suhyuneee</a>
-<!-- =======
+=======
 				<div class="namediv">
 					
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
-				
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 				</div>
-				
-				<!--<span><button class="follow">팔로우</button></span> -->
-					<span><button class="following">팔로잉</button></span>
-				</header>
-						</div>
+				<!-- 				<span><button class="follow">팔로우</button></span> --> <span><button
+						class="following">팔로잉</button></span> </header>
 				<div class="left">
 					<img
 						src="https://scontent.cdninstagram.com/t51.2885-15/e35/13687040_1563987130573588_1209261600_n.jpg?ig_cache_key=MTI5NzE4MTA0MzgyNDg2MTQ3Mg%3D%3D.2">
@@ -545,7 +590,7 @@ display:none;
 							</div>
 						</li>
 					</ul>
-<!-- <<<<<<< HEAD
+<<<<<<< HEAD
 					<section id="comment"> <span><img
 						src="/Hansta/img/littleLike.png"></span>
 					<form>
@@ -557,7 +602,7 @@ display:none;
 					<div class="comment_write">
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
+>>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 				</div>
 			</div>
 			</article>

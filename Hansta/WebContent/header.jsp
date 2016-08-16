@@ -56,16 +56,18 @@ display: inline-block;
 position:relative;
 display: table-cell;
 vertical-align: middle;
-
+text-align: left;
 }
 #logoArea img{
 display: inline-block;
+width:176px;
+
 }
 #iconArea{
 display:inline-block;
 width:132px;
 height:24px;
-border:1px solid #000;
+text-align: right;
 }
 li{
 list-style: none;
@@ -268,7 +270,11 @@ ID  :  ${user.id }
             <!-- <span class="searchMask"></span> --><input type="text" id="search" placeholder="검색">
          </div>
          <div>
-         <div id="iconArea"></div>
+         <div id="iconArea">
+         	<a href="timeline.do?id=${user.id }">
+         		<img src="/Hansta/img/my.PNG">
+         	</a>
+         </div>
       </div>
    </div>
    <div id="area">
