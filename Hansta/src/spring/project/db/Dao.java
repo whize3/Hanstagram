@@ -195,4 +195,41 @@ public class Dao {
 		return template.selectList("timelinecomment",b_idx);
 	}
 	
+	// 게시글 등록
+			public void insertPost(BoardVO bvo){
+				template.insert("insertPost",bvo);
+			}
+			
+			// b_idx 중 큰 값 가져오기
+			public int getMax_idx(){
+				return template.selectOne("getMax_idx");
+			}
+			
+
+		public void join(UsersVO uvo){
+			template.insert("usersJoin",uvo);
+		}
+		
+		public UsersVO nameConfirm(String id){
+			return template.selectOne("confirmName",id);
+		}
+		
+		public void pwdUpdate(String id, String pwd){
+			Map<String, String> map = new HashMap<>();
+			map.put("id", id);
+			map.put("pwd",pwd);
+			template.update("pwdUpdate",map);
+		}
+		/*public UsersVO usersSel(String id){
+			return template.selectOne("usersSel",id)
+		}*/
+		
+		public void updateUsers(UsersVO uvo){
+			System.out.println("profileModify---dao");
+			template.update("usersUpdate",uvo);
+		}
+		public void deleteUsers(String id){
+			template.delete("deleteUsers",id);
+		}
+	
 }
