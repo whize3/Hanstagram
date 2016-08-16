@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Request;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -166,14 +167,19 @@ public class Dao {
 		UsersVO user = template.selectOne("login", map);
 		return user;
 	}
-	public List<BoardVO> getTimeLine(String id){
+	public List<BoardVO> getTimeLine(String id,String id2){
 		 String b_idx=null;
 		 System.out.println(id);
+		 Map<String,String> map = new HashMap<>();
 		 List<BoardVO> list = template.selectList("timelinelist", id);
 		 for(BoardVO k : list){
 			 b_idx = k.getB_idx();
 			 k.setLike_count(template.selectOne("hashlistcnt", b_idx));
 			 k.setComment_count(template.selectOne("commentcount",b_idx));
+			 System.out.println(b_idx+id);
+		  	 map.put("b_idx", b_idx);
+		 	 map.put("id", id2);
+		 	 k.setLike_state(template.selectOne("likestatechk",map));
 		 }
 		 return list;
 	}

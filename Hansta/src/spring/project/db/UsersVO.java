@@ -5,6 +5,7 @@ public class UsersVO {
 	
 	public UsersVO(){}
 	public UsersVO(String id, String name, String pwd, String email, String age, String profile_url) {
+		
 		super();
 		this.id = id;
 		this.name = name;
