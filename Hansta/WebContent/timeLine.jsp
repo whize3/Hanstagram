@@ -545,19 +545,16 @@ display:none;
 							</div>
 						</li>
 					</ul>
-<!-- <<<<<<< HEAD
-					<section id="comment"> <span><img
+<!-- 					<section id="comment"> <span><img
 						src="/Hansta/img/littleLike.png"></span>
 					<form>
 						<input type="text" placeholder="댓글 달기...">
 					</form>
 					</section>
-=======
-					
+					 -->
 					<div class="comment_write">
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
-				</div>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
+					</div>
 				</div>
 			</div>
 			</article>
