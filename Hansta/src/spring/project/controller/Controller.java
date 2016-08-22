@@ -588,7 +588,7 @@ public class Controller {
 		//파일 이름을 가져온 값으로 설정해준다.
 				// 바보 기미현
 		request.setCharacterEncoding("utf-8");
-		final String filePath = request.getServletContext().getRealPath("\\203.236.209.64:8090/Hansta/upload/");
+		final String filePath = request.getServletContext().getRealPath("/upload/");
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
 		MultipartFile fileImg = mr.getFile("photoSel");
 		
@@ -612,8 +612,10 @@ public class Controller {
 			/*fileImg.transferTo(file);*/
 			FileCopyUtils.copy(fileImg.getInputStream(),new FileOutputStream(file));
 			
+			//http://203.236.209.64:8090/Hansta/upload/193_KakaoTalk_20160817_161313181.jpg
+			
 			bvo.setId(id);
-			bvo.setImg_url("203.236.209.64:8090/Hansta/upload/"+fileName);
+			bvo.setImg_url("http://203.236.209.64:8090/Hansta/upload/"+fileName);
 			bvo.setB_content(b_content);
 			dao.insertPost(bvo);
 		}
