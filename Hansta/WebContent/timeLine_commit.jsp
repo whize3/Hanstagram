@@ -146,8 +146,6 @@ display:none;
 											});
 						});
 	});
-<<<<<<< HEAD
-=======
 	$("#cancel").click(function(){
 		$(this).css("display","none");
 		$("#pop").css("display","none");
@@ -303,7 +301,6 @@ display:none;
 							//좋아요 클릭 이벤트
 							
 });
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 </script>
 </head>
 
@@ -354,7 +351,6 @@ display:none;
 				</div>
 			</c:otherwise>
 		</c:choose>
-=======
 		<img src="/Hansta/img/a.jpg" />
 	</div>
 	<div class="profileInfo">
@@ -367,9 +363,7 @@ display:none;
 			<span class="fBtn" id="enableFollow"><button
 					onclick="location.href='follow.do'">팔로잉</button></span>
 		</div>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 
-<<<<<<< HEAD
 		<div class="name info">${usersvo.name }</div>
 		<ul class="info">
 			<li><span>게시물 <span class="number">${boardcount }</span>
@@ -421,13 +415,11 @@ display:none;
 						<span> <img src="/Hansta/img/bubble.png"> <span
 							class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 							<img src="/Hansta/img/likeWhite.png"> <span class="likecnt">${k.like_count }개</span>
-=======
             <div>
                <h1>UserIDUserIDUserID</h1>
                <span class="fBtn"><button>프로필 편집</button></span>
                <span class="fBtn" id="write"><button>게시글 작성</button></span>
             </div>
--->
 		<div class="name info">${usersvo.name }</div>
 		<ul class="info">
 			<li><span>게시물 <span class="number">${boardcount }</span>
@@ -475,7 +467,6 @@ display:none;
 							class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 							<img src="/Hansta/img/likeWhite.png"> <span class="likecnt">${k.like_count }개</span>
 							<input type="hidden" id="likestate" value="${k.like_state }"/>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 						</span>
 					</div>
 				</a>
@@ -501,18 +492,14 @@ display:none;
 
 		<img src="/Hansta/img/cancel.png" id="cancel">
 		<div class="popTable">
-<<<<<<< HEAD
 			<header>
 			<span id="followTitle"></span></header>
-=======
 			<header> <span id="followTitle"></span></header>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 			<ul id="flist">
 				<c:forEach var="k" items="${followervo }">
 
 					<li>
 						<div class="person">
-<<<<<<< HEAD
 						<c:choose>
 							<c:when test="${k.profile_url == null }">
 								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
@@ -539,14 +526,12 @@ display:none;
 									<button>팔로잉</button>
 								</c:when>
 							</c:choose>
-=======
 							<a href="#"><img src="/Hansta/img/person.jpg"></a>
 							<div>
 								<span class="personId"><a href="#">${k.follower }</a></span> <span
 									class="personName">이수현</span>
 							</div>
 							<button>팔로우</button>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 						</div>
 					</li>
 				</c:forEach>
@@ -559,13 +544,10 @@ display:none;
 			<article>
 			<div>
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
-<<<<<<< HEAD
 				<div class="name">
 					<a href="">_suhyuneee</a>
-=======
 				<div class="namediv">
 					
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 				</div>
 				<!-- 				<span><button class="follow">팔로우</button></span> --> <span><button
 						class="following">팔로잉</button></span> </header>
@@ -590,19 +572,16 @@ display:none;
 							</div>
 						</li>
 					</ul>
-<<<<<<< HEAD
 					<section id="comment"> <span><img
 						src="/Hansta/img/littleLike.png"></span>
 					<form>
 						<input type="text" placeholder="댓글 달기...">
 					</form>
 					</section>
-=======
 					
 					<div class="comment_write">
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git
 				</div>
 			</div>
 			</article>
