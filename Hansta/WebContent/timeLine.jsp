@@ -148,7 +148,7 @@ display:none;
 	});
  */
 
-	$("#follower").click(function(){
+	/* $("#follower").click(function(){
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
 		$(".popArea").css("display","block");
@@ -180,6 +180,19 @@ display:none;
 			}
 			
 		})
+	}); */
+	$(".showlist").click(function(){
+		if($(this).attr("id")=="follow"){
+			$("#followTitle").empty().text("팔로우");
+			$("#followlist").css("display","block");
+		}else if($(this).attr("id")="follower"){
+			$("#followTitle").empty().text("팔로워");
+			$("#followerlist").css("display","block");
+		}
+		$("#cancel").css("display","inline-block");
+		$("#pop").css("display","block");
+		$(".popArea").css("display","block");
+		
 	});
 	$(".wrap").each(function(){
 		 $(this).on("click", function(){
@@ -380,10 +393,10 @@ display:none;
 			<li><span>게시물 <span class="number">${boardcount }</span>
 					개
 			</span></li>
-			<li><a href="#" id="follower"><span>팔로워 <span
+			<li><a href="#" class="showlist" id="follower"><span>팔로워 <span
 						class="number">${fn:length(followervo) }</span> 명
 				</span></a></li>
-			<li><a href="#" id="follow"><span>팔로우 <span
+			<li><a href="#" class="showlist" id="follow"><span>팔로우 <span
 						class="number">${fn:length(followeevo) }</span> 명
 				</span></a></li>
 		</ul>
@@ -466,8 +479,42 @@ display:none;
 		<div class="popTable">
 			<header>
 			<span id="followTitle"></span></header>
-			<ul id="flist">
+			<ul id="followerlist" class="flist">
 				<c:forEach var="k" items="${followervo }">
+					<li>
+						<div class="person">
+						<c:choose>
+							<c:when test="${k.profile_url == null }">
+								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
+							</c:when>
+							<c:otherwise>
+								<img src="${k.profile_url }" />
+							</c:otherwise>
+						</c:choose>
+							<div>
+								<span class="personId"><a href="#">${k.id }</a></span> <span
+									class="personName">${k.name }</span>
+							</div>
+							<c:set var="sue" value="0" />
+							<c:forEach var="s" items="${myfollowList }">
+								<c:if test="${s.id == k.id}">
+									<c:set var="sue" value="${sue+1}" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${sue eq 0 }">
+									<button>팔로우</button>
+								</c:when>
+								<c:when test="${sue > 0}">
+									<button>팔로잉</button>
+								</c:when>
+							</c:choose>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+			<ul id="followlist" class="">
+				<c:forEach var="k" items="${followeevo }">
 					<li>
 						<div class="person">
 						<c:choose>
@@ -513,11 +560,6 @@ display:none;
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
 				<div class="name">
 					<a href="">_suhyuneee</a>
-<!-- =======
-				<div class="namediv">
-					
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
-				
 				</div>
 				
 				<!--<span><button class="follow">팔로우</button></span> -->
