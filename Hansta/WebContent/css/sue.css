@@ -69,7 +69,7 @@ margin-right: 40px;
 
 .profile .name{
 
-display:inline-block;
+display:block;
 font-weight:600;
 
 }
@@ -348,6 +348,7 @@ over-flow:auto;
 	display: block;
 	position:relative;
 	background:#fff;
+	top:50px;
 }
  .contentsArea .name{
  width:137px;

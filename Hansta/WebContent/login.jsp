@@ -144,14 +144,14 @@ $(function() {
 					</div>
 					<div class="right_form">
 						<form>
-							<input type="text" id="username" name="username" placeholder="사용자 이름"/>					
+							<input type="text" id="username" name="username" placeholder="사용자 이름"/>
 							<input type="password" id="password" name="password" placeholder="비밀번호"/>
 							<div class="pwd_div">
 								<a href="findpwd.jsp">비밀번호를 잊으셨나요?</a>
 							</div>
 							<input type="button" class="loginBtn" value="로그인"/>
 						</form>
-					</div>					
+					</div>
 				</div>
 				<div class="join_go">
 					<p id="join_go">계정이 없으신가요? <a href="join.jsp">가입하기</a></p>

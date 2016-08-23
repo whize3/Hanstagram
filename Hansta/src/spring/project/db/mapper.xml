@@ -23,8 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc
 	</select>
 	
-	<select id="boardlist" parameterType="String" resultType="spring.project.db.BoardVO">
-		select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc
+	<select id="boardlist" parameterType="Map" resultType="spring.project.db.BoardVO">
+		select * from (select rownum as rnum, a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc) a, board_3 b where a.b_idx=b.b_idx) where rnum between #{begin} and #{end}
+	</select>
+	
+	<select id="morecomment" parameterType="String" resultType="spring.project.db.CommentVO">
+		select * from comment_3 where b_idx = #{b_idx}
 	</select>
 	
 	<select id="likecnt" parameterType="String" resultType="String">
@@ -150,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<delete id="deleteUsers" parameterType="String">
-		delete from users_3 where id = #{id};
+		delete from users_3 where id = #{id}
 	</delete>
 	
    <!-- 팔로우하기 -->
