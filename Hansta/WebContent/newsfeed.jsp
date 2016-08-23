@@ -314,6 +314,11 @@ $(function() {
 <div class="wrap">
 	<div class="container">
 	<c:set var="nowcnt" value="6"/>
+	<c:choose>
+		<c:when test="${fn:length(boardvo)==0 }">
+			<h2 style="margin-top:250px;">친구를 팔로우하거나, 게시글을 등록해주세요</h2>
+		</c:when>
+		<c:otherwise>
 		<c:forEach var="k" begin="0" end="${fn:length(boardvo) }" items="${boardvo}">
 		<article class="a1"> 
 			<header class="h1"> 
@@ -374,7 +379,8 @@ $(function() {
 			</div>		
 		</article>		
 		</c:forEach>
-	
+			</c:otherwise>
+		</c:choose>
 	</div>
 		<div class="test99">
 		<h2 class="listshowmore" pagenum="2">더보기</h2>

@@ -559,8 +559,7 @@ display:none;
 							</div>
 						</li>
 					</ul>
-					
-					<div class="comment_write">
+	<div class="comment_write">
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
 				</div>

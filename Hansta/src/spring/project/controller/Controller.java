@@ -1,6 +1,7 @@
 package spring.project.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +20,7 @@ import javax.websocket.Session;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -650,6 +652,7 @@ public class Controller {
 		//b_idx 중에 가장 큰 값을 가져온다.
 		String Max_idx = String.valueOf(dao.getMax_idx()+1);
 		
+		
 		//파일 이름을 가져온 값으로 설정해준다.
 				// 바보 기미현
 		request.setCharacterEncoding("utf-8");
@@ -674,10 +677,13 @@ public class Controller {
 			file = new File(filePath+fileName);
 			
 			// 파일 업로드 저장
-			fileImg.transferTo(file);
+			/*fileImg.transferTo(file);*/
+			FileCopyUtils.copy(fileImg.getInputStream(),new FileOutputStream(file));
+			
+			//http://203.236.209.64:8090/Hansta/upload/193_KakaoTalk_20160817_161313181.jpg
 			
 			bvo.setId(id);
-			bvo.setImg_url("/Hansta/upload/"+fileName);
+			bvo.setImg_url("http://203.236.209.64:8090/Hansta/upload/"+fileName);
 			bvo.setB_content(b_content);
 			dao.insertPost(bvo);
 		}
