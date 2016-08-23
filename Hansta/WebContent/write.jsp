@@ -150,6 +150,9 @@
 </style>
  <jsp:useBean id="uvo" class="spring.project.db.UsersVO" />
  <jsp:setProperty property="*" name="uvo"/> 
+
+<script src="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/js/Jcrop.js"></script>
+<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css">
 <script type="text/javascript">
 	function share_go(f) {
 		f.action="write.do";
@@ -158,7 +161,6 @@
 
 	function imageCheck(input) {
 		
-		
 		if(input.files&&input.files[0]){
 			var reader = new FileReader();
 			reader.onload=function(e){
@@ -166,7 +168,6 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
-		
 	
 	}
 </script>
@@ -199,7 +200,7 @@
 					<div id="share">
 						<div class="share-1"><input type="button" class="cancel" name="cancel" value="<"/></div>
 						<a class="share-2">새 게시물</a>
-						<div class="share-3"><input type="button" class="share" onclick="share_go(this.form)" value="공유하기"/></div>
+						<div class="share-3"><input type="button" class="share" onclick="crop(this.form)" value="공유하기"/></div>
 						
 					</div>
 					<div class="prWrap">

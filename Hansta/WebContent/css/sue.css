@@ -69,7 +69,7 @@ margin-right: 40px;
 
 .profile .name{
 
-display:inline-block;
+display:block;
 font-weight:600;
 
 }
@@ -118,6 +118,8 @@ text-decoration: none;
 display: inline-block;
 width:293px;
 height:293px;
+overflow-y:hidden;
+
 }
 .contents img{
 display: block;
@@ -234,7 +236,7 @@ z-index:1000;
 display: none;
 }
 .popTable ul{
-display: block;
+display: none;
 width:100%;
 overflow-y:scroll;
 overflow-x:hidden;
@@ -346,6 +348,7 @@ over-flow:auto;
 	display: block;
 	position:relative;
 	background:#fff;
+	top:50px;
 }
  .contentsArea .name{
  width:137px;

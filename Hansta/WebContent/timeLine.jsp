@@ -34,6 +34,9 @@ display:none;
 			$(this).css("display", "none");
 			$("#pop").css("display", "none");
 			$(".popArea").css("display", "none");
+			$("#followerlist").css("display", "none");
+			$("#followlist").css("display", "none");
+			
 		});
 		$("#pop").click(function() {
 			console.log("bye");
@@ -148,7 +151,7 @@ display:none;
 	});
  */
 
-	$("#follower").click(function(){
+	/* $("#follower").click(function(){
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
 		$(".popArea").css("display","block");
@@ -180,6 +183,23 @@ display:none;
 			}
 			
 		})
+	}); */
+	$(".showlist").click(function(){
+		var str = $(this).attr("id");
+		switch(str){
+		case "follow":
+			$("#followTitle").empty().text("팔로우");
+			$("#followlist").css("display","block");
+			break;
+		case "follower":
+			$("#followTitle").empty().text("팔로워");
+			$("#followerlist").css("display","block");
+			break;
+		}
+		$("#cancel").css("display","inline-block");
+		$("#pop").css("display","block");
+		$(".popArea").css("display","block");
+		
 	});
 	$(".wrap").each(function(){
 		 $(this).on("click", function(){
@@ -197,11 +217,19 @@ display:none;
 			 $(".comment_write_content").attr("b_idx",b_idx);
 			 $(".name").text();
 			 $(".namediv").text(uservoid);
-			 if(da_likestate==0){
+			/*  if(da_likestate==0){
 				 $(".comment_write").append("<a class='heart_link'><img class='heart' b_idx='"+b_idx+"' src='img/like.PNG' onclick='like_go(this)'></a>");
 			 }else{
 				 $(".comment_write").append("<a class='heart_link'><img class='heart' b_idx='"+b_idx+"' src='img/liked.PNG' onclick='like_go(this)'></a>");
+			 } */
+			 
+			//상세보기를 띄운 횟수대로 하트 추가되던거 수정한 부분
+			 if(da_likestate==0){
+				 $(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
+			 }else{
+				 $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
 			 }
+			 
 				$.ajax({
 					type: "post",
 					url: "timelinecomment.do",
@@ -254,7 +282,8 @@ display:none;
 											data: {"b_idx" : b_idx  , "id" : ${user.id}  },
 											dataType: "json",
 											success: function(data){
-												alert("성공");
+												var cnt = ($(".detailArea_like").text().substr(0,1)+1)+" 개";
+												$(".detailArea_like").empty().text(cnt);
 											},
 											error : function(request,status,error){
 												alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -403,10 +432,10 @@ display:none;
 			<li><span>게시물 <span class="number">${boardcount }</span>
 					개
 			</span></li>
-			<li><a href="#" id="follower"><span>팔로워 <span
+			<li><a href="#" class="showlist" id="follower"><span>팔로워 <span
 						class="number">${fn:length(followervo) }</span> 명
 				</span></a></li>
-			<li><a href="#" id="follow"><span>팔로우 <span
+			<li><a href="#" class="showlist" id="follow"><span>팔로우 <span
 						class="number">${fn:length(followeevo) }</span> 명
 				</span></a></li>
 		</ul>
@@ -489,7 +518,7 @@ display:none;
 		<div class="popTable">
 			<header>
 			<span id="followTitle"></span></header>
-			<ul id="flist">
+			<ul id="followerlist" class="flist">
 				<c:forEach var="k" items="${followervo }">
 					<li>
 						<div class="person">
@@ -502,7 +531,41 @@ display:none;
 							</c:otherwise>
 						</c:choose>
 							<div>
-								<span class="personId"><a href="#">${k.id }</a></span> <span
+								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span> <span
+									class="personName">${k.name }</span>
+							</div>
+							<c:set var="sue" value="0" />
+							<c:forEach var="s" items="${myfollowList }">
+								<c:if test="${s.id == k.id}">
+									<c:set var="sue" value="${sue+1}" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${sue eq 0 }">
+									<button>팔로우</button>
+								</c:when>
+								<c:when test="${sue > 0}">
+									<button>팔로잉</button>
+								</c:when>
+							</c:choose>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+			<ul id="followlist" class="">
+				<c:forEach var="k" items="${followeevo }">
+					<li>
+						<div class="person">
+						<c:choose>
+							<c:when test="${k.profile_url == null }">
+								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
+							</c:when>
+							<c:otherwise>
+								<img src="${k.profile_url }" />
+							</c:otherwise>
+						</c:choose>
+							<div>
+								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span> <span
 									class="personName">${k.name }</span>
 							</div>
 							<c:set var="sue" value="0" />
@@ -534,8 +597,8 @@ display:none;
 			<article>
 			<div>
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
+				<div class="name">
 				<div class="namediv">
-					
 				</div>
 				 </header>
 				<div class="left">
@@ -560,6 +623,7 @@ display:none;
 						</li>
 					</ul>
 	<div class="comment_write">
+		<a class='heart_link'><img class='heart' src='img/like.PNG' onclick='like_go(this)'></a>
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
 				</div>
