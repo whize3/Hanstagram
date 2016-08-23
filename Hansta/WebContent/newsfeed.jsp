@@ -257,12 +257,17 @@ $(function() {
 							+"<ul id='"+data[i]["b_idx"]+"_ul' class='"+data[i]["b_idx"]+"_ul'>"
 							+"</ul>"
 							+"</div>"
-							+"<div class='comment_write'>"
-							+"<input type='text' class='comment_write_content'  b_idx='"+data[i]["b_idx"]+"' aria-label='댓글 달기...' placeholder='댓글 달기...'>"
+							+"<div class='comment_write' id='"+data[i]["b_idx"]+"_cw'>"
 							+"</div>"
 							+"</div>"
 							+"</article>"
 					);
+					if(data[i]["like_state"]==0){
+						$("#"+data[i]["b_idx"]+"_cw").append("<a class='heart_link'><img class='heart' b_idx='"+data[i]["b_idx"]+"' src='img/like.PNG' onclick='like_go(this)'></a>");
+					}else{
+						$("#"+data[i]["b_idx"]+"_cw").append("<a class='heart_link'><img class='heart' b_idx='"+data[i]["b_idx"]+"' src='img/liked.PNG' onclick='like_go(this)'></a>");
+					}
+					$("#"+data[i]["b_idx"]+"_cw").append("<input type='text' class='comment_write_content'  b_idx='"+data[i]["b_idx"]+"' aria-label='댓글 달기...' placeholder='댓글 달기...'>");
 					$.ajax({
 						type: "post",
 						url: "newsfeedmorec.do",
@@ -270,11 +275,44 @@ $(function() {
 						dataType: "json",
 						success: function(data){
 							if(data.length>5){
-								$("<li>").html("<button class='showmore' b_idx='"+data[0]["b_idx"]+"'>댓글 더보기</button>").appendTo("#comment_"+data[0]["b_idx"]);
-							}for(var i=0; i<data.length; i++){
-							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#comment_"+data[0]["b_idx"]);
+								$("<li>").html("<button class='showmore' b_idx='"+data[0]["b_idx"]+"'>댓글 더보기</button>").appendTo("#"+data[0]["b_idx"]+"_ul");
+								for(var i=0; i<6; i++){
+									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
+									}
+								for(var i=0; i<data.length; i++){
+									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("."+data[0]["b_idx"]+"_ul");
+									}
+							}else{for(var i=0; i<data.length; i++){
+							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
 							}
-							
+							}
+							$(".showmore").each(function(){
+								 $(this).on("click", function(){
+									 var b_idx = $(this).attr("b_idx");
+									 $("#comment_"+b_idx).css("display","none");
+									 $("#comment_all_"+b_idx).css("display","block");
+								 });
+							});	
+							$(".deletecomment").each(function(){
+								 $(this).on("click", function(){
+									 var c_idx = $(this).attr("c_idx");
+									 $.ajax({
+											type: "post",
+											url: "deletecomment.do",
+											data: {"c_idx" : c_idx},
+											dataType: "text",
+											success: function(data){
+												 $('#'+c_idx+'_li').text("")
+												 $('#'+c_idx+'_li').contents().unwrap();
+												 
+											},
+											error : function(request,status,error){
+												alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+										    }
+										});	
+									
+								 });
+							});	
 							
 						},
 						error : function(request,status,error){
@@ -282,6 +320,77 @@ $(function() {
 					    }
 					});
 					}
+					$(".comment_write_content").keyup(function(e) {
+					    if (e.keyCode == 13){
+					    	var index = $(".comment_write_content").index(this);	
+					    	/* var index = $(".comment_write>a>img").index(this); */
+					    	var c_content = $(this).val();
+					    	var b_idx = $(this).attr("b_idx");
+					    	var id = $(this).attr
+					    	$.ajax({
+								type: "post",
+								url: "commentwrite.do",
+								data: {"b_idx" : b_idx, "c_content" : c_content},
+								dataType: "json",
+								success: function(data){
+									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("#"+b_idx+"_ul");
+									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("."+b_idx+"_ul");
+									$(".comment_write_content").val("");
+									$(".deletecomment").each(function(){
+										 $(this).on("click", function(){
+											 var c_idx = $(this).attr("c_idx");
+											 $.ajax({
+													type: "post",
+													url: "deletecomment.do",
+													data: {"c_idx" : c_idx},
+													dataType: "text",
+													success: function(data){
+														 $('#'+c_idx+'_li').text("")
+														 $('#'+c_idx+'_li').contents().unwrap();
+														 
+													},
+													error : function(request,status,error){
+														alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+												    }
+												});	
+											
+										 });
+									});	
+								},
+								error : function(request,status,error){
+									alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							    }
+							});	
+					    };        
+					});
+					$(".heart").on("click",$(".comment_write>*"),function() {
+						/* var index = $(".comment_write>a>img").index(this); */
+						var src = $(this).attr("src");
+						var b_idx = $(this).attr("b_idx");
+						var counttext;
+						src = (src==="img/like.PNG")
+						? "img/liked.PNG"
+						: "img/like.PNG";		
+						$(this).attr("src",src);	
+						$.ajax({
+							type: "post",
+							url: "like.do",
+							data: {"b_idx" : b_idx  , "id" : ${user.id}  },
+							dataType: "json",
+							success: function(data){
+										alert(data[0]["chk"]);
+										counttext = $("#"+b_idx).text().substring(3,$("#"+b_idx).text().length-1);
+										if(data[0]["chk"]=="삭제"){
+										$("#"+b_idx).text("좋아요 "+(parseInt(counttext)-1)+"개");
+										}else{
+											$("#"+b_idx).text("좋아요 "+(parseInt(counttext)+1)+"개");
+										}
+							},
+							error : function(request,status,error){
+								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						    }
+						});	
+					});	
 				},
 				error : function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
