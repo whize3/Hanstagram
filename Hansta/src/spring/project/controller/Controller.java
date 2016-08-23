@@ -213,17 +213,12 @@ public class Controller {
 		 String content= null;
 			String result = "[";
 			for(CommentVO k : commentvo){
-				content = k.getC_content();
-				content = System.getProperty("line.separator");
-				content = content.replace("\r\n","\n");
-				content = content.replace("\n","</br>");
 				idx++;
 			result += "{";
 			result += "\"b_idx\" : \"" + k.getB_idx() + "\",";
 			result += "\"id\" : \"" + k.getId() + "\",";
 			result += "\"c_time\" : \"" + k.getC_time() + "\",";
-			result += "\"c_content\" : \"" + content + "\",";
-			System.out.println(content);
+			result += "\"c_content\" : \"" + k.getC_content() + "\",";
 			if(k.getId().equals(id)){
 				result += "\"delete\" : \"" + "<span class='deletecomment' c_idx='"+k.getC_idx()+"'>삭제</span>" +"\","; 
 			}else{

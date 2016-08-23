@@ -269,7 +269,7 @@ $(function() {
 						data: {"b_idx" : b_idx},
 						dataType: "json",
 						success: function(data){
-							if(data.length>2){
+							if(data.length>5){
 								$("<li>").html("<button class='showmore' b_idx='"+data[0]["b_idx"]+"'>댓글 더보기</button>").appendTo("#comment_"+data[0]["b_idx"]);
 							}for(var i=0; i<data.length; i++){
 							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#comment_"+data[0]["b_idx"]);
