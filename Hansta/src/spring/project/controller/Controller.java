@@ -246,12 +246,13 @@ public class Controller {
 		String id = request.getParameter("id");
 		String likestate = dao.likeState(b_idx, id);
 		String chk = null;
-		if(likestate.equals("1")){
-			dao.deleteLike(b_idx, id);
-			chk = "삭제";
-		}else{
+		System.out.println(b_idx+"//"+id);
+		if(likestate.equals("0")){
 			dao.insertLike(b_idx, id);
 			chk = "삽입";
+		}else{
+			dao.deleteLike(b_idx, id);
+			chk = "삭제";
 		}
 		String result = "[";
 		result += "{";

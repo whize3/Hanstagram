@@ -206,7 +206,7 @@ display:none;
 			 var b_idx = $(this).attr("b_idx");
 			 var da_date = $(this).children($("<span>")).children(".date").attr("date");
 			 var da_like = $(this).children($("<span>")).children(".likecnt").text()
-			 var da_likestate = $("#likestate").val();
+			 var da_likestate = $("#likestate_"+b_idx).val();
 			 var uservoid = $("#uservoid").val();
 			 $("#pop").css("display","inline-block");
 			 $("#cancel0").css("display","inline-block");
@@ -224,10 +224,10 @@ display:none;
 			 } */
 			 
 			//상세보기를 띄운 횟수대로 하트 추가되던거 수정한 부분
-			 if(da_likestate==0){
-				 $(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
-			 }else{
+			 if(da_likestate>0){
 				 $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
+			 }else{
+				 $(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
 			 }
 			 
 				$.ajax({
@@ -268,7 +268,7 @@ display:none;
 								
 							 });
 						});	
-								 $(".heart").on("click",$(".comment_write>*"),function() {
+								 $(".heart").on("click",function() {
 										/* var index = $(".comment_write>a>img").index(this); */
 										var src = $(this).attr("src");
 										var b_idx = $(this).attr("b_idx");
@@ -282,8 +282,14 @@ display:none;
 											data: {"b_idx" : b_idx  , "id" : ${user.id}  },
 											dataType: "json",
 											success: function(data){
-												var cnt = ($(".detailArea_like").text().substr(0,1)+1)+" 개";
-												$(".detailArea_like").empty().text(cnt);
+												alert(data[0]["chk"]);
+												counttext = $(".detailArea_like").text().substring(0,$(".detailArea_like").text().length-1);
+												if(data[0]["chk"]=="삭제"){
+												$(".detailArea_like").text((parseInt(counttext)-1)+"개");
+												}else if(data[0]["chk"]=="삽입"){
+													$(".detailArea_like").text((parseInt(counttext)+1)+"개");
+												}
+												
 											},
 											error : function(request,status,error){
 												alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -474,7 +480,7 @@ display:none;
 						<span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 						<img src="/Hansta/img/likeWhite.png">
 						<span class="likecnt">${k.like_count }개</span>
-						<input type="hidden" id="likestate" value="${k.like_state }"/>
+						<input type="hidden" id="likestate_${k.b_idx }" value="${k.like_state }"/>
 						</span>
 					</div>
 				</a>

@@ -242,7 +242,7 @@ $(function() {
 							+"<header class='h1'>"
 							+"<a class='profile' href='timeline.do?id="+data[i]["id"]+"'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a>"
 							+"<a class='id' href='timeline.do?id="+data[i]["id"]+"'>"+data[i]["id"]+"</a>"
-							+"<span class='date'>시간</span>"
+							+"<span class='date'>"+data[i]["b_time"].substring(0,16)+"</span>"
 							+"</header>"
 							+"<div class='image-wrap'>"
 							+"<img class='image' src='"+data[i]["img_url"]+"' style=''>"
