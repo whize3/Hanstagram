@@ -199,6 +199,7 @@ display:none;
 		$("#cancel").css("display","inline-block");
 		$("#pop").css("display","block");
 		$(".popArea").css("display","block");
+		$(".body").scroll(none);
 		
 	});
 	$(".wrap").each(function(){
