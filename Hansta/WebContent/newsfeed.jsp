@@ -222,37 +222,85 @@ $(function() {
 	});	
 	
 	
-// 	$(".listshowmore").each(function(){
+	$(".listshowmore").each(function(){
+		 $(this).on("click", function(){
+			var pagenum = $(this).attr("pagenum");
+			var pagenum2 = Number(pagenum)+1;
+	    	$.ajax({
+				type: "post",
+				url: "newsfeedmore.do",
+				data: {"pagenum" : pagenum},
+				dataType: "json",
+				success: function(data){
+					alert("성공");
+					$(".listshowmore").attr("pagenum",pagenum2);
+					var b_idx;
+					for(var i=0; i<data.length;i++){
+						 b_idx = data[i]["b_idx"];
+					$(".container").append(
+							"<article class='a1'>"
+							+"<header class='h1'>"
+							+"<a class='profile' href='timeline.do?id="+data[i]["id"]+"'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a>"
+							+"<a class='id' href='timeline.do?id="+data[i]["id"]+"'>"+data[i]["id"]+"</a>"
+							+"<span class='date'>시간</span>"
+							+"</header>"
+							+"<div class='image-wrap'>"
+							+"<img class='image' src='"+data[i]["img_url"]+"' style=''>"
+							+"</div>"
+							+"<div class='comment-wrap'>"
+							+"<div class='like'><span id='"+data[i]["b_idx"]+"'>좋아요 "+data[i]["like_count"]+"개</span></div>"
+							+"<div class='comment' id='comment_"+data[i]["b_idx"]+"'>"
+							+"<ul id='"+data[i]["b_idx"]+"_ul'>"
+							+"</ul>"
+							+"</div>"
+							+"<div class='comment_all' id='comment_all_"+data[i]["b_idx"]+"'>"
+							+"<ul id='"+data[i]["b_idx"]+"_ul' class='"+data[i]["b_idx"]+"_ul'>"
+							+"</ul>"
+							+"</div>"
+							+"<div class='comment_write'>"
+							+"<input type='text' class='comment_write_content'  b_idx='"+data[i]["b_idx"]+"' aria-label='댓글 달기...' placeholder='댓글 달기...'>"
+							+"</div>"
+							+"</div>"
+							+"</article>"
+					);
+					$.ajax({
+						type: "post",
+						url: "newsfeedmorec.do",
+						data: {"b_idx" : b_idx},
+						dataType: "json",
+						success: function(data){
+							if(data.length>2){
+								$("<li>").html("<button class='showmore' b_idx='"+data[0]["b_idx"]+"'>댓글 더보기</button>").appendTo("#comment_"+data[0]["b_idx"]);
+							}for(var i=0; i<data.length; i++){
+							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#comment_"+data[0]["b_idx"]);
+							}
+							
+							
+						},
+						error : function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					    }
+					});
+					}
+				},
+				error : function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
+			});	
+	    });        
+	});
+	
+	
+	
+// 		$(".listshowmore").each(function(){
 // 		 $(this).on("click", function(){
 // 			var cPage = $(this).attr("cPage");
 // 			alert("gdgd");
-// 	    	$.ajax({
-// 				type: "post",
-// 				url: "newsfeedmore.do",
-// 				data: {"cPage" : cPage},
-// 				dataType: "text",
-// 				success: function(data){
-// 					alert("성공");
-// 					$(".test99").html("<c:forEach var='k' begin='0' end='5' items='${boardvo2}'>${k.b_idx}</c:forEach>");
-// 				},
-// 				error : function(request,status,error){
-// 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 			    }
-// 			});	
+// 			 $(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>")
+// 			 $(".test99").contents().unwrap();
+// 			//$(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>");
 // 	    });        
 // 	});
-	
-	
-	
-		$(".listshowmore").each(function(){
-		 $(this).on("click", function(){
-			var cPage = $(this).attr("cPage");
-			alert("gdgd");
-			 $(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>")
-			 $(".test99").contents().unwrap();
-			//$(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>");
-	    });        
-	});
 	
 	
 }); 
@@ -262,6 +310,7 @@ $(function() {
 <jsp:useBean id="boardvo2" scope="page" class="spring.project.db.BoardVO"/>
 <jsp:setProperty property="*" name="boardvo2"/>
 <jsp:include page="header.jsp"></jsp:include>
+<c:set var="pagenum" value="0" />
 <div class="wrap">
 	<div class="container">
 	<c:set var="nowcnt" value="6"/>
@@ -325,14 +374,11 @@ $(function() {
 			</div>		
 		</article>		
 		</c:forEach>
-		
-<!-- 		<div class="test99"> -->
-<%-- 		<c:if test="${fn:length(boardvo)>6 }">dsdf --%>
-<!-- 		<h2 class="listshowmore" cPage="2">더보기</h2> -->
-<%-- 		</c:if> --%>
-<!-- 		</div> -->
-	</div>
 	
+	</div>
+		<div class="test99">
+		<h2 class="listshowmore" pagenum="2">더보기</h2>
+		</div>
 </div>
 
 </body>

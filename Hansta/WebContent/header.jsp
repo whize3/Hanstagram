@@ -95,11 +95,11 @@ height:auto;
    border: 1px solid lightgray;
    border-top: none;
    background-color: white;
-   display:block;
+   display:none;
     margin:0 auto;
     width: 347px;
     position:relative;
-   
+   height: 300px;
     left:34px;
     top:12px;
     overflow-x:hidden;
@@ -132,6 +132,7 @@ $(function() {
    var res_split;
    $("#search").keyup(function(e) {
       if($("#search").val().length>0){
+    	  $("#search_div").css("display","block");
          if($("#search").val().substr(0,1)=="#"){
       $.ajax({
          type: "post",
@@ -252,6 +253,7 @@ $(function() {
          }
    }else{
       $("#search_div").empty();
+      $("#search_div").css("display","none");
    }
    });
    

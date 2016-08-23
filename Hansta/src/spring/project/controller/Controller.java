@@ -151,15 +151,96 @@ public class Controller {
 	public ModelAndView followingList(HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		UsersVO user = (UsersVO)session.getAttribute("user");
+		String begin = request.getParameter("begin");
+		String end = request.getParameter("end");
 		String id = user.getId();
-		List<BoardVO> boardvo = dao.getBooardList(id);
+		List<BoardVO> boardvo = dao.getBooardList(id,begin,end);
 		List<CommentVO> commentvo = dao.getCommentList();
 		ModelAndView mv = new ModelAndView("newsfeed");
 		mv.addObject("boardvo", boardvo);
 		mv.addObject("commentvo", commentvo);
+		mv.addObject("end","3");
 		return mv;
 	}
 
+	@RequestMapping(value = "/newsfeedmore.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
+		public ResponseEntity<String> newsfeedmore2(HttpServletRequest request, HttpServletResponse response){
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+			HttpSession session = request.getSession();
+			UsersVO user = (UsersVO)session.getAttribute("user");
+			String pagenum = request.getParameter("pagenum");
+			String end = String.valueOf(Integer.parseInt(pagenum)*3);
+			String begin = String.valueOf(Integer.parseInt(end)-2);
+			String id = user.getId();
+			List<BoardVO> boardvo = dao.getBooardList(id,begin,end);
+			 int idx=0;
+			 String content= null;
+				String result = "[";
+				for(BoardVO k : boardvo){
+					content = k.getB_content();
+					content = System.getProperty("line.separator");
+					content = content.replace("\r\n","\n");
+					content = content.replace("\n","</br>");
+					idx++;
+				result += "{";
+				result += "\"b_idx\" : \"" + k.getB_idx() + "\",";
+				result += "\"id\" : \"" + k.getId() + "\",";
+				result += "\"b_time\" : \"" + k.getB_time() + "\",";
+				result += "\"img_url\" : \"" + k.getImg_url() + "\",";
+				result += "\"b_content\" : \"" + content + "\",";
+				result += "\"like_state\" : \"" + k.getLike_state() + "\",";
+				result += "\"like_count\" : \"" + k.getLike_count() + "\",";
+				result += "\"r_num\" : \"" + k.getR_num() + "\"";
+				result += "}";
+				if(idx != boardvo.size()){
+					result += ",";
+				}
+				}
+				result += "]";
+			 return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+		}
+	@RequestMapping(value = "/newsfeedmorec.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
+	public ResponseEntity<String> newsfeedmorec(HttpServletRequest request, HttpServletResponse response){
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		String b_idx = request.getParameter("b_idx");
+		HttpSession session = request.getSession();
+		UsersVO user = (UsersVO)session.getAttribute("user");
+		String id = user.getId();
+		List<CommentVO> commentvo = dao.getBooardListc(b_idx);
+		 int idx=0;
+		 String content= null;
+			String result = "[";
+			for(CommentVO k : commentvo){
+				content = k.getC_content();
+				content = System.getProperty("line.separator");
+				content = content.replace("\r\n","\n");
+				content = content.replace("\n","</br>");
+				idx++;
+			result += "{";
+			result += "\"b_idx\" : \"" + k.getB_idx() + "\",";
+			result += "\"id\" : \"" + k.getId() + "\",";
+			result += "\"c_time\" : \"" + k.getC_time() + "\",";
+			result += "\"c_content\" : \"" + content + "\",";
+			System.out.println(content);
+			if(k.getId().equals(id)){
+				result += "\"delete\" : \"" + "<span class='deletecomment' c_idx='"+k.getC_idx()+"'>삭제</span>" +"\","; 
+			}else{
+				result += "\"delete\" : \"" + " " + "\",";
+			}
+			
+			result += "\"c_idx\" : \"" + k.getC_idx() + "\"";
+			result += "}";
+			if(idx != commentvo.size()){
+				result += ",";
+			}
+			}
+			result += "]";
+		 return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+	}
+	
+	
 	@RequestMapping(value = "/like.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> like(HttpServletRequest request, HttpServletResponse response){
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -184,7 +265,6 @@ public class Controller {
 	}
 	@RequestMapping(value = "/commentwrite.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> commentwrite(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("여기1");
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
@@ -193,13 +273,12 @@ public class Controller {
 		String b_idx = request.getParameter("b_idx");		
 		String c_content = request.getParameter("c_content");
 		String c_idx = dao.insertComment(id,b_idx,c_content);
-		System.out.println("여기2");
+
 		String result = "[";
 		result += "{";
 		result += "\"c_idx\" : \"" + c_idx + "\"";
 		result += "}";
 		result += "]";
-		System.out.println("여기3");
 		return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
 	@RequestMapping("/hashlist.do")
@@ -343,7 +422,6 @@ public class Controller {
 		UsersVO user = (UsersVO)session.getAttribute("user");
 		String id = user.getId();
 		String followeeId = request.getParameter("followeeId");
-		System.out.println(id+"/"+followeeId);
 		
 		FollowVO result = dao.followCheck(id, followeeId);
 
@@ -352,7 +430,6 @@ public class Controller {
 		}else{
 			dao.followState(id, followeeId, "0");
 		}		
-		System.out.println(followeeId+" follow.do");
 		ModelAndView mv = new ModelAndView("timelineGo");
 		mv.addObject("fid", followeeId);		
 		return mv;
@@ -364,11 +441,10 @@ public class Controller {
 			UsersVO user = (UsersVO)session.getAttribute("user");
 			String id = user.getId();
 			String followeeId = request.getParameter("followeeId");
-			System.out.println(followeeId);
 	      dao.followState(id, followeeId,"10");
 	      
 	      ModelAndView mv = new ModelAndView("timelineGo");
-	      mv.addObject("id", followeeId);
+	      mv.addObject("fid", followeeId);
 	      return mv;
 	   }
 	
@@ -408,14 +484,11 @@ public class Controller {
 		String id2 = user.getId();
 		String myid = user.getId();
 		if(id!=null){
-		System.out.println("gdgd11");
 		session.setAttribute("id", id);
 		}
 		if(id==null){
 			id = (String) session.getAttribute("id");
-			System.out.println("gdgd22");
 		}
-		System.out.println(id);
 		ModelAndView mv = new ModelAndView("timeLine");
 		List<BoardVO> boardvo = dao.getTimeLine(id,id2);
 		UsersVO usersvo = dao.getTimeUser(id);
@@ -622,7 +695,6 @@ public class Controller {
 	}
 	@RequestMapping("/join.do")
 	public ModelAndView join(HttpServletRequest request) throws Exception{
-		System.out.println("dd");
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
@@ -644,12 +716,10 @@ public class Controller {
 	}
 	@RequestMapping("/nameConfirm.do")
 	public ModelAndView confirm(HttpServletRequest request) throws Exception{
-		System.out.println("dddd");
+
 		String id = request.getParameter("id");
 		ModelAndView mv = null;
-		System.out.println(id);
 		UsersVO uvo = dao.nameConfirm(id);
-		System.out.println(uvo.getId());
 		if(uvo.getId()==null){
 			mv = new ModelAndView(""); // 해당 아이디 없음.
 			return mv;
@@ -663,7 +733,6 @@ public class Controller {
 	public ModelAndView pwdUpdate (HttpServletRequest request) throws Exception{
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd1");
-		System.out.println("pwdupdate"+id+" / "+pwd);
 		
 		ModelAndView mv = new ModelAndView("pwdUpdateOk");
 		

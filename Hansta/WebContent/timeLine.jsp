@@ -268,27 +268,49 @@ display:none;
 				});	
 		 });
 	});
-						$(".comment_write_content").keyup(function(e) {
-						    if (e.keyCode == 13){
-						    	var index = $(".comment_write_content").index(this);	
-						    	/* var index = $(".comment_write>a>img").index(this); */
-						    	var c_content = $(this).val();
-						    	var b_idx = $(this).attr("b_idx");
-						    	var id = $(this).attr
-						    	$.ajax({
-									type: "post",
-									url: "commentwrite.do",
-									data: {"b_idx" : b_idx, "c_content" : c_content},
-									dataType: "json",
-									success: function(data){
-										
-									},
-									error : function(request,status,error){
-										alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-								    }
-								});	
-						    };        
-						});
+										$(".comment_write_content").keyup(function(e) {
+										    if (e.keyCode == 13){
+										    	var index = $(".comment_write_content").index(this);	
+										    	/* var index = $(".comment_write>a>img").index(this); */
+										    	var c_content = $(this).val();
+										    	var b_idx = $(this).attr("b_idx");
+										    	var id = $(this).attr
+										    	$.ajax({
+													type: "post",
+													url: "commentwrite.do",
+													data: {"b_idx" : b_idx, "c_content" : c_content},
+													dataType: "json",
+													success: function(data){
+														$("<li>").attr("id",data[0]["c_idx"]).html("<div><a href='#' class='name00'><c:out value="${user.id}"/></a>"+c_content+"</div>").appendTo("#detailArea_comment_ul");
+										                        $("#"+data[0]["c_idx"]).append("<span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>");
+										                        $(".comment_write_content").val("");
+																$(".deletecomment").each(function(){
+																	 $(this).on("click", function(){
+																		 var c_idx = $(this).attr("c_idx");
+																		 $.ajax({
+																				type: "post",
+																				url: "deletecomment.do",
+																				data: {"c_idx" : c_idx},
+																				dataType: "text",
+																				success: function(data){
+																					 $('#'+c_idx).text("")
+																					 $('#'+c_idx).contents().unwrap();
+																					 
+																				},
+																				error : function(request,status,error){
+																					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+																			    }
+																			});	
+																		
+																	 });
+																});	
+													},
+													error : function(request,status,error){
+														alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+												    }
+												});	
+										    };        
+										});
 							//좋아요 클릭 이벤트
 							
 });
@@ -308,6 +330,7 @@ display:none;
 		</c:choose>
 	</div>
 	<div class="profileInfo">
+	<input type="hidden" id="uservoid" value="${usersvo.id }"/>
 		<c:choose>
 			<c:when test="${user.id eq usersvo.id }">
 				<div>
@@ -511,19 +534,10 @@ display:none;
 			<article>
 			<div>
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
-				<div class="name">
-					<a href="">_suhyuneee</a>
-<!-- =======
 				<div class="namediv">
 					
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
-				
 				</div>
-				
-				<!--<span><button class="follow">팔로우</button></span> -->
-					<span><button class="following">팔로잉</button></span>
-				</header>
-						</div>
+				 </header>
 				<div class="left">
 					<img
 						src="https://scontent.cdninstagram.com/t51.2885-15/e35/13687040_1563987130573588_1209261600_n.jpg?ig_cache_key=MTI5NzE4MTA0MzgyNDg2MTQ3Mg%3D%3D.2">
@@ -545,24 +559,16 @@ display:none;
 							</div>
 						</li>
 					</ul>
-<!-- <<<<<<< HEAD
-					<section id="comment"> <span><img
-						src="/Hansta/img/littleLike.png"></span>
-					<form>
-						<input type="text" placeholder="댓글 달기...">
-					</form>
-					</section>
-=======
 					
 					<div class="comment_write">
 					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
 				</div>
->>>>>>> branch 'master' of https://github.com/whize3/Hanstagram.git -->
 				</div>
 			</div>
 			</article>
 		</div>
 
+	</div>
 	</div>
 </body>
 

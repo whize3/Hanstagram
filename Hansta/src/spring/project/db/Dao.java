@@ -32,10 +32,20 @@ public class Dao {
 	}
 	
 	// �븘�씠�뵒 二쇨퀬 寃뚯떆湲� 遺덈윭�삤湲�
-	public List<BoardVO> getBooardList(String id){
+	public List<BoardVO> getBooardList(String id,String begin,String end){
 		String b_idx = null;
+		if(begin==null){
+			begin="1";
+		}
+		if(end==null){
+			end="3";
+		}
 		Map<String,String> map = new HashMap<>();
-		List<BoardVO> boardvo = template.selectList("boardlist",id);
+		Map<String,String> map2 = new HashMap<>();
+		map2.put("id", id);
+		map2.put("begin", begin);
+		map2.put("end", end);
+		List<BoardVO> boardvo = template.selectList("boardlist",map2);
 		for(BoardVO k : boardvo){
 			b_idx = k.getB_idx();
 			k.setLike_count(template.selectOne("likecnt",b_idx));
@@ -44,6 +54,9 @@ public class Dao {
 			k.setLike_state(template.selectOne("likestatechk",map));
 		}
 		return boardvo; 
+	}
+	public List<CommentVO> getBooardListc(String b_idx){
+		return  template.selectList("morecomment",b_idx);
 	}
 	public List<BoardVO> getBooardListMore(String id, int begin, int end){
 		String b_idx = null;
@@ -169,14 +182,12 @@ public class Dao {
 	}
 	public List<BoardVO> getTimeLine(String id,String id2){
 		 String b_idx=null;
-		 System.out.println(id);
 		 Map<String,String> map = new HashMap<>();
 		 List<BoardVO> list = template.selectList("timelinelist", id);
 		 for(BoardVO k : list){
 			 b_idx = k.getB_idx();
 			 k.setLike_count(template.selectOne("hashlistcnt", b_idx));
 			 k.setComment_count(template.selectOne("commentcount",b_idx));
-			 System.out.println(b_idx+id);
 		  	 map.put("b_idx", b_idx);
 		 	 map.put("id", id2);
 		 	 k.setLike_state(template.selectOne("likestatechk",map));
@@ -229,7 +240,6 @@ public class Dao {
 		}*/
 		
 		public void updateUsers(UsersVO uvo){
-			System.out.println("profileModify---dao");
 			template.update("usersUpdate",uvo);
 		}
 		public void deleteUsers(String id){
