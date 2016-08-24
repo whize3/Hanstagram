@@ -156,12 +156,14 @@ public class Controller {
 		String begin = request.getParameter("begin");
 		String end = request.getParameter("end");
 		String id = user.getId();
+		int listcnt = dao.getBooardListcnt(id);
 		List<BoardVO> boardvo = dao.getBooardList(id,begin,end);
 		List<CommentVO> commentvo = dao.getCommentList();
 		ModelAndView mv = new ModelAndView("newsfeed");
 		mv.addObject("boardvo", boardvo);
 		mv.addObject("commentvo", commentvo);
 		mv.addObject("end","3");
+		mv.addObject("listcnt",listcnt);
 		return mv;
 	}
 
@@ -758,15 +760,6 @@ public class Controller {
 		ModelAndView mv = new ModelAndView("profileModify");
 		UsersVO uvo = dao.nameConfirm(id);
 		mv.addObject(uvo);
-		return mv;
-	}
-	@RequestMapping("/logout.do")
-	public ModelAndView logout(HttpServletRequest request) throws Exception{
-		
-		ModelAndView mv = new ModelAndView("login");
-		HttpSession session = request.getSession();
-		session.invalidate();
-		
 		return mv;
 	}
 	

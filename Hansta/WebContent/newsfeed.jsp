@@ -12,7 +12,7 @@
 #con{
 text-align:center;
 }
-.test99 {
+.morebtn {
     display: inline-table;
     border: 2px solid #ba32c7;
     border-radius: 50%;
@@ -267,6 +267,8 @@ $(function() {
 		 $(this).on("click", function(){
 			var pagenum = $(this).attr("pagenum");
 			var pagenum2 = Number(pagenum)+1;
+			var listcnt2;
+			var listcnt = "<c:out value='${listcnt}'/>";
 	    	$.ajax({
 				type: "post",
 				url: "newsfeedmore.do",
@@ -274,7 +276,12 @@ $(function() {
 				dataType: "json",
 				success: function(data){
 					alert("성공");
+					listcnt2=data[data.length-1]["r_num"];
+					alert(listcnt+""+listcnt2);
 					$(".listshowmore").attr("pagenum",pagenum2);
+					if(listcnt==listcnt2){
+						$("#con").css("display","none");
+					}
 					var b_idx;
 					for(var i=0; i<data.length;i++){
 						 b_idx = data[i]["b_idx"];
@@ -553,11 +560,13 @@ $(function() {
 			</c:otherwise>
 		</c:choose>
 	</div>
+		<c:if test="${listcnt>3 }">
 	<div id="con">
-		<div class="test99">
+		<div class="morebtn">
 		<h2 class="listshowmore" pagenum="2">더 읽어들이기</h2>
 		</div>
 	</div>
+	</c:if>
 </div>
 
 </body>

@@ -16,15 +16,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 불러오기  -->
 	
 	<select id="boardlistmore" parameterType="Map" resultType="spring.project.db.BoardVO">
-	select * from (select rownum r_num,a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc) a)  where r_num between #{begin} and #{end}
+	select * from (select rownum r_num,a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') or id=#{id} order by b_time desc) a)  where r_num between #{begin} and #{end}
 	</select>
 	
 	<select id="boardlistcnt" parameterType="String" resultType="Integer">
-		select count(*) from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc
+		select count(*) from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') or id=#{id} order by b_time desc
 	</select>
 	
 	<select id="boardlist" parameterType="Map" resultType="spring.project.db.BoardVO">
-		select * from (select rownum as rnum, a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') order by b_time desc) a, board_3 b where a.b_idx=b.b_idx) where rnum between #{begin} and #{end}
+		select * from (select rownum as r_num, a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') or id=#{id} order by b_time desc) a, board_3 b where a.b_idx=b.b_idx) where r_num between #{begin} and #{end}
 	</select>
 	
 	<select id="morecomment" parameterType="String" resultType="spring.project.db.CommentVO">
