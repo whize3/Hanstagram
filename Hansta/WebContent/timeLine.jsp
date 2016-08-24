@@ -3,14 +3,15 @@
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.nonono{
-display:none;
+.nonono {
+	display: none;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="/Hansta/css/sue.css">
@@ -206,18 +207,58 @@ display:none;
 		 $(this).on("click", function(){
 			 var b_idx = $(this).attr("b_idx");
 			 var da_date = $(this).children($("<span>")).children(".date").attr("date");
+			 
 			 var da_like = $(this).children($("<span>")).children(".likecnt").text()
-			 var da_likestate = $("#likestate_"+b_idx).val();
+			 var da_likestate = $("#likestate").val();
 			 var uservoid = $("#uservoid").val();
 			 $("#pop").css("display","inline-block");
 			 $("#cancel0").css("display","inline-block");
 			 $(".detailArea").css("display","inline-block");
 			 $(".detailArea_like").text(da_like);
 			 $(".detailArea_date").text(da_date);
-			 $("#detailArea_comment_ul").text("");
+			 /* $("#detailArea_comment_ul").has(".cont").text(""); */
 			 $(".comment_write_content").attr("b_idx",b_idx);
 			 $(".name").text();
 			 $(".namediv").text(uservoid);
+			 $(".cont").text("");
+			 
+			 $.ajax({
+				 type:"post",
+				 url:"detail.do",
+				 data:{"b_idx":b_idx},
+				 dataType:"json",
+				 success:function(data){
+					 var img_url = data[0]["img_url"];
+					 var b_content = data[0]["b_content"];
+					 var result="";
+					 if(b_content.length>0){
+						 result+="<div><li class='cont'><b>"+uservoid+"</b>";
+						 var hash = b_content.split("#");
+			
+ 						 for(var i=1;i<hash.length;i++){
+ 							 
+ 							 console.log("#"+hash[i]);
+ 							 var tmp = hash[i].split(" ");
+ 							 for(var j=0;j<tmp.length;j++){
+ 								 console.log("!!"+tmp[j]);
+ 								if(j==0){
+ 									 result+="<a href='hashlist.do?keyword="+tmp[j]+"' class='hashTag'>#"+tmp[j]+"</a>";
+ 								}else{
+ 									result+="&nbsp;"+tmp[j];
+ 								}
+ 							 }
+ 							 
+ 						 }
+					 }
+					 result+="</li></div>";
+					 $(".contentImg").attr("src",img_url);
+					 $("#detailArea_comment_ul").has(".cont").html(result);
+				 },
+				 error:function(){
+					 console.log("에러발생")
+				 }
+			 });
+			 
 			/*  if(da_likestate==0){
 				 $(".comment_write").append("<a class='heart_link'><img class='heart' b_idx='"+b_idx+"' src='img/like.PNG' onclick='like_go(this)'></a>");
 			 }else{
@@ -225,83 +266,76 @@ display:none;
 			 } */
 			 
 			//상세보기를 띄운 횟수대로 하트 추가되던거 수정한 부분
-			 if(da_likestate>0){
-				 $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
-			 }else{
+			 if(da_likestate==0){
 				 $(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
+			 }else{
+				 $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
 			 }
 			 
-				$.ajax({
-					type: "post",
-					url: "timelinecomment.do",
-					data: {"b_idx" : b_idx},
-					dataType: "json",
-					success: function(data){
-						
-						for(var i=0; i<data.length; i++){
-							var liid=data[i]["c_idx"];
-	                        $("<li>").attr("id",liid).html("<div><a href='#' class='name00'>"+data[i]["id"]+"</a>"+data[i]["c_content"]+"</div>").appendTo("#detailArea_comment_ul");
-	                        $("<div>").attr("class","nonono").attr("id",liid+"_div").html(data[i]["id"]).appendTo("#"+liid);
-		                        var aaa1 = $("#"+liid+"_div").html();
-		                        var aaa2 = <c:out value="${user.id}"/>
-		                        if(aaa1==aaa2){
-		                        $("#"+liid).append("<span class='deletecomment' c_idx="+data[i]["c_idx"]+">삭제</span>");
-		                        }
-						}
-						
-						$(".deletecomment").each(function(){
-							 $(this).on("click", function(){
-								 var c_idx = $(this).attr("c_idx");
-								 $.ajax({
-										type: "post",
-										url: "deletecomment.do",
-										data: {"c_idx" : c_idx},
-										dataType: "text",
-										success: function(data){
-											 $('#'+c_idx).text("")
-											 $('#'+c_idx).contents().unwrap();
-											 
-										},
-										error : function(request,status,error){
-											alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-									    }
-									});	
-								
-							 });
-						});	
-								 $(".heart").on("click",function() {
-										/* var index = $(".comment_write>a>img").index(this); */
-										var src = $(this).attr("src");
-										var b_idx = $(this).attr("b_idx");
-										src = (src==="img/like.PNG")
-										? "img/liked.PNG"
-										: "img/like.PNG";		
-										$(this).attr("src",src);	
-										$.ajax({
-											type: "post",
-											url: "like.do",
-											data: {"b_idx" : b_idx  , "id" : ${user.id}  },
-											dataType: "json",
-											success: function(data){
-												alert(data[0]["chk"]);
-												counttext = $(".detailArea_like").text().substring(0,$(".detailArea_like").text().length-1);
-												if(data[0]["chk"]=="삭제"){
-												$(".detailArea_like").text((parseInt(counttext)-1)+"개");
-												}else if(data[0]["chk"]=="삽입"){
-													$(".detailArea_like").text((parseInt(counttext)+1)+"개");
-												}
-												
-											},
-											error : function(request,status,error){
-												alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-										    }
-										});	
-									});	
-					},
-					error : function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				    }
+			$.ajax({
+				type: "post",
+				url: "timelinecomment.do",
+				data: {"b_idx" : b_idx},
+				dataType: "json",
+				success: function(data){
+					
+					for(var i=0; i<data.length; i++){
+						var liid=data[i]["c_idx"];
+                        $("<li>").attr("id",liid).html("<div><a href='#' class='name00'>"+data[i]["id"]+"</a>"+data[i]["c_content"]+"</div>").appendTo("#detailArea_comment_ul");
+                        $("<div>").attr("class","nonono").attr("id",liid+"_div").html(data[i]["id"]).appendTo("#"+liid);
+	                        var aaa1 = $("#"+liid+"_div").html();
+	                        var aaa2 = <c:out value="${user.id}"/>
+	                        if(aaa1==aaa2){
+	                        $("#"+liid).append("<span class='deletecomment' c_idx="+data[i]["c_idx"]+">삭제</span>");
+	                        }
+					}
+					
+					$(".deletecomment").each(function(){
+						 $(this).on("click", function(){
+							 var c_idx = $(this).attr("c_idx");
+							 $.ajax({
+									type: "post",
+									url: "deletecomment.do",
+									data: {"c_idx" : c_idx},
+									dataType: "text",
+									success: function(data){
+										 $('#'+c_idx).text("")
+										 $('#'+c_idx).contents().unwrap();
+										 
+									},
+									error : function(request,status,error){
+										alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+								    }
+								});	
+						 });
+					});	
+				$(".heart").on("click",$(".comment_write>*"),function() {
+					/* var index = $(".comment_write>a>img").index(this); */
+					var src = $(this).attr("src");
+					var b_idx = $(this).attr("b_idx");
+					src = (src==="img/like.PNG")
+					? "img/liked.PNG"
+					: "img/like.PNG";		
+					$(this).attr("src",src);	
+					$.ajax({
+						type: "post",
+						url: "like.do",
+						data: {"b_idx" : b_idx  , "id" : ${user.id}  },
+						dataType: "json",
+						success: function(data){
+							var cnt = (parseInt($(".detailArea_like").text().substr(0,1))+1)+" 개";
+							$(".detailArea_like").empty().text(cnt);
+						},
+						error : function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					    }
+					});	
 				});	
+			},
+				error : function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
+			});	
 		 });
 	});
 										$(".comment_write_content").keyup(function(e) {
@@ -366,13 +400,14 @@ display:none;
 		</c:choose>
 	</div>
 	<div class="profileInfo">
-	<input type="hidden" id="uservoid" value="${usersvo.id }"/>
+		<input type="hidden" id="uservoid" value="${usersvo.id }" />
 		<c:choose>
 			<c:when test="${user.id eq usersvo.id }">
 				<div>
 					<h1>${user.id }</h1>
 					<span class="fBtn"><button>프로필 편집</button></span> <span
-						class="fBtn" id="write"><button onclick="location.href='write.jsp?id=${user.id}'">게시글 작성</button></span>
+						class="fBtn" id="write"><button
+							onclick="location.href='write.jsp?id=${user.id}'">게시글 작성</button></span>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -401,7 +436,7 @@ display:none;
 
 		<!-- 내 타임라인인 경우 -->
 		<!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
-<%-- 		<c:set var="view" value="0" />
+		<%-- 		<c:set var="view" value="0" />
 		<c:if test="${fn:length(boardvo)>0 }">
 
 			<c:forEach var="k" items="${boardvo }">
@@ -430,7 +465,7 @@ display:none;
 						<span> <img src="/Hansta/img/bubble.png"> <span
 							class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
 							<img src="/Hansta/img/likeWhite.png"> <span class="likecnt">${k.like_count }개</span>
- --%> 
+ --%>
 
 
 
@@ -439,11 +474,11 @@ display:none;
 			<li><span>게시물 <span class="number">${boardcount }</span>
 					개
 			</span></li>
-			<li><a href="#" class="showlist" id="follower"><span>팔로워 <span
-						class="number">${fn:length(followervo) }</span> 명
+			<li><a href="#" class="showlist" id="follower"><span>팔로워
+						<span class="number">${fn:length(followervo) }</span> 명
 				</span></a></li>
-			<li><a href="#" class="showlist" id="follow"><span>팔로우 <span
-						class="number">${fn:length(followeevo) }</span> 명
+			<li><a href="#" class="showlist" id="follow"><span>팔로우
+						<span class="number">${fn:length(followeevo) }</span> 명
 				</span></a></li>
 		</ul>
 	</div>
@@ -452,65 +487,60 @@ display:none;
 
 		<!-- 게시글이 있는 경우, 한 라인당 3개씩 -->
 		<c:set var="view" value="0" />
-	<c:choose>
-		<c:when test="${fn:length(boardvo)>0}">
-			<c:forEach var="k" items="${boardvo }">
-				<c:choose>
-					<c:when test="${view==0}">
-						<div class="line">
-					</c:when>
-
-
-				</c:choose>
-				<c:if test="${view>2 }">
+		<c:choose>
+			<c:when test="${fn:length(boardvo)>0}">
+				<c:forEach var="k" items="${boardvo }">
 					<c:choose>
-						<c:when test="${view%3==0 }">
+						<c:when test="${view==0}">
 							<div class="line">
 						</c:when>
-					</c:choose>
-				</c:if>
-				<c:set var="view" value="${view+1 }" />
-				<a href="#">
-					<div class="wrap" b_idx="${k.b_idx }">
-						<div class="contents">
-							<img src="${k.img_url}">
-						</div>
-						<div class="box"></div>
-						<span>
-						<img src="/Hansta/img/bubble.png">
-						<span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
-						<img src="/Hansta/img/likeWhite.png">
-						<span class="likecnt">${k.like_count }개</span>
-						<input type="hidden" id="likestate_${k.b_idx }" value="${k.like_state }"/>
-						</span>
-					</div>
-				</a>
 
-				<c:if test="${view>2 }">
-					<c:if test="${view%3==0 }">
-						</div>
+
+					</c:choose>
+					<c:if test="${view>2 }">
+						<c:choose>
+							<c:when test="${view%3==0 }">
+								<div class="line">
+							</c:when>
+						</c:choose>
 					</c:if>
-				</c:if>
-				
-				</c:forEach>
+					<c:set var="view" value="${view+1 }" />
+					<a href="#">
+						<div class="wrap" b_idx="${k.b_idx }">
+							<div class="contents">
+								<img src="${k.img_url}">
+							</div>
+							<div class="box"></div>
+							<span> <img src="/Hansta/img/bubble.png" class="littlebtn">
+								<span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
+								<img src="/Hansta/img/likeWhite.png" class="littlebtn"> <span
+								class="likecnt">${k.like_count }개</span> <input type="hidden"
+								id="likestate" value="${k.like_state }" />
+							</span>
+						</div>
+					</a>
+
+					<c:if test="${view>2 }">
+						<c:if test="${view%3==0 }">
+	</div>
+	</c:if> </c:if> </c:forEach> </c:when> <c:otherwise>
+		<c:choose>
+			<c:when test="${uservo.id eq user.id }">
+				<div id="none">
+					<h2>소중한 순간을 포착하여 공유해보세요.</h2>
+					<h3>첫 사진이나 동영상을 공유해보세요</h3>
+					<a href="#"><img src="/Hansta/img/plus.png"></a>
+				</div>
 			</c:when>
 			<c:otherwise>
-				<c:choose>
-				<c:when test="${uservo.id eq user.id }">
-					<div id="none">
-			      		<h2>소중한 순간을 포착하여 공유해보세요.</h2>
-						<h3>첫 사진이나 동영상을 공유해보세요</h3>
-						<a href="#"><img src="/Hansta/img/plus.png"></a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div id="none">
-						<h3>아직 게시물이 없습니다.</h4>
-					</div>
-				</c:otherwise>
-				</c:choose>
+				<div id="none">
+					<h3>
+						아직 게시물이 없습니다.
+						</h4>
+				</div>
 			</c:otherwise>
 		</c:choose>
+	</c:otherwise> </c:choose>
 
 	</div>
 
@@ -523,23 +553,23 @@ display:none;
 
 		<img src="/Hansta/img/cancel.png" id="cancel">
 		<div class="popTable">
-			<header>
-			<span id="followTitle"></span></header>
+			<header> <span id="followTitle"></span></header>
 			<ul id="followerlist" class="flist">
 				<c:forEach var="k" items="${followervo }">
 					<li>
 						<div class="person">
-						<c:choose>
-							<c:when test="${k.profile_url == null }">
-								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
-							</c:when>
-							<c:otherwise>
-								<img src="${k.profile_url }" />
-							</c:otherwise>
-						</c:choose>
+							<c:choose>
+								<c:when test="${k.profile_url == null }">
+									<a href="timeline.do?id=${k.id }"><img
+										src="/Hansta/img/default.jpg" /></a>
+								</c:when>
+								<c:otherwise>
+									<img src="${k.profile_url }" />
+								</c:otherwise>
+							</c:choose>
 							<div>
-								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span> <span
-									class="personName">${k.name }</span>
+								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span>
+								<span class="personName">${k.name }</span>
 							</div>
 							<c:set var="sue" value="0" />
 							<c:forEach var="s" items="${myfollowList }">
@@ -563,17 +593,18 @@ display:none;
 				<c:forEach var="k" items="${followeevo }">
 					<li>
 						<div class="person">
-						<c:choose>
-							<c:when test="${k.profile_url == null }">
-								<a href="timeline.do?id=${k.id }"><img src="/Hansta/img/default.jpg" /></a>
-							</c:when>
-							<c:otherwise>
-								<img src="${k.profile_url }" />
-							</c:otherwise>
-						</c:choose>
+							<c:choose>
+								<c:when test="${k.profile_url == null }">
+									<a href="timeline.do?id=${k.id }"><img
+										src="/Hansta/img/default.jpg" /></a>
+								</c:when>
+								<c:otherwise>
+									<img src="${k.profile_url }" />
+								</c:otherwise>
+							</c:choose>
 							<div>
-								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span> <span
-									class="personName">${k.name }</span>
+								<span class="personId"><a href="timeline.do?id=${k.id }">${k.id }</a></span>
+								<span class="personName">${k.name }</span>
 							</div>
 							<c:set var="sue" value="0" />
 							<c:forEach var="s" items="${myfollowList }">
@@ -595,8 +626,8 @@ display:none;
 			</ul>
 		</div>
 	</div>
-	
-	
+
+
 	<!-- 여기 이후로는 합치기 성공 -->
 	<div class="detailArea">
 		<img src="/Hansta/img/cancel.png" id="cancel0">
@@ -605,11 +636,10 @@ display:none;
 			<div>
 				<header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
 				<div class="name">
-				<div class="namediv">
-				</div>
-				 </header>
+					<div class="namediv"></div>
+				</header>
 				<div class="left">
-					<img
+					<img class="contentImg"
 						src="https://scontent.cdninstagram.com/t51.2885-15/e35/13687040_1563987130573588_1209261600_n.jpg?ig_cache_key=MTI5NzE4MTA0MzgyNDg2MTQ3Mg%3D%3D.2">
 				</div>
 				<div class="detailCon">
@@ -620,8 +650,7 @@ display:none;
 					<div class="detailArea_date">날짜</div>
 					</section>
 					<ul id="detailArea_comment_ul">
-
-						<li>
+						<li class="cont">
 							<div>
 								<a href="#" class="name00">username!</a> 늦어서
 								미안합니다!!!!!!!!!!!!ㅠㅠㅠ <a href="#" class="hashTag">#해시태그는</a> 이렇게
@@ -629,10 +658,12 @@ display:none;
 							</div>
 						</li>
 					</ul>
-	<div class="comment_write">
-		<a class='heart_link'><img class='heart' src='img/like.PNG' onclick='like_go(this)'></a>
-					<input type="text" class="comment_write_content"  b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
-				</div>
+					<div class="comment_write">
+						<a class='heart_link'><img class='heart' src='img/like.PNG'
+							onclick='like_go(this)'></a> <input type="text"
+							class="comment_write_content" b_idx="1" aria-label="댓글 달기..."
+							placeholder="댓글 달기...">
+					</div>
 				</div>
 			</div>
 			</article>

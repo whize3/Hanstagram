@@ -118,13 +118,17 @@ text-decoration: none;
 display: inline-block;
 width:293px;
 height:293px;
-overflow-y:hidden;
+overflow-x:hidden;
+
 
 }
 .contents img{
 display: block;
-width:100%;
-height:auto;
+width:auto;
+height:100%;
+margin-left:auto;
+margin-right:auto;
+
 }
 .line{
 display: block;
@@ -172,13 +176,9 @@ z-index: -100;
 	display: table-cell;
 	vertical-align: top;
 }
-.wrap img{
+.wrap img.littlebtn{
 	margin-left:30px;
 	margin-right:10px;
-}
-.wrap img:FIRST-CHILD{
-	margin-left:0;
-	
 }
 .fBtn button:HOVER{
 font-weight:600;
@@ -363,8 +363,12 @@ over-flow:auto;
  color:#262626;
  font-weight:600;
  }
- .detailCon ul li div a.hashTag{
+a.hashTag{
 	color: #4b4db9;
+}
+.cont b{
+	font-weight:600;
+	margin-right:3px;
 }
 .detailCon section#info{
 	height:18px;
@@ -411,12 +415,14 @@ over-flow:auto;
 	width:307px;
 }
 .detailCon section div:FIRST-CHILD{
-	width:240px;
+	width:175px;
 }
 .detailCon section div:LAST-CHILD{
 	color:#999;
+	font-weight:400;
 	}
 .detailCon ul{
+	background:#fff;
 	width:307px;
 	height:376px;
 	margin:-5px -24px -20px -24px;
@@ -433,11 +439,12 @@ over-flow:auto;
 	position: absolute;
 	left: 0px;
 	background:none;
+	overflow:hidden;
 }
 .left img{
 	margin:0 auto;
-	display: inline-block;
-	with:100%;
+	display: table-cell;
+	width:auto;
 	height:100%;
 }
 .detailArea article{
@@ -498,4 +505,27 @@ over-flow:auto;
 	height:38px;
 	border-radius:50%;
 	
+}
+.comment_write input{
+	height:20px;
+	border:0;
+	display: table-cell;
+	vertical-align: middle;
+}
+.comment_write a{
+	
+	
+	display: table-cell;
+	vertical-align: middle;
+}
+.heart{
+	width:24px;
+	height:24px;
+}
+
+.comment_write{
+	width: 307px;
+    height: 50px;
+    margin-top: 28px;
+    display: table;
 }

@@ -70,6 +70,9 @@ width:132px;
 height:24px;
 text-align: right;
 }
+#iconArea a{
+margin-left:20px;
+}
 li{
 list-style: none;
 }
@@ -278,9 +281,7 @@ $(function() {
          	<a href="timeline.do?id=${user.id }">
          		<img src="/Hansta/img/my.PNG">
          	</a>
-         	<c:if test="${user.id ne null}">
-         	<h2 id="log_out">로그아웃</h2>
-         	</c:if>
+         	<a href="logout.do">logout</a>
          </div>
       </div>
    </div>

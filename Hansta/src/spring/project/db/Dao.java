@@ -210,6 +210,9 @@ public class Dao {
 		return template.selectList("timelinecomment",b_idx);
 	}
 	
+	public BoardVO getDetail(String b_idx){
+		return template.selectOne("getDetail",b_idx);
+	}
 	// 게시글 등록
 			public void insertPost(BoardVO bvo){
 				template.insert("insertPost",bvo);
@@ -245,5 +248,6 @@ public class Dao {
 		public void deleteUsers(String id){
 			template.delete("deleteUsers",id);
 		}
+		
 	
 }

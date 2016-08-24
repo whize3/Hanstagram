@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html >
@@ -8,11 +9,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+#con{
+text-align:center;
+}
+.test99 {
+    display: inline-table;
+    border: 2px solid #ba32c7;
+    border-radius: 50%;
+    width: 115px;
+    height: 115px;
+    text-align: center;
+    font-size: 10px;
+    font-weight:normal;
+}
+
+.listshowmore{
+	display: table-cell;
+    vertical-align: middle;
+    margin: 0 auto;
+    cursor: pointer;
+    color:#ba32c7;
+}
 .wrap {
+	margin-top:25px;
 	background-color: #fafafa;
 }
 .container{
-	width: 35%;
+	width: 40%;
 	margin: 0 auto;
 }
 .a1{
@@ -78,6 +101,9 @@ color: #999;
 border: none;
 padding: 0px;
 }
+.showmore{
+font-size:15px;
+}
 .comment-wrap{
 padding-left: 25px;
 padding-right: 25px;
@@ -89,15 +115,18 @@ padding-right: 10px;
 }
 .comment_content{
 font-size: 15px;
-font-weight: bold;
+font-weight: normal;
 }
 .comment_write{
 width:100%;
+height:50px;
 border-top:1px solid #efefef;
 display: table;
 }
 .heart_link{
 width:25px;
+height:25px;
+
     vertical-align: middle;
     display: table-cell;
 }
@@ -110,10 +139,22 @@ padding-left: 10px;
 border: none;
     display: table-cell;
     vertical-align: middle;
+        width: 300px;
+    height: 30px;
+    margin-top: 6px;
 }
 .comment_all{
 display:none;
 }
+.hashAndcontent span{
+font-weight:600;
+display: inline-block;
+}
+._hash{
+color:#003569;
+
+}
+
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
@@ -441,6 +482,27 @@ $(function() {
 			</div>
 			<div class="comment-wrap">
 				<div class="like"><span id="${k.b_idx }">좋아요 ${k.like_count}개</span></div>
+				<div class="hashAndcontent">
+					<div>
+						<span>${k.id}</span>
+						<% pageContext.setAttribute("LF", "\n"); %>
+						
+						<c:set var="str" value="${fn:replace(k.b_content, LF,'<br/>') }"/>
+						<c:forTokens var="hash" items="${str}" delims="#">
+						<c:set var="tokenCnt" value="1"></c:set>
+							<c:forTokens var="token" items="${hash}" delims=" ">
+								<c:choose>
+									<c:when test="${tokenCnt==1 }"><a href="hashlist.do?keyword=${token }" class="_hash">#${token}</a></c:when>
+									<c:otherwise>${token}</c:otherwise>
+								</c:choose>
+								<c:set var="tokenCnt" value="${tokenCnt+1 }"/>
+							</c:forTokens>
+						</c:forTokens>
+						<%-- <c:forEach var="c" items="${k.b_content}">
+							
+						</c:forEach> --%>
+					</div>
+				</div>
 				<div class="comment" id="comment_${k.b_idx }">
 					<ul id="${k.b_idx }_ul">
 					<c:set var="comment_cnt" value="0" />
@@ -491,9 +553,11 @@ $(function() {
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<div id="con">
 		<div class="test99">
-		<h2 class="listshowmore" pagenum="2">더보기</h2>
+		<h2 class="listshowmore" pagenum="2">더 읽어들이기</h2>
 		</div>
+	</div>
 </div>
 
 </body>
