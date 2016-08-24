@@ -260,14 +260,14 @@ $(function() {
       $("#search_div").css("display","none");
    }
    });
-   
+   $("#log_out").on("click", function(){
+	   location.href="logout.do";
+	 });
 })
 
 </script>
 </head>
 <body class="body">
-
-ID  :  ${user.id }
 <nav>
    <div id="header">
       <div class="header">

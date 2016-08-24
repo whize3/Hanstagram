@@ -170,4 +170,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="folllowState" parameterType="Map">
       update follow_3 set state = #{state} where follower = #{id} and FOLLOWEE = #{followeeId}
    </update>
+   
+   <!-- 상세보기 -->
+   <select id="getDetail" parameterType="String" resultType="spring.project.db.BoardVO">
+		select * from board_3 where b_idx=#{b_idx}
+   </select>
 </mapper>
