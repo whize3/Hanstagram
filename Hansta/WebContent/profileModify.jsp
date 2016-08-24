@@ -224,6 +224,11 @@
 								</div>
 							</div>
 							<div class="profile_bottom">
+								<table>
+									<tr>
+										<td></td>
+									</tr>
+								</table>
 								<label class="f_label">이름</label><input type="text" class="f_input" name="name"/><br/>
 								<label class="f_label">사용자 이름</label><input type="text" class="f_input" name="id"/><br/>
 								<label class="f_label">이메일</label><input type="text" class="f_input" name="email"/><br/>
