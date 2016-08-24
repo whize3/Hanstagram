@@ -292,6 +292,7 @@ public class Controller {
 		list = dao.getHashList(keyword);
 		mv.addObject("list_b", list_b);
 		mv.addObject("list", list);
+		mv.addObject("keyword",keyword);
 		return mv;
 	}
 	@RequestMapping("/deletecomment.do")
@@ -759,6 +760,22 @@ public class Controller {
 		session.invalidate();
 		
 		return mv;
+	}
+	
+	@RequestMapping("/detail.do")
+	public ResponseEntity<String> detail (HttpServletRequest request, HttpServletResponse response){
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		String b_idx = request.getParameter("b_idx");
+		String idx = request.getParameter("b_idx");
+		BoardVO bvo = dao.getDetail(idx);
+		String result = "[";
+		result += "{";
+		result += "\"b_idx\" : \"" + bvo.getB_idx()+ "\",";
+		result += "\"img_url\" : \"" + bvo.getImg_url() + "\",";
+		result += "\"b_content\" : \"" + bvo.getB_content() + "\"";
+		result += "}]";
+		return new ResponseEntity<String>(result,responseHeaders,HttpStatus.CREATED);
 	}
 	
 	

@@ -9,6 +9,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/Hansta/css/sue.css">
+<style type="text/css">
+.Container header{
+width:100%;
+text-align:center;
+display: block;
+height:72px;
+}
+.Container header h1{
+font-weight:500;
+font-size:34px;
+line-height:10px;
+}
+
+.Container header h4{
+line-height:10px;
+font-weight:normal;
+}
+</style>
 <script type="text/javascript" src="/Hansta/js/jquery-latest.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -28,10 +46,14 @@ $(function(){
 	<%-- <c:forEach var="k" items="${list }"> --%>
 	<%-- 		      			${k.b_idx } --%>
 	<%-- 		      			</c:forEach> --%>
-	${fn:length(list) }
+	
 	<main> <article>
 
 	<div class="Container">
+	<header>
+		<h1>${keyword }</h1>
+		<h4>게시물 ${fn:length(list)} 개</h4>
+	</header>
 		<c:if test="${fn:length(list)>6 }">
 			<h2 class="bnn">인기 게시물</h2>
 			<c:if test="${fn:length(list) <10 }">
