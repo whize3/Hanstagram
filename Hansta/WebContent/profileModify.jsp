@@ -18,8 +18,8 @@
 	.photoSel{
 	
 		position:relative;
-		top:2px;
-		margin-left: 20px;
+		top: -30px;
+    	margin-left: 42px;
 		background: transparent;
 		border: none;
 		outline: none;
@@ -32,9 +32,9 @@
 	} */
 	.photoSelFile{
 		position: relative;
-    	top: -20px;
-  		width: 70px;
-		margin-left: 497px;
+    	top: -27px;
+    	width: 70px;
+    	margin-left: -76px;
 		cursor: pointer;
 		opacity: 0;
 		filter:alpha(opcity=0);
@@ -71,7 +71,8 @@
 	#profileImg{
 		border-radius: 50%;
 		overflow: hidden;
-		margin-right: 11px;
+		margin-right: 14px;
+		margin-left: 71px;
 	}
 	.left{
 		width:230px;
@@ -80,7 +81,7 @@
 		border: 1px solid #EFEFEF;
 	} 
 	.right{
-		width:700px;
+		width:570px;
 		display: table-cell;
 		vertical-align: middle;
 		height: 630px;
@@ -91,10 +92,11 @@
 		border: 1px solid #EFEFEF;
 	}
 	.profile{
-		display: table;
+		display: table-row;
 		margin-bottom: 10px;
 		padding-left: 11px;
 		border-bottom: 1px solid #EFEFEF;
+		margin: 0 auto;
 	}
 	.profileImg{
 		display: table-cell;
@@ -105,12 +107,16 @@
 		vertical-align: middle;
 		/* margin-left: 30px; */
 	}
+	.profileId>a{
+		margin-bottom: 20px;
+		margin-left: -36px;
+	}
 	.img{
 		margin-left:5px;
 		margin-right: 5px;
 	}
 	.wrap2{
-		width: 930px;
+		width: 800px;
 		/* text-align: center; */
 		margin: 0 auto;
 	}
@@ -163,6 +169,10 @@
 		display: table-row;
 		margin: 0 auto;
 	}
+	.prWrap{
+		display: table;
+		height: 650px;
+	}
 }
 </style>
  <jsp:useBean id="uvo" class="spring.project.db.UsersVO" />
@@ -197,30 +207,31 @@
 					
 				</div>
 				<div class="right">
-				
-					<div class="prWrap">
-						<div class="profile">
-							<div class="profileImg">
-								<a class=""><img id="profileImg" class="jcrop_target" src="img/a.jpg" width="38px" height="38px"/></a>
-<%-- 								<a class=""><img id="profileImg" class="jcrop_target" src="${uvo.profile_url}" width="38px" height="38px"/></a> --%>
+					<form>
+						<div class="prWrap">
+							<div class="profile">
+								<div class="profileImg">
+									<a class=""><img id="profileImg" class="jcrop_target" src="img/a.jpg" width="100px" height="100px"/></a>
+	<%-- 								<a class=""><img id="profileImg" class="jcrop_target" src="${uvo.profile_url}" width="38px" height="38px"/></a> --%>
+								</div>
+								<div class="profileId">
+									<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 21px; color: #656565">khee</a>
+	<%-- 								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${user.id }</a> --%>
+								</div>
+								<div class="btn">
+									<input type="button" class="photoSel" value="파일 선택" />
+									<input type="file" class="photoSelFile" name="photoSel" onchange="imageCheck(this);"/>
+								</div>
 							</div>
-							<div class="profileId">
-								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">khee</a>
-<%-- 								<a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${user.id }</a> --%>
-							</div>
-							<div class="btn">
-								<input type="button" class="photoSel" value="파일 선택" />
-								<input type="file" class="photoSelFile" name="photoSel" onchange="imageCheck(this);"/>
+							<div class="profile_bottom">
+								<label class="f_label">이름</label><input type="text" class="f_input" name="name"/><br/>
+								<label class="f_label">사용자 이름</label><input type="text" class="f_input" name="id"/><br/>
+								<label class="f_label">이메일</label><input type="text" class="f_input" name="email"/><br/>
+								<label class="f_label">비밀번호</label><input type="password" class="f_input" name="pwd"/><br/>
+								<label class="f_label">비밀번호 확인</label><input type="password" class="f_input" name="pwd"/><br/>
 							</div>
 						</div>
-						<div class="profile_bottom">
-							<label class="f_label">이름</label><input type="text" class="f_input" name="name"/><br/>
-							<label class="f_label">사용자 이름</label><input type="text" class="f_input" name="id"/><br/>
-							<label class="f_label">이메일</label><input type="text" class="f_input" name="email"/><br/>
-							<label class="f_label">비밀번호</label><input type="password" class="f_input" name="pwd"/><br/>
-							<label class="f_label">비밀번호 확인</label><input type="password" class="f_input" name="pwd"/><br/>
-						</div>
-					</div>
+					</form>
 				</div>
 			</form>
 		</div>

@@ -752,6 +752,15 @@ public class Controller {
 		mv.addObject(uvo);
 		return mv;
 	}
+	@RequestMapping("/logout.do")
+	public ModelAndView logout(HttpServletRequest request) throws Exception{
+		
+		ModelAndView mv = new ModelAndView("login");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		return mv;
+	}
 	
 	
 }

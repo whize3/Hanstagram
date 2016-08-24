@@ -70,6 +70,9 @@ width:132px;
 height:24px;
 text-align: right;
 }
+#iconArea a{
+margin-left:20px;
+}
 li{
 list-style: none;
 }
@@ -278,6 +281,7 @@ ID  :  ${user.id }
          	<a href="timeline.do?id=${user.id }">
          		<img src="/Hansta/img/my.PNG">
          	</a>
+         	<a href="logout.do">logout</a>
          </div>
       </div>
    </div>
