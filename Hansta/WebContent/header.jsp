@@ -257,14 +257,14 @@ $(function() {
       $("#search_div").css("display","none");
    }
    });
-   
+   $("#log_out").on("click", function(){
+	   location.href="logout.do";
+	 });
 })
 
 </script>
 </head>
 <body class="body">
-
-ID  :  ${user.id }
 <nav>
    <div id="header">
       <div class="header">
@@ -278,6 +278,9 @@ ID  :  ${user.id }
          	<a href="timeline.do?id=${user.id }">
          		<img src="/Hansta/img/my.PNG">
          	</a>
+         	<c:if test="${user.id ne null}">
+         	<h2 id="log_out">로그아웃</h2>
+         	</c:if>
          </div>
       </div>
    </div>

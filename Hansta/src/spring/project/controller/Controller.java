@@ -456,6 +456,13 @@ public class Controller {
 		session.setAttribute("user", user);
 		return mv;
 	}
+	@RequestMapping("/logout.do")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mv = new ModelAndView("login");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return mv;
+	}
 
 	@RequestMapping(value = "/login.do", produces = "text/plain;charset=UTF-8", method = RequestMethod.POST)
 	public ResponseEntity<String> login(HttpServletRequest request, HttpServletResponse response){
