@@ -694,6 +694,7 @@ public class Controller {
 		
 		return mv;
 	}
+
 	@RequestMapping("/join.do")
 	public ModelAndView join(HttpServletRequest request) throws Exception{
 		String email = request.getParameter("email");
