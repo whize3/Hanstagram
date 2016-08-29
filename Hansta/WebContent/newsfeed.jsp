@@ -485,11 +485,8 @@ $(function() {
 				<div class="hashAndcontent">
 					<div>
 						<span>${k.id}</span>
-						<% pageContext.setAttribute("LF", "\n"); %>
-						
-						<c:set var="str" value="${fn:replace(k.b_content, LF,'<br/>') }"/>
-						<c:forTokens var="hash" items="${str}" delims="#">
-						<c:set var="tokenCnt" value="1"></c:set>
+						<c:forTokens var="hash" items="${k.b_content}" delims="#">
+							<c:set var="tokenCnt" value="1"></c:set>
 							<c:forTokens var="token" items="${hash}" delims=" ">
 								<c:choose>
 									<c:when test="${tokenCnt==1 }"><a href="hashlist.do?keyword=${token }" class="_hash">#${token}</a></c:when>
