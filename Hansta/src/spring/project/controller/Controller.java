@@ -691,7 +691,7 @@ public class Controller {
 		
 		UsersVO uvo = dao.nameConfirm(id);
 		
-		String b_content = request.getParameter("b_content");
+		String b_content = request.getParameter("b_content").replace("\r\n", " <br>");
 		String fileName = null;
 		File file = null;
 		BoardVO bvo = null;
