@@ -134,6 +134,10 @@ public class Dao {
 	public void deletecomment(String c_idx){
 		template.delete("deletecomment", c_idx);
 	}
+	public void deleteboard(String b_idx){
+		template.delete("deleteboardc", b_idx);
+		template.delete("deleteboard", b_idx);
+	}
 	
 	public List<BoardVO> getHashList(String keyword){
 		 String b_idx=null;
@@ -242,9 +246,9 @@ public class Dao {
 			return template.selectOne("usersSel",id)
 		}*/
 		
-		public void updateUsers(UsersVO uvo){
-			template.update("usersUpdate",uvo);
-		}
+		 public void updateUsers(UsersVO user){
+		      template.update("usersUpdate",user);
+		   }
 		public void deleteUsers(String id){
 			template.delete("deleteUsers",id);
 		}

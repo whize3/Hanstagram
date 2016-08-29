@@ -114,7 +114,7 @@ height:auto;
 #search_div li div{
 display: inline-block;
 }
-.fuckingproject{
+.div_keyword{
 margin-top:14px;
 position:absolute;
 left:5px;
@@ -149,7 +149,7 @@ $(function() {
                $("<ul>").attr("css", "width:200px").attr("id","search_list").appendTo($("#search_div"));
                
                for(var i=0; i<data.length; i++)
-                  $("<li>").attr("class","keyword").attr("id", i+"sli").html("<div class='fuckingproject'>"+data[i]["keyword"]+"</div><div class='ttt'> "+data[i]["hashcnt"]+"개</div>").appendTo("#search_list");
+                  $("<li>").attr("class","keyword").attr("id", i+"sli").html("<div class='div_keyword'>"+data[i]["keyword"]+"</div><div class='ttt'> "+data[i]["hashcnt"]+"개</div>").appendTo("#search_list");
             }
             $("li.keyword").each(function(){
                $(this).on("click", function(){

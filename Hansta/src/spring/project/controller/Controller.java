@@ -183,9 +183,10 @@ public class Controller {
 				String result = "[";
 				for(BoardVO k : boardvo){
 					content = k.getB_content();
-					content = System.getProperty("line.separator");
 					content = content.replace("\r\n","\n");
-					content = content.replace("\n","</br>");
+					content = content.replace("\n","<br/>");
+					content = content.replace(" \n "," <br/>");
+					content = content.replace("\n  ","<br/> ");
 					idx++;
 				result += "{";
 				result += "\"b_idx\" : \"" + k.getB_idx() + "\",";
@@ -193,6 +194,8 @@ public class Controller {
 				result += "\"b_time\" : \"" + k.getB_time() + "\",";
 				result += "\"img_url\" : \"" + k.getImg_url() + "\",";
 				result += "\"b_content\" : \"" + content + "\",";
+				System.out.println(k.getB_content());
+				System.out.println(content);
 				result += "\"like_state\" : \"" + k.getLike_state() + "\",";
 				result += "\"like_count\" : \"" + k.getLike_count() + "\",";
 				result += "\"r_num\" : \"" + k.getR_num() + "\"";
@@ -224,7 +227,7 @@ public class Controller {
 			result += "\"c_time\" : \"" + k.getC_time() + "\",";
 			result += "\"c_content\" : \"" + k.getC_content() + "\",";
 			if(k.getId().equals(id)){
-				result += "\"delete\" : \"" + "<span class='deletecomment' c_idx='"+k.getC_idx()+"'>삭제</span>" +"\","; 
+				result += "\"delete\" : \"" + "<span class='deletecomment' c_idx='"+k.getC_idx()+"'><img alt='삭제' src='/Hansta/img/delete.png'/></span>" +"\","; 
 			}else{
 				result += "\"delete\" : \"" + " " + "\",";
 			}
@@ -303,6 +306,17 @@ public class Controller {
 		ModelAndView mv = new ModelAndView("newsfeed");
 		String c_idx = request.getParameter("c_idx");
 		dao.deletecomment(c_idx);
+		return mv;
+	}
+	@RequestMapping("/deleteboard.do")
+	public ModelAndView deleteboard(HttpServletRequest request, HttpServletResponse response){
+		   HttpSession session = request.getSession();
+			UsersVO user = (UsersVO)session.getAttribute("user");
+			String id = user.getId();
+		ModelAndView mv = new ModelAndView("timelineGo");
+		String b_idx = request.getParameter("b_idx");
+		dao.deleteboard(b_idx);
+		mv.addObject("fid", id);
 		return mv;
 	}
 	/*	// 로그인
@@ -705,7 +719,73 @@ public class Controller {
 		
 		return mv;
 	}
-
+	 @RequestMapping("/profilego.do")
+	   public ModelAndView profilego(HttpServletRequest request) throws Exception{
+	      String id = request.getParameter("id");
+	      
+	      UsersVO user2 = dao.nameConfirm(id);
+	      System.out.println(user2.getName()+"__"+user2.getPwd());
+	      
+	      ModelAndView mv = new ModelAndView("profileModify");
+	      mv.addObject("user2",user2);
+	      return mv;
+	   }
+	   @RequestMapping("/infoModify.do")
+	   public ModelAndView infoModify(HttpServletRequest request) throws Exception{
+	      String name = request.getParameter("name");
+	      String id = request.getParameter("id");
+	      String email = request.getParameter("email");
+	      String pwd1 = request.getParameter("pwd1");
+	      String pwd2 = request.getParameter("pwd2");
+	      
+	      System.out.println("infomip");
+	      
+	      request.setCharacterEncoding("utf-8");
+	      final String filePath = request.getServletContext().getRealPath("/upload/");
+	      MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
+	      MultipartFile fileImg = mr.getFile("photoSel");
+	      
+	      String fileName = null;
+	      File file = null;
+	      UsersVO usermo = null;
+	      
+	      ModelAndView mv = null;
+	      
+	      if(pwd1.equals(pwd2)){
+	         //비밀번호 일치
+	         
+	         if(!fileImg.isEmpty()){
+	            
+	            usermo = new UsersVO();
+	            fileName = id+"_"+fileImg.getOriginalFilename();
+	            file = new File(filePath+fileName);
+	            
+	            /*FileCopyUtils.copy(fileImg.getInputStream(),new FileOutputStream(file));*/
+	            
+	            fileImg.transferTo(file);
+	            
+	            usermo.setId(id);
+	            usermo.setName(name);
+	            usermo.setEmail(email);
+	            usermo.setPwd(pwd1);
+	            usermo.setProfile_url("http://203.236.209.64:8090/Hansta/upload/"+fileName);
+	   
+	            dao.updateUsers(usermo);
+	         }else{
+	            
+	            // 이미지파일 안들어갔을 때.
+	         }
+	         
+	      }else{
+	         //비밀번호가 일치하지 않을 때
+	      }
+	      
+	      mv = new ModelAndView("profileModifyok");
+	      mv.addObject("usermo",usermo);
+	      
+	      
+	      return mv;
+	   }
 	@RequestMapping("/join.do")
 	public ModelAndView join(HttpServletRequest request) throws Exception{
 		String email = request.getParameter("email");

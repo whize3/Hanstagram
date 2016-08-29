@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (select rownum as r_num, a.* from (select * from board_3 where id in(select followee from follow_3 where follower=#{id} and state='0') or id=#{id} order by b_time desc) a, board_3 b where a.b_idx=b.b_idx) where r_num between #{begin} and #{end}
 	</select>
 	
+	<delete id="deleteboardc" parameterType="String">
+		delete from comment_3 where b_idx=#{b_idx}
+	</delete>
+	<delete id="deleteboard" parameterType="String">
+		delete from board_3 where b_idx=#{b_idx}
+	</delete>
 	<select id="morecomment" parameterType="String" resultType="spring.project.db.CommentVO">
 		select * from comment_3 where b_idx = #{b_idx}
 	</select>
@@ -57,9 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 좋아요 삭제  -->
-	<insert id="deletelike" parameterType="Map">
+	<delete id="deletelike" parameterType="Map">
 		delete from like_3 where id = #{id} and b_idx = #{b_idx}
-	</insert>
+	</delete>
 	
 
 	<select id="searchHash" parameterType="String" resultType="spring.project.db.BoardVO">
@@ -150,8 +156,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="usersUpdate" parameterType="spring.project.db.UsersVO">
-		update users_3 set id=#{id},name=#{name},pwd=#{pwd},email=#{email} where id= #{id}
-	</update>
+      update users_3 set id=#{id},name=#{name},pwd=#{pwd},email=#{email},profile_url=#{profile_url} where id= #{id}
+   </update>
 	
 	<delete id="deleteUsers" parameterType="String">
 		delete from users_3 where id = #{id}

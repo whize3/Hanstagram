@@ -207,9 +207,8 @@
        $(this).on("click", function(){
           var b_idx = $(this).attr("b_idx");
           var da_date = $(this).children($("<span>")).children(".date").attr("date");
-          
           var da_like = $(this).children($("<span>")).children(".likecnt").text()
-          var da_likestate = $("#likestate").val();
+          var da_likestate = $(this).children($("#likestate")).attr("like_state");
           var uservoid = $("#uservoid").val();
           $("#pop").css("display","inline-block");
           $("#cancel0").css("display","inline-block");
@@ -221,7 +220,9 @@
           $(".name").text();
           $(".namediv").text(uservoid);
           $(".cont").text("");
-          
+          if(uservoid==${user.id}){
+        	  $(".name").append("<div><a href='deleteboard.do?b_idx="+b_idx+"'>글삭제</a></div>");
+          }
           $.ajax({
              type:"post",
              url:"detail.do",
@@ -267,9 +268,13 @@
           
          //상세보기를 띄운 횟수대로 하트 추가되던거 수정한 부분
           if(da_likestate==0){
-             $(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
+        	  $(".heart_link").text("");
+        	  $("<img>").attr("class","heart").attr("src","img/like.PNG").attr("b_idx",b_idx).attr("onclick","like_go(this)").appendTo(".heart_link");
+             //$(".heart").attr("b_idx",b_idx).attr("src","img/like.PNG");
           }else{
-             $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
+        	  $(".heart_link").text("");
+        	  $("<img>").attr("class","heart").attr("src","img/liked.PNG").attr("b_idx",b_idx).attr("onclick","liked_go(this)").appendTo(".heart_link");
+//             $(".heart").attr("b_idx",b_idx).attr("src","img/liked.PNG");
           }
           
          $.ajax({
@@ -281,7 +286,7 @@
                
                for(var i=0; i<data.length; i++){
                   var liid=data[i]["c_idx"];
-                        $("<li>").attr("id",liid).html("<div><a href='#' class='name00'>"+data[i]["id"]+"</a>"+data[i]["c_content"]+"</div>").appendTo("#detailArea_comment_ul");
+                        $("<li>").attr("id",liid).html("<div><a href='timeline.do?id="+data[i]["id"]+"' class='name00'>"+data[i]["id"]+"</a>"+data[i]["c_content"]+"</div>").appendTo("#detailArea_comment_ul");
                         $("<div>").attr("class","nonono").attr("id",liid+"_div").html(data[i]["id"]).appendTo("#"+liid);
                            var aaa1 = $("#"+liid+"_div").html();
                            var aaa2 = <c:out value="${user.id}"/>
@@ -309,22 +314,30 @@
                         });   
                    });
                });   
-            $(".heart").on("click",$(".comment_write>*"),function() {
+            $(".heart").on("click",function() {
                /* var index = $(".comment_write>a>img").index(this); */
                var src = $(this).attr("src");
                var b_idx = $(this).attr("b_idx");
                src = (src==="img/like.PNG")
                ? "img/liked.PNG"
                : "img/like.PNG";      
-               $(this).attr("src",src);   
+               $(this).attr("src",src);
                $.ajax({
                   type: "post",
                   url: "like.do",
                   data: {"b_idx" : b_idx  , "id" : ${user.id}  },
                   dataType: "json",
                   success: function(data){
-                     var cnt = (parseInt($(".detailArea_like").text().substr(0,1))+1)+" 개";
-                     $(".detailArea_like").empty().text(cnt);
+                	  counttext = $(".detailArea_like").text().substring(0,$(".detailArea_like").text().length-1);
+						if(data[0]["chk"]=="삭제"){
+							$("#wrap_"+b_idx).children($("#likestate")).attr("like_state","0");
+							$("#wrap_"+b_idx).children($("<span>")).find($(".likecnt")).text((parseInt(counttext)-1)+"개")
+							$(".detailArea_like").text((parseInt(counttext)-1)+"개");
+						}else if(data[0]["chk"]=="삽입"){
+							$("#wrap_"+b_idx).children($("#likestate")).attr("like_state","1");
+							$("#wrap_"+b_idx).children($("<span>")).find($(".likecnt")).text((parseInt(counttext)+1)+"개")
+							$(".detailArea_like").text((parseInt(counttext)+1)+"개");
+						}
                   },
                   error : function(request,status,error){
                      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -405,9 +418,11 @@
          <c:when test="${user.id eq usersvo.id }">
             <div>
                <h1>${user.id }</h1>
-               <span class="fBtn"><button>프로필 편집</button></span> <span
-                  class="fBtn" id="write"><button
-                     onclick="location.href='write.jsp?id=${user.id}'">게시글 작성</button></span>
+               <span class="fBtn">
+                  <button onclick="location.href='profilego.do?id=${user.id}'">프로필 편집</button></span> 
+               <span class="fBtn" id="write">
+                  <button onclick="location.href='writego.do?id=${user.id}'">게시글 작성</button>
+               </span>
             </div>
          </c:when>
          <c:otherwise>
@@ -506,16 +521,15 @@
                </c:if>
                <c:set var="view" value="${view+1 }" />
                <a href="#">
-                  <div class="wrap" b_idx="${k.b_idx }">
+                  <div class="wrap" id="wrap_${k.b_idx }" b_idx="${k.b_idx }">
+                  <input type="hidden" id="likestate" like_state="${k.like_state }" />
                      <div class="contents">
                         <img src="${k.img_url}">
                      </div>
                      <div class="box"></div>
                      <span> <img src="/Hansta/img/bubble.png" class="littlebtn">
                         <span class="date" date="${k.b_time.substring(0,16)}">${k.comment_count }</span>
-                        <img src="/Hansta/img/likeWhite.png" class="littlebtn"> <span
-                        class="likecnt">${k.like_count }개</span> <input type="hidden"
-                        id="likestate" value="${k.like_state }" />
+                        <img src="/Hansta/img/likeWhite.png" class="littlebtn"><span class="likecnt">${k.like_count }개</span> 
                      </span>
                   </div>
                </a>
@@ -637,6 +651,7 @@
             <header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
             <div class="name">
                <div class="namediv"></div>
+               </div>
             </header>
             <div class="left">
                <img class="contentImg"
@@ -659,10 +674,8 @@
                   </li>
                </ul>
                <div class="comment_write">
-                  <a class='heart_link'><img class='heart' src='img/like.PNG'
-                     onclick='like_go(this)'></a> <input type="text"
-                     class="comment_write_content" b_idx="1" aria-label="댓글 달기..."
-                     placeholder="댓글 달기...">
+                  <a class='heart_link'></a>
+                  <input type="text" class="comment_write_content" b_idx="1" aria-label="댓글 달기..." placeholder="댓글 달기...">
                </div>
             </div>
          </div>

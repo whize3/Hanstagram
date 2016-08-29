@@ -152,7 +152,6 @@ display: inline-block;
 }
 ._hash{
 color:#003569;
-
 }
 
 </style>
@@ -203,8 +202,8 @@ $(function() {
 				data: {"b_idx" : b_idx, "c_content" : c_content},
 				dataType: "json",
 				success: function(data){
-					$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("#"+b_idx+"_ul");
-					$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("."+b_idx+"_ul");
+					$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+"><img alt='삭제' src='/Hansta/img/delete.png'/></span>").appendTo("#"+b_idx+"_ul");
+					$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+"><img alt='삭제' src='/Hansta/img/delete.png'/></span>").appendTo("."+b_idx+"_ul");
 					$(".comment_write_content").val("");
 					$(".deletecomment").each(function(){
 						 $(this).on("click", function(){
@@ -275,9 +274,7 @@ $(function() {
 				data: {"pagenum" : pagenum},
 				dataType: "json",
 				success: function(data){
-					alert("성공");
 					listcnt2=data[data.length-1]["r_num"];
-					alert(listcnt+""+listcnt2);
 					$(".listshowmore").attr("pagenum",pagenum2);
 					if(listcnt==listcnt2){
 						$("#con").css("display","none");
@@ -297,6 +294,24 @@ $(function() {
 							+"</div>"
 							+"<div class='comment-wrap'>"
 							+"<div class='like'><span id='"+data[i]["b_idx"]+"'>좋아요 "+data[i]["like_count"]+"개</span></div>"
+							+"<div class='hashAndcontent'>"
+							+"<div>"
+							+"<span>"+data[i]["id"]+"</span>"
+							+"<c:forTokens var='hash' items='"+data[i]["b_content"]+"' delims='#'>"
+							+"<c:set var='tokenCnt' value='1'></c:set>"
+							+"<c:forTokens var='token' items='${hash}' delims=' '>"
+							+<c:choose>
+							<c:when test="${tokenCnt==1 }">
+							+"<a href='hashlist.do?keyword=${token}' class='_hash'>#${token}</a>"
+							</c:when>
+							<c:otherwise>
+							"${token}"
+							</c:otherwise></c:choose>
+							+"<c:set var='tokenCnt' value='${tokenCnt+1 }'/>"
+							+"</c:forTokens>"
+							+"</c:forTokens>"
+							+"</div>"
+							+"</div>"
 							+"<div class='comment' id='comment_"+data[i]["b_idx"]+"'>"
 							+"<ul id='"+data[i]["b_idx"]+"_ul'>"
 							+"</ul>"
@@ -325,13 +340,13 @@ $(function() {
 							if(data.length>5){
 								$("<li>").html("<button class='showmore' b_idx='"+data[0]["b_idx"]+"'>댓글 더보기</button>").appendTo("#"+data[0]["b_idx"]+"_ul");
 								for(var i=0; i<6; i++){
-									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
+									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id' href='timeline.do?id="+data[i]["id"]+"'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
 									}
 								for(var i=0; i<data.length; i++){
-									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("."+data[0]["b_idx"]+"_ul");
+									$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id' href='timeline.do?id="+data[i]["id"]+"'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("."+data[0]["b_idx"]+"_ul");
 									}
 							}else{for(var i=0; i<data.length; i++){
-							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
+							$("<li>").attr("id",data[i]["c_idx"]+"_li").html("<a class='comment_id' href='timeline.do?id="+data[i]["id"]+"'>"+data[i]["id"]+"</a><span class='comment_content'>"+data[i]["c_content"]+"</span>"+data[i]["delete"]).appendTo("#"+data[0]["b_idx"]+"_ul");
 							}
 							}
 							$(".showmore").each(function(){
@@ -381,8 +396,8 @@ $(function() {
 								data: {"b_idx" : b_idx, "c_content" : c_content},
 								dataType: "json",
 								success: function(data){
-									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("#"+b_idx+"_ul");
-									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+">삭제</span>").appendTo("."+b_idx+"_ul");
+									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+"><img alt='삭제' src='/Hansta/img/delete.png'/></span>").appendTo("#"+b_idx+"_ul");
+									$("<li>").attr("id",data[0]["c_idx"]+"_li").html("<a class='comment_id'>"+${user.id}+"</a><span class='comment_content'>"+c_content+"</span><span class='deletecomment' c_idx="+data[0]["c_idx"]+"><img alt='삭제' src='/Hansta/img/delete.png'/></span>").appendTo("."+b_idx+"_ul");
 									$(".comment_write_content").val("");
 									$(".deletecomment").each(function(){
 										 $(this).on("click", function(){
@@ -446,20 +461,7 @@ $(function() {
 			});	
 	    });        
 	});
-	
-	
-	
-// 		$(".listshowmore").each(function(){
-// 		 $(this).on("click", function(){
-// 			var cPage = $(this).attr("cPage");
-// 			alert("gdgd");
-// 			 $(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>")
-// 			 $(".test99").contents().unwrap();
-// 			//$(".test99").html("<c:forEach var='k' begin='6' end='11' items='${boardvo}'><article class='a1'><header class='h1'><a class='profile' href='#'><img class='profile_img' src='https://scontent.cdninstagram.com/t51.2885-19/s150x150/12918039_230227960666719_282379501_a.jpg'></a><a class='id' href='#'>${k.id}</a><span class='date'>${k.b_time.substring(0,16)}</span></header><div class='image-wrap'><img class='image' src='upload/${k.img_url}.jpg' style=''></div><div class='comment-wrap'><div class='like'><span id='${k.b_idx }'>좋아요 ${k.like_count}개</span></div><div class='comment' id='comment_${k.b_idx }'><ul id='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx }'><c:set var='comment_cnt' value='${comment_cnt+1 }' /></c:if></c:forEach><c:if test='${comment_cnt>5 }'><li><button class='showmore' b_idx='${k.b_idx}'>댓글 더보기</button></li></c:if><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${comment_cnt<5 }'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:if></c:forEach></ul></div><div class='comment_all' id='comment_all_${k.b_idx }'><ul id='${k.b_idx }_ul' class='${k.b_idx }_ul'><c:set var='comment_cnt' value='0' /><c:forEach var='c' items='${commentvo}'><c:if test='${c.b_idx==k.b_idx}'><c:set var='comment_cnt' value='${comment_cnt+1 }' /><li id='${c.c_idx }_li'><a class='comment_id'>${c.id}</a><span class='comment_content'>${c.c_content}</span><c:if test='${c.id==user.id }'><span class='deletecomment' c_idx=${c.c_idx }>삭제</span></c:if></li></c:if></c:forEach></ul></div><div class='comment_write'><c:choose><c:when test='${k.like_state==0}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/like.PNG' onclick='like_go(this)'></a></c:when><c:when test='${k.like_state==1}'><a class='heart_link'><img class='heart' b_idx='${k.b_idx}' src='img/liked.PNG' onclick='like_go(this)'></a></c:when></c:choose><input type='text' class='comment_write_content'  b_idx='${k.b_idx}' aria-label='댓글 달기...' placeholder='댓글 달기...'></div></div></article></c:forEach><div class='test99'><c:if test='${fn:length(boardvo)>6 }'><h2 class='listshowmore' cPage='2'>더보기</h2></c:if></div>");
-// 	    });        
-// 	});
-	
-	
+
 }); 
 </script>
 </head>
@@ -526,7 +528,7 @@ $(function() {
 						<c:if test="${comment_cnt<5 }">
 						<c:if test="${c.b_idx==k.b_idx}">
 							<c:set var="comment_cnt" value="${comment_cnt+1 }" />
-							<li id="${c.c_idx }_li"><a class="comment_id">${c.id}</a><span class="comment_content">${c.c_content}</span><c:if test="${c.id==user.id }"><span class="deletecomment" c_idx=${c.c_idx }>삭제</span></c:if></li>
+							<li id="${c.c_idx }_li"><a class="comment_id" href="timeline.do?id=${c.id }">${c.id}</a><span class="comment_content">${c.c_content}</span><c:if test="${c.id==user.id }"><span class="deletecomment" c_idx=${c.c_idx }><img alt="삭제" src="/Hansta/img/delete.png"/></span></c:if></li>
 						</c:if>
 						</c:if>
 						</c:forEach>
@@ -538,7 +540,7 @@ $(function() {
 						<c:forEach var="c" items="${commentvo}">
 						<c:if test="${c.b_idx==k.b_idx}">
 							<c:set var="comment_cnt" value="${comment_cnt+1 }" />
-							<li id="${c.c_idx }_li"><a class="comment_id">${c.id}</a><span class="comment_content">${c.c_content}</span><c:if test="${c.id==user.id }"><span class="deletecomment" c_idx=${c.c_idx }>삭제</span></c:if></li>
+							<li id="${c.c_idx }_li"><a class="comment_id" href="timeline.do?id=${c.id }">${c.id}</a><span class="comment_content">${c.c_content}</span><c:if test="${c.id==user.id }"><span class="deletecomment" c_idx=${c.c_idx }><img alt="삭제" src="/Hansta/img/delete.png"/></span></c:if></li>
 						</c:if>
 						</c:forEach>
 					</ul>

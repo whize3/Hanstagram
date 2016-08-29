@@ -239,7 +239,6 @@
 <link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css">
 <script type="text/javascript">
    function submit_go(f) {
-      alert("수정완료");
       f.action="infoModify.do";
       f.submit();
    }
@@ -255,7 +254,6 @@
       }
    
    }
-   if(res=="0"){}
 </script>
 
 </head>
@@ -270,7 +268,7 @@
                
                <ul>
                   <li>
-                     <a href="profilego.do?id=${user2.id}">프로필 편집</a>
+                     <a href="profilego.do?id=${usermo.id}">프로필 편집</a>
                   </li>
                </ul>
                
@@ -280,12 +278,12 @@
                   <div class="profile">
                      <div class="profile_top">
                         <div class="profileImg">
-                           <a class=""><img id="profileImg" src="${user2.profile_url}" width="100px" height="100px"/></a>
+                           <a class=""><img id="profileImg" src="${usermo.profile_url}" width="100px" height="100px"/></a>
    <%--                         <a class=""><img id="profileImg" class="jcrop_target" src="${uvo.profile_url}" width="38px" height="38px"/></a> --%>
                         </div>
                         <div class="profileId">
-                           <a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 21px; color: #656565">${user.id }</a>
-   <%--                         <a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${user.id }</a> --%>
+                           <a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 21px; color: #656565">${usermo.id }</a>
+   <%--                         <a style="font-family: 'Maven Pro', sans-serif; font-weight:bold; font-size: 15px; color: #656565">${usermo.id }</a> --%>
                         </div>
                         <div class="btn">
                            <input type="button" class="photoSel" value="파일 선택" />
@@ -299,15 +297,15 @@
                         <tbody style="width: 500px;">
                            <tr>
                               <td class="f_label"><label>이름</label></td>
-                              <td><input type="text" class="f_input" name="name" value="${user2.name}"/></td>
+                              <td><input type="text" class="f_input" name="name" value="${usermo.name}"/></td>
                            </tr>
                            <tr>
                               <td class="f_label"><label>사용자 이름</label></td>
-                              <td><input type="text" class="f_input" name="id" value="${user2.id}"/></td>
+                              <td><input type="text" class="f_input" name="id" value="${usermo.id}"/></td>
                            </tr>
                            <tr>
                               <td class="f_label"><label>이메일</label></td>
-                              <td><input type="text" class="f_input" name="email" value="${user2.email}"/></td>
+                              <td><input type="text" class="f_input" name="email" value="${usermo.email}"/></td>
                            </tr>
                            <tr>
                               <td class="f_label"><label>비밀번호</label></td>
