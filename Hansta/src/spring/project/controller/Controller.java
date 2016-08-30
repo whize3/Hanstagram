@@ -663,7 +663,6 @@ public class Controller {
 		
 		
 		//파일 이름을 가져온 값으로 설정해준다.
-				// 바보 기미현
 		request.setCharacterEncoding("utf-8");
 		final String filePath = request.getServletContext().getRealPath("/upload/");
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
