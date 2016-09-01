@@ -221,7 +221,7 @@
           $(".namediv").text(uservoid);
           $(".cont").text("");
           if(uservoid==${user.id}){
-        	  $(".name").append("<div><a href='deleteboard.do?b_idx="+b_idx+"'>글삭제</a></div>");
+        	  $(".namedc").html("<div><a href='deleteboard.do?b_idx="+b_idx+"'>글삭제</a></div>");
           }
           $.ajax({
              type:"post",
@@ -650,7 +650,7 @@
          <div>
             <header> <a href="#"><img src="/Hansta/img/a.jpg"></a>
             <div class="name">
-               <div class="namediv"></div>
+               <div class="namediv"></div><div class="namedc"></div>
                </div>
             </header>
             <div class="left">

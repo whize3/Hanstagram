@@ -670,6 +670,17 @@ public class Controller {
 	//		 return new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	//	}
 	
+	@RequestMapping("writego.do")
+	   public ModelAndView writego(HttpServletRequest request) throws Exception{
+	      String id = request.getParameter("id");
+	      
+	      UsersVO userprofile = dao.nameConfirm(id);
+	      
+	      ModelAndView mv = new ModelAndView("write");
+	      mv.addObject("userprofile",userprofile);
+	      return mv;
+	   }
+	
 	@RequestMapping("write.do")
 	public ModelAndView write(HttpServletRequest request) throws Exception{
 		// string b_idx, id, b_time, img_url, b_content, like_state,like_count;
@@ -679,6 +690,7 @@ public class Controller {
 		
 		
 		//파일 이름을 가져온 값으로 설정해준다.
+				// 바보 기미현
 		request.setCharacterEncoding("utf-8");
 		final String filePath = request.getServletContext().getRealPath("/upload/");
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
@@ -723,7 +735,6 @@ public class Controller {
 	      String id = request.getParameter("id");
 	      
 	      UsersVO user2 = dao.nameConfirm(id);
-	      System.out.println(user2.getName()+"__"+user2.getPwd());
 	      
 	      ModelAndView mv = new ModelAndView("profileModify");
 	      mv.addObject("user2",user2);
